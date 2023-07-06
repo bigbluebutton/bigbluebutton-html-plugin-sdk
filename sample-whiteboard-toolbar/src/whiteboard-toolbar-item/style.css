@@ -102,3 +102,12 @@
 .button-style:hover {
     border: 3px solid #0F70D7;
 }
+
+.current-slide-text-container {
+    font-size: medium;
+    background-color: #aaa;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}

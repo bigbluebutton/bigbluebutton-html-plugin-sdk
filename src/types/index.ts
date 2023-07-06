@@ -1,5 +1,5 @@
 export type {
-    WhiteboardToolbarItems,
+    WhiteboardToolbarItem,
     WhiteboardToolbarLoading,
     WhiteboardToolbarSeparator,
     WhiteboardToolbarButtonObj,

@@ -6,28 +6,13 @@ import { WhiteboardToolbarButtonProps } from './types';
 
 import * as BbbPluginSdk from 'bigbluebutton-html-plugin-sdk';
 
-declare let window: BbbPluginSdk.CustomWindowPlugin;
-
-function WhiteboardToolbarItem({ pluginName }: WhiteboardToolbarButtonProps) {
+function WhiteboardToolbarItem({ pluginName, pluginUuid: uuid }: WhiteboardToolbarButtonProps) {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [isIdle, setIsIdle] = useState<Boolean>(false);
+  const pluginApi = BbbPluginSdk.getPluginApi(uuid)
+  const [currentSlideText, setCurrentSlideText] = useState<string>("");
 
-  console.log("Teste antes do useState ----")
   const currentPresentation = BbbPluginSdk.useCurrentPresentation();
-  console.log("Teste aqui do hook dentro do plugin", currentPresentation);
-
-  const getPresentationIdData = Object.getPrototypeOf(async function() {}).constructor(`
-    return require('/imports/api/presentations').default.find({current: true}).fetch();
-  `);
-
-  const getSlideInfo_1 = () => {
-    const presentationId = getPresentationIdData()[0].id;
-    const getSlideInDB = Object.getPrototypeOf(async function() {}).constructor(`
-      return require('/imports/api/slides').Slides.find({current: true, presentationId: "${presentationId}"}).fetch();
-    `);
-    const slideData = getSlideInDB();
-    return slideData[0].txtUri
-  }
 
   const setWhiteboardButtonLoading = () => {
     setIsIdle(true);
@@ -40,9 +25,8 @@ function WhiteboardToolbarItem({ pluginName }: WhiteboardToolbarButtonProps) {
 
   const handleGenerateQuiz = (currentPres: BbbPluginSdk.CurrentPresentation) => {
     const currentTxtUri = currentPres.urls.text;
-    console.log("1 - atual --- 2 - antigo (Teste) ----", currentTxtUri, getSlideInfo_1())
     requestLastPages(currentTxtUri).then(currentPageContent => {
-      console.log(currentPageContent)
+      setCurrentSlideText(currentPageContent)
       setShowModal(true);
     }).catch((err) => {
       console.log("Error while requesting data from bbb-web. Could not get the base text, error: " + err.message);
@@ -59,8 +43,7 @@ function WhiteboardToolbarItem({ pluginName }: WhiteboardToolbarButtonProps) {
   }
 
   useEffect(() => {
-    let currentObjectToSendToClient: BbbPluginSdk.WhiteboardToolbarItems;
-    console.log("Teste aqui ver se atualiza certinho ----> ", currentPresentation)
+    let currentObjectToSendToClient: BbbPluginSdk.WhiteboardToolbarItem;
     if (!isIdle){
       currentObjectToSendToClient = {
         name: pluginName,
@@ -78,11 +61,7 @@ function WhiteboardToolbarItem({ pluginName }: WhiteboardToolbarButtonProps) {
         type: BbbPluginSdk.PresentationType.PRESENTATION_TOOLBAR_LOADING,
       } as BbbPluginSdk.WhiteboardToolbarLoading
     }
-    const getWhiteboardToolbarItems: BbbPluginSdk.GetWhiteboardToolbarItems = () => [currentObjectToSendToClient];
-    window.bbb_plugins[pluginName] = {
-      getWhiteboardToolbarItems
-    };
-    window.dispatchEvent(new Event(BbbPluginSdk.UPDATE_PLUGIN_DATA))
+    pluginApi.setWhiteboardToolbarItems([currentObjectToSendToClient]);
   }, [isIdle, currentPresentation])
 
   return (
@@ -96,6 +75,9 @@ function WhiteboardToolbarItem({ pluginName }: WhiteboardToolbarButtonProps) {
         style={{width: '100%', height: '100%', alignItems: 'center', display: 'flex', flexDirection: 'column'}}
       >
         <h1>Hey, I am a modal sample</h1>
+        <div className='current-slide-text-container'>
+          {currentSlideText}
+        </div>
         <button
           onClick={() => {setShowModal(false)}}
         >

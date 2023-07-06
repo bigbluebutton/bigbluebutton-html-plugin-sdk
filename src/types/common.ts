@@ -1,26 +1,30 @@
 import { Quiz } from "./components/poll";
 
-export interface WhiteboardToolbarItems {
+export interface WhiteboardToolbarItem {
     name: string,
     type: string,
 }
 
-export interface WhiteboardToolbarButtonObj extends WhiteboardToolbarItems {
+export interface WhiteboardToolbarButtonObj extends WhiteboardToolbarItem {
     label: string,
     tooltip: string,
     pollInfoQuiz: Quiz,
     onClick: () => void,
 }
 
-export interface WhiteboardToolbarLoading extends WhiteboardToolbarItems {}
+export interface WhiteboardToolbarLoading extends WhiteboardToolbarItem {}
 
-export interface WhiteboardToolbarSeparator extends WhiteboardToolbarItems {
+export interface WhiteboardToolbarSeparator extends WhiteboardToolbarItem {
     width: number;
 }
 
-export type GetWhiteboardToolbarItems = () => WhiteboardToolbarItems[];
+export type GetWhiteboardToolbarItems = () => WhiteboardToolbarItem[];
+
+export type SetWhiteboardToolbarItems = (whiteboardToolbarItem: WhiteboardToolbarItem[]) => void;
 
 export interface CustomWindowPlugin extends Window {
-    bbb_plugins: { [key: string]: {setWhiteboardToolbarItems: (callback: GetWhiteboardToolbarItems) => void} };
+    bbb_plugins: { [key: string]: {
+        setWhiteboardToolbarItems: SetWhiteboardToolbarItems
+    }};
 }
 
