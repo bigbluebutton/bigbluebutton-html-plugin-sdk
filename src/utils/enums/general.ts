@@ -1,8 +1,13 @@
-// Presentation toolbar items types:
-export enum PresentationType {
-    PRESENTATION_TOOLBAR_BUTTON = 'PRESENTATION_TOOLBAR_BUTTON',
-    PRESENTATION_TOOLBAR_LOADING = 'PRESENTATION_TOOLBAR_LOADING',
+enum BbbHookEvents {
+    Update = "UPDATE_HOOK",
+    NewSubscriber = "NEW_SUBSCRIBER",
 }
 
-// Force update plugin
-export const UPDATE_PLUGIN_DATA = 'UPDATE_PLUGIN_DATA';
+enum BbbHooks {
+    UseCurrentPresentation = "BbbHooks::UseCurrentPresentation",
+}
+
+export const Internal = {
+    BbbHookEvents,
+    BbbHooks
+}

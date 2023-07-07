@@ -1,12 +1,9 @@
 export {
-    PresentationType,
-
-    UPDATE_PLUGIN_DATA,
+    Internal,
 } from './enums/general'
 
 export {
-    UPDATE_HOOK_USE_CURRENT_PRESENTATION,
-    UPDATE_HOOK_USE_CURRENT_PRESENTATION_NEW_SUBSCRIBER,
+    PresentationType,
 } from './enums/presentation' 
 
 export {

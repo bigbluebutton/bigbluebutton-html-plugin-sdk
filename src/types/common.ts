@@ -1,5 +1,3 @@
-import { Quiz } from "./components/poll";
-
 export interface WhiteboardToolbarItem {
     name: string,
     type: string,
@@ -8,7 +6,6 @@ export interface WhiteboardToolbarItem {
 export interface WhiteboardToolbarButtonObj extends WhiteboardToolbarItem {
     label: string,
     tooltip: string,
-    pollInfoQuiz: Quiz,
     onClick: () => void,
 }
 
@@ -28,3 +25,11 @@ export interface CustomWindowPlugin extends Window {
     }};
 }
 
+export interface CustomEventHook<T> {
+    data: T
+    hook: string
+}
+
+export interface CustomEventHookWrapper<T> extends Event {
+    detail: CustomEventHook<T>
+}

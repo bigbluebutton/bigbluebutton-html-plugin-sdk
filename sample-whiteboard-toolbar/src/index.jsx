@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import "./index.css";
-import WhiteboardToolbarItem from './whiteboard-toolbar-item/component';
+import SampleWhiteboardItem from './sample-whiteboard-item/component';
 
-const elementId = document.currentScript?.getAttribute("elementId") || "root";
+const uuid = document.currentScript?.getAttribute("uuid") || "root";
 
 const pluginName = document.currentScript?.getAttribute("pluginName") || "plugin";
 
-const root = ReactDOM.createRoot(document.getElementById(elementId));
+const root = ReactDOM.createRoot(document.getElementById(uuid));
 root.render(
   <React.StrictMode>
-    <WhiteboardToolbarItem {...{
-      pluginUuid: elementId,
+    <SampleWhiteboardItem {...{
+      pluginUuid: uuid,
       pluginName
     }} />
   </React.StrictMode>

@@ -1,19 +1,21 @@
 import { useState, useEffect } from 'react';
-import { UPDATE_HOOK_USE_CURRENT_PRESENTATION, UPDATE_HOOK_USE_CURRENT_PRESENTATION_NEW_SUBSCRIBER } from '../utils/enums/presentation';
+import { Internal } from '../utils/enums/general';
 import { CurrentPresentation } from '../types/'
+import { CustomEventHookWrapper } from '../types/common';
 
 const useCurrentPresentation: () => CurrentPresentation | undefined = () => {
     const [presentationInfo, setPresentationInfo] = useState<CurrentPresentation | undefined>();
-    const handleCurrentPresentationUpdateEvent = (event: any) => {
-        setPresentationInfo(event.detail.data);
-        console.log(event);
-    }
+    const handleCurrentPresentationUpdateEvent: EventListener = ((event: CustomEventHookWrapper<CurrentPresentation>) => {
+        if (event.detail.hook === Internal.BbbHooks.UseCurrentPresentation) {
+            setPresentationInfo(event.detail.data);
+        }
+    }) as EventListener
 
     useEffect(() => {
-        window.addEventListener(UPDATE_HOOK_USE_CURRENT_PRESENTATION, handleCurrentPresentationUpdateEvent)
-        window.dispatchEvent(new Event(UPDATE_HOOK_USE_CURRENT_PRESENTATION_NEW_SUBSCRIBER));
+        window.addEventListener(Internal.BbbHookEvents.Update, handleCurrentPresentationUpdateEvent)
+        window.dispatchEvent(new Event(Internal.BbbHookEvents.NewSubscriber));
         return () => {
-            window.removeEventListener(UPDATE_HOOK_USE_CURRENT_PRESENTATION, handleCurrentPresentationUpdateEvent)
+            window.removeEventListener(Internal.BbbHookEvents.Update, handleCurrentPresentationUpdateEvent)
         }
     }, [])
     return presentationInfo

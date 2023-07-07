@@ -2,11 +2,11 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import * as ReactModal from 'react-modal';
 import './style.css';
-import { WhiteboardToolbarButtonProps } from './types';
+import { SampleWhiteboardItemProps } from './types';
 
 import * as BbbPluginSdk from 'bigbluebutton-html-plugin-sdk';
 
-function WhiteboardToolbarItem({ pluginName, pluginUuid: uuid }: WhiteboardToolbarButtonProps) {
+function SampleWhiteboardItem({ pluginName, pluginUuid: uuid }: SampleWhiteboardItemProps) {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [isIdle, setIsIdle] = useState<Boolean>(false);
   const pluginApi = BbbPluginSdk.getPluginApi(uuid)
@@ -23,7 +23,7 @@ function WhiteboardToolbarItem({ pluginName, pluginUuid: uuid }: WhiteboardToolb
   }
   const requestLastPages = (currentTxtUri: string) => fetch(currentTxtUri).then((response) => response.text());
 
-  const handleGenerateQuiz = (currentPres: BbbPluginSdk.CurrentPresentation) => {
+  const handleFetchPresentationData = (currentPres: BbbPluginSdk.CurrentPresentation) => {
     const currentTxtUri = currentPres.urls.text;
     requestLastPages(currentTxtUri).then(currentPageContent => {
       setCurrentSlideText(currentPageContent)
@@ -51,7 +51,7 @@ function WhiteboardToolbarItem({ pluginName, pluginUuid: uuid }: WhiteboardToolb
         label: "10 seconds",
         tooltip: "this is a button injected by plugin",
         onClick: () => {
-          handleGenerateQuiz(currentPresentation);
+          handleFetchPresentationData(currentPresentation);
           setWhiteboardButtonLoading();
         },
       } as BbbPluginSdk.WhiteboardToolbarButtonObj;
@@ -88,4 +88,4 @@ function WhiteboardToolbarItem({ pluginName, pluginUuid: uuid }: WhiteboardToolb
   );
 }
 
-export default WhiteboardToolbarItem;
+export default SampleWhiteboardItem;

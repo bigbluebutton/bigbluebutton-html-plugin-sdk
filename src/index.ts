@@ -6,7 +6,6 @@ export type {
   GetWhiteboardToolbarItems,
   CustomWindowPlugin,
   ErrorDisplay,
-  Quiz,
   CurrentPresentation,
   Urls,
 } from './types'
@@ -17,8 +16,6 @@ export {
 
 export {
   PresentationType,
-  UPDATE_PLUGIN_DATA,
-  UPDATE_HOOK_USE_CURRENT_PRESENTATION,
-  UPDATE_HOOK_USE_CURRENT_PRESENTATION_NEW_SUBSCRIBER,
+  Internal,
   getPluginApi,
 } from './utils'
