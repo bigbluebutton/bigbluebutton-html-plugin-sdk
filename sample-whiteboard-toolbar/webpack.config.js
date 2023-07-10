@@ -1,8 +1,8 @@
 module.exports = {
     entry: './src/index.jsx',
     output: {
-        filename: 'WhiteboardToolbarButton.js',
-        library: 'WhiteboardToolbarButton',
+        filename: 'SampleWhiteboardToolbarItems.js',
+        library: 'SampleWhiteboardToolbarItems',
         libraryTarget: 'umd',
         publicPath: '/static/',
         globalObject: 'this',
