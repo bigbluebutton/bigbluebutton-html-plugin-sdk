@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Internal } from '../utils/enums/general';
-import { CurrentPresentation } from '../types/'
+import { Presentation } from '../types/'
 import { CustomEventHookWrapper } from '../types/common';
 
-const useCurrentPresentation: () => CurrentPresentation | undefined = () => {
-    const [presentationInfo, setPresentationInfo] = useState<CurrentPresentation | undefined>();
-    const handleCurrentPresentationUpdateEvent: EventListener = ((event: CustomEventHookWrapper<CurrentPresentation>) => {
+const useCurrentPresentation: () => Presentation | undefined = () => {
+    const [presentationInfo, setPresentationInfo] = useState<Presentation | undefined>();
+    const handleCurrentPresentationUpdateEvent: EventListener = ((event: CustomEventHookWrapper<Presentation>) => {
         if (event.detail.hook === Internal.BbbHooks.UseCurrentPresentation) {
             setPresentationInfo(event.detail.data);
         }

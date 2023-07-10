@@ -1,5 +1,5 @@
 {
-  "name": "sample-whiteboard-toolbar",
+  "name": "sample-whiteboard-toolbar-plugin",
   "version": "0.1.0",
   "private": true,
   "main": "./src/index.jsx",

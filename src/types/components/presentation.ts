@@ -1,17 +1,15 @@
-export interface CurrentPresentation {
-    isCurrentPage: boolean;
-    num: number;
-    pageId: string,
-    presentationId: string
-    slideRevealed: boolean,
-    urls: Urls,
+export interface Presentation {
+    presentationId: string;
+    currentPage: PresentationPage
 }
-
-export interface Urls {
-    png: string,
-    svg: string,
-    text: string,
-    thumb: string,
+export interface PresentationPage {
+    id: string
+    num: number
+    urls: PresentationPageUrls
 }
-
-
+export interface PresentationPageUrls {
+    thumbnail: string
+    png: string
+    svg: string
+    text: string
+}

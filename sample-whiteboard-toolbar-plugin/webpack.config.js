@@ -1,8 +1,8 @@
 module.exports = {
     entry: './src/index.jsx',
     output: {
-        filename: 'SampleWhiteboardToolbarItems.js',
-        library: 'SampleWhiteboardToolbarItems',
+        filename: 'SampleWhiteboardToolbarPlugin.js',
+        library: 'SampleWhiteboardToolbarPlugin',
         libraryTarget: 'umd',
         publicPath: '/static/',
         globalObject: 'this',
@@ -30,5 +30,4 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx', '.tsx', '.ts']
     },
-    // rest of your webpack config
 }

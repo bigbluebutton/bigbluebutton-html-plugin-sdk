@@ -1,13 +1,13 @@
-export type {
+export {
+  PluginItem,
   WhiteboardToolbarItem,
-  WhiteboardToolbarLoading,
+  WhiteboardToolbarSpinner,
   WhiteboardToolbarSeparator,
-  WhiteboardToolbarButtonObj,
-  GetWhiteboardToolbarItems,
+  WhiteboardToolbarButton,
   CustomWindowPlugin,
-  ErrorDisplay,
-  CurrentPresentation,
-  Urls,
+  Presentation,
+  PresentationPage,
+  PresentationPageUrls,
 } from './types'
 
 export {
