@@ -57,7 +57,6 @@ function SampleWhiteboardToolbarPlugin({ pluginUuid: uuid }: SampleWhiteboardToo
     } else {
       currentObjectToSendToClient = new BbbPluginSdk.WhiteboardToolbarSpinner();
     }
-    console.log("Teste aqui -->   ", currentObjectToSendToClient instanceof BbbPluginSdk.WhiteboardToolbarButton, currentObjectToSendToClient)
     pluginApi.setWhiteboardToolbarItems([currentObjectToSendToClient]);
   }, [isIdle, currentPresentation])
 

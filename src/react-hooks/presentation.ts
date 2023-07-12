@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Internal } from '../utils/enums/general';
+import { Internal } from '../index';
 import { Presentation } from '../types/'
 import { CustomEventHookWrapper } from '../types/common';
 

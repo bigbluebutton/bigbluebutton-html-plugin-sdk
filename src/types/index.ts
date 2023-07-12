@@ -1,13 +1,13 @@
 export {
-    PluginItem,
+    PluginProvidedUiItemDescriptor,
     WhiteboardToolbarItem,
     WhiteboardToolbarSpinner,
     WhiteboardToolbarSeparator,
     WhiteboardToolbarButton,
-    CustomWindowPlugin,
+    PluginBrowserWindow,
 } from './common';
 export {
     Presentation,
     PresentationPage,
     PresentationPageUrls,
-} from './components/presentation';
+} from './custom-hook-types/presentation';

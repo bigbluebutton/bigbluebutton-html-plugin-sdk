@@ -1,8 +1,8 @@
 import {
-    CustomWindowPlugin,
-} from '../../types';
+    PluginBrowserWindow,
+} from '../types';
 
-declare const window: CustomWindowPlugin
+declare const window: PluginBrowserWindow
 export const getPluginApi = (uuid: string) => {
     if (window.bbb_plugins){
         if (Object.keys(window.bbb_plugins).indexOf(uuid) !== -1) {

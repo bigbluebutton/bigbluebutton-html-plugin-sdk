@@ -1,10 +1,10 @@
 export {
-  PluginItem,
+  PluginProvidedUiItemDescriptor,
   WhiteboardToolbarItem,
   WhiteboardToolbarSpinner,
   WhiteboardToolbarSeparator,
   WhiteboardToolbarButton,
-  CustomWindowPlugin,
+  PluginBrowserWindow,
   Presentation,
   PresentationPage,
   PresentationPageUrls,
@@ -15,7 +15,10 @@ export {
 } from './react-hooks'
 
 export {
-  PresentationType,
-  Internal,
   getPluginApi,
-} from './utils'
+} from './core'
+
+export {
+  Internal,
+  WhiteboardToolbarItemType,
+} from './enums' 

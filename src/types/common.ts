@@ -1,12 +1,12 @@
-import { PresentationType } from '../utils/enums/presentation';
+import { WhiteboardToolbarItemType } from '../index';
 
-export interface PluginItem {
+export interface PluginProvidedUiItemDescriptor {
     id: string
     type: string
     setItemId: (id: string) => void
 }
 
-export interface WhiteboardToolbarItem extends PluginItem{}
+export interface WhiteboardToolbarItem extends PluginProvidedUiItemDescriptor{}
 
 export interface WhiteboardToolbarButtonProps {
     label: string,
@@ -24,7 +24,7 @@ export class WhiteboardToolbarButton implements WhiteboardToolbarItem {
         this.label = label;
         this.tooltip = tooltip;
         this.onClick = onClick;
-        this.type = PresentationType.PRESENTATION_TOOLBAR_BUTTON;
+        this.type = WhiteboardToolbarItemType.BUTTON;
     }
     
     setItemId: (id: string) => void = (id: string) => {
@@ -37,7 +37,7 @@ export class WhiteboardToolbarSpinner implements WhiteboardToolbarItem {
     type: string;
 
     constructor() {
-        this.type = PresentationType.PRESENTATION_TOOLBAR_SPINNER;
+        this.type = WhiteboardToolbarItemType.SPINNER;
     }
 
     setItemId: (id: string) => void = (id: string) => {
@@ -54,7 +54,7 @@ export class WhiteboardToolbarSeparator implements WhiteboardToolbarItem {
     width: number;
     constructor({width}: WhiteboardToolbarSeparatorProps) {
         this.width = width;
-        this.type = PresentationType.PRESENTATION_TOOLBAR_SEPARATOR
+        this.type = WhiteboardToolbarItemType.SEPARATOR
 
     }
 
@@ -63,25 +63,9 @@ export class WhiteboardToolbarSeparator implements WhiteboardToolbarItem {
     }
 }
 
-// export interface WhiteboardToolbarItem extends PluginItem {}
-
-// export interface WhiteboardToolbarButton extends WhiteboardToolbarItem {
-//     label: string,
-//     tooltip: string,
-//     onClick: () => void,
-// }
-
-// export interface WhiteboardToolbarSpinner extends WhiteboardToolbarItem {}
-
-// export interface WhiteboardToolbarSeparator extends WhiteboardToolbarItem {
-//     width: number;
-// }
-
-
-
 export type SetWhiteboardToolbarItems = (whiteboardToolbarItem: WhiteboardToolbarItem[]) => void;
 
-export interface CustomWindowPlugin extends Window {
+export interface PluginBrowserWindow extends Window {
     bbb_plugins: { [key: string]: {
         setWhiteboardToolbarItems: SetWhiteboardToolbarItems
     }};
