@@ -1,0 +1,70 @@
+{
+  "name": "bigbluebutton-html-plugin-sdk",
+  "version": "1.0.0",
+  "homepage": "https://use-http.com",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alex-cory/use-http.git"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^13.9.8",
+    "@types/react": "^16.9.30",
+    "@types/react-dom": "^16.9.5",
+    "@typescript-eslint/eslint-plugin": "^2.26.0",
+    "@typescript-eslint/parser": "^2.26.0",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^3.0.0",
+    "eslint-plugin-standard": "^4.0.1",
+    "eslint-watch": "^6.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^3.8.3",
+    "watch": "^1.0.2"
+  },
+  "scripts": {
+    "prepublishOnly": "yarn build:production && yarn build:production:esm # runs before publish",
+    "prepublishOnly-p": "npm run build-p && npm run build:esm-p # runs before publish",
+    "build": "rm -rf dist/cjs && tsc --module CommonJS --outDir dist/cjs",
+    "build-p": "rm -rf dist/cjs && tsc --module CommonJS --outDir dist/cjs -p tsconfig.production.json",
+    "build:esm": "rm -rf dist/esm && tsc",
+    "build:esm-p": "rm -rf dist/esm && tsc -p tsconfig.production.json",
+    "build:production": "yarn build -p tsconfig.production.json",
+    "build:production:esm": "yarn build:esm -p tsconfig.production.json",
+    "build:watch": "rm -rf dist && tsc -w --module CommonJS",
+    "tsc": "tsc -p . --noEmit && tsc -p ./src/__tests__",
+    "clean": "npm prune; yarn cache clean; rm -rf ./node_modules package-lock.json yarn.lock; yarn",
+    "lint": "eslint ./src/**/*.{ts,tsx}",
+    "lint:fix": "npm run lint -- --fix",
+    "lint:watch": "watch 'yarn lint'"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "react hook",
+    "react-hook",
+    "use",
+    "fetch",
+    "hook",
+    "react",
+    "use hooks",
+    "graphql",
+    "mutation",
+    "query",
+    "useAxios",
+    "apollo"
+  ]
+}
