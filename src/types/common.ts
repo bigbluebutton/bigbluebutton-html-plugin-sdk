@@ -65,12 +65,12 @@ export class WhiteboardToolbarSeparator implements WhiteboardToolbarItem {
 
 export type SetWhiteboardToolbarItems = (whiteboardToolbarItem: WhiteboardToolbarItem[]) => void;
 
-export interface SettersForExtensibleUIs {
+export interface PluginApi {
     setWhiteboardToolbarItems: SetWhiteboardToolbarItems
 }
 
 export interface PluginBrowserWindow extends Window {
-    bbb_plugins: { [key: string]: SettersForExtensibleUIs};
+    bbb_plugins: { [key: string]: PluginApi};
 }
 
 export interface CustomEventHook<T> {
@@ -81,5 +81,3 @@ export interface CustomEventHook<T> {
 export interface CustomEventHookWrapper<T> extends Event {
     detail: CustomEventHook<T>
 }
-
-export type GetPluginApi = (uuid: string) => SettersForExtensibleUIs

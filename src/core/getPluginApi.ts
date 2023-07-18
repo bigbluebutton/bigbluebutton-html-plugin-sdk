@@ -1,7 +1,9 @@
 import {
     PluginBrowserWindow,
-    GetPluginApi,
+    PluginApi,
 } from '../types';
+
+export type GetPluginApi = (uuid: string) => PluginApi
 
 declare const window: PluginBrowserWindow
 export const getPluginApi: GetPluginApi = (uuid: string) => {

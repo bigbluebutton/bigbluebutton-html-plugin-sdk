@@ -5,8 +5,7 @@ export {
     WhiteboardToolbarSeparator,
     WhiteboardToolbarButton,
     PluginBrowserWindow,
-    GetPluginApi,
-    SettersForExtensibleUIs,
+    PluginApi,
 } from './common';
 export {
     Presentation,

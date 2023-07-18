@@ -5,12 +5,12 @@ import './style.css';
 import { SampleWhiteboardToolbarPluginProps } from './types';
 
 import * as BbbPluginSdk from 'bigbluebutton-html-plugin-sdk';
-import { SettersForExtensibleUIs } from 'bigbluebutton-html-plugin-sdk';
+import { PluginApi } from 'bigbluebutton-html-plugin-sdk';
 
 function SampleWhiteboardToolbarPlugin({ pluginUuid: uuid }: SampleWhiteboardToolbarPluginProps) {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [isIdle, setIsIdle] = useState<Boolean>(false);
-  const pluginApi: SettersForExtensibleUIs = BbbPluginSdk.getPluginApi(uuid)
+  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid)
   const [currentSlideText, setCurrentSlideText] = useState<string>("");
 
   const currentPresentation = BbbPluginSdk.useCurrentPresentation();

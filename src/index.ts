@@ -8,7 +8,7 @@ export {
   Presentation,
   PresentationPage,
   PresentationPageUrls,
-  SettersForExtensibleUIs,
+  PluginApi,
 } from './types'
 
 export {
