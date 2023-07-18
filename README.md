@@ -1,4 +1,4 @@
-# Bigblubutton HTML5 SDK for plugins
+# BigBlueButton SDK for for HTML plugins
 
 ## Information
 
@@ -7,9 +7,8 @@ SDK for developing BigBlueButton plugins, an example implementation of it can be
 ## API
 ### Integration features
 
-#### Available places for plugin
-For now the only place that accepts the plugin architecture is: 
- - Whiteboard toolbar button;
+#### Extensible UI areas
+- Whiteboard toolbar items (button, separator, spinner)
 
-#### Available Hooks for information
-You have the `useCurrentPresentation` hook available from the SDK to find out information regarding the current presentation. It will naturally update whenever any presentation information changes.
+#### Realtime data consumption
+- `useCurrentPresentation` hook: provides information regarding the current presentation.

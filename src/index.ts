@@ -8,11 +8,12 @@ export {
   Presentation,
   PresentationPage,
   PresentationPageUrls,
+  SettersForExtensibleUIs,
 } from './types'
 
 export {
   useCurrentPresentation,
-} from './react-hooks'
+} from './data-consumption/hooks'
 
 export {
   getPluginApi,

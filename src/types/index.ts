@@ -5,9 +5,11 @@ export {
     WhiteboardToolbarSeparator,
     WhiteboardToolbarButton,
     PluginBrowserWindow,
+    GetPluginApi,
+    SettersForExtensibleUIs,
 } from './common';
 export {
     Presentation,
     PresentationPage,
     PresentationPageUrls,
-} from './custom-hook-types/presentation';
+} from '../data-consumption/types/presentation';

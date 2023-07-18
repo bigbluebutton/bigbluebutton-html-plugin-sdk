@@ -1,9 +1,10 @@
 import {
     PluginBrowserWindow,
+    GetPluginApi,
 } from '../types';
 
 declare const window: PluginBrowserWindow
-export const getPluginApi = (uuid: string) => {
+export const getPluginApi: GetPluginApi = (uuid: string) => {
     if (window.bbb_plugins){
         if (Object.keys(window.bbb_plugins).indexOf(uuid) !== -1) {
             return window.bbb_plugins[uuid];

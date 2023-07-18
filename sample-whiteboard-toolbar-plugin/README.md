@@ -1,15 +1,10 @@
-# Sample Whiteboard Toolbar Button Plugin
+# Sample Whiteboard Toolbar Plugin
 
 ## What it does
 
 This plugin is just an example of how developers can create their own plugins. It consists of a button that shows the label "10s" and as soon as you click it, it will turn into a spinner and will open a modal window showing some information about the current presentation and its slide.
 
 ![Alt Text](./public/assets/plugin.gif)
-
-The example uses some of the currently available features for plugins in BBB such as:
-
-- `useCurrentPresentation` hook which will make presentation info available and will automatically update whenever it changes.
-- `setWhiteboardToolbarItems` function which is responsible for updating the object you want to be displayed in the toolbar.
 
 ## Building the plugin
 

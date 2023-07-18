@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Internal } from '../index';
-import { Presentation } from '../types/'
-import { CustomEventHookWrapper } from '../types/common';
+import { Internal } from '../../index';
+import { Presentation } from '../../types/'
+import { CustomEventHookWrapper } from '../../types/common';
 
 const useCurrentPresentation: () => Presentation | undefined = () => {
     const [presentationInfo, setPresentationInfo] = useState<Presentation | undefined>();
