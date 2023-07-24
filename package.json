@@ -1,10 +1,10 @@
 {
   "name": "bigbluebutton-html-plugin-sdk",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/bigbluebutton/bigbluebutton-html-plugin-sdk",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
-  "license": "Apache-2.0",
+  "license": "LGPL-3.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/bigbluebutton/bigbluebutton-html-plugin-sdk.git"
