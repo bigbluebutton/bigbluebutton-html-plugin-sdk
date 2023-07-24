@@ -11,7 +11,7 @@ This plugin is just an example of how developers can create their own plugins. I
 In order to build it, use the `build-bundle command`.
 
 ```bash
-cd $HOME/src/bigbluebutton-html-plugin-sdk/sample-whiteboard-toolbar-plugin
+cd $HOME/src/bigbluebutton-html-plugin-sdk/samples/sample-whiteboard-toolbar-plugin
 npm install
 npm run build-bundle
 ```

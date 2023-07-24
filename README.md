@@ -2,13 +2,11 @@
 
 ## Information
 
-SDK for developing BigBlueButton plugins, an example implementation of it can be found in `./sample-whiteboard-toolbar-plugin` (Refer to `./sample-whiteboard-toolbar-plugin/README.md`).
+SDK for developing BigBlueButton plugins, an example implementation of it can be found in `./samples/sample-whiteboard-toolbar-plugin` (Refer to `./samples/sample-whiteboard-toolbar-plugin/README.md`).
 
 ## API
-### Integration features
-
-#### Extensible UI areas
+### Extensible UI areas
 - Whiteboard toolbar items (button, separator, spinner)
 
-#### Realtime data consumption
+### Realtime data consumption
 - `useCurrentPresentation` hook: provides information regarding the current presentation.

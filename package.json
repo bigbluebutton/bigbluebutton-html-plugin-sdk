@@ -1,13 +1,13 @@
 {
   "name": "bigbluebutton-html-plugin-sdk",
-  "version": "1.0.0",
-  "homepage": "https://use-http.com",
+  "version": "0.0.1",
+  "homepage": "https://github.com/bigbluebutton/bigbluebutton-html-plugin-sdk",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alex-cory/use-http.git"
+    "url": "https://github.com/bigbluebutton/bigbluebutton-html-plugin-sdk.git"
   },
   "peerDependencies": {
     "react": "^18.2.0",
