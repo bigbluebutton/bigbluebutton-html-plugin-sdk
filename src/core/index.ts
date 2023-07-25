@@ -1,3 +1,1 @@
-export {
-    getPluginApi,
-} from './getPluginApi';
+export * from './getPluginApi';
