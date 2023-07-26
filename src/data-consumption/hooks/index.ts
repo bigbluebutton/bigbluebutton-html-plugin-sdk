@@ -1,3 +1,1 @@
-export {
-    useCurrentPresentation,
-} from './presentation';
+export { default as useCurrentPresentation } from './presentation';
