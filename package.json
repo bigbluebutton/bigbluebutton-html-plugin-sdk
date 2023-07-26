@@ -34,12 +34,9 @@
     "watch": "^1.0.2"
   },
   "scripts": {
-    "prepublishOnly": "npm run build # runs before publish",
-    "prepublishOnly:production": "npm run build:production && npm run build:production:esm # runs before publish",
+    "prepublishOnly": "npm run build:esm # runs before publish",
     "build": "rm -rf dist/cjs && tsc --module CommonJS --outDir dist/cjs",
-    "build:production": "rm -rf dist/cjs && tsc --module CommonJS --outDir dist/cjs -p tsconfig.production.json",
     "build:esm": "rm -rf dist/esm && tsc",
-    "build:production:esm": "rm -rf dist/esm && tsc -p tsconfig.production.json",
     "build:watch": "rm -rf dist && tsc -w --module CommonJS",
     "lint": "eslint ./src/*.{ts,tsx}",
     "lint:fix": "npm run lint -- --fix",
