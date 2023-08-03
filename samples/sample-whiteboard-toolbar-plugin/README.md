@@ -1,14 +1,32 @@
 # Sample Whiteboard Toolbar Plugin
 
-## What it does
+## What is it?
 
-This plugin is just an example of how developers can create their own plugins. It consists of a button that shows the label "10s" and as soon as you click it, it will turn into a spinner and will open a modal window showing some information about the current presentation and its slide.
+The Sample Whiteboard Toolbar Plugin serves as a demonstration of how developers can create their own custom plugins. This plugin includes a button that displays the label "10s." When you click on the button, it transforms into a spinner and opens a modal window, providing information about the current presentation and its slide.
 
 ![Alt Text](./public/assets/plugin.gif)
 
-## Building the plugin
+## Running the Plugin from Source
 
-In order to build it, use the `build-bundle command`.
+1. Start the development server:
+
+```bash
+cd $HOME/src/bigbluebutton-html-plugin-sdk/samples/sample-whiteboard-toolbar-plugin
+npm install
+npm start
+```
+
+2. Add reference to it on BigBlueButton's `settings.yml`:
+
+```yaml
+  plugins:
+    - name: SampleWhiteboardToolbarPlugin
+      url: http://localhost:8080/static/SampleWhiteboardToolbarPlugin.js
+```
+
+## Building the Plugin
+
+To build the plugin for production use, follow these steps:
 
 ```bash
 cd $HOME/src/bigbluebutton-html-plugin-sdk/samples/sample-whiteboard-toolbar-plugin
@@ -16,40 +34,18 @@ npm install
 npm run build-bundle
 ```
 
-It will generate the `dist` folder which contains the bundled js file (in this case called `SampleWhiteboardToolbarPlugin.js`, but you can change this in `webpack.config.js`).
+The above command will generate the `dist` folder, containing the bundled JavaScript file named `SampleWhiteboardToolbarPlugin.js`. This file can be hosted on any HTTPS server.
 
-## Using it in your BigBlueButton server
-
-With the bundled plugin, you can install it anywhere you want (for instance: a dedicated server for your plugins `https://<your-dedicated-server>/plugins/SampleWhiteboardToolbarPlugin.js`), just make sure to point it correctly on the `settings.yml`. But for the purpose of just testing it, we are going to install it in the BigBlueButton server, so follow the instructions:
-
-```bash
-mkdir /var/www/bigbluebutton-default/assets/plugins
-sudo cp $HOME/src/bigbluebutton-html-plugin-sdk/sample-whiteboard-toolbar-plugin/dist/SampleWhiteboardToolbarPlugin.js /var/www/bigbluebutton-default/assets/plugins
-```
-
-`settings.yml` configuration:
-
-Next we will change the `settings.yml` file from bbb-html5, and insert the following lines:
-
-```yaml
-plugins:
-    - name: sampleWhiteboardToolbarPlugin
-      url: https://<your-host>/plugins/SampleWhiteboardToolbarPlugin.js
-```
-
-alongside with the app directive, just as follows:
+To use the plugin with BigBlueButton, add the plugin's URL to `settings.yml` as shown below:
 
 ```yaml
 public:
-    app:
-      ... // All app configs
-    plugins:
-        - name: sampleWhiteboardToolbarPlugin
-          url: https://<your-host>/plugins/SampleWhiteboardToolbarPlugin.js
-    ... // All other configs
-
+  app:
+    ... // All app configurations
+  plugins:
+    - name: sampleWhiteboardToolbarPlugin
+      url: <<PLUGIN_URL>>
+  ... // All other configurations
 ```
 
-And there you go, it is already possible to use.
-
-To create a custom Plugin yourself, just follow the general structure of the sample-whiteboard-toolbar-plugin
+Alternatively, you can host the bundled file on the BigBlueButton server by copying `dist/SampleWhiteboardToolbarPlugin.js` to the folder `/var/www/bigbluebutton-default/assets/plugins`. In this case, the `<<PLUGIN_URL>>` will be `https://<your-host>/plugins/SampleWhiteboardToolbarPlugin.js`.
