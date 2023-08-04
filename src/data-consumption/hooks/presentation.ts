@@ -14,8 +14,13 @@ const useCurrentPresentation: () => Presentation | undefined = () => {
 
   useEffect(() => {
     window.addEventListener(Internal.BbbHookEvents.Update, handleCurrentPresentationUpdateEvent);
-    window.dispatchEvent(new Event(Internal.BbbHookEvents.NewSubscriber));
+    window.dispatchEvent(new CustomEvent(Internal.BbbHookEvents.NewSubscriber, {
+      detail: { hook: Internal.BbbHooks.UseCurrentPresentation },
+    }));
     return () => {
+      window.dispatchEvent(new CustomEvent(Internal.BbbHookEvents.Unsubscribe, {
+        detail: { hook: Internal.BbbHooks.UseCurrentPresentation },
+      }));
       window.removeEventListener(
         Internal.BbbHookEvents.Update,
         handleCurrentPresentationUpdateEvent,
