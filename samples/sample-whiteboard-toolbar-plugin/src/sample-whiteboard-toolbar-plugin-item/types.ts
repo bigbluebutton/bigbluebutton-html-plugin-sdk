@@ -1,6 +1,6 @@
-interface SampleWhiteboardToolbarPluginProps {
+interface SamplePresentationToolbarPluginProps {
     pluginName: string,
     pluginUuid: string,
 }
 
-export { SampleWhiteboardToolbarPluginProps };
+export { SamplePresentationToolbarPluginProps };
