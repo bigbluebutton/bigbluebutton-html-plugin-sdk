@@ -12,13 +12,13 @@ const getPluginApi: GetPluginApi = (uuid: string) => {
       return window.bbb_plugins[uuid];
     }
     window.bbb_plugins[uuid] = {
-      setWhiteboardToolbarItems: () => {},
+      setPresentationToolbarItems: () => {},
     };
     return window.bbb_plugins[uuid];
   }
   window.bbb_plugins = {};
   window.bbb_plugins[uuid] = {
-    setWhiteboardToolbarItems: () => {},
+    setPresentationToolbarItems: () => {},
   };
   return window.bbb_plugins[uuid];
 };

@@ -1,4 +1,4 @@
-import { WhiteboardToolbarItemType } from '../index';
+import { PresentationToolbarItemType } from '../index';
 
 export interface PluginProvidedUiItemDescriptor {
   id: string
@@ -6,15 +6,15 @@ export interface PluginProvidedUiItemDescriptor {
   setItemId: (id: string) => void
 }
 
-export interface WhiteboardToolbarItem extends PluginProvidedUiItemDescriptor{}
+export interface PresentationToolbarItem extends PluginProvidedUiItemDescriptor{}
 
-export interface WhiteboardToolbarButtonProps {
+export interface PresentationToolbarButtonProps {
   label: string,
   tooltip: string,
   onClick: () => void,
 }
 
-export class WhiteboardToolbarButton implements WhiteboardToolbarItem {
+export class PresentationToolbarButton implements PresentationToolbarItem {
   id: string = '';
 
   type: string;
@@ -25,56 +25,57 @@ export class WhiteboardToolbarButton implements WhiteboardToolbarItem {
 
   onClick: () => void;
 
-  constructor({ label = '', tooltip = '', onClick = () => {} }: WhiteboardToolbarButtonProps) {
+  constructor({ label = '', tooltip = '', onClick = () => {} }: PresentationToolbarButtonProps) {
     this.label = label;
     this.tooltip = tooltip;
     this.onClick = onClick;
-    this.type = WhiteboardToolbarItemType.BUTTON;
+    this.type = PresentationToolbarItemType.BUTTON;
   }
 
   setItemId: (id: string) => void = (id: string) => {
-    this.id = `WhiteboardToolbarButton_${id}`;
+    this.id = `PresentationToolbarButton_${id}`;
   };
 }
 
-export class WhiteboardToolbarSpinner implements WhiteboardToolbarItem {
+export class PresentationToolbarSpinner implements PresentationToolbarItem {
   id: string = '';
 
   type: string;
 
   constructor() {
-    this.type = WhiteboardToolbarItemType.SPINNER;
+    this.type = PresentationToolbarItemType.SPINNER;
   }
 
   setItemId: (id: string) => void = (id: string) => {
-    this.id = `WhiteboardToolbarButton_${id}`;
+    this.id = `PresentationToolbarButton_${id}`;
   };
 }
 
-export interface WhiteboardToolbarSeparatorProps {
+export interface PresentationToolbarSeparatorProps {
   width: number
 }
-export class WhiteboardToolbarSeparator implements WhiteboardToolbarItem {
+export class PresentationToolbarSeparator implements PresentationToolbarItem {
   id: string = '';
 
   type: string;
 
   width: number;
 
-  constructor({ width } : WhiteboardToolbarSeparatorProps) {
+  constructor({ width } : PresentationToolbarSeparatorProps) {
     this.width = width;
-    this.type = WhiteboardToolbarItemType.SEPARATOR;
+    this.type = PresentationToolbarItemType.SEPARATOR;
   }
 
   setItemId: (id: string) => void = (id: string) => {
-    this.id = `WhiteboardToolbarButton_${id}`;
+    this.id = `PresentationToolbarButton_${id}`;
   };
 }
 
-export type SetWhiteboardToolbarItems = (whiteboardToolbarItem: WhiteboardToolbarItem[]) => void;
+export type SetPresentationToolbarItems = (presentationToolbarItem:
+  PresentationToolbarItem[]) => void;
 
 export interface PluginApi {
-  setWhiteboardToolbarItems: SetWhiteboardToolbarItems
+  setPresentationToolbarItems: SetPresentationToolbarItems
 }
 
 export interface PluginBrowserWindow extends Window {
