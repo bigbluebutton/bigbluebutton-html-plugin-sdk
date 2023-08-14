@@ -1,17 +1,17 @@
-export interface PresentationPageUrls {
+export interface CurrentPresentationPageUrls {
     thumbnail: string
     png: string
     svg: string
     text: string
 }
 
-export interface PresentationPage {
+export interface CurrentPresentationPage {
     id: string
     num: number
-    urls: PresentationPageUrls
+    urls: CurrentPresentationPageUrls
 }
 
-export interface Presentation {
+export interface CurrentPresentation {
     presentationId: string;
-    currentPage: PresentationPage
+    currentPage: CurrentPresentationPage
 }

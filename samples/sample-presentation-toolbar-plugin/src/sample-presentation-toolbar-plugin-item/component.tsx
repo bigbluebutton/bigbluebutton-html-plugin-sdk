@@ -25,7 +25,7 @@ function SamplePresentationToolbarPlugin({ pluginUuid: uuid }: SamplePresentatio
   const requestLastPages = (currentTxtUri: string) => fetch(currentTxtUri)
     .then((response) => response.text());
 
-  const handleFetchPresentationData = (currentPres: BbbPluginSdk.Presentation) => {
+  const handleFetchPresentationData = (currentPres: BbbPluginSdk.CurrentPresentation) => {
     const currentTxtUri = currentPres.currentPage.urls.text;
     requestLastPages(currentTxtUri).then((currentPageContent) => {
       setCurrentSlideText(currentPageContent);
