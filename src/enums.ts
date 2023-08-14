@@ -1,6 +1,7 @@
 enum BbbHookEvents {
   Update = 'UPDATE_HOOK',
-  NewSubscriber = 'NEW_SUBSCRIBER',
+  Subscribe = 'SUBSCRIBE_TO_HOOK',
+  Unsubscribe = 'UNSUBSCRIBE_FROM_HOOK'
 }
 
 enum BbbHooks {

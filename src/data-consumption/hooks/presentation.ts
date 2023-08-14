@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Internal } from '../../index';
-import { Presentation } from '../../types';
+import { CurrentPresentation } from '../../types';
 import { CustomEventHookWrapper } from '../../types/common';
 
-const useCurrentPresentation: () => Presentation | undefined = () => {
-  const [presentationInfo, setPresentationInfo] = useState<Presentation | undefined>();
+const useCurrentPresentation: () => CurrentPresentation | undefined = () => {
+  const [presentationInfo, setPresentationInfo] = useState<CurrentPresentation | undefined>();
   const handleCurrentPresentationUpdateEvent: EventListener = (
-    (event: CustomEventHookWrapper<Presentation>) => {
+    (event: CustomEventHookWrapper<CurrentPresentation>) => {
       if (event.detail.hook === Internal.BbbHooks.UseCurrentPresentation) {
         setPresentationInfo(event.detail.data);
       }
@@ -14,8 +14,13 @@ const useCurrentPresentation: () => Presentation | undefined = () => {
 
   useEffect(() => {
     window.addEventListener(Internal.BbbHookEvents.Update, handleCurrentPresentationUpdateEvent);
-    window.dispatchEvent(new Event(Internal.BbbHookEvents.NewSubscriber));
+    window.dispatchEvent(new CustomEvent(Internal.BbbHookEvents.Subscribe, {
+      detail: { hook: Internal.BbbHooks.UseCurrentPresentation },
+    }));
     return () => {
+      window.dispatchEvent(new CustomEvent(Internal.BbbHookEvents.Unsubscribe, {
+        detail: { hook: Internal.BbbHooks.UseCurrentPresentation },
+      }));
       window.removeEventListener(
         Internal.BbbHookEvents.Update,
         handleCurrentPresentationUpdateEvent,
