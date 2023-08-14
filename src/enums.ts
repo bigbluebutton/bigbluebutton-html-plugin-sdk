@@ -13,7 +13,7 @@ export const Internal = {
 };
 
 // Presentation toolbar items types:
-export enum WhiteboardToolbarItemType {
+export enum PresentationToolbarItemType {
   BUTTON = 'PRESENTATION_TOOLBAR_BUTTON',
   SPINNER = 'PRESENTATION_TOOLBAR_SPINNER',
   SEPARATOR = 'PRESENTATION_TOOLBAR_SEPARATOR',
