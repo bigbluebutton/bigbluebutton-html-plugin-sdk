@@ -1,36 +1,43 @@
-import { UserListDropdownItemType, WhiteboardToolbarItemType } from '../index';
+import {
+  PresentationToolbarItemType,
+  UserListDropdownItemType,
+} from '../index';
+
+type PluginProvidedUiItemType = UserListDropdownItemType | PresentationToolbarItemType;
 
 export interface PluginProvidedUiItemDescriptor {
-  id: string
-  type: string
-  setItemId: (id: string) => void
+  /** Defined by BigBlueButton Plugin Engine. */
+  id: string;
+  type: PluginProvidedUiItemType;
+  // type: UserListDropdownItemType | PresentationToolbarItemType;
+  setItemId: (id: string) => void;
 }
 
 export interface CustomEventHook<T> {
-  data: T
-  hook: string
+  data: T;
+  hook: string;
 }
 
 export interface CustomEventHookWrapper<T> extends Event {
-  detail: CustomEventHook<T>
+  detail: CustomEventHook<T>;
 }
 
 // Extensible Areas
 
-// WhiteboardToolbarItem Extensible Area
+// PresentationToolbarItem Extensible Area
 
-export interface WhiteboardToolbarItem extends PluginProvidedUiItemDescriptor{}
+export interface PresentationToolbarItem extends PluginProvidedUiItemDescriptor{}
 
-export interface WhiteboardToolbarButtonProps {
-  label: string,
-  tooltip: string,
-  onClick: () => void,
+export interface PresentationToolbarButtonProps {
+  label: string;
+  tooltip: string;
+  onClick: () => void;
 }
 
-export class WhiteboardToolbarButton implements WhiteboardToolbarItem {
+export class PresentationToolbarButton implements PresentationToolbarItem {
   id: string = '';
 
-  type: string;
+  type: PresentationToolbarItemType;
 
   label: string;
 
@@ -38,113 +45,73 @@ export class WhiteboardToolbarButton implements WhiteboardToolbarItem {
 
   onClick: () => void;
 
-  constructor({ label = '', tooltip = '', onClick = () => {} }: WhiteboardToolbarButtonProps) {
+  constructor({ label = '', tooltip = '', onClick = () => {} }: PresentationToolbarButtonProps) {
     this.label = label;
     this.tooltip = tooltip;
     this.onClick = onClick;
-    this.type = WhiteboardToolbarItemType.BUTTON;
+    this.type = PresentationToolbarItemType.BUTTON;
   }
 
   setItemId: (id: string) => void = (id: string) => {
-    this.id = `WhiteboardToolbarButton_${id}`;
+    this.id = `PresentationToolbarButton_${id}`;
   };
 }
 
-export class WhiteboardToolbarSpinner implements WhiteboardToolbarItem {
+export class PresentationToolbarSpinner implements PresentationToolbarItem {
   id: string = '';
 
-  type: string;
+  type: PresentationToolbarItemType;
 
   constructor() {
-    this.type = WhiteboardToolbarItemType.SPINNER;
+    this.type = PresentationToolbarItemType.SPINNER;
   }
 
   setItemId: (id: string) => void = (id: string) => {
-    this.id = `WhiteboardToolbarButton_${id}`;
+    this.id = `PresentationToolbarButton_${id}`;
   };
 }
 
-export interface WhiteboardToolbarSeparatorProps {
-  width: number
+export interface PresentationToolbarSeparatorProps {
+  width: number;
 }
-export class WhiteboardToolbarSeparator implements WhiteboardToolbarItem {
+export class PresentationToolbarSeparator implements PresentationToolbarItem {
   id: string = '';
 
-  type: string;
+  type: PresentationToolbarItemType;
 
   width: number;
 
-  constructor({ width } : WhiteboardToolbarSeparatorProps) {
+  constructor({ width } : PresentationToolbarSeparatorProps) {
     this.width = width;
-    this.type = WhiteboardToolbarItemType.SEPARATOR;
+    this.type = PresentationToolbarItemType.SEPARATOR;
   }
 
   setItemId: (id: string) => void = (id: string) => {
-    this.id = `WhiteboardToolbarButton_${id}`;
+    this.id = `PresentationToolbarButton_${id}`;
   };
 }
 
 // UserListDropdownItem Extensible Area
 
-export interface UserListDropdownItem extends PluginProvidedUiItemDescriptor{
-  label: string,
-  icon: string,
-  tooltip: string,
-  allowed: boolean,
-}
+export interface UserListDropdownItem extends PluginProvidedUiItemDescriptor{}
 
 export interface UserListDropdownItemWrapper {
-  userId: string
-  userListDropdownItem: UserListDropdownItem,
+  userId: string;
+  userListDropdownItem: UserListDropdownItem;
 }
 
-export interface UserListDropdownInformationProps {
-  label: string,
-  icon: string,
-  tooltip: string,
-  allowed: boolean,
-}
-
-export class UserListDropdownInformation implements UserListDropdownItem {
-  id: string = '';
-
-  type: string;
-
+interface UserListDropdownOptionProps {
   label: string;
-
   icon: string;
-
   tooltip: string;
-
   allowed: boolean;
-
-  constructor({
-    label = '', icon = '', tooltip = '', allowed = true,
-  }: UserListDropdownInformationProps) {
-    this.label = label;
-    this.tooltip = tooltip;
-    this.icon = icon;
-    this.allowed = allowed;
-    this.type = UserListDropdownItemType.INFORMATION;
-  }
-
-  setItemId: (id: string) => void = (id: string) => {
-    this.id = `UserListDropdownInformation_${id}`;
-  };
+  onClick: () => void;
 }
 
-interface UserListDropdownButtonProps {
-  label: string,
-  icon: string,
-  tooltip: string,
-  allowed: boolean,
-  onClick: () => void,
-}
-
-export class UserListDropdownButton implements UserListDropdownItem {
+export class UserListDropdownOption implements UserListDropdownItem {
   id: string = '';
 
-  type: string;
+  type: UserListDropdownItemType;
 
   label: string;
 
@@ -158,82 +125,44 @@ export class UserListDropdownButton implements UserListDropdownItem {
 
   constructor({
     label = '', icon = '', tooltip = '', allowed = true, onClick = () => {},
-  }: UserListDropdownButtonProps) {
+  }: UserListDropdownOptionProps) {
     this.label = label;
     this.icon = icon;
     this.tooltip = tooltip;
     this.allowed = allowed;
     this.onClick = onClick;
-    this.type = UserListDropdownItemType.BUTTON;
+    this.type = UserListDropdownItemType.OPTION;
   }
 
   setItemId: (id: string) => void = (id: string) => {
-    this.id = `UserListDropdownButton_${id}`;
+    this.id = `UserListDropdownOption_${id}`;
   };
 }
-
-export interface UserListDropdownDropdownItem {
-  label: string,
-  icon: string,
-  tooltip: string,
-  onClick: () => void
-}
-
-export interface UserListDropdownDropdownProps {
-  label: string,
-  icon: string,
-  tooltip: string,
-  type: string,
-  onClick: () => void,
-  allowed: boolean,
-  itemsList: UserListDropdownDropdownItem[]
-}
-
-export class UserListDropdownDropdown implements UserListDropdownItem {
+export class UserListDropdownSeparator implements UserListDropdownItem {
   id: string = '';
 
-  type: string;
+  type: UserListDropdownItemType;
 
-  label: string;
-
-  icon: string;
-
-  tooltip: string;
-
-  allowed: boolean;
-
-  onClick: () => void;
-
-  itemsList: UserListDropdownDropdownItem[];
-
-  constructor({
-    label = '', icon = '', tooltip = '', allowed = true, onClick = () => {},
-    itemsList = new Array<UserListDropdownDropdownItem>(),
-  }: UserListDropdownDropdownProps) {
-    this.label = label;
-    this.icon = icon;
-    this.tooltip = tooltip;
-    this.allowed = allowed;
-    this.onClick = onClick;
-    this.itemsList = itemsList;
-    this.type = UserListDropdownItemType.DROPDOWN;
+  constructor() {
+    this.type = UserListDropdownItemType.SEPARATOR;
   }
 
   setItemId: (id: string) => void = (id: string) => {
-    this.id = `UserListDropdownDropdown_${id}`;
+    this.id = `UserListDropdownSeparator_${id}`;
   };
 }
 
 // Setter Functions for the API
+export type SetPresentationToolbarItems = (presentationToolbarItem:
+  PresentationToolbarItem[]) => void;
 
-export type SetWhiteboardToolbarItems = (whiteboardToolbarItem: WhiteboardToolbarItem[]) => void;
-export type SetUserListDropdownItems = (
+export type SetUserListDropdownItemWrappers = (
   userListDropdownItemWrapper: UserListDropdownItemWrapper[]
 ) => void;
 
 export interface PluginApi {
-  setWhiteboardToolbarItems: SetWhiteboardToolbarItems
-  setUserListDropdownItems: SetUserListDropdownItems
+  setPresentationToolbarItems: SetPresentationToolbarItems;
+  setUserListDropdownItemWrappers: SetUserListDropdownItemWrappers;
 }
 
 export interface PluginBrowserWindow extends Window {

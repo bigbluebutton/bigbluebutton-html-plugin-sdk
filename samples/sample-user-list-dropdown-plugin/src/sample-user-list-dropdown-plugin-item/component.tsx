@@ -22,15 +22,14 @@ function SampleUserListDropdownPlugin({
   const [modalInfo, setModalInfo] = useState<ModalInfo>({} as ModalInfo);
   const pluginApi: BbbPluginSdk.PluginApi = BbbPluginSdk.getPluginApi(uuid);
   const loadedUserList = BbbPluginSdk.useLoadedUserList();
-  const pres = BbbPluginSdk.useCurrentPresentation();
 
   useEffect(() => {
     if (loadedUserList !== undefined && loadedUserList.length > 0) {
-      const listOfObjectsToSend:
+      const listOfOptionsToSend:
       Array<BbbPluginSdk.UserListDropdownItemWrapper> = loadedUserList.map(
         (user) => {
-          const currentObjectToSendToClient:
-            BbbPluginSdk.UserListDropdownItem = new BbbPluginSdk.UserListDropdownButton({
+          const buttonToUserListItem:
+            BbbPluginSdk.UserListDropdownItem = new BbbPluginSdk.UserListDropdownOption({
               label: 'Click to see participant information',
               icon: 'user',
               tooltip: 'This will open a modal dialog',
@@ -47,13 +46,25 @@ function SampleUserListDropdownPlugin({
             });
           return {
             userId: user.userId,
-            userListDropdownItem: currentObjectToSendToClient,
+            userListDropdownItem: buttonToUserListItem,
           } as BbbPluginSdk.UserListDropdownItemWrapper;
         },
       );
-      pluginApi.setUserListDropdownItems(listOfObjectsToSend);
+      
+      const listOfDropdownsToSend:
+      Array<BbbPluginSdk.UserListDropdownItemWrapper> = loadedUserList.map(
+        (user) => {
+          const dropdownToUserListItem:
+            BbbPluginSdk.UserListDropdownItem = new BbbPluginSdk.UserListDropdownSeparator();
+          return {
+            userId: user.userId,
+            userListDropdownItem: dropdownToUserListItem,
+          } as BbbPluginSdk.UserListDropdownItemWrapper;
+        },
+      );
+      pluginApi.setUserListDropdownItemWrappers([...listOfDropdownsToSend, ...listOfOptionsToSend]);
     }
-  }, [loadedUserList, pres]);
+  }, [loadedUserList]);
 
   return (
     <ReactModal

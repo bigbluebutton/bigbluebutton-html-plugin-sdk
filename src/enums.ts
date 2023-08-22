@@ -1,6 +1,7 @@
 enum BbbHookEvents {
   Update = 'UPDATE_HOOK',
-  NewSubscriber = 'NEW_SUBSCRIBER',
+  Subscribe = 'SUBSCRIBE_TO_HOOK',
+  Unsubscribe = 'UNSUBSCRIBE_FROM_HOOK'
 }
 
 enum BbbHooks {
@@ -14,7 +15,7 @@ export const Internal = {
 };
 
 // Presentation toolbar items types:
-export enum WhiteboardToolbarItemType {
+export enum PresentationToolbarItemType {
   BUTTON = 'PRESENTATION_TOOLBAR_BUTTON',
   SPINNER = 'PRESENTATION_TOOLBAR_SPINNER',
   SEPARATOR = 'PRESENTATION_TOOLBAR_SEPARATOR',
@@ -22,7 +23,6 @@ export enum WhiteboardToolbarItemType {
 
 // Participant dropdown items types:
 export enum UserListDropdownItemType {
-  INFORMATION = 'USER_LIST_DROPDOWN_INFORMATION',
-  BUTTON = 'USER_LIST_DROPDOWN_BUTTON',
-  DROPDOWN = 'USER_LIST_DROPDOWN_DROPDOWN',
+  OPTION = 'USER_LIST_DROPDOWN_OPTION',
+  SEPARATOR = 'USER_LIST_DROPDOWN_SEPARATOR',
 }

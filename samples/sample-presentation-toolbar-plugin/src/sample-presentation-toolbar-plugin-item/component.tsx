@@ -4,9 +4,9 @@ import * as ReactModal from 'react-modal';
 import './style.css';
 
 import * as BbbPluginSdk from 'bigbluebutton-html-plugin-sdk';
-import { SampleWhiteboardToolbarPluginProps } from './types';
+import { SamplePresentationToolbarPluginProps } from './types';
 
-function SampleWhiteboardToolbarPlugin({ pluginUuid: uuid }: SampleWhiteboardToolbarPluginProps) {
+function SamplePresentationToolbarPlugin({ pluginUuid: uuid }: SamplePresentationToolbarPluginProps) {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [isIdle, setIsIdle] = useState<boolean>(false);
   const pluginApi: BbbPluginSdk.PluginApi = BbbPluginSdk.getPluginApi(uuid);
@@ -14,18 +14,18 @@ function SampleWhiteboardToolbarPlugin({ pluginUuid: uuid }: SampleWhiteboardToo
 
   const currentPresentation = BbbPluginSdk.useCurrentPresentation();
 
-  const setWhiteboardItemSpinner = () => {
+  const setPresentationItemSpinner = () => {
     setIsIdle(true);
   };
 
-  const setWhiteboardButtonWaitForClick = () => {
+  const setPresentationButtonWaitForClick = () => {
     setIsIdle(false);
   };
 
   const requestLastPages = (currentTxtUri: string) => fetch(currentTxtUri)
     .then((response) => response.text());
 
-  const handleFetchPresentationData = (currentPres: BbbPluginSdk.Presentation) => {
+  const handleFetchPresentationData = (currentPres: BbbPluginSdk.CurrentPresentation) => {
     const currentTxtUri = currentPres.currentPage.urls.text;
     requestLastPages(currentTxtUri).then((currentPageContent) => {
       setCurrentSlideText(currentPageContent);
@@ -35,7 +35,7 @@ function SampleWhiteboardToolbarPlugin({ pluginUuid: uuid }: SampleWhiteboardToo
     }).finally(() => {
       setTimeout(() => {
         setShowModal(false);
-        setWhiteboardButtonWaitForClick();
+        setPresentationButtonWaitForClick();
       }, 10000);
     });
   };
@@ -45,20 +45,20 @@ function SampleWhiteboardToolbarPlugin({ pluginUuid: uuid }: SampleWhiteboardToo
   };
 
   useEffect(() => {
-    let currentObjectToSendToClient: BbbPluginSdk.WhiteboardToolbarItem;
+    let currentObjectToSendToClient: BbbPluginSdk.PresentationToolbarItem;
     if (!isIdle) {
-      currentObjectToSendToClient = new BbbPluginSdk.WhiteboardToolbarButton({
+      currentObjectToSendToClient = new BbbPluginSdk.PresentationToolbarButton({
         label: '10 seconds',
         tooltip: 'this is a button injected by plugin',
         onClick: () => {
           handleFetchPresentationData(currentPresentation);
-          setWhiteboardItemSpinner();
+          setPresentationItemSpinner();
         },
       });
     } else {
-      currentObjectToSendToClient = new BbbPluginSdk.WhiteboardToolbarSpinner();
+      currentObjectToSendToClient = new BbbPluginSdk.PresentationToolbarSpinner();
     }
-    pluginApi.setWhiteboardToolbarItems([currentObjectToSendToClient]);
+    pluginApi.setPresentationToolbarItems([currentObjectToSendToClient]);
   }, [isIdle, currentPresentation]);
 
   return (
@@ -90,4 +90,4 @@ function SampleWhiteboardToolbarPlugin({ pluginUuid: uuid }: SampleWhiteboardToo
   );
 }
 
-export default SampleWhiteboardToolbarPlugin;
+export default SamplePresentationToolbarPlugin;
