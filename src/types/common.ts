@@ -93,23 +93,22 @@ export class PresentationToolbarSeparator implements PresentationToolbarItem {
 
 // UserListDropdownItem Extensible Area
 
-export interface UserListDropdownItem extends PluginProvidedUiItemDescriptor{}
-
-export interface UserListDropdownItemWrapper {
+export interface UserListDropdownItem extends PluginProvidedUiItemDescriptor{
   userId: string;
-  userListDropdownItem: UserListDropdownItem;
 }
-
 interface UserListDropdownOptionProps {
   label: string;
   icon: string;
   tooltip: string;
   allowed: boolean;
+  userId: string;
   onClick: () => void;
 }
 
 export class UserListDropdownOption implements UserListDropdownItem {
   id: string = '';
+
+  userId: string;
 
   type: UserListDropdownItemType;
 
@@ -125,7 +124,9 @@ export class UserListDropdownOption implements UserListDropdownItem {
 
   constructor({
     label = '', icon = '', tooltip = '', allowed = true, onClick = () => {},
+    userId = '',
   }: UserListDropdownOptionProps) {
+    this.userId = userId;
     this.label = label;
     this.icon = icon;
     this.tooltip = tooltip;
@@ -138,12 +139,20 @@ export class UserListDropdownOption implements UserListDropdownItem {
     this.id = `UserListDropdownOption_${id}`;
   };
 }
+
+interface UserListDropdownSeparatorProps {
+  userId: string;
+}
+
 export class UserListDropdownSeparator implements UserListDropdownItem {
   id: string = '';
 
+  userId: string;
+
   type: UserListDropdownItemType;
 
-  constructor() {
+  constructor({ userId = '' }: UserListDropdownSeparatorProps) {
+    this.userId = userId;
     this.type = UserListDropdownItemType.SEPARATOR;
   }
 
@@ -156,13 +165,13 @@ export class UserListDropdownSeparator implements UserListDropdownItem {
 export type SetPresentationToolbarItems = (presentationToolbarItem:
   PresentationToolbarItem[]) => void;
 
-export type SetUserListDropdownItemWrappers = (
-  userListDropdownItemWrapper: UserListDropdownItemWrapper[]
+export type SetUserListDropdownItems = (
+  userListDropdownItem: UserListDropdownItem[]
 ) => void;
 
 export interface PluginApi {
   setPresentationToolbarItems: SetPresentationToolbarItems;
-  setUserListDropdownItemWrappers: SetUserListDropdownItemWrappers;
+  setUserListDropdownItems: SetUserListDropdownItems;
 }
 
 export interface PluginBrowserWindow extends Window {

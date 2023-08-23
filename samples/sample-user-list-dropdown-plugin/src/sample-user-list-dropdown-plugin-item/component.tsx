@@ -26,12 +26,13 @@ function SampleUserListDropdownPlugin({
   useEffect(() => {
     if (loadedUserList !== undefined && loadedUserList.length > 0) {
       const listOfOptionsToSend:
-      Array<BbbPluginSdk.UserListDropdownItemWrapper> = loadedUserList.map(
+      Array<BbbPluginSdk.UserListDropdownItem> = loadedUserList.map(
         (user) => {
           const buttonToUserListItem:
             BbbPluginSdk.UserListDropdownItem = new BbbPluginSdk.UserListDropdownOption({
               label: 'Click to see participant information',
               icon: 'user',
+              userId: user.userId,
               tooltip: 'This will open a modal dialog',
               allowed: true,
               onClick: () => {
@@ -44,25 +45,21 @@ function SampleUserListDropdownPlugin({
                 setShowModal(true);
               },
             });
-          return {
-            userId: user.userId,
-            userListDropdownItem: buttonToUserListItem,
-          } as BbbPluginSdk.UserListDropdownItemWrapper;
+          return buttonToUserListItem as BbbPluginSdk.UserListDropdownItem;
         },
       );
       
       const listOfDropdownsToSend:
-      Array<BbbPluginSdk.UserListDropdownItemWrapper> = loadedUserList.map(
+      Array<BbbPluginSdk.UserListDropdownItem> = loadedUserList.map(
         (user) => {
           const dropdownToUserListItem:
-            BbbPluginSdk.UserListDropdownItem = new BbbPluginSdk.UserListDropdownSeparator();
-          return {
-            userId: user.userId,
-            userListDropdownItem: dropdownToUserListItem,
-          } as BbbPluginSdk.UserListDropdownItemWrapper;
+            BbbPluginSdk.UserListDropdownItem = new BbbPluginSdk.UserListDropdownSeparator({
+              userId: user.userId,
+            });
+          return dropdownToUserListItem as BbbPluginSdk.UserListDropdownItem;
         },
       );
-      pluginApi.setUserListDropdownItemWrappers([...listOfDropdownsToSend, ...listOfOptionsToSend]);
+      pluginApi.setUserListDropdownItems([...listOfDropdownsToSend, ...listOfOptionsToSend]);
     }
   }, [loadedUserList]);
 

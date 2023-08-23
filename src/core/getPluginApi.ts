@@ -12,14 +12,14 @@ const getPluginApi: GetPluginApi = (uuid: string) => {
       return window.bbb_plugins[uuid];
     }
     window.bbb_plugins[uuid] = {
-      setUserListDropdownItemWrappers: () => {},
+      setUserListDropdownItems: () => {},
       setPresentationToolbarItems: () => {},
     };
     return window.bbb_plugins[uuid];
   }
   window.bbb_plugins = {};
   window.bbb_plugins[uuid] = {
-    setUserListDropdownItemWrappers: () => {},
+    setUserListDropdownItems: () => {},
     setPresentationToolbarItems: () => {},
   };
   return window.bbb_plugins[uuid];
