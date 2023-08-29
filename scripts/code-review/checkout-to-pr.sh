@@ -15,13 +15,13 @@ if [ $# -ne 1 ]; then
 fi
 
 PR_NUMBER=$1
-REPO_URL="https://github.com/bigbluebutton/bigbluebutton.git"
+REPO_URL="https://github.com/bigbluebutton/bigbluebutton-html-plugin-sdk.git"
 
 # Get the PR branch name
-PR_BRANCH=$(curl -s https://api.github.com/repos/bigbluebutton/bigbluebutton/pulls/${PR_NUMBER} | jq -r '.head.ref')
+PR_BRANCH=$(curl -s https://api.github.com/repos/bigbluebutton/bigbluebutton-html-plugin-sdk/pulls/${PR_NUMBER} | jq -r '.head.ref')
 
 # Get the sender's username
-SENDER_USERNAME=$(curl -s https://api.github.com/repos/bigbluebutton/bigbluebutton/pulls/${PR_NUMBER} | jq -r '.head.repo.owner.login')
+SENDER_USERNAME=$(curl -s https://api.github.com/repos/bigbluebutton/bigbluebutton-html-plugin-sdk/pulls/${PR_NUMBER} | jq -r '.head.repo.owner.login')
 
 # Configure the sender's fork as a remote with a name based on the sender's username
 REMOTE_NAME="upstream_${SENDER_USERNAME}"
@@ -29,7 +29,7 @@ if git remote | grep -q "^$REMOTE_NAME$"; then
   git remote remove $REMOTE_NAME
 fi
 
-git remote add ${REMOTE_NAME} git@github.com:${SENDER_USERNAME}/bigbluebutton.git
+git remote add ${REMOTE_NAME} git@github.com:${SENDER_USERNAME}/bigbluebutton-html-plugin-sdk.git
 
 # Fetch the PR branch and create a local branch to track it
 LOCAL_BRANCH="PR_${PR_NUMBER}"
