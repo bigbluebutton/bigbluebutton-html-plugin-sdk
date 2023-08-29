@@ -6,7 +6,7 @@ import './style.css';
 import * as BbbPluginSdk from 'bigbluebutton-html-plugin-sdk';
 import { SampleUserListDropdownPluginProps } from './types';
 
-import { IsModeratorTag } from '../IsModeratorTag/component';
+import { ModeratorTag } from '../moderator-tag/component';
 
 interface ModalInfo {
   userId: string
@@ -97,7 +97,7 @@ function SampleUserListDropdownPlugin({
           <tr>
             <td className="table-right">Role: </td>
             <td className="table-left">
-              <IsModeratorTag
+              <ModeratorTag
                 isModerator={modalInfo.isModerator}
               />
             </td>

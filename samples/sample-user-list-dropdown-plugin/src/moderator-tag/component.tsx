@@ -5,7 +5,7 @@ interface IsModeratorTagProps {
   isModerator: boolean
 }
 
-function IsModeratorTag({ isModerator }: IsModeratorTagProps) {
+function ModeratorTag({ isModerator }: IsModeratorTagProps) {
   return (
     <span className="role-tag">
       {isModerator ? 'Moderator' : 'Attendee'}
@@ -14,5 +14,5 @@ function IsModeratorTag({ isModerator }: IsModeratorTagProps) {
 }
 
 export {
-  IsModeratorTag,
+  ModeratorTag,
 };
