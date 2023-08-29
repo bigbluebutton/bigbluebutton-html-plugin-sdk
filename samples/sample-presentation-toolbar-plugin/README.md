@@ -4,7 +4,7 @@
 
 The Sample Presentation Toolbar Plugin serves as a demonstration of how developers can create their own custom plugins. This plugin includes a button that displays the label "10s." When you click on the button, it transforms into a spinner and opens a modal window, providing information about the current presentation and its slide.
 
-![Alt Text](./public/assets/plugin.gif)
+![Gif of plugin demo](./public/assets/plugin.gif)
 
 ## Running the Plugin from Source
 
