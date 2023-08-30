@@ -1,5 +1,5 @@
 module.exports = {
-  entry: './src/index.jsx',
+  entry: './src/index.tsx',
   output: {
     filename: 'SamplePresentationToolbarPlugin.js',
     library: 'SamplePresentationToolbarPlugin',
