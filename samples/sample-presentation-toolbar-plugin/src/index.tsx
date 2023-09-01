@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom/client';
 import './index.css';
 import SamplePresentationToolbarPlugin from './sample-presentation-toolbar-plugin-item/component';
 

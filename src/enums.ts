@@ -6,6 +6,7 @@ enum BbbHookEvents {
 
 enum BbbHooks {
   UseCurrentPresentation = 'BbbHooks::UseCurrentPresentation',
+  UseLoadedUserList = 'BbbHooks::UseLoadedUserList',
 }
 
 export const Internal = {
@@ -18,4 +19,10 @@ export enum PresentationToolbarItemType {
   BUTTON = 'PRESENTATION_TOOLBAR_BUTTON',
   SPINNER = 'PRESENTATION_TOOLBAR_SPINNER',
   SEPARATOR = 'PRESENTATION_TOOLBAR_SEPARATOR',
+}
+
+// Participant dropdown items types:
+export enum UserListDropdownItemType {
+  OPTION = 'USER_LIST_DROPDOWN_OPTION',
+  SEPARATOR = 'USER_LIST_DROPDOWN_SEPARATOR',
 }
