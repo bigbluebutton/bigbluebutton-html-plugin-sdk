@@ -21,7 +21,7 @@ npm start
 ```yaml
   plugins:
     - name: SampleUserListDropdownPlugin
-      url: http://127.0.0.1:8080/static/SampleUserListDropdownPlugin.js
+      url: http://127.0.0.1:4701/static/SampleUserListDropdownPlugin.js
 ```
 
 ## Building the Plugin

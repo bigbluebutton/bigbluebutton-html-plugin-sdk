@@ -21,7 +21,7 @@ npm start
 ```yaml
   plugins:
     - name: SamplePresentationToolbarPlugin
-      url: http://127.0.0.1:8080/static/SamplePresentationToolbarPlugin.js
+      url: http://127.0.0.1:4701/static/SamplePresentationToolbarPlugin.js
 ```
 
 ## Building the Plugin
