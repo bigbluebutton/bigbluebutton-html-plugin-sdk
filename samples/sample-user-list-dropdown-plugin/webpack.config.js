@@ -7,6 +7,11 @@ module.exports = {
     publicPath: '/static/',
     globalObject: 'this',
   },
+  devServer: {
+    hot: false,
+    liveReload: false,
+    websocketServer: false,
+  },
   module: {
     rules: [
       {
