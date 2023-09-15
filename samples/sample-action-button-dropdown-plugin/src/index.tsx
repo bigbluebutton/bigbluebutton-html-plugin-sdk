@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
-import './index.css';
 import SampleActionButtonDropdownPlugin from './sample-action-button-dropdown-plugin-item/component';
 
 const uuid = document.currentScript?.getAttribute('uuid') || 'root';
