@@ -2,16 +2,16 @@ import * as React from 'react';
 import { useEffect } from 'react';
 
 import * as BbbPluginSdk from 'bigbluebutton-html-plugin-sdk';
-import { SampleActionBarItemPluginProps } from './types';
+import { SampleActionsBarPluginProps } from './types';
 
-function SampleActionBarItemPlugin({
+function SampleActionsBarPlugin({
   pluginUuid: uuid,
-}: SampleActionBarItemPluginProps): React.ReactNode {
+}: SampleActionsBarPluginProps): React.ReactNode {
   const pluginApi: BbbPluginSdk.PluginApi = BbbPluginSdk.getPluginApi(uuid);
 
   useEffect(() => {
     const buttonToUserListItem:
-          BbbPluginSdk.ActionBarItem = new BbbPluginSdk.ActionBarButton({
+          BbbPluginSdk.ActionsBarItem = new BbbPluginSdk.ActionsBarButton({
             icon: 'user',
             tooltip: 'This will make an alert dialog',
             allowed: true,
@@ -20,17 +20,17 @@ function SampleActionBarItemPlugin({
             },
             hasDropdownButton: false,
             listOfDropdownItems: [],
-            position: BbbPluginSdk.ActionBarPosition.RIGHT,
+            position: BbbPluginSdk.ActionsBarPosition.RIGHT,
           });
     const dropdownToUserListItem:
-      BbbPluginSdk.ActionBarItem = new BbbPluginSdk.ActionBarSeparator({
-          position: BbbPluginSdk.ActionBarPosition.RIGHT,
+      BbbPluginSdk.ActionsBarItem = new BbbPluginSdk.ActionsBarSeparator({
+          position: BbbPluginSdk.ActionsBarPosition.RIGHT,
         });
     
-    pluginApi.setActionBarItems([dropdownToUserListItem, buttonToUserListItem]);
+    pluginApi.setActionsBarItems([dropdownToUserListItem, buttonToUserListItem]);
   }, []);
 
   return null;
 }
 
-export default SampleActionBarItemPlugin;
+export default SampleActionsBarPlugin;

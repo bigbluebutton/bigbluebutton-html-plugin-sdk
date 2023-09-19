@@ -1,8 +1,8 @@
 module.exports = {
   entry: './src/index.tsx',
   output: {
-    filename: 'SampleActionBarItemPlugin.js',
-    library: 'SampleActionBarItemPlugin',
+    filename: 'SampleActionsBarPlugin.js',
+    library: 'SampleActionsBarPlugin',
     libraryTarget: 'umd',
     publicPath: '/static/',
     globalObject: 'this',

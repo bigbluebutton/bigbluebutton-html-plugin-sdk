@@ -1,5 +1,5 @@
 {
-  "name": "sample-action-bar-button-plugin",
+  "name": "sample-actions-bar-plugin",
   "version": "0.1.0",
   "private": true,
   "main": "./src/index.tsx",
