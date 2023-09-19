@@ -26,3 +26,9 @@ export enum UserListDropdownItemType {
   OPTION = 'USER_LIST_DROPDOWN_OPTION',
   SEPARATOR = 'USER_LIST_DROPDOWN_SEPARATOR',
 }
+
+// Presentation dropdown items types:
+export enum PresentationDropdownItemType {
+  OPTION = 'PRESENTATION_DROPDOWN_OPTION',
+  SEPARATOR = 'PRESENTATION_DROPDOWN_SEPARATOR',
+}
