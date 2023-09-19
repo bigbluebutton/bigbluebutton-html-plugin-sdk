@@ -1,9 +1,12 @@
 import {
   PresentationToolbarItemType,
   UserListDropdownItemType,
+  ActionBarItemType,
+  ActionBarPosition,
 } from '../index';
 
-type PluginProvidedUiItemType = UserListDropdownItemType | PresentationToolbarItemType;
+type PluginProvidedUiItemType = UserListDropdownItemType | PresentationToolbarItemType
+  | ActionBarItemType;
 
 export interface PluginProvidedUiItemDescriptor {
   /** Defined by BigBlueButton Plugin Engine. */
@@ -161,6 +164,92 @@ export class UserListDropdownSeparator implements UserListDropdownItem {
   };
 }
 
+// ActionBarItem Extensible Area
+
+export interface ActionBarItem extends PluginProvidedUiItemDescriptor{
+  position: ActionBarPosition;
+}
+
+export interface ActionBarButtonDropdownItem {
+  label: string;
+  icon: string;
+  tooltip: string;
+  allowed: boolean;
+  userId: string;
+  onClick: () => void;
+}
+
+interface ActionBarButtonProps {
+  icon: string;
+  tooltip: string;
+  allowed: boolean;
+  hasDropdownButton: boolean;
+  listOfDropdownItems: ActionBarButtonDropdownItem[];
+  position: ActionBarPosition;
+  onClick: () => void;
+}
+
+export class ActionBarButton implements ActionBarItem {
+  id: string = '';
+
+  type: ActionBarItemType;
+
+  icon: string;
+
+  tooltip: string;
+
+  allowed: boolean;
+
+  hasDropdownButton: boolean;
+
+  listOfDropdownItems: ActionBarButtonDropdownItem[];
+
+  position: ActionBarPosition;
+
+  onClick: () => void;
+
+  constructor({
+    icon = '', tooltip = '', allowed = true, onClick = () => {},
+    hasDropdownButton = false, listOfDropdownItems = [], position = ActionBarPosition.RIGHT,
+  }: ActionBarButtonProps) {
+    this.icon = icon;
+    this.tooltip = tooltip;
+    this.allowed = allowed;
+    this.onClick = onClick;
+    this.hasDropdownButton = hasDropdownButton;
+    this.listOfDropdownItems = listOfDropdownItems;
+    this.position = position;
+    this.type = ActionBarItemType.BUTTON;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `ActionBarButton_${id}`;
+  };
+}
+
+export interface ActionBarSeparatorProps {
+  position: ActionBarPosition;
+}
+
+export class ActionBarSeparator implements ActionBarItem {
+  position: ActionBarPosition;
+
+  id: string = '';
+
+  type: ActionBarItemType;
+
+  constructor({
+    position = ActionBarPosition.RIGHT,
+  }: ActionBarSeparatorProps) {
+    this.position = position;
+    this.type = ActionBarItemType.SEPARATOR;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `ActionBarSeparator_${id}`;
+  };
+}
+
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
   PresentationToolbarItem[]) => void;
@@ -169,9 +258,14 @@ export type SetUserListDropdownItems = (
   userListDropdownItem: UserListDropdownItem[]
 ) => void;
 
+export type SetActionBarItems = (
+  actionBarItems: ActionBarItem[]
+) => void;
+
 export interface PluginApi {
   setPresentationToolbarItems: SetPresentationToolbarItems;
   setUserListDropdownItems: SetUserListDropdownItems;
+  setActionBarItems: SetActionBarItems;
 }
 
 export interface PluginBrowserWindow extends Window {

@@ -26,3 +26,14 @@ export enum UserListDropdownItemType {
   OPTION = 'USER_LIST_DROPDOWN_OPTION',
   SEPARATOR = 'USER_LIST_DROPDOWN_SEPARATOR',
 }
+
+// Action bar items types:
+export enum ActionBarItemType {
+  BUTTON = 'ACTION_BAR_BUTTON',
+  SEPARATOR = 'ACTION_BAR_SEPARATOR',
+}
+
+export enum ActionBarPosition {
+  LEFT = 'left',
+  RIGHT = 'right',
+}
