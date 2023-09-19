@@ -1,9 +1,11 @@
 import {
   PresentationToolbarItemType,
   UserListDropdownItemType,
+  MicrophoneDropdownItemType,
 } from '../index';
 
-type PluginProvidedUiItemType = UserListDropdownItemType | PresentationToolbarItemType;
+type PluginProvidedUiItemType = UserListDropdownItemType | PresentationToolbarItemType
+  | MicrophoneDropdownItemType;
 
 export interface PluginProvidedUiItemDescriptor {
   /** Defined by BigBlueButton Plugin Engine. */
@@ -161,6 +163,63 @@ export class UserListDropdownSeparator implements UserListDropdownItem {
   };
 }
 
+// MicrophoneDropdownItem Extensible Area
+
+export interface MicrophoneDropdownItem extends PluginProvidedUiItemDescriptor{
+}
+interface MicrophoneDropdownOptionProps {
+  label: string;
+  icon: string;
+  tooltip: string;
+  allowed: boolean;
+  onClick: () => void;
+}
+
+export class MicrophoneDropdownOption implements MicrophoneDropdownItem {
+  id: string = '';
+
+  type: MicrophoneDropdownItemType;
+
+  label: string;
+
+  icon: string;
+
+  tooltip: string;
+
+  allowed: boolean;
+
+  onClick: () => void;
+
+  constructor({
+    label = '', icon = '', tooltip = '', allowed = true, onClick = () => {},
+  }: MicrophoneDropdownOptionProps) {
+    this.label = label;
+    this.icon = icon;
+    this.tooltip = tooltip;
+    this.allowed = allowed;
+    this.onClick = onClick;
+    this.type = MicrophoneDropdownItemType.OPTION;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `MicrophoneDropdownOption_${id}`;
+  };
+}
+
+export class MicrophoneDropdownSeparator implements MicrophoneDropdownItem {
+  id: string = '';
+
+  type: MicrophoneDropdownItemType;
+
+  constructor() {
+    this.type = MicrophoneDropdownItemType.SEPARATOR;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `MicrophoneDropdownSeparator_${id}`;
+  };
+}
+
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
   PresentationToolbarItem[]) => void;
@@ -169,9 +228,14 @@ export type SetUserListDropdownItems = (
   userListDropdownItem: UserListDropdownItem[]
 ) => void;
 
+export type SetMicrophoneDropdownItems = (
+  microphoneDropdownItem: MicrophoneDropdownItem[]
+) => void;
+
 export interface PluginApi {
   setPresentationToolbarItems: SetPresentationToolbarItems;
   setUserListDropdownItems: SetUserListDropdownItems;
+  setMicrophoneDropdownItems: SetMicrophoneDropdownItems;
 }
 
 export interface PluginBrowserWindow extends Window {

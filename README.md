@@ -8,7 +8,9 @@ SDK for developing BigBlueButton plugins, examples of implementations can be fou
 ### Extensible UI areas
 - Presentation toolbar items (button, separator, spinner)
 
-- User list dropdown items (option, separator) 
+- User list dropdown items (option, separator)
+
+- Microphone dropdown items (option, separator)
 
 ### Realtime data consumption
 - `useCurrentPresentation` hook: provides information regarding the current presentation.
