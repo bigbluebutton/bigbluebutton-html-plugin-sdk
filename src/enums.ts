@@ -27,6 +27,12 @@ export enum UserListDropdownItemType {
   SEPARATOR = 'USER_LIST_DROPDOWN_SEPARATOR',
 }
 
+// Participant dropdown items types:
+export enum ActionButtonDropdownItemType {
+  OPTION = 'ACTION_BUTTON_DROPDOWN_OPTION',
+  SEPARATOR = 'ACTION_BUTTON_DROPDOWN_SEPARATOR',
+}
+
 // Nav bar items types:
 export enum NavBarItemType {
   BUTTON = 'NAV_BAR_BUTTON',

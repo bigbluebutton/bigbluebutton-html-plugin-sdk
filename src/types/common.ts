@@ -1,11 +1,13 @@
 import {
   PresentationToolbarItemType,
   UserListDropdownItemType,
+  ActionButtonDropdownItemType,
   NavBarItemType,
   NavBarItemPosition,
 } from '../index';
 
-type PluginProvidedUiItemType = UserListDropdownItemType | PresentationToolbarItemType
+type PluginProvidedUiItemType = UserListDropdownItemType |
+  PresentationToolbarItemType | ActionButtonDropdownItemType
  | NavBarItemType;
 
 export interface PluginProvidedUiItemDescriptor {
@@ -164,6 +166,63 @@ export class UserListDropdownSeparator implements UserListDropdownItem {
   };
 }
 
+// ActionButtonDropdownItem Extensible Area
+
+export interface ActionButtonDropdownItem extends PluginProvidedUiItemDescriptor{
+}
+interface ActionButtonDropdownOptionProps {
+  label: string;
+  icon: string;
+  tooltip: string;
+  allowed: boolean;
+  onClick: () => void;
+}
+
+export class ActionButtonDropdownOption implements ActionButtonDropdownItem {
+  id: string = '';
+
+  type: ActionButtonDropdownItemType;
+
+  label: string;
+
+  icon: string;
+
+  tooltip: string;
+
+  allowed: boolean;
+
+  onClick: () => void;
+
+  constructor({
+    label = '', icon = '', tooltip = '', allowed = true, onClick = () => {},
+  }: ActionButtonDropdownOptionProps) {
+    this.label = label;
+    this.icon = icon;
+    this.tooltip = tooltip;
+    this.allowed = allowed;
+    this.onClick = onClick;
+    this.type = ActionButtonDropdownItemType.OPTION;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `ActionButtonDropdownOption_${id}`;
+  };
+}
+
+export class ActionButtonDropdownSeparator implements ActionButtonDropdownItem {
+  id: string = '';
+
+  type: ActionButtonDropdownItemType;
+
+  constructor() {
+    this.type = ActionButtonDropdownItemType.SEPARATOR;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `ActionButtonDropdownSeparator_${id}`;
+  };
+}
+
 // NavBarItem Extensible Area
 
 export interface NavBarItem extends PluginProvidedUiItemDescriptor{
@@ -266,6 +325,10 @@ export type SetUserListDropdownItems = (
   userListDropdownItem: UserListDropdownItem[]
 ) => void;
 
+export type SetActionButtonDropdownItems = (
+  actionButtonDropdownItem: ActionButtonDropdownItem[]
+) => void;
+
 export type SetNavBarItems = (
   userListDropdownItem: NavBarItem[]
 ) => void;
@@ -273,6 +336,7 @@ export type SetNavBarItems = (
 export interface PluginApi {
   setPresentationToolbarItems: SetPresentationToolbarItems;
   setUserListDropdownItems: SetUserListDropdownItems;
+  setActionButtonDropdownItems: SetActionButtonDropdownItems;
   setNavBarItems: SetNavBarItems;
 }
 

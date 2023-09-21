@@ -1,0 +1,113 @@
+.plugin-modal {
+    position: relative;
+    z-index: 1000 !important;
+
+    outline: transparent;
+    outline-width: 2px;
+    outline-style: solid;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+    background-color: #FFF !important;
+    max-width: 60vw;
+    max-height: 100%;
+    border-radius: .2rem;
+    overflow: auto;
+
+    overflow-y: hidden;
+
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+    background-attachment: local, local, scroll, scroll;
+
+    &::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+    }
+    &::-webkit-scrollbar-button {
+        width: 0;
+        height: 0;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: rgba(0,0,0,.25);
+        border: none;
+        border-radius: 50px;
+    }
+    &::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,.5); }
+    &::-webkit-scrollbar-thumb:active { background: rgba(0,0,0,.25); }
+    &::-webkit-scrollbar-track {
+        background: rgba(0,0,0,.25);
+        border: none;
+        border-radius: 50px;
+    }
+    &::-webkit-scrollbar-track:hover { background: rgba(0,0,0,.25); }
+    &::-webkit-scrollbar-track:active { background: rgba(0,0,0,.25); }
+    &::-webkit-scrollbar-corner { background: 0 0; }
+
+    @media only screen and (max-width: 40em) {
+        max-width: 95vw;
+    }
+
+    @media only screen and (min-width: 40.063em) {
+        max-width: 80vw;
+    }
+}
+
+.modal-overlay {
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(6, 23, 42, 0.75);
+}
+
+.text {
+    font-size: 20px;
+    margin: 0.6rem auto;
+}
+
+.select-options {
+    margin: 0.5rem auto;
+}
+
+.buttons-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.button-style {
+    border: 3px solid transparent;
+    overflow: visible;
+    display: inline-block;
+    border-radius: 2px;
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    padding: 8px 15px;
+}
+
+.button-style:hover {
+    border: 3px solid #0F70D7;
+}
+
+.current-slide-text-container {
+    font-size: medium;
+    background-color: #aaa;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}

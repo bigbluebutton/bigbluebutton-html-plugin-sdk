@@ -10,6 +10,8 @@ SDK for developing BigBlueButton plugins, examples of implementations can be fou
 
 - User list dropdown items (option, separator) 
 
+- Action Button Dropdown Items (option, separator)
+
 - Nav bar (button, info) 
 
 ### Realtime data consumption
