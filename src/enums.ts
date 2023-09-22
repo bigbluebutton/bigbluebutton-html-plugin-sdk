@@ -7,6 +7,7 @@ enum BbbHookEvents {
 enum BbbHooks {
   UseCurrentPresentation = 'BbbHooks::UseCurrentPresentation',
   UseLoadedUserList = 'BbbHooks::UseLoadedUserList',
+  UseCurrentUser = 'BbbHooks::UseCurrentUser'
 }
 
 export const Internal = {
