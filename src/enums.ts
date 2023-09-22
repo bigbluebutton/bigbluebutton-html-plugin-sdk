@@ -21,14 +21,20 @@ export enum PresentationToolbarItemType {
   SEPARATOR = 'PRESENTATION_TOOLBAR_SEPARATOR',
 }
 
-// Participant dropdown items types:
+// User list dropdown items types:
 export enum UserListDropdownItemType {
   OPTION = 'USER_LIST_DROPDOWN_OPTION',
   SEPARATOR = 'USER_LIST_DROPDOWN_SEPARATOR',
 }
 
-// Participant dropdown items types:
+// Action dropdown items types:
 export enum ActionButtonDropdownItemType {
   OPTION = 'ACTION_BUTTON_DROPDOWN_OPTION',
   SEPARATOR = 'ACTION_BUTTON_DROPDOWN_SEPARATOR',
+}
+
+// Options dropdown items types:
+export enum OptionsDropdownItemType {
+  OPTION = 'OPTIONS_DROPDOWN_OPTION',
+  SEPARATOR = 'OPTIONS_DROPDOWN_SEPARATOR',
 }
