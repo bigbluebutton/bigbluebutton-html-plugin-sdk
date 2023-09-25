@@ -6,12 +6,14 @@ import {
   ActionsBarPosition,
   AudioSettingsDropdownItemType,
   PresentationDropdownItemType,
+  NavBarItemType,
+  NavBarItemPosition,
 } from '../index';
 
 type PluginProvidedUiItemType = UserListDropdownItemType |
   PresentationToolbarItemType | ActionButtonDropdownItemType |
   ActionsBarItemType | AudioSettingsDropdownItemType |
-  PresentationDropdownItemType;
+  PresentationDropdownItemType | NavBarItemType;
 
 export interface PluginProvidedUiItemDescriptor {
   /** Defined by BigBlueButton Plugin Engine. */
@@ -410,6 +412,100 @@ export class PresentationDropdownSeparator implements PresentationDropdownItem {
   };
 }
 
+// NavBarItem Extensible Area
+
+export interface NavBarItem extends PluginProvidedUiItemDescriptor{
+  position: NavBarItemPosition;
+  hasSeparator: boolean;
+}
+interface NavBarButtonProps {
+  label: string;
+  icon: string;
+  tooltip: string;
+  disabled: boolean;
+  hasSeparator: boolean;
+  position: NavBarItemPosition;
+  onClick: () => void;
+}
+
+export class NavBarButton implements NavBarItem {
+  id: string = '';
+
+  type: NavBarItemType;
+
+  label: string;
+
+  icon: string;
+
+  tooltip: string;
+
+  disabled: boolean;
+
+  position: NavBarItemPosition;
+
+  hasSeparator: boolean;
+
+  onClick: () => void;
+
+  constructor({
+    label = '', icon = '', tooltip = '', disabled = true, onClick = () => {},
+    position = NavBarItemPosition.RIGHT, hasSeparator = true,
+  }: NavBarButtonProps) {
+    this.label = label;
+    this.icon = icon;
+    this.tooltip = tooltip;
+    this.disabled = disabled;
+    this.onClick = onClick;
+    this.type = NavBarItemType.BUTTON;
+    this.hasSeparator = hasSeparator;
+    this.position = position;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `NavBarButton_${id}`;
+  };
+}
+
+interface NavBarInfoProps {
+  label: string;
+  hasSeparator: boolean;
+  icon: string;
+  disabled: boolean;
+  position: NavBarItemPosition;
+}
+
+export class NavBarInfo implements NavBarItem {
+  id: string = '';
+
+  type: NavBarItemType;
+
+  label: string;
+
+  hasSeparator: boolean;
+
+  icon: string;
+
+  disabled: boolean;
+
+  position: NavBarItemPosition;
+
+  constructor({
+    label = '', icon = '', disabled = true, position = NavBarItemPosition.RIGHT,
+    hasSeparator = true,
+  }: NavBarInfoProps) {
+    this.label = label;
+    this.icon = icon;
+    this.disabled = disabled;
+    this.type = NavBarItemType.INFO;
+    this.position = position;
+    this.hasSeparator = hasSeparator;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `NavBarInfo_${id}`;
+  };
+}
+
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
   PresentationToolbarItem[]) => void;
@@ -434,6 +530,10 @@ export type SetPresentationDropdownItems = (
   userListDropdownItem: PresentationDropdownItem[]
 ) => void;
 
+export type SetNavBarItems = (
+  userListDropdownItem: NavBarItem[]
+) => void;
+
 export interface PluginApi {
   setPresentationToolbarItems: SetPresentationToolbarItems;
   setUserListDropdownItems: SetUserListDropdownItems;
@@ -441,6 +541,7 @@ export interface PluginApi {
   setActionsBarItems: SetActionsBarItems;
   setAudioSettingsDropdownItems: SetAudioSettingsDropdownItems;
   setPresentationDropdownItems: SetPresentationDropdownItems;
+  setNavBarItems: SetNavBarItems;
 }
 
 export interface PluginBrowserWindow extends Window {
