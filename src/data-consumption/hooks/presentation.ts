@@ -30,4 +30,6 @@ const useCurrentPresentation: () => CurrentPresentation | undefined = () => {
   return presentationInfo;
 };
 
-export default useCurrentPresentation;
+export {
+  useCurrentPresentation,
+};

@@ -27,10 +27,20 @@ NEW_VERSION=$(echo "$CURRENT_VERSION" | sed "s/\.[0-9]\+$/\.$NEW_PATCH_VERSION/"
 # Update the main package.json file with the new version
 sed -i "s/\"version\": \"$CURRENT_VERSION\"/\"version\": \"$NEW_VERSION\"/" package.json
 
+# Runs npm install so the package-lock gets updated
+npm install
+
+# Publishes to npm
+npm publish
+
 # Update the package.json files of sample projects
 for sample in samples/*/; do
   if [ -f "$sample/package.json" ]; then
     sed -i "s/\"$DEPENDENCY_NAME\": \".*\",/\"$DEPENDENCY_NAME\": \"$NEW_VERSION\",/" "$sample/package.json"
+    cd $sample
+    # Runs npm install so the package-lock gets updated
+    npm install
+    cd -
   fi
 done
 

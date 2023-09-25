@@ -1,11 +1,17 @@
 import {
   PresentationToolbarItemType,
   UserListDropdownItemType,
+  ActionButtonDropdownItemType,
+  ActionsBarItemType,
+  ActionsBarPosition,
+  AudioSettingsDropdownItemType,
   PresentationDropdownItemType,
 } from '../index';
 
-type PluginProvidedUiItemType = UserListDropdownItemType | PresentationToolbarItemType
-  | PresentationDropdownItemType;
+type PluginProvidedUiItemType = UserListDropdownItemType |
+  PresentationToolbarItemType | ActionButtonDropdownItemType |
+  ActionsBarItemType | AudioSettingsDropdownItemType |
+  PresentationDropdownItemType;
 
 export interface PluginProvidedUiItemDescriptor {
   /** Defined by BigBlueButton Plugin Engine. */
@@ -163,6 +169,198 @@ export class UserListDropdownSeparator implements UserListDropdownItem {
   };
 }
 
+// ActionButtonDropdownItem Extensible Area
+
+export interface ActionButtonDropdownItem extends PluginProvidedUiItemDescriptor{
+}
+interface ActionButtonDropdownOptionProps {
+  label: string;
+  icon: string;
+  tooltip: string;
+  allowed: boolean;
+  onClick: () => void;
+}
+
+export class ActionButtonDropdownOption implements ActionButtonDropdownItem {
+  id: string = '';
+
+  type: ActionButtonDropdownItemType;
+
+  label: string;
+
+  icon: string;
+
+  tooltip: string;
+
+  allowed: boolean;
+
+  onClick: () => void;
+
+  constructor({
+    label = '', icon = '', tooltip = '', allowed = true, onClick = () => {},
+  }: ActionButtonDropdownOptionProps) {
+    this.label = label;
+    this.icon = icon;
+    this.tooltip = tooltip;
+    this.allowed = allowed;
+    this.onClick = onClick;
+    this.type = ActionButtonDropdownItemType.OPTION;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `ActionButtonDropdownOption_${id}`;
+  };
+}
+
+export class ActionButtonDropdownSeparator implements ActionButtonDropdownItem {
+  id: string = '';
+
+  type: ActionButtonDropdownItemType;
+
+  constructor() {
+    this.type = ActionButtonDropdownItemType.SEPARATOR;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `ActionButtonDropdownSeparator_${id}`;
+  };
+}
+
+// ActionsBarItem Extensible Area
+
+export interface ActionsBarItem extends PluginProvidedUiItemDescriptor{
+  position: ActionsBarPosition;
+}
+
+export interface ActionsBarButtonDropdownItem {
+  label: string;
+  icon: string;
+  tooltip: string;
+  allowed: boolean;
+  userId: string;
+  onClick: () => void;
+}
+
+interface ActionsBarButtonProps {
+  icon: string;
+  tooltip: string;
+  allowed: boolean;
+  hasDropdownButton: boolean;
+  listOfDropdownItems: ActionsBarButtonDropdownItem[];
+  position: ActionsBarPosition;
+  onClick: () => void;
+}
+
+export class ActionsBarButton implements ActionsBarItem {
+  id: string = '';
+
+  type: ActionsBarItemType;
+
+  icon: string;
+
+  tooltip: string;
+
+  allowed: boolean;
+
+  hasDropdownButton: boolean;
+
+  listOfDropdownItems: ActionsBarButtonDropdownItem[];
+
+  position: ActionsBarPosition;
+
+  onClick: () => void;
+
+  constructor({
+    icon = '', tooltip = '', allowed = true, onClick = () => {},
+    hasDropdownButton = false, listOfDropdownItems = [], position = ActionsBarPosition.RIGHT,
+  }: ActionsBarButtonProps) {
+    this.icon = icon;
+    this.tooltip = tooltip;
+    this.allowed = allowed;
+    this.onClick = onClick;
+    this.hasDropdownButton = hasDropdownButton;
+    this.listOfDropdownItems = listOfDropdownItems;
+    this.position = position;
+    this.type = ActionsBarItemType.BUTTON;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `ActionsBarButton_${id}`;
+  };
+}
+
+export interface ActionsBarSeparatorProps {
+  position: ActionsBarPosition;
+}
+
+export class ActionsBarSeparator implements ActionsBarItem {
+  position: ActionsBarPosition;
+
+  id: string = '';
+
+  type: ActionsBarItemType;
+
+  constructor({
+    position = ActionsBarPosition.RIGHT,
+  }: ActionsBarSeparatorProps) {
+    this.position = position;
+    this.type = ActionsBarItemType.SEPARATOR;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `ActionsBarSeparator_${id}`;
+  };
+}
+
+// AudioSettingsDropdownItem Extensible Area
+
+export interface AudioSettingsDropdownItem extends PluginProvidedUiItemDescriptor{
+}
+interface AudioSettingsDropdownOptionProps {
+  label: string;
+  icon: string;
+  onClick: () => void;
+}
+
+export class AudioSettingsDropdownOption implements AudioSettingsDropdownItem {
+  id: string = '';
+
+  type: AudioSettingsDropdownItemType;
+
+  label: string;
+
+  icon: string;
+
+  onClick: () => void;
+
+  constructor({
+    label = '', icon = '', onClick = () => {},
+  }: AudioSettingsDropdownOptionProps) {
+    this.label = label;
+    this.icon = icon;
+    this.onClick = onClick;
+    this.type = AudioSettingsDropdownItemType.OPTION;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `AudioSettingsDropdownOption_${id}`;
+  };
+}
+
+export class AudioSettingsDropdownSeparator implements AudioSettingsDropdownItem {
+  id: string = '';
+
+  type: AudioSettingsDropdownItemType;
+
+  constructor() {
+    this.type = AudioSettingsDropdownItemType.SEPARATOR;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `AudioSettingsDropdownSeparator_${id}`;
+  };
+}
+
 // PresentationDropdownItem Extensible Area
 
 export interface PresentationDropdownItem extends PluginProvidedUiItemDescriptor{
@@ -228,6 +426,18 @@ export type SetUserListDropdownItems = (
   userListDropdownItem: UserListDropdownItem[]
 ) => void;
 
+export type SetActionButtonDropdownItems = (
+  actionButtonDropdownItem: ActionButtonDropdownItem[]
+) => void;
+
+export type SetActionsBarItems = (
+  actionsBarItems: ActionsBarItem[]
+) => void;
+
+export type SetAudioSettingsDropdownItems = (
+  audioSettingsDropdownItem: AudioSettingsDropdownItem[]
+) => void;
+
 export type SetPresentationDropdownItems = (
   userListDropdownItem: PresentationDropdownItem[]
 ) => void;
@@ -235,6 +445,9 @@ export type SetPresentationDropdownItems = (
 export interface PluginApi {
   setPresentationToolbarItems: SetPresentationToolbarItems;
   setUserListDropdownItems: SetUserListDropdownItems;
+  setActionButtonDropdownItems: SetActionButtonDropdownItems;
+  setActionsBarItems: SetActionsBarItems;
+  setAudioSettingsDropdownItems: SetAudioSettingsDropdownItems;
   setPresentationDropdownItems: SetPresentationDropdownItems;
 }
 
