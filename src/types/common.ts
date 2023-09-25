@@ -368,8 +368,6 @@ export interface PresentationDropdownItem extends PluginProvidedUiItemDescriptor
 interface PresentationDropdownOptionProps {
   label: string;
   icon: string;
-  tooltip: string;
-  allowed: boolean;
   onClick: () => void;
 }
 
@@ -382,19 +380,13 @@ export class PresentationDropdownOption implements PresentationDropdownItem {
 
   icon: string;
 
-  tooltip: string;
-
-  allowed: boolean;
-
   onClick: () => void;
 
   constructor({
-    label = '', icon = '', tooltip = '', allowed = true, onClick = () => {},
+    label = '', icon = '', onClick = () => {},
   }: PresentationDropdownOptionProps) {
     this.label = label;
     this.icon = icon;
-    this.tooltip = tooltip;
-    this.allowed = allowed;
     this.onClick = onClick;
     this.type = PresentationDropdownItemType.OPTION;
   }

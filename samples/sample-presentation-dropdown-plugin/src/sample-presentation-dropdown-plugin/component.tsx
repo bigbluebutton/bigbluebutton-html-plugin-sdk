@@ -14,8 +14,6 @@ function SamplePresentationDropdownPlugin({
       BbbPluginSdk.PresentationDropdownItem = new BbbPluginSdk.PresentationDropdownOption({
         label: 'Click to see alert from plugin',
         icon: 'user',
-        tooltip: 'This will open a modal dialog',
-        allowed: true,
         onClick: () => {
           alert("Alert from plugin")
         },
