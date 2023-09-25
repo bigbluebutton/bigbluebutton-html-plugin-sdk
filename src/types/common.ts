@@ -5,11 +5,13 @@ import {
   ActionsBarItemType,
   ActionsBarPosition,
   AudioSettingsDropdownItemType,
+  PresentationDropdownItemType,
 } from '../index';
 
 type PluginProvidedUiItemType = UserListDropdownItemType |
   PresentationToolbarItemType | ActionButtonDropdownItemType |
-  ActionsBarItemType | AudioSettingsDropdownItemType;
+  ActionsBarItemType | AudioSettingsDropdownItemType |
+  PresentationDropdownItemType;
 
 export interface PluginProvidedUiItemDescriptor {
   /** Defined by BigBlueButton Plugin Engine. */
@@ -359,6 +361,55 @@ export class AudioSettingsDropdownSeparator implements AudioSettingsDropdownItem
   };
 }
 
+// PresentationDropdownItem Extensible Area
+
+export interface PresentationDropdownItem extends PluginProvidedUiItemDescriptor{
+}
+interface PresentationDropdownOptionProps {
+  label: string;
+  icon: string;
+  onClick: () => void;
+}
+
+export class PresentationDropdownOption implements PresentationDropdownItem {
+  id: string = '';
+
+  type: PresentationDropdownItemType;
+
+  label: string;
+
+  icon: string;
+
+  onClick: () => void;
+
+  constructor({
+    label = '', icon = '', onClick = () => {},
+  }: PresentationDropdownOptionProps) {
+    this.label = label;
+    this.icon = icon;
+    this.onClick = onClick;
+    this.type = PresentationDropdownItemType.OPTION;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `PresentationDropdownOption_${id}`;
+  };
+}
+
+export class PresentationDropdownSeparator implements PresentationDropdownItem {
+  id: string = '';
+
+  type: PresentationDropdownItemType;
+
+  constructor() {
+    this.type = PresentationDropdownItemType.SEPARATOR;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `PresentationDropdownSeparator_${id}`;
+  };
+}
+
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
   PresentationToolbarItem[]) => void;
@@ -379,12 +430,17 @@ export type SetAudioSettingsDropdownItems = (
   audioSettingsDropdownItem: AudioSettingsDropdownItem[]
 ) => void;
 
+export type SetPresentationDropdownItems = (
+  userListDropdownItem: PresentationDropdownItem[]
+) => void;
+
 export interface PluginApi {
   setPresentationToolbarItems: SetPresentationToolbarItems;
   setUserListDropdownItems: SetUserListDropdownItems;
   setActionButtonDropdownItems: SetActionButtonDropdownItems;
   setActionsBarItems: SetActionsBarItems;
   setAudioSettingsDropdownItems: SetAudioSettingsDropdownItems;
+  setPresentationDropdownItems: SetPresentationDropdownItems;
 }
 
 export interface PluginBrowserWindow extends Window {
