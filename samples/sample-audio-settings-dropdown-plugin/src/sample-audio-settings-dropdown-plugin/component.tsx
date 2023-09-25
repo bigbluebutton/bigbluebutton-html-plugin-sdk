@@ -15,8 +15,6 @@ function SampleAudioSettingsDropdownPlugin({
       BbbPluginSdk.AudioSettingsDropdownItem = new BbbPluginSdk.AudioSettingsDropdownOption({
         label: 'Click to send alert message',
         icon: 'user',
-        tooltip: 'This will open an alert dialog',
-        allowed: true,
         onClick: () => {
           alert("Alert popup from plugin");
         },
@@ -27,7 +25,9 @@ function SampleAudioSettingsDropdownPlugin({
     pluginApi.setAudioSettingsDropdownItems([separatorToAudioSettingsDropdown, buttonToAudioSettingsDropdown]);
   }, []);
 
-  return null;
+  return (
+    <></>
+  );
 }
 
 export default SampleAudioSettingsDropdownPlugin;

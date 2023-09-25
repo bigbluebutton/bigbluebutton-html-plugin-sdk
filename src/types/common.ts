@@ -317,8 +317,6 @@ export interface AudioSettingsDropdownItem extends PluginProvidedUiItemDescripto
 interface AudioSettingsDropdownOptionProps {
   label: string;
   icon: string;
-  tooltip: string;
-  allowed: boolean;
   onClick: () => void;
 }
 
@@ -331,19 +329,13 @@ export class AudioSettingsDropdownOption implements AudioSettingsDropdownItem {
 
   icon: string;
 
-  tooltip: string;
-
-  allowed: boolean;
-
   onClick: () => void;
 
   constructor({
-    label = '', icon = '', tooltip = '', allowed = true, onClick = () => {},
+    label = '', icon = '', onClick = () => {},
   }: AudioSettingsDropdownOptionProps) {
     this.label = label;
     this.icon = icon;
-    this.tooltip = tooltip;
-    this.allowed = allowed;
     this.onClick = onClick;
     this.type = AudioSettingsDropdownItemType.OPTION;
   }
