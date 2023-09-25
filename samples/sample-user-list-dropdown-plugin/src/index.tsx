@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
-import './index.css';
 import SampleUserListDropdownPlugin from './sample-user-list-dropdown-plugin-item/component';
 
 const uuid = document.currentScript?.getAttribute('uuid') || 'root';
