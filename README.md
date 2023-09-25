@@ -12,6 +12,8 @@ SDK for developing BigBlueButton plugins, examples of implementations can be fou
 
 - Action bar items (button, separator)
 
+- Action Button Dropdown Items (option, separator)
+
 ### Realtime data consumption
 - `useCurrentPresentation` hook: provides information regarding the current presentation.
 

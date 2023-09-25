@@ -1,11 +1,13 @@
 import {
   PresentationToolbarItemType,
   UserListDropdownItemType,
+  ActionButtonDropdownItemType,
   ActionsBarItemType,
   ActionsBarPosition,
 } from '../index';
 
-type PluginProvidedUiItemType = UserListDropdownItemType | PresentationToolbarItemType
+type PluginProvidedUiItemType = UserListDropdownItemType |
+  PresentationToolbarItemType | ActionButtonDropdownItemType
   | ActionsBarItemType;
 
 export interface PluginProvidedUiItemDescriptor {
@@ -164,6 +166,63 @@ export class UserListDropdownSeparator implements UserListDropdownItem {
   };
 }
 
+// ActionButtonDropdownItem Extensible Area
+
+export interface ActionButtonDropdownItem extends PluginProvidedUiItemDescriptor{
+}
+interface ActionButtonDropdownOptionProps {
+  label: string;
+  icon: string;
+  tooltip: string;
+  allowed: boolean;
+  onClick: () => void;
+}
+
+export class ActionButtonDropdownOption implements ActionButtonDropdownItem {
+  id: string = '';
+
+  type: ActionButtonDropdownItemType;
+
+  label: string;
+
+  icon: string;
+
+  tooltip: string;
+
+  allowed: boolean;
+
+  onClick: () => void;
+
+  constructor({
+    label = '', icon = '', tooltip = '', allowed = true, onClick = () => {},
+  }: ActionButtonDropdownOptionProps) {
+    this.label = label;
+    this.icon = icon;
+    this.tooltip = tooltip;
+    this.allowed = allowed;
+    this.onClick = onClick;
+    this.type = ActionButtonDropdownItemType.OPTION;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `ActionButtonDropdownOption_${id}`;
+  };
+}
+
+export class ActionButtonDropdownSeparator implements ActionButtonDropdownItem {
+  id: string = '';
+
+  type: ActionButtonDropdownItemType;
+
+  constructor() {
+    this.type = ActionButtonDropdownItemType.SEPARATOR;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `ActionButtonDropdownSeparator_${id}`;
+  };
+}
+
 // ActionsBarItem Extensible Area
 
 export interface ActionsBarItem extends PluginProvidedUiItemDescriptor{
@@ -258,6 +317,10 @@ export type SetUserListDropdownItems = (
   userListDropdownItem: UserListDropdownItem[]
 ) => void;
 
+export type SetActionButtonDropdownItems = (
+  actionButtonDropdownItem: ActionButtonDropdownItem[]
+) => void;
+
 export type SetActionsBarItems = (
   actionsBarItems: ActionsBarItem[]
 ) => void;
@@ -265,6 +328,7 @@ export type SetActionsBarItems = (
 export interface PluginApi {
   setPresentationToolbarItems: SetPresentationToolbarItems;
   setUserListDropdownItems: SetUserListDropdownItems;
+  setActionButtonDropdownItems: SetActionButtonDropdownItems;
   setActionsBarItems: SetActionsBarItems;
 }
 

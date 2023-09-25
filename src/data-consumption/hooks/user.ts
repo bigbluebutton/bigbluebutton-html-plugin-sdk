@@ -30,4 +30,34 @@ const useLoadedUserList: () => User[] | undefined = () => {
   return userInfo;
 };
 
-export default useLoadedUserList;
+const useCurrentUser: () => User | undefined = () => {
+  const [userInfo, setUserInfo] = useState<User | undefined>();
+  const handleCurrentUserUpdateEvent: EventListener = (
+    (event: CustomEventHookWrapper<User>) => {
+      if (event.detail.hook === Internal.BbbHooks.UseCurrentUser) {
+        setUserInfo(event.detail.data);
+      }
+    }) as EventListener;
+  useEffect(() => {
+    window.addEventListener(Internal.BbbHookEvents.Update, handleCurrentUserUpdateEvent);
+    window.dispatchEvent(new CustomEvent(Internal.BbbHookEvents.Subscribe, {
+      detail: { hook: Internal.BbbHooks.UseCurrentUser },
+    }));
+    return () => {
+      window.dispatchEvent(new CustomEvent(Internal.BbbHookEvents.Unsubscribe, {
+        detail: { hook: Internal.BbbHooks.UseCurrentUser },
+      }));
+      window.removeEventListener(
+        Internal.BbbHookEvents.Update,
+        handleCurrentUserUpdateEvent,
+      );
+    };
+  }, []);
+
+  return userInfo;
+};
+
+export {
+  useLoadedUserList,
+  useCurrentUser,
+};
