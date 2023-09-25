@@ -15,6 +15,10 @@ const getPluginApi: GetPluginApi = (uuid: string) => {
       setUserListDropdownItems: () => {},
       setPresentationToolbarItems: () => {},
       setActionButtonDropdownItems: () => {},
+      setActionsBarItems: () => {},
+      setAudioSettingsDropdownItems: () => {},
+      setPresentationDropdownItems: () => {},
+      setNavBarItems: () => {},
       setOptionsDropdownItems: () => {},
     };
     return window.bbb_plugins[uuid];
@@ -24,6 +28,10 @@ const getPluginApi: GetPluginApi = (uuid: string) => {
     setUserListDropdownItems: () => {},
     setPresentationToolbarItems: () => {},
     setActionButtonDropdownItems: () => {},
+    setActionsBarItems: () => {},
+    setAudioSettingsDropdownItems: () => {},
+    setPresentationDropdownItems: () => {},
+    setNavBarItems: () => {},
     setOptionsDropdownItems: () => {},
   };
   return window.bbb_plugins[uuid];
