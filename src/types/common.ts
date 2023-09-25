@@ -515,8 +515,6 @@ export interface OptionsDropdownItem extends PluginProvidedUiItemDescriptor{
 interface OptionsDropdownOptionProps {
   label: string;
   icon: string;
-  tooltip: string;
-  allowed: boolean;
   onClick: () => void;
 }
 
@@ -529,19 +527,13 @@ export class OptionsDropdownOption implements OptionsDropdownItem {
 
   icon: string;
 
-  tooltip: string;
-
-  allowed: boolean;
-
   onClick: () => void;
 
   constructor({
-    label = '', icon = '', tooltip = '', allowed = true, onClick = () => {},
+    label = '', icon = '', onClick = () => {},
   }: OptionsDropdownOptionProps) {
     this.label = label;
     this.icon = icon;
-    this.tooltip = tooltip;
-    this.allowed = allowed;
     this.onClick = onClick;
     this.type = OptionsDropdownItemType.OPTION;
   }

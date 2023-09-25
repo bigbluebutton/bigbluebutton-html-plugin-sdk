@@ -14,8 +14,6 @@ function SampleOptionsDropdownPlugin(
       new BbbPluginSdk.OptionsDropdownOption({
         label: 'Send an alert popup',
         icon: 'copy',
-        tooltip: 'this is a button injected by plugin',
-        allowed: true,
         onClick: () => {
           alert("Alert sent from plugin")
         },
