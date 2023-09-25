@@ -566,8 +566,6 @@ export interface CameraSettingsDropdownItem extends PluginProvidedUiItemDescript
 interface CameraSettingsDropdownOptionProps {
   label: string;
   icon: string;
-  tooltip: string;
-  allowed: boolean;
   onClick: () => void;
 }
 
@@ -580,19 +578,13 @@ export class CameraSettingsDropdownOption implements CameraSettingsDropdownItem 
 
   icon: string;
 
-  tooltip: string;
-
-  allowed: boolean;
-
   onClick: () => void;
 
   constructor({
-    label = '', icon = '', tooltip = '', allowed = true, onClick = () => {},
+    label = '', icon = '', onClick = () => {},
   }: CameraSettingsDropdownOptionProps) {
     this.label = label;
     this.icon = icon;
-    this.tooltip = tooltip;
-    this.allowed = allowed;
     this.onClick = onClick;
     this.type = CameraSettingsDropdownItemType.OPTION;
   }
