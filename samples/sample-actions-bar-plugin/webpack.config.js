@@ -10,7 +10,6 @@ module.exports = {
   devServer: {
     hot: false,
     liveReload: false,
-    websocketServer: false,
   },
   module: {
     rules: [
