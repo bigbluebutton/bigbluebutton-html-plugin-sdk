@@ -10,6 +10,7 @@ function SampleActionButtonDropdownPlugin({ pluginUuid: uuid }: SampleActionButt
   const [showModal, setShowModal] = useState<boolean>(false);
   const pluginApi: BbbPluginSdk.PluginApi = BbbPluginSdk.getPluginApi(uuid);
   const [currentSlideText, setCurrentSlideText] = useState<string>('');
+  const currentUser = BbbPluginSdk.useCurrentUser();
 
   const currentPresentation = BbbPluginSdk.useCurrentPresentation();
 
@@ -34,20 +35,22 @@ function SampleActionButtonDropdownPlugin({ pluginUuid: uuid }: SampleActionButt
     setShowModal(false);
   };
 
-  useEffect(() => {    
-    pluginApi.setActionButtonDropdownItems([
-      new BbbPluginSdk.ActionButtonDropdownSeparator(),
-      new BbbPluginSdk.ActionButtonDropdownOption({
-        label: 'Fetch presentation content',
-        icon: 'copy',
-        tooltip: 'this is a button injected by plugin',
-        allowed: true,
-        onClick: () => {
-          handleFetchPresentationData(currentPresentation);
-        },
-      }),
-    ]);
-  }, [currentPresentation]);
+  useEffect(() => {
+    if (currentUser?.presenter){
+      pluginApi.setActionButtonDropdownItems([
+        new BbbPluginSdk.ActionButtonDropdownSeparator(),
+        new BbbPluginSdk.ActionButtonDropdownOption({
+          label: 'Fetch presentation content',
+          icon: 'copy',
+          tooltip: 'this is a button injected by plugin',
+          allowed: true,
+          onClick: () => {
+            handleFetchPresentationData(currentPresentation);
+          },
+        }),
+      ]);
+    }
+  }, [currentPresentation, currentUser]);
 
   return (
     <ReactModal

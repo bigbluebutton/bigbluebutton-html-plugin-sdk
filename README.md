@@ -8,9 +8,15 @@ SDK for developing BigBlueButton plugins, examples of implementations can be fou
 ### Extensible UI areas
 - Presentation toolbar items (button, separator, spinner)
 
-- User list dropdown items (option, separator) 
+- User list dropdown items (option, separator)
+
+- Action bar items (button, separator)
 
 - Action Button Dropdown Items (option, separator)
+
+- Audio settings dropdown items (option, separator)
+
+- Presentation dropdown items (option, separator) 
 
 - Nav bar (button, info) 
 
