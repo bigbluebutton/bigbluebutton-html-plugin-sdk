@@ -1,5 +1,5 @@
 {
-  "name": "sample-microphone-dropdown-plugin",
+  "name": "sample-audio-settings-dropdown-plugin",
   "version": "0.1.0",
   "private": true,
   "main": "./src/index.tsx",

@@ -4,12 +4,12 @@ import {
   ActionButtonDropdownItemType,
   ActionsBarItemType,
   ActionsBarPosition,
-  MicrophoneDropdownItemType,
+  AudioSettingsDropdownItemType,
 } from '../index';
 
 type PluginProvidedUiItemType = UserListDropdownItemType |
   PresentationToolbarItemType | ActionButtonDropdownItemType |
-  ActionsBarItemType | MicrophoneDropdownItemType;
+  ActionsBarItemType | AudioSettingsDropdownItemType;
 
 export interface PluginProvidedUiItemDescriptor {
   /** Defined by BigBlueButton Plugin Engine. */
@@ -310,11 +310,11 @@ export class ActionsBarSeparator implements ActionsBarItem {
   };
 }
 
-// MicrophoneDropdownItem Extensible Area
+// AudioSettingsDropdownItem Extensible Area
 
-export interface MicrophoneDropdownItem extends PluginProvidedUiItemDescriptor{
+export interface AudioSettingsDropdownItem extends PluginProvidedUiItemDescriptor{
 }
-interface MicrophoneDropdownOptionProps {
+interface AudioSettingsDropdownOptionProps {
   label: string;
   icon: string;
   tooltip: string;
@@ -322,10 +322,10 @@ interface MicrophoneDropdownOptionProps {
   onClick: () => void;
 }
 
-export class MicrophoneDropdownOption implements MicrophoneDropdownItem {
+export class AudioSettingsDropdownOption implements AudioSettingsDropdownItem {
   id: string = '';
 
-  type: MicrophoneDropdownItemType;
+  type: AudioSettingsDropdownItemType;
 
   label: string;
 
@@ -339,31 +339,31 @@ export class MicrophoneDropdownOption implements MicrophoneDropdownItem {
 
   constructor({
     label = '', icon = '', tooltip = '', allowed = true, onClick = () => {},
-  }: MicrophoneDropdownOptionProps) {
+  }: AudioSettingsDropdownOptionProps) {
     this.label = label;
     this.icon = icon;
     this.tooltip = tooltip;
     this.allowed = allowed;
     this.onClick = onClick;
-    this.type = MicrophoneDropdownItemType.OPTION;
+    this.type = AudioSettingsDropdownItemType.OPTION;
   }
 
   setItemId: (id: string) => void = (id: string) => {
-    this.id = `MicrophoneDropdownOption_${id}`;
+    this.id = `AudioSettingsDropdownOption_${id}`;
   };
 }
 
-export class MicrophoneDropdownSeparator implements MicrophoneDropdownItem {
+export class AudioSettingsDropdownSeparator implements AudioSettingsDropdownItem {
   id: string = '';
 
-  type: MicrophoneDropdownItemType;
+  type: AudioSettingsDropdownItemType;
 
   constructor() {
-    this.type = MicrophoneDropdownItemType.SEPARATOR;
+    this.type = AudioSettingsDropdownItemType.SEPARATOR;
   }
 
   setItemId: (id: string) => void = (id: string) => {
-    this.id = `MicrophoneDropdownSeparator_${id}`;
+    this.id = `AudioSettingsDropdownSeparator_${id}`;
   };
 }
 
@@ -383,8 +383,8 @@ export type SetActionsBarItems = (
   actionsBarItems: ActionsBarItem[]
 ) => void;
 
-export type SetMicrophoneDropdownItems = (
-  microphoneDropdownItem: MicrophoneDropdownItem[]
+export type SetAudioSettingsDropdownItems = (
+  audioSettingsDropdownItem: AudioSettingsDropdownItem[]
 ) => void;
 
 export interface PluginApi {
@@ -392,7 +392,7 @@ export interface PluginApi {
   setUserListDropdownItems: SetUserListDropdownItems;
   setActionButtonDropdownItems: SetActionButtonDropdownItems;
   setActionsBarItems: SetActionsBarItems;
-  setMicrophoneDropdownItems: SetMicrophoneDropdownItems;
+  setAudioSettingsDropdownItems: SetAudioSettingsDropdownItems;
 }
 
 export interface PluginBrowserWindow extends Window {

@@ -1,8 +1,8 @@
 module.exports = {
   entry: './src/index.tsx',
   output: {
-    filename: 'SampleMicrophoneDropdownPlugin.js',
-    library: 'SampleMicrophoneDropdownPlugin',
+    filename: 'SampleAudioSettingsDropdownPlugin.js',
+    library: 'SampleAudioSettingsDropdownPlugin',
     libraryTarget: 'umd',
     publicPath: '/static/',
     globalObject: 'this',

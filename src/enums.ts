@@ -45,8 +45,8 @@ export enum ActionsBarPosition {
   RIGHT = 'right',
 }
 
-// Microphone dropdown items types:
-export enum MicrophoneDropdownItemType {
-  OPTION = 'MICROPHONE_DROPDOWN_OPTION',
-  SEPARATOR = 'MICROPHONE_DROPDOWN_SEPARATOR',
+// AudioSettings dropdown items types:
+export enum AudioSettingsDropdownItemType {
+  OPTION = 'AUDIO_SETTINGS_DROPDOWN_OPTION',
+  SEPARATOR = 'AUDIO_SETTINGS_DROPDOWN_SEPARATOR',
 }
