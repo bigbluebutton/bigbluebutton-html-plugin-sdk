@@ -2,10 +2,13 @@ import {
   PresentationToolbarItemType,
   UserListDropdownItemType,
   ActionButtonDropdownItemType,
+  ActionsBarItemType,
+  ActionsBarPosition,
 } from '../index';
 
 type PluginProvidedUiItemType = UserListDropdownItemType |
-  PresentationToolbarItemType | ActionButtonDropdownItemType;
+  PresentationToolbarItemType | ActionButtonDropdownItemType
+  | ActionsBarItemType;
 
 export interface PluginProvidedUiItemDescriptor {
   /** Defined by BigBlueButton Plugin Engine. */
@@ -220,6 +223,92 @@ export class ActionButtonDropdownSeparator implements ActionButtonDropdownItem {
   };
 }
 
+// ActionsBarItem Extensible Area
+
+export interface ActionsBarItem extends PluginProvidedUiItemDescriptor{
+  position: ActionsBarPosition;
+}
+
+export interface ActionsBarButtonDropdownItem {
+  label: string;
+  icon: string;
+  tooltip: string;
+  allowed: boolean;
+  userId: string;
+  onClick: () => void;
+}
+
+interface ActionsBarButtonProps {
+  icon: string;
+  tooltip: string;
+  allowed: boolean;
+  hasDropdownButton: boolean;
+  listOfDropdownItems: ActionsBarButtonDropdownItem[];
+  position: ActionsBarPosition;
+  onClick: () => void;
+}
+
+export class ActionsBarButton implements ActionsBarItem {
+  id: string = '';
+
+  type: ActionsBarItemType;
+
+  icon: string;
+
+  tooltip: string;
+
+  allowed: boolean;
+
+  hasDropdownButton: boolean;
+
+  listOfDropdownItems: ActionsBarButtonDropdownItem[];
+
+  position: ActionsBarPosition;
+
+  onClick: () => void;
+
+  constructor({
+    icon = '', tooltip = '', allowed = true, onClick = () => {},
+    hasDropdownButton = false, listOfDropdownItems = [], position = ActionsBarPosition.RIGHT,
+  }: ActionsBarButtonProps) {
+    this.icon = icon;
+    this.tooltip = tooltip;
+    this.allowed = allowed;
+    this.onClick = onClick;
+    this.hasDropdownButton = hasDropdownButton;
+    this.listOfDropdownItems = listOfDropdownItems;
+    this.position = position;
+    this.type = ActionsBarItemType.BUTTON;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `ActionsBarButton_${id}`;
+  };
+}
+
+export interface ActionsBarSeparatorProps {
+  position: ActionsBarPosition;
+}
+
+export class ActionsBarSeparator implements ActionsBarItem {
+  position: ActionsBarPosition;
+
+  id: string = '';
+
+  type: ActionsBarItemType;
+
+  constructor({
+    position = ActionsBarPosition.RIGHT,
+  }: ActionsBarSeparatorProps) {
+    this.position = position;
+    this.type = ActionsBarItemType.SEPARATOR;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `ActionsBarSeparator_${id}`;
+  };
+}
+
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
   PresentationToolbarItem[]) => void;
@@ -232,10 +321,15 @@ export type SetActionButtonDropdownItems = (
   actionButtonDropdownItem: ActionButtonDropdownItem[]
 ) => void;
 
+export type SetActionsBarItems = (
+  actionsBarItems: ActionsBarItem[]
+) => void;
+
 export interface PluginApi {
   setPresentationToolbarItems: SetPresentationToolbarItems;
   setUserListDropdownItems: SetUserListDropdownItems;
   setActionButtonDropdownItems: SetActionButtonDropdownItems;
+  setActionsBarItems: SetActionsBarItems;
 }
 
 export interface PluginBrowserWindow extends Window {
