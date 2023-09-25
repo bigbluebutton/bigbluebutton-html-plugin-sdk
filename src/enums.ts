@@ -22,13 +22,13 @@ export enum PresentationToolbarItemType {
   SEPARATOR = 'PRESENTATION_TOOLBAR_SEPARATOR',
 }
 
-// Participant dropdown items types:
+// User list dropdown items types:
 export enum UserListDropdownItemType {
   OPTION = 'USER_LIST_DROPDOWN_OPTION',
   SEPARATOR = 'USER_LIST_DROPDOWN_SEPARATOR',
 }
 
-// Participant dropdown items types:
+// Action button dropdown items types:
 export enum ActionButtonDropdownItemType {
   OPTION = 'ACTION_BUTTON_DROPDOWN_OPTION',
   SEPARATOR = 'ACTION_BUTTON_DROPDOWN_SEPARATOR',
@@ -43,4 +43,10 @@ export enum ActionsBarItemType {
 export enum ActionsBarPosition {
   LEFT = 'left',
   RIGHT = 'right',
+}
+
+// User camera dropdown items types:
+export enum UserCameraDropdownItemType {
+  OPTION = 'USER_CAMERA_DROPDOWN_OPTION',
+  SEPARATOR = 'USER_CAMERA_DROPDOWN_SEPARATOR',
 }

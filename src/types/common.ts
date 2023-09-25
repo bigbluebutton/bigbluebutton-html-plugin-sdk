@@ -4,17 +4,17 @@ import {
   ActionButtonDropdownItemType,
   ActionsBarItemType,
   ActionsBarPosition,
+  UserCameraDropdownItemType,
 } from '../index';
 
 type PluginProvidedUiItemType = UserListDropdownItemType |
-  PresentationToolbarItemType | ActionButtonDropdownItemType
-  | ActionsBarItemType;
+  PresentationToolbarItemType | ActionButtonDropdownItemType|
+  ActionsBarItemType | UserCameraDropdownItemType;
 
 export interface PluginProvidedUiItemDescriptor {
   /** Defined by BigBlueButton Plugin Engine. */
   id: string;
   type: PluginProvidedUiItemType;
-  // type: UserListDropdownItemType | PresentationToolbarItemType;
   setItemId: (id: string) => void;
 }
 
@@ -309,6 +309,63 @@ export class ActionsBarSeparator implements ActionsBarItem {
   };
 }
 
+// UserCameraDropdownItem Extensible Area
+
+export interface UserCameraDropdownItem extends PluginProvidedUiItemDescriptor{
+}
+interface UserCameraDropdownOptionProps {
+  label: string;
+  icon: string;
+  tooltip: string;
+  allowed: boolean;
+  onClick: () => void;
+}
+
+export class UserCameraDropdownOption implements UserCameraDropdownItem {
+  id: string = '';
+
+  type: UserCameraDropdownItemType;
+
+  label: string;
+
+  icon: string;
+
+  tooltip: string;
+
+  allowed: boolean;
+
+  onClick: () => void;
+
+  constructor({
+    label = '', icon = '', tooltip = '', allowed = true, onClick = () => {},
+  }: UserCameraDropdownOptionProps) {
+    this.label = label;
+    this.icon = icon;
+    this.tooltip = tooltip;
+    this.allowed = allowed;
+    this.onClick = onClick;
+    this.type = UserCameraDropdownItemType.OPTION;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `UserCameraDropdownOption_${id}`;
+  };
+}
+
+export class UserCameraDropdownSeparator implements UserCameraDropdownItem {
+  id: string = '';
+
+  type: UserCameraDropdownItemType;
+
+  constructor() {
+    this.type = UserCameraDropdownItemType.SEPARATOR;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `UserCameraDropdownSeparator_${id}`;
+  };
+}
+
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
   PresentationToolbarItem[]) => void;
@@ -325,11 +382,16 @@ export type SetActionsBarItems = (
   actionsBarItems: ActionsBarItem[]
 ) => void;
 
+export type SetUserCameraDropdownItems = (
+  userCameraDropdownItem: UserCameraDropdownItem[]
+) => void;
+
 export interface PluginApi {
   setPresentationToolbarItems: SetPresentationToolbarItems;
   setUserListDropdownItems: SetUserListDropdownItems;
   setActionButtonDropdownItems: SetActionButtonDropdownItems;
   setActionsBarItems: SetActionsBarItems;
+  setUserCameraDropdownItems: SetUserCameraDropdownItems;
 }
 
 export interface PluginBrowserWindow extends Window {
