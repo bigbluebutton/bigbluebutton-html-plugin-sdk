@@ -13,8 +13,6 @@ function SampleCameraSettingsDropdownPlugin({ pluginUuid: uuid }: SampleCameraSe
       new BbbPluginSdk.CameraSettingsDropdownOption({
         label: 'Send alert from plugin',
         icon: 'user',
-        tooltip: 'this is a button injected by plugin',
-        allowed: true,
         onClick: () => {
           alert("Alert sent from plugin")
         },
