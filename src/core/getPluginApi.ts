@@ -20,6 +20,7 @@ const getPluginApi: GetPluginApi = (uuid: string) => {
       setPresentationDropdownItems: () => {},
       setNavBarItems: () => {},
       setOptionsDropdownItems: () => {},
+      setCameraSettingsDropdownItems: () => {},
     };
     return window.bbb_plugins[uuid];
   }
@@ -33,6 +34,7 @@ const getPluginApi: GetPluginApi = (uuid: string) => {
     setPresentationDropdownItems: () => {},
     setNavBarItems: () => {},
     setOptionsDropdownItems: () => {},
+    setCameraSettingsDropdownItems: () => {},
   };
   return window.bbb_plugins[uuid];
 };

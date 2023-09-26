@@ -9,12 +9,14 @@ import {
   NavBarItemType,
   NavBarItemPosition,
   OptionsDropdownItemType,
+  CameraSettingsDropdownItemType,
 } from '../index';
 
 type PluginProvidedUiItemType = UserListDropdownItemType |
   PresentationToolbarItemType | ActionButtonDropdownItemType |
   ActionsBarItemType | AudioSettingsDropdownItemType |
-  PresentationDropdownItemType | NavBarItemType | OptionsDropdownItemType;
+  PresentationDropdownItemType | NavBarItemType | OptionsDropdownItemType |
+  CameraSettingsDropdownItemType;
 
 export interface PluginProvidedUiItemDescriptor {
   /** Defined by BigBlueButton Plugin Engine. */
@@ -557,6 +559,55 @@ export class OptionsDropdownSeparator implements OptionsDropdownItem {
   };
 }
 
+// CameraSettingsDropdownItem Extensible Area
+
+export interface CameraSettingsDropdownItem extends PluginProvidedUiItemDescriptor{
+}
+interface CameraSettingsDropdownOptionProps {
+  label: string;
+  icon: string;
+  onClick: () => void;
+}
+
+export class CameraSettingsDropdownOption implements CameraSettingsDropdownItem {
+  id: string = '';
+
+  type: CameraSettingsDropdownItemType;
+
+  label: string;
+
+  icon: string;
+
+  onClick: () => void;
+
+  constructor({
+    label = '', icon = '', onClick = () => {},
+  }: CameraSettingsDropdownOptionProps) {
+    this.label = label;
+    this.icon = icon;
+    this.onClick = onClick;
+    this.type = CameraSettingsDropdownItemType.OPTION;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `CameraSettingsDropdownOption_${id}`;
+  };
+}
+
+export class CameraSettingsDropdownSeparator implements CameraSettingsDropdownItem {
+  id: string = '';
+
+  type: CameraSettingsDropdownItemType;
+
+  constructor() {
+    this.type = CameraSettingsDropdownItemType.SEPARATOR;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `CameraSettingsDropdownSeparator_${id}`;
+  };
+}
+
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
   PresentationToolbarItem[]) => void;
@@ -589,6 +640,10 @@ export type SetOptionsDropdownItems = (
   optionsDropdownItem: OptionsDropdownItem[]
 ) => void;
 
+export type SetCameraSettingsDropdownItems = (
+  cameraSettingsDropdownItem: CameraSettingsDropdownItem[]
+) => void;
+
 export interface PluginApi {
   setPresentationToolbarItems: SetPresentationToolbarItems;
   setUserListDropdownItems: SetUserListDropdownItems;
@@ -598,6 +653,7 @@ export interface PluginApi {
   setPresentationDropdownItems: SetPresentationDropdownItems;
   setNavBarItems: SetNavBarItems;
   setOptionsDropdownItems: SetOptionsDropdownItems;
+  setCameraSettingsDropdownItems: SetCameraSettingsDropdownItems;
 }
 
 export interface PluginBrowserWindow extends Window {
