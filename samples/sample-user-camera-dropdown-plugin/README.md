@@ -2,7 +2,7 @@
 
 ## What is it?
 
-The Sample User Camera Dropdown Plugin serves as a demonstration of how developers can create their own custom plugins. This plugin includes a separator after the ordinary actions menu options and a button that displays the label "Fetch presentation content". When you click on the button, the menu will close and open a pop-up with the current presentation.
+The Sample User Camera Dropdown Plugin serves as a demonstration of how developers can create their own custom plugins. This plugin includes a separator after the ordinary dropdown menu option, it reads the label "Send alert from plugin". When you click it, an alert popup will be displayed.
 
 ![Gif of plugin demo](./public/assets/plugin.gif)
 

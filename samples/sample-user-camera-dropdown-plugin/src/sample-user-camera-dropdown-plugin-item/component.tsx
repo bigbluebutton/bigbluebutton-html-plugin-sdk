@@ -14,15 +14,12 @@ React.ReactElement<SampleUserCameraDropdownPluginProps> {
         new BbbPluginSdk.UserCameraDropdownOption({
           label: 'Send alert from plugin',
           icon: 'user',
-          tooltip: 'this is a button injected by plugin',
-          allowed: true,
           onClick: () => {
             alert('Alert sent from plugin');
           },
         }),
       ]);
 
-      console.log("Teste passei por aqui")
   }, []);
 
   return null;
