@@ -45,6 +45,42 @@ export enum ActionsBarPosition {
   RIGHT = 'right',
 }
 
+// AudioSettings dropdown items types:
+export enum AudioSettingsDropdownItemType {
+  OPTION = 'AUDIO_SETTINGS_DROPDOWN_OPTION',
+  SEPARATOR = 'AUDIO_SETTINGS_DROPDOWN_SEPARATOR',
+}
+
+// Presentation dropdown items types:
+export enum PresentationDropdownItemType {
+  OPTION = 'PRESENTATION_DROPDOWN_OPTION',
+  SEPARATOR = 'PRESENTATION_DROPDOWN_SEPARATOR',
+}
+
+// Nav bar items types:
+export enum NavBarItemType {
+  BUTTON = 'NAV_BAR_BUTTON',
+  INFO = 'NAV_BAR_INFO',
+}
+
+export enum NavBarItemPosition {
+  LEFT = 'left',
+  CENTER = 'center',
+  RIGHT = 'right',
+}
+
+// Options dropdown items types:
+export enum OptionsDropdownItemType {
+  OPTION = 'OPTIONS_DROPDOWN_OPTION',
+  SEPARATOR = 'OPTIONS_DROPDOWN_SEPARATOR',
+}
+
+// Participant dropdown items types:
+export enum CameraSettingsDropdownItemType {
+  OPTION = 'CAMERA_SETTINGS_DROPDOWN_OPTION',
+  SEPARATOR = 'CAMERA_SETTINGS_DROPDOWN_SEPARATOR',
+}
+
 // User camera dropdown items types:
 export enum UserCameraDropdownItemType {
   OPTION = 'USER_CAMERA_DROPDOWN_OPTION',
