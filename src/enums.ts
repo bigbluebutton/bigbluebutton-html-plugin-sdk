@@ -28,7 +28,7 @@ export enum UserListDropdownItemType {
   SEPARATOR = 'USER_LIST_DROPDOWN_SEPARATOR',
 }
 
-// Action dropdown items types:
+// Action button dropdown items types:
 export enum ActionButtonDropdownItemType {
   OPTION = 'ACTION_BUTTON_DROPDOWN_OPTION',
   SEPARATOR = 'ACTION_BUTTON_DROPDOWN_SEPARATOR',
@@ -79,4 +79,10 @@ export enum OptionsDropdownItemType {
 export enum CameraSettingsDropdownItemType {
   OPTION = 'CAMERA_SETTINGS_DROPDOWN_OPTION',
   SEPARATOR = 'CAMERA_SETTINGS_DROPDOWN_SEPARATOR',
+}
+
+// User camera dropdown items types:
+export enum UserCameraDropdownItemType {
+  OPTION = 'USER_CAMERA_DROPDOWN_OPTION',
+  SEPARATOR = 'USER_CAMERA_DROPDOWN_SEPARATOR',
 }
