@@ -29,6 +29,12 @@ export interface PluginProvidedUiItemDescriptor {
 export interface CustomEventHook<T> {
   data: T;
   hook: string;
+
+  /**
+   * This essentially is the query to activate parameterized hooks
+   * it is not mandatory for all hooks.
+   */
+  parameter?: string;
 }
 
 export interface CustomEventHookWrapper<T> extends Event {

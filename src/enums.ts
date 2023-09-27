@@ -6,8 +6,9 @@ enum BbbHookEvents {
 
 enum BbbHooks {
   UseCurrentPresentation = 'BbbHooks::UseCurrentPresentation',
+  UseCustomSubscription = 'BbbHooks::Parameterized::UseCustomSubscription',
   UseLoadedUserList = 'BbbHooks::UseLoadedUserList',
-  UseCurrentUser = 'BbbHooks::UseCurrentUser'
+  UseCurrentUser = 'BbbHooks::UseCurrentUser',
 }
 
 export const Internal = {
