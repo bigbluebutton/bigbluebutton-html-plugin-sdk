@@ -14,14 +14,18 @@ function SampleCustomSubscriptionPlugin():
   }
 
   const dataResult = BbbPluginSdk.useCustomSubscription(`
-    subscription {
-      user_aggregate(where: {name: {_eq: "${selfName}"}}) {
+    subscription Users($name: String!) {
+      user_aggregate(where: {name: {_eq: $name}}) {
         aggregate {
           count
         }
       }
     }
-  `);
+  `, {
+    variables: {
+      name: selfName,
+    }
+  });
 
   useEffect(() => {
     const selfNameUsersCount = dataResult?.user_aggregate?.aggregate?.count;

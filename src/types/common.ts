@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   PresentationToolbarItemType,
   UserListDropdownItemType,
@@ -26,6 +27,15 @@ export interface PluginProvidedUiItemDescriptor {
   setItemId: (id: string) => void;
 }
 
+export interface GraphqlVariables {
+  [key: string]: any;
+}
+
+export interface CustomEventParameter {
+  query: string;
+  variables?: GraphqlVariables;
+}
+
 export interface CustomEventHook<T> {
   data: T;
   hook: string;
@@ -34,7 +44,7 @@ export interface CustomEventHook<T> {
    * This essentially is the query to activate parameterized hooks
    * it is not mandatory for all hooks.
    */
-  parameter?: string;
+  parameter?: CustomEventParameter;
 }
 
 export interface CustomEventHookWrapper<T> extends Event {

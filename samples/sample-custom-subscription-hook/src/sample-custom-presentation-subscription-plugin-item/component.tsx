@@ -16,19 +16,21 @@ function SampleCustomPresentationSubscriptionPlugin({ pluginUuid: uuid }: Sample
   const currentPresentation = BbbPluginSdk.useCurrentPresentation();
   const nextSlidePage = currentPresentation?.currentPage?.num + 1 || 1;
 
-  let dataResult;
-
-  dataResult = BbbPluginSdk.useCustomSubscription(`
-    subscription {
+  const dataResult = BbbPluginSdk.useCustomSubscription(`
+    subscription Presentation($nextSlidePage: Int!){
       pres_presentation (where: {current: {_eq: true}}) {
-          presentationId
-          pages (where: {num: {_eq: ${nextSlidePage}}}) {
-              num
-              urls
-          }
+        presentationId
+        pages (where: {num: {_eq: $nextSlidePage}}) {
+          num
+          urls
+        }
       }
     }
-  `);
+  `, {
+    variables: {
+      nextSlidePage
+    } as BbbPluginSdk.GraphqlVariables
+  });
 
   const presentationNextPage: Presentation[] | undefined = dataResult?.pres_presentation;
 
