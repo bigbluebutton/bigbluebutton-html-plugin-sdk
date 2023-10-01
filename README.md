@@ -1,4 +1,4 @@
-# BigBlueButton SDK for for HTML plugins
+# BigBlueButton SDK for HTML plugins
 
 ## Information
 
