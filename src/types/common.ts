@@ -11,13 +11,14 @@ import {
   OptionsDropdownItemType,
   CameraSettingsDropdownItemType,
   UserCameraDropdownItemType,
+  UserListIconItemType,
 } from '../index';
 
 type PluginProvidedUiItemType = UserListDropdownItemType |
   PresentationToolbarItemType | ActionButtonDropdownItemType |
   ActionsBarItemType | AudioSettingsDropdownItemType |
   PresentationDropdownItemType | NavBarItemType | OptionsDropdownItemType |
-  CameraSettingsDropdownItemType | UserCameraDropdownItemType;
+  CameraSettingsDropdownItemType | UserCameraDropdownItemType | UserListIconItemType;
 
 export interface PluginProvidedUiItemDescriptor {
   /** Defined by BigBlueButton Plugin Engine. */
@@ -657,6 +658,37 @@ export class UserCameraDropdownSeparator implements UserCameraDropdownItem {
   };
 }
 
+// UserListIconItem Extensible Area
+
+export interface UserListIconItem extends PluginProvidedUiItemDescriptor {
+}
+interface UserListIconProps {
+  userId: string;
+  icon: string;
+}
+
+export class UserListIcon implements UserListIconItem {
+  id: string = '';
+
+  type: UserListIconItemType;
+
+  userId: string;
+
+  icon: string;
+
+  constructor({
+    icon = '', userId = '',
+  }: UserListIconProps) {
+    this.icon = icon;
+    this.userId = userId;
+    this.type = UserListIconItemType.ICON;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `UserListIcon_${id}`;
+  };
+}
+
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
   PresentationToolbarItem[]) => void;
@@ -697,6 +729,10 @@ export type SetUserCameraDropdownItems = (
   userCameraDropdownItem: UserCameraDropdownItem[]
 ) => void;
 
+export type SetUserListIconItems = (
+  userListIconItem: UserListIconItem[]
+) => void;
+
 export interface PluginApi {
   setPresentationToolbarItems: SetPresentationToolbarItems;
   setUserListDropdownItems: SetUserListDropdownItems;
@@ -708,6 +744,7 @@ export interface PluginApi {
   setOptionsDropdownItems: SetOptionsDropdownItems;
   setCameraSettingsDropdownItems: SetCameraSettingsDropdownItems;
   setUserCameraDropdownItems: SetUserCameraDropdownItems;
+  setUserListIconItems: SetUserListIconItems;
 }
 
 export interface PluginBrowserWindow extends Window {
