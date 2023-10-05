@@ -174,6 +174,50 @@ export class UserListDropdownSeparator implements UserListDropdownItem {
   };
 }
 
+interface UserListDropdownInformationProps {
+  label: string;
+  icon?: string;
+  iconRight?: string;
+  allowed: boolean;
+  userId: string;
+  textColor: string;
+}
+
+export class UserListDropdownInformation implements UserListDropdownItem {
+  id: string = '';
+
+  userId: string;
+
+  type: UserListDropdownItemType;
+
+  label: string;
+
+  icon: string;
+
+  iconRight: string;
+
+  textColor: string;
+
+  allowed: boolean;
+
+  constructor({
+    label = '', icon = '', iconRight = '', allowed = true,
+    userId = '', textColor = '',
+  }: UserListDropdownInformationProps) {
+    this.userId = userId;
+    this.label = label;
+    this.icon = icon;
+    this.iconRight = iconRight;
+    this.textColor = textColor;
+    this.allowed = allowed;
+    this.type = UserListDropdownItemType.INFORMATION;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `UserListDropdownInformation_${id}`;
+  };
+}
+
 // ActionButtonDropdownItem Extensible Area
 
 export interface ActionButtonDropdownItem extends PluginProvidedUiItemDescriptor{
