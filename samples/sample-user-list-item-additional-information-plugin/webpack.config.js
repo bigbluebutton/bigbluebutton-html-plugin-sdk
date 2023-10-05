@@ -1,8 +1,8 @@
 module.exports = {
   entry: './src/index.tsx',
   output: {
-    filename: 'SampleUserListIconPlugin.js',
-    library: 'SampleUserListIconPlugin',
+    filename: 'SampleUserListItemAdditionalInformationPlugin.js',
+    library: 'SampleUserListItemAdditionalInformationPlugin',
     libraryTarget: 'umd',
     publicPath: '/static/',
     globalObject: 'this',

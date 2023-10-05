@@ -88,6 +88,7 @@ export enum UserCameraDropdownItemType {
 }
 
 // User list icon items types:
-export enum UserListIconItemType {
-  ICON = 'USER_LIST_ICON',
+export enum UserListItemAdditionalInformationType {
+  ICON = 'USER_LIST_ITEM_ICON',
+  LABEL = 'USER_LIST_ITEM_LABEL',
 }

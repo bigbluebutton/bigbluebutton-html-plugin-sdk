@@ -22,7 +22,7 @@ const getPluginApi: GetPluginApi = (uuid: string) => {
       setOptionsDropdownItems: () => {},
       setCameraSettingsDropdownItems: () => {},
       setUserCameraDropdownItems: () => {},
-      setUserListIconItems: () => {},
+      setUserListItemAdditionalInformation: () => {},
     };
     return window.bbb_plugins[uuid];
   }
@@ -38,7 +38,7 @@ const getPluginApi: GetPluginApi = (uuid: string) => {
     setOptionsDropdownItems: () => {},
     setCameraSettingsDropdownItems: () => {},
     setUserCameraDropdownItems: () => {},
-    setUserListIconItems: () => {},
+    setUserListItemAdditionalInformation: () => {},
   };
   return window.bbb_plugins[uuid];
 };
