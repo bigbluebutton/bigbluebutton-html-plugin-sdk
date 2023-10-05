@@ -76,7 +76,7 @@ export enum OptionsDropdownItemType {
   SEPARATOR = 'OPTIONS_DROPDOWN_SEPARATOR',
 }
 
-// Participant dropdown items types:
+// Camera settings dropdown items types:
 export enum CameraSettingsDropdownItemType {
   OPTION = 'CAMERA_SETTINGS_DROPDOWN_OPTION',
   SEPARATOR = 'CAMERA_SETTINGS_DROPDOWN_SEPARATOR',
@@ -86,4 +86,10 @@ export enum CameraSettingsDropdownItemType {
 export enum UserCameraDropdownItemType {
   OPTION = 'USER_CAMERA_DROPDOWN_OPTION',
   SEPARATOR = 'USER_CAMERA_DROPDOWN_SEPARATOR',
+}
+
+// User list icon items types:
+export enum UserListItemAdditionalInformationType {
+  ICON = 'USER_LIST_ITEM_ICON',
+  LABEL = 'USER_LIST_ITEM_LABEL',
 }

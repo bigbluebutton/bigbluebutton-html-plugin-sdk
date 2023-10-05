@@ -11,13 +11,15 @@ import {
   OptionsDropdownItemType,
   CameraSettingsDropdownItemType,
   UserCameraDropdownItemType,
+  UserListItemAdditionalInformationType,
 } from '../index';
 
 type PluginProvidedUiItemType = UserListDropdownItemType |
   PresentationToolbarItemType | ActionButtonDropdownItemType |
   ActionsBarItemType | AudioSettingsDropdownItemType |
   PresentationDropdownItemType | NavBarItemType | OptionsDropdownItemType |
-  CameraSettingsDropdownItemType | UserCameraDropdownItemType;
+  CameraSettingsDropdownItemType | UserCameraDropdownItemType |
+  UserListItemAdditionalInformationType;
 
 export interface PluginProvidedUiItemDescriptor {
   /** Defined by BigBlueButton Plugin Engine. */
@@ -701,6 +703,69 @@ export class UserCameraDropdownSeparator implements UserCameraDropdownItem {
   };
 }
 
+// UserListItemAdditionalInformation Extensible Area
+
+export interface UserListItemAdditionalInformation extends PluginProvidedUiItemDescriptor {
+  userId: string;
+}
+interface UserListItemIconProps {
+  userId: string;
+  icon: string;
+}
+
+export class UserListItemIcon implements UserListItemAdditionalInformation {
+  id: string = '';
+
+  type: UserListItemAdditionalInformationType;
+
+  userId: string;
+
+  icon: string;
+
+  constructor({
+    icon = '', userId = '',
+  }: UserListItemIconProps) {
+    this.icon = icon;
+    this.userId = userId;
+    this.type = UserListItemAdditionalInformationType.ICON;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `UserListItemIcon_${id}`;
+  };
+}
+
+interface UserListItemLabelProps {
+  userId: string;
+  icon: string;
+  label: string;
+}
+
+export class UserListItemLabel implements UserListItemAdditionalInformation {
+  id: string = '';
+
+  type: UserListItemAdditionalInformationType;
+
+  userId: string;
+
+  icon: string;
+
+  label: string;
+
+  constructor({
+    icon = '', userId = '', label = '',
+  }: UserListItemLabelProps) {
+    this.icon = icon;
+    this.label = label;
+    this.userId = userId;
+    this.type = UserListItemAdditionalInformationType.LABEL;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `UserListItemLabel_${id}`;
+  };
+}
+
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
   PresentationToolbarItem[]) => void;
@@ -741,6 +806,10 @@ export type SetUserCameraDropdownItems = (
   userCameraDropdownItem: UserCameraDropdownItem[]
 ) => void;
 
+export type SetUserListItemAdditionalInformation = (
+  userListItemAdditionalInformation: UserListItemAdditionalInformation[]
+) => void;
+
 export interface PluginApi {
   setPresentationToolbarItems: SetPresentationToolbarItems;
   setUserListDropdownItems: SetUserListDropdownItems;
@@ -752,6 +821,7 @@ export interface PluginApi {
   setOptionsDropdownItems: SetOptionsDropdownItems;
   setCameraSettingsDropdownItems: SetCameraSettingsDropdownItems;
   setUserCameraDropdownItems: SetUserCameraDropdownItems;
+  setUserListItemAdditionalInformation: SetUserListItemAdditionalInformation;
 }
 
 export interface PluginBrowserWindow extends Window {
