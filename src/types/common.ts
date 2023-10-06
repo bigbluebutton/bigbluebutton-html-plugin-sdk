@@ -12,6 +12,7 @@ import {
   CameraSettingsDropdownItemType,
   UserCameraDropdownItemType,
   UserListItemAdditionalInformationType,
+  FloatingWindowItemType,
 } from '../index';
 
 type PluginProvidedUiItemType = UserListDropdownItemType |
@@ -19,7 +20,7 @@ type PluginProvidedUiItemType = UserListDropdownItemType |
   ActionsBarItemType | AudioSettingsDropdownItemType |
   PresentationDropdownItemType | NavBarItemType | OptionsDropdownItemType |
   CameraSettingsDropdownItemType | UserCameraDropdownItemType |
-  UserListItemAdditionalInformationType;
+  UserListItemAdditionalInformationType | FloatingWindowItemType;
 
 export interface PluginProvidedUiItemDescriptor {
   /** Defined by BigBlueButton Plugin Engine. */
@@ -766,16 +767,69 @@ export class UserListItemLabel implements UserListItemAdditionalInformation {
   };
 }
 
+// FloatingWindow Extensible Area
+
+export interface FloatingWindowItem extends PluginProvidedUiItemDescriptor {
+}
+interface FloatingWindowProps {
+  top: number;
+  left: number;
+  movable: boolean;
+  backgroundColor: string;
+  boxShadow: string;
+  contentFunction: (element: HTMLElement) => void;
+}
+
+export class FloatingWindow implements FloatingWindowItem {
+  id: string = '';
+
+  type: FloatingWindowItemType;
+
+  top: number;
+
+  left: number;
+
+  movable: boolean;
+
+  backgroundColor: string;
+
+  boxShadow: string;
+
+  contentFunction: (element: HTMLElement) => void;
+
+  constructor({
+    top,
+    left,
+    movable,
+    backgroundColor,
+    boxShadow,
+    contentFunction,
+  }: FloatingWindowProps) {
+    this.top = top;
+    this.left = left;
+    this.movable = movable;
+    this.backgroundColor = backgroundColor;
+    this.boxShadow = boxShadow;
+
+    this.contentFunction = contentFunction;
+    this.type = FloatingWindowItemType.CONTAINER;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `UserListItemIcon_${id}`;
+  };
+}
+
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
   PresentationToolbarItem[]) => void;
 
 export type SetUserListDropdownItems = (
-  userListDropdownItem: UserListDropdownItem[]
+  userListDropdownItems: UserListDropdownItem[]
 ) => void;
 
 export type SetActionButtonDropdownItems = (
-  actionButtonDropdownItem: ActionButtonDropdownItem[]
+  actionButtonDropdownItems: ActionButtonDropdownItem[]
 ) => void;
 
 export type SetActionsBarItems = (
@@ -783,31 +837,35 @@ export type SetActionsBarItems = (
 ) => void;
 
 export type SetAudioSettingsDropdownItems = (
-  audioSettingsDropdownItem: AudioSettingsDropdownItem[]
+  audioSettingsDropdownItems: AudioSettingsDropdownItem[]
 ) => void;
 
 export type SetPresentationDropdownItems = (
-  userListDropdownItem: PresentationDropdownItem[]
+  userListDropdownItems: PresentationDropdownItem[]
 ) => void;
 
 export type SetNavBarItems = (
-  userListDropdownItem: NavBarItem[]
+  userListDropdownItems: NavBarItem[]
 ) => void;
 
 export type SetOptionsDropdownItems = (
-  optionsDropdownItem: OptionsDropdownItem[]
+  optionsDropdownItems: OptionsDropdownItem[]
 ) => void;
 
 export type SetCameraSettingsDropdownItems = (
-  cameraSettingsDropdownItem: CameraSettingsDropdownItem[]
+  cameraSettingsDropdownItems: CameraSettingsDropdownItem[]
 ) => void;
 
 export type SetUserCameraDropdownItems = (
-  userCameraDropdownItem: UserCameraDropdownItem[]
+  userCameraDropdownItems: UserCameraDropdownItem[]
 ) => void;
 
 export type SetUserListItemAdditionalInformation = (
   userListItemAdditionalInformation: UserListItemAdditionalInformation[]
+) => void;
+
+export type SetFloatingWindowItems = (
+  FloatingWindowItems: FloatingWindowItem[]
 ) => void;
 
 export interface PluginApi {
@@ -822,6 +880,7 @@ export interface PluginApi {
   setCameraSettingsDropdownItems: SetCameraSettingsDropdownItems;
   setUserCameraDropdownItems: SetUserCameraDropdownItems;
   setUserListItemAdditionalInformation: SetUserListItemAdditionalInformation;
+  setFloatingWindowItems: SetFloatingWindowItems;
 }
 
 export interface PluginBrowserWindow extends Window {

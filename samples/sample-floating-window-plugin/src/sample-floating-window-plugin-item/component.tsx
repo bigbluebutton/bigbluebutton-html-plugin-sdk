@@ -1,0 +1,82 @@
+import * as ReactDOM from 'react-dom/client';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
+
+import * as BbbPluginSdk from 'bigbluebutton-html-plugin-sdk';
+import { SampleFloatingWindowPluginProps } from './types';
+import StickyNote from '../floating-personal-notes/component';
+import enums from '../utils/events';
+
+function SampleFloatingWindowPlugin({ pluginUuid: uuid }: SampleFloatingWindowPluginProps): React.ReactElement {
+  const pluginApi: BbbPluginSdk.PluginApi = BbbPluginSdk.getPluginApi(uuid);
+  const [textContent, setTextContent] = useState('');
+  const [isMinimized, setIsMinimized] = useState(false);
+  const [isClosed, setIsClosed] = useState(false);
+
+  const handleMinimizeWindow: EventListener = (
+    (event: CustomEvent) => {
+      setTextContent(event.detail.textContent);
+      setIsMinimized(true);
+    }) as EventListener;
+    
+  const handleCloseWindow: EventListener = (
+    () => {
+      setIsClosed(true);
+    }) as EventListener;
+
+  useEffect(() => {
+    if (!isMinimized && !isClosed) {
+      const floatingWindow = new BbbPluginSdk.FloatingWindow({
+        top: 50,
+        left: 50,
+        movable: true,
+        backgroundColor: '#f1f1f1',
+        boxShadow: '2px 2px 10px #777',
+        contentFunction: (element: HTMLElement) => {
+          const root = ReactDOM.createRoot(element);
+          root.render(
+            <React.StrictMode>
+              <StickyNote
+                initialTextContent={textContent}
+                initialTitle='Personal notes (not saved)'
+              />
+            </React.StrictMode>,
+          );
+        }
+      });
+      pluginApi.setActionsBarItems([]);
+      pluginApi.setFloatingWindowItems([floatingWindow]);
+    } else if (isMinimized && !isClosed) {
+      const restoringButton: BbbPluginSdk.ActionsBarItem = new BbbPluginSdk.ActionsBarButton({
+          icon: 'copy',
+          tooltip: 'Open private notes floating window',
+          allowed: true,
+          onClick: () => {
+            setIsMinimized(false)
+          },
+          hasDropdownButton: false,
+          listOfDropdownItems: [],
+          position: BbbPluginSdk.ActionsBarPosition.RIGHT,
+        }
+      );
+      pluginApi.setFloatingWindowItems([]);
+      pluginApi.setActionsBarItems([restoringButton]);
+    } else {
+      pluginApi.setFloatingWindowItems([]);
+      pluginApi.setActionsBarItems([]);
+    }
+  }, [isMinimized, isClosed]);
+
+  useEffect(() => {
+    window.addEventListener(enums.SampleFloatingWindow.MINIMIZE_WINDOW, handleMinimizeWindow)
+    window.addEventListener(enums.SampleFloatingWindow.CLOSE_WINDOW, handleCloseWindow)
+    return () => {
+      window.removeEventListener(enums.SampleFloatingWindow.MINIMIZE_WINDOW, handleMinimizeWindow)
+      window.removeEventListener(enums.SampleFloatingWindow.CLOSE_WINDOW, handleCloseWindow)
+    }
+  }, []);
+
+  return null;
+}
+
+export default SampleFloatingWindowPlugin;

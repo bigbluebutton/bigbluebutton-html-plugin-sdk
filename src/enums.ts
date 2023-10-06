@@ -93,3 +93,8 @@ export enum UserListItemAdditionalInformationType {
   ICON = 'USER_LIST_ITEM_ICON',
   LABEL = 'USER_LIST_ITEM_LABEL',
 }
+
+// User list icon items types:
+export enum FloatingWindowItemType {
+  CONTAINER = 'FLOATING_WINDOW_ITEM_CONTAINER',
+}

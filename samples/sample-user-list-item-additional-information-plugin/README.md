@@ -1,8 +1,8 @@
-# Sample User List Icon Plugin
+# Sample User List Item Additional Information Plugin
 
 ## What is it?
 
-The Sample User List Icon Plugin serves as a demonstration of how developers can create their own custom plugins, in this case each participant will have a sort of warning badge right on the user's name side. See example below
+The Sample User List Item Additional Information Plugin serves as a demonstration of how developers can create their own custom plugins, in this case each participant will have a sort of warning badge right on the user's name side. See example below
 
 ![Gif of plugin demo](./public/assets/plugin.png)
 
