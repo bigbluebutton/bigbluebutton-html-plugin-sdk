@@ -1,6 +1,6 @@
 export * from './types';
 
-export * from './data-consumption/hooks';
+export * from './data-consumption';
 
 export * from './core';
 

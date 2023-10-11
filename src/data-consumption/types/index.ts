@@ -1,3 +1,3 @@
+export * from './event';
 export * from './presentation';
 export * from './user';
-export * from './event';

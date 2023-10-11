@@ -15,6 +15,14 @@ export const Internal = {
   BbbHooks,
 };
 
+export enum BbbUiEvents {
+  UserListOpened = 'USER_LIST_OPENED',
+  UserListClosed = 'USER_LIST_CLOSED',
+  ChatInputChanged = 'CHAT_INPUT_CHANGED',
+  ChatInputFocused = 'CHAT_INPUT_FOCUSED',
+  ChatInputUnfocused = 'CHAT_INPUT_UNFOCUSED',
+}
+
 // Presentation toolbar items types:
 export enum PresentationToolbarItemType {
   BUTTON = 'PRESENTATION_TOOLBAR_BUTTON',
