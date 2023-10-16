@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
-import SampleUserListItemAdditionalInformationPlugin from './sample-user-list-item-additional-information-plugin/component';
+import SampleUserListItemAdditionalInformationPlugin from './sample-user-list-icon-plugin-item/component';
 
 const uuid = document.currentScript?.getAttribute('uuid') || 'root';
 
