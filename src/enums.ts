@@ -10,10 +10,33 @@ enum BbbHooks {
   UseCurrentUser = 'BbbHooks::UseCurrentUser'
 }
 
+enum Poll {
+  Open = 'UiCommands::PollCreationOpen',
+  Fill = 'UiCommands::PollCreationFill',
+}
+
+const UiCommandsEvents = {
+  Poll,
+};
+
 export const Internal = {
   BbbHookEvents,
   BbbHooks,
+  UiCommandsEvents,
 };
+
+export enum PollType {
+  YesNo= 'YN',
+  YesNoAbstention= 'YNA',
+  TrueFalse= 'TF',
+  Letter= 'A-',
+  A2= 'A-2',
+  A3= 'A-3',
+  A4= 'A-4',
+  A5= 'A-5',
+  Custom= 'CUSTOM',
+  Response= 'R-',
+}
 
 // Presentation toolbar items types:
 export enum PresentationToolbarItemType {

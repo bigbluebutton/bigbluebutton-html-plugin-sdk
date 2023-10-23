@@ -3,6 +3,8 @@ import {
   PluginApi,
 } from '../types';
 
+import { uiCommands } from '../commands';
+
 type GetPluginApi = (uuid: string) => PluginApi
 
 declare const window: PluginBrowserWindow;
@@ -23,6 +25,7 @@ const getPluginApi: GetPluginApi = (uuid: string) => {
       setCameraSettingsDropdownItems: () => {},
       setUserCameraDropdownItems: () => {},
       setUserListItemAdditionalInformation: () => {},
+      uiCommands,
     };
     return window.bbb_plugins[uuid];
   }
@@ -39,6 +42,7 @@ const getPluginApi: GetPluginApi = (uuid: string) => {
     setCameraSettingsDropdownItems: () => {},
     setUserCameraDropdownItems: () => {},
     setUserListItemAdditionalInformation: () => {},
+    uiCommands,
   };
   return window.bbb_plugins[uuid];
 };

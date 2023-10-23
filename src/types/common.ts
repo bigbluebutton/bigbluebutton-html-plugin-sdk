@@ -12,6 +12,7 @@ import {
   CameraSettingsDropdownItemType,
   UserCameraDropdownItemType,
   UserListItemAdditionalInformationType,
+  UiCommands,
 } from '../index';
 
 type PluginProvidedUiItemType = UserListDropdownItemType |
@@ -822,6 +823,7 @@ export interface PluginApi {
   setCameraSettingsDropdownItems: SetCameraSettingsDropdownItems;
   setUserCameraDropdownItems: SetUserCameraDropdownItems;
   setUserListItemAdditionalInformation: SetUserListItemAdditionalInformation;
+  uiCommands: UiCommands;
 }
 
 export interface PluginBrowserWindow extends Window {
