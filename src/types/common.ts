@@ -32,12 +32,23 @@ export interface PluginProvidedUiItemDescriptor {
 export interface CustomEventHook<T> {
   data: T;
   hook: string;
-  channelName?: string;
-  pluginName?: string;
 }
 
 export interface CustomEventHookWrapper<T> extends Event {
   detail: CustomEventHook<T>;
+}
+
+export interface DataChannelPluginHookEventDetailParameter {
+  channelName: string;
+  pluginName: string;
+}
+
+export interface DataChannelPluginHookEventDetail<T> extends CustomEventHook<T> {
+  parameters: DataChannelPluginHookEventDetailParameter;
+}
+
+export interface DataChannelPluginHookEventDetailWrapper<T> extends CustomEventHookWrapper<T> {
+  detail: DataChannelPluginHookEventDetail<T>;
 }
 
 // Extensible Areas

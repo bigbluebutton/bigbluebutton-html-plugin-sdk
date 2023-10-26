@@ -35,11 +35,17 @@ const useDataChannel = (<T>(channelName: string,
     );
 
     window.dispatchEvent(new CustomEvent(Internal.BbbHookEvents.Subscribe, {
-      detail: { hook: Internal.BbbDataChannel.UseDataChannel, channelName, pluginName },
+      detail: {
+        hook: Internal.BbbDataChannel.UseDataChannel,
+        parameters: { channelName, pluginName },
+      },
     }));
     return () => {
       window.dispatchEvent(new CustomEvent(Internal.BbbHookEvents.Unsubscribe, {
-        detail: { hook: Internal.BbbDataChannel.UseDataChannel, channelName, pluginName },
+        detail: {
+          hook: Internal.BbbDataChannel.UseDataChannel,
+          parameters: { channelName, pluginName },
+        },
       }));
       window.removeEventListener(channelIdentifier, handleDataChange);
     };
