@@ -10,10 +10,22 @@ enum BbbHooks {
   UseCurrentUser = 'BbbHooks::UseCurrentUser'
 }
 
+enum BbbDataChannel {
+  UseDataChannel = 'BbbDataChannel::UseDataChannel',
+}
+
 export const Internal = {
   BbbHookEvents,
   BbbHooks,
+  BbbDataChannel,
 };
+
+// Role
+export enum Role {
+  PRESENTER = 'PRESENTER',
+  MODERATOR = 'MODERATOR',
+  VIEWER = 'VIEWER',
+}
 
 // Presentation toolbar items types:
 export enum PresentationToolbarItemType {
