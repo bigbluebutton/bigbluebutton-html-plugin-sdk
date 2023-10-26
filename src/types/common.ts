@@ -47,10 +47,6 @@ export interface DataChannelPluginHookEventDetail<T> extends CustomEventHook<T> 
   parameters: DataChannelPluginHookEventDetailParameter;
 }
 
-export interface DataChannelPluginHookEventDetailWrapper<T> extends CustomEventHookWrapper<T> {
-  detail: DataChannelPluginHookEventDetail<T>;
-}
-
 // Extensible Areas
 
 // PresentationToolbarItem Extensible Area
