@@ -1,20 +1,16 @@
-import { Roles } from '..';
+import { Role } from '..';
 
 export interface ToUserId {
   userId: string;
 }
 
 export interface ToRole {
-  role: Roles;
+  role: Role;
 }
 
 export type ObjectTo = ToUserId | ToRole;
 
 export type DispatcherFunction = <T>(objectToDispatch: T, objectsTo?: ObjectTo[]) => void;
-
-export interface DispatcherFunctionsMap {
-  [key: string]: DispatcherFunction
-}
 
 export type UseDataChannel = <T>(
   channelName: string,

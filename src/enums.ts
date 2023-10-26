@@ -20,8 +20,8 @@ export const Internal = {
   BbbDataChannel,
 };
 
-// Roles
-export enum Roles{
+// Role
+export enum Role {
   PRESENTER = 'PRESENTER',
   MODERATOR = 'MODERATOR',
   VIEWER = 'VIEWER',

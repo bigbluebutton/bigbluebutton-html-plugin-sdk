@@ -24,9 +24,6 @@ const getPluginApi: GetPluginApi = (uuid: string, pluginName = undefined) => {
       setCameraSettingsDropdownItems: () => {},
       setUserCameraDropdownItems: () => {},
       setUserListItemAdditionalInformation: () => {},
-      dataChannelDispatchersMap: {
-        '': () => {},
-      },
     };
   }
   // When pluginName is not provided, we understand that the call is coming from the plugin's react

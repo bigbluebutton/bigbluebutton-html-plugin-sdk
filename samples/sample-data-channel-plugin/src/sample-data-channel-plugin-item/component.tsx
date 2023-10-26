@@ -20,7 +20,7 @@ function SampleDataChannelPlugin(
       second_example_field: 'string as an example',
     }, [
       {
-        role: BbbPluginSdk.Roles.MODERATOR
+        role: BbbPluginSdk.Role.MODERATOR
       } as BbbPluginSdk.ToRole,
       {
         userId: 'userId-123'

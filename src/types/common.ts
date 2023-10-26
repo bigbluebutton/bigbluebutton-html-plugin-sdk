@@ -12,7 +12,6 @@ import {
   CameraSettingsDropdownItemType,
   UserCameraDropdownItemType,
   UserListItemAdditionalInformationType,
-  DispatcherFunctionsMap,
   UseDataChannel,
 } from '../index';
 
@@ -828,7 +827,6 @@ export interface PluginApi {
   setUserListItemAdditionalInformation: SetUserListItemAdditionalInformation;
   useDataChannel?: UseDataChannel;
   pluginName?: string;
-  dataChannelDispatchersMap: DispatcherFunctionsMap;
 }
 
 export interface PluginBrowserWindow extends Window {
