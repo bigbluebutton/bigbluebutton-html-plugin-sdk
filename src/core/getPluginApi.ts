@@ -29,6 +29,7 @@ const getPluginApi: GetPluginApi = (uuid: string, pluginName = undefined) => {
       },
     };
   }
+  // When pluginName is not provided, we understand that the call is coming from the plugin's react
   if (!pluginName) {
     const pluginNameSet = window.bbb_plugins[uuid].pluginName;
     if (pluginNameSet) {
