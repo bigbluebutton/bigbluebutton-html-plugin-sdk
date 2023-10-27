@@ -13,6 +13,7 @@ import {
   UserCameraDropdownItemType,
   UserListItemAdditionalInformationType,
   UseDataChannel,
+  MapOfDispatchers,
 } from '../index';
 
 type PluginProvidedUiItemType = UserListDropdownItemType |
@@ -833,6 +834,7 @@ export interface PluginApi {
   setUserCameraDropdownItems: SetUserCameraDropdownItems;
   setUserListItemAdditionalInformation: SetUserListItemAdditionalInformation;
   useDataChannel?: UseDataChannel;
+  mapOfDispatchers: MapOfDispatchers;
   pluginName?: string;
 }
 

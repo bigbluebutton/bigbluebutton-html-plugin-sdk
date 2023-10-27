@@ -3,12 +3,13 @@ import {
   CustomEventHookWrapper, Internal,
   DispatcherFunction,
   UseDataChannelAuxiliary,
+  PluginApi,
 } from '../index';
 
 const createChannelIdentifier = (channelName: string, pluginName: string) => `${channelName}::${pluginName}`;
 
 const useDataChannel = (<T>(channelName: string,
-  pluginName: string,
+  pluginName: string, pluginApi: PluginApi,
   ) => {
   const [data, setData] = useState<T>();
   const [dispatcherFunction, setDispatcherFunction] = useState<DispatcherFunction>();
@@ -20,8 +21,8 @@ const useDataChannel = (<T>(channelName: string,
   }) as EventListener;
 
   const handleListenToChangeDisPatcherFunction: EventListener = (
-    (event: CustomEventHookWrapper<DispatcherFunction>) => {
-      setDispatcherFunction(() => event.detail.data);
+    () => {
+      setDispatcherFunction(() => pluginApi.mapOfDispatchers[channelIdentifier]);
       window.removeEventListener(
         `${channelIdentifier}::dispatcherFunction`,
         handleListenToChangeDisPatcherFunction,

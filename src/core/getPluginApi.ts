@@ -24,6 +24,9 @@ const getPluginApi: GetPluginApi = (uuid: string, pluginName = undefined) => {
       setCameraSettingsDropdownItems: () => {},
       setUserCameraDropdownItems: () => {},
       setUserListItemAdditionalInformation: () => {},
+      mapOfDispatchers: {
+        '': () => {},
+      },
     };
   }
   // When pluginName is not provided, we understand that the call is coming from the plugin's react
@@ -32,7 +35,7 @@ const getPluginApi: GetPluginApi = (uuid: string, pluginName = undefined) => {
     if (pluginNameSet) {
       window.bbb_plugins[uuid].useDataChannel = ((
         channelName: string,
-      ) => useDataChannel(channelName, pluginNameSet)) as UseDataChannel;
+      ) => useDataChannel(channelName, pluginNameSet, window.bbb_plugins[uuid])) as UseDataChannel;
     }
   } else {
     window.bbb_plugins[uuid].pluginName = pluginName;
