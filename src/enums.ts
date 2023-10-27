@@ -7,7 +7,8 @@ enum BbbHookEvents {
 enum BbbHooks {
   UseCurrentPresentation = 'BbbHooks::UseCurrentPresentation',
   UseLoadedUserList = 'BbbHooks::UseLoadedUserList',
-  UseCurrentUser = 'BbbHooks::UseCurrentUser'
+  UseCurrentUser = 'BbbHooks::UseCurrentUser',
+  UseUsersOverview = 'BbbHooks::UseUsersOverview'
 }
 
 enum BbbDataChannel {

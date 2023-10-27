@@ -30,6 +30,11 @@ function SampleActionsBarPlugin({
     pluginApi.setActionsBarItems([dropdownToUserListItem, buttonToUserListItem]);
   }, []);
 
+  const users: BbbPluginSdk.UserOverview[] = BbbPluginSdk.useUsersOverview();
+
+  useEffect(() => {
+    console.log("Users Overview: ", users);
+  }, [users])
   return null;
 }
 
