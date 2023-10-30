@@ -7,7 +7,8 @@ enum BbbHookEvents {
 enum BbbHooks {
   UseCurrentPresentation = 'BbbHooks::UseCurrentPresentation',
   UseLoadedUserList = 'BbbHooks::UseLoadedUserList',
-  UseCurrentUser = 'BbbHooks::UseCurrentUser'
+  UseCurrentUser = 'BbbHooks::UseCurrentUser',
+  UseUsersOverview = 'BbbHooks::UseUsersOverview',
 }
 
 enum Poll {
@@ -19,11 +20,23 @@ const UiCommandsEvents = {
   Poll,
 };
 
+enum BbbDataChannel {
+  UseDataChannel = 'BbbDataChannel::UseDataChannel',
+}
+
 export const Internal = {
   BbbHookEvents,
   BbbHooks,
+  BbbDataChannel,
   UiCommandsEvents,
 };
+
+// Role
+export enum Role {
+  PRESENTER = 'PRESENTER',
+  MODERATOR = 'MODERATOR',
+  VIEWER = 'VIEWER',
+}
 
 export enum PollType {
   YesNo= 'YN',
