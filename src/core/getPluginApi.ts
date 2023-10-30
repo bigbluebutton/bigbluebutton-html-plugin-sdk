@@ -1,16 +1,17 @@
 import {
   PluginBrowserWindow,
-  PluginApi,
 } from '../types';
 
-type GetPluginApi = (uuid: string) => PluginApi
+import {
+  PluginApi, UseDataChannel, useDataChannel,
+} from '../index';
+
+type GetPluginApi = (uuid: string, pluginName?: string) => PluginApi
 
 declare const window: PluginBrowserWindow;
-const getPluginApi: GetPluginApi = (uuid: string) => {
-  if (window.bbb_plugins) {
-    if (Object.keys(window.bbb_plugins).indexOf(uuid) !== -1) {
-      return window.bbb_plugins[uuid];
-    }
+const getPluginApi: GetPluginApi = (uuid: string, pluginName = undefined) => {
+  if (!window.bbb_plugins) window.bbb_plugins = {};
+  if (Object.keys(window.bbb_plugins).indexOf(uuid) === -1) {
     window.bbb_plugins[uuid] = {
       setUserListDropdownItems: () => {},
       setPresentationToolbarItems: () => {},
@@ -22,22 +23,23 @@ const getPluginApi: GetPluginApi = (uuid: string) => {
       setOptionsDropdownItems: () => {},
       setCameraSettingsDropdownItems: () => {},
       setUserCameraDropdownItems: () => {},
+      setUserListItemAdditionalInformation: () => {},
+      mapOfDispatchers: {
+        '': () => {},
+      },
     };
-    return window.bbb_plugins[uuid];
   }
-  window.bbb_plugins = {};
-  window.bbb_plugins[uuid] = {
-    setUserListDropdownItems: () => {},
-    setPresentationToolbarItems: () => {},
-    setActionButtonDropdownItems: () => {},
-    setActionsBarItems: () => {},
-    setAudioSettingsDropdownItems: () => {},
-    setPresentationDropdownItems: () => {},
-    setNavBarItems: () => {},
-    setOptionsDropdownItems: () => {},
-    setCameraSettingsDropdownItems: () => {},
-    setUserCameraDropdownItems: () => {},
-  };
+  // When pluginName is not provided, we understand that the call is coming from the plugin's react
+  if (!pluginName) {
+    const pluginNameSet = window.bbb_plugins[uuid].pluginName;
+    if (pluginNameSet) {
+      window.bbb_plugins[uuid].useDataChannel = ((
+        channelName: string,
+      ) => useDataChannel(channelName, pluginNameSet, window.bbb_plugins[uuid])) as UseDataChannel;
+    }
+  } else {
+    window.bbb_plugins[uuid].pluginName = pluginName;
+  }
   return window.bbb_plugins[uuid];
 };
 

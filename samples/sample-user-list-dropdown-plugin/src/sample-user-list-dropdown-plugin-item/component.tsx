@@ -25,6 +25,21 @@ function SampleUserListDropdownPlugin({
 
   useEffect(() => {
     if (loadedUserList !== undefined && loadedUserList.length > 0) {
+      const listOfInformationToSend:
+      Array<BbbPluginSdk.UserListDropdownItem> = loadedUserList.map(
+        (user) => {
+          const buttonToUserListItem:
+            BbbPluginSdk.UserListDropdownItem = new BbbPluginSdk.UserListDropdownInformation({
+              label: '1 pending assignment',
+              iconRight: 'warning',
+              userId: user.userId,
+              textColor: 'red',
+              allowed: true,
+            });
+          return buttonToUserListItem as BbbPluginSdk.UserListDropdownItem;
+        },
+      );
+      
       const listOfOptionsToSend:
       Array<BbbPluginSdk.UserListDropdownItem> = loadedUserList.map(
         (user) => {
@@ -59,7 +74,7 @@ function SampleUserListDropdownPlugin({
           return dropdownToUserListItem as BbbPluginSdk.UserListDropdownItem;
         },
       );
-      pluginApi.setUserListDropdownItems([...listOfDropdownsToSend, ...listOfOptionsToSend]);
+      pluginApi.setUserListDropdownItems([...listOfInformationToSend, ...listOfDropdownsToSend, ...listOfOptionsToSend]);
     }
   }, [loadedUserList]);
 

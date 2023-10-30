@@ -9,12 +9,25 @@ enum BbbHooks {
   UseCustomSubscription = 'BbbHooks::Parameterized::UseCustomSubscription',
   UseLoadedUserList = 'BbbHooks::UseLoadedUserList',
   UseCurrentUser = 'BbbHooks::UseCurrentUser',
+  UseUsersOverview = 'BbbHooks::UseUsersOverview'
+}
+
+enum BbbDataChannel {
+  UseDataChannel = 'BbbDataChannel::UseDataChannel',
 }
 
 export const Internal = {
   BbbHookEvents,
   BbbHooks,
+  BbbDataChannel,
 };
+
+// Role
+export enum Role {
+  PRESENTER = 'PRESENTER',
+  MODERATOR = 'MODERATOR',
+  VIEWER = 'VIEWER',
+}
 
 // Presentation toolbar items types:
 export enum PresentationToolbarItemType {
@@ -27,6 +40,7 @@ export enum PresentationToolbarItemType {
 export enum UserListDropdownItemType {
   OPTION = 'USER_LIST_DROPDOWN_OPTION',
   SEPARATOR = 'USER_LIST_DROPDOWN_SEPARATOR',
+  INFORMATION = 'USER_LIST_DROPDOWN_INFORMATION',
 }
 
 // Action button dropdown items types:
@@ -76,7 +90,7 @@ export enum OptionsDropdownItemType {
   SEPARATOR = 'OPTIONS_DROPDOWN_SEPARATOR',
 }
 
-// Participant dropdown items types:
+// Camera settings dropdown items types:
 export enum CameraSettingsDropdownItemType {
   OPTION = 'CAMERA_SETTINGS_DROPDOWN_OPTION',
   SEPARATOR = 'CAMERA_SETTINGS_DROPDOWN_SEPARATOR',
@@ -86,4 +100,10 @@ export enum CameraSettingsDropdownItemType {
 export enum UserCameraDropdownItemType {
   OPTION = 'USER_CAMERA_DROPDOWN_OPTION',
   SEPARATOR = 'USER_CAMERA_DROPDOWN_SEPARATOR',
+}
+
+// User list icon items types:
+export enum UserListItemAdditionalInformationType {
+  ICON = 'USER_LIST_ITEM_ICON',
+  LABEL = 'USER_LIST_ITEM_LABEL',
 }

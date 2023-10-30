@@ -12,13 +12,17 @@ import {
   OptionsDropdownItemType,
   CameraSettingsDropdownItemType,
   UserCameraDropdownItemType,
+  UserListItemAdditionalInformationType,
+  UseDataChannel,
+  MapOfDispatchers,
 } from '../index';
 
 type PluginProvidedUiItemType = UserListDropdownItemType |
   PresentationToolbarItemType | ActionButtonDropdownItemType |
   ActionsBarItemType | AudioSettingsDropdownItemType |
   PresentationDropdownItemType | NavBarItemType | OptionsDropdownItemType |
-  CameraSettingsDropdownItemType | UserCameraDropdownItemType;
+  CameraSettingsDropdownItemType | UserCameraDropdownItemType |
+  UserListItemAdditionalInformationType;
 
 export interface PluginProvidedUiItemDescriptor {
   /** Defined by BigBlueButton Plugin Engine. */
@@ -34,6 +38,15 @@ export interface CustomEventHook<T> {
 
 export interface CustomEventHookWrapper<T> extends Event {
   detail: CustomEventHook<T>;
+}
+
+export interface DataChannelPluginHookEventDetailParameter {
+  channelName: string;
+  pluginName: string;
+}
+
+export interface DataChannelPluginHookEventDetail<T> extends CustomEventHook<T> {
+  parameters: DataChannelPluginHookEventDetailParameter;
 }
 
 export interface GraphqlVariables {
@@ -189,6 +202,50 @@ export class UserListDropdownSeparator implements UserListDropdownItem {
 
   setItemId: (id: string) => void = (id: string) => {
     this.id = `UserListDropdownSeparator_${id}`;
+  };
+}
+
+interface UserListDropdownInformationProps {
+  label: string;
+  icon?: string;
+  iconRight?: string;
+  allowed: boolean;
+  userId: string;
+  textColor: string;
+}
+
+export class UserListDropdownInformation implements UserListDropdownItem {
+  id: string = '';
+
+  userId: string;
+
+  type: UserListDropdownItemType;
+
+  label: string;
+
+  icon: string;
+
+  iconRight: string;
+
+  textColor: string;
+
+  allowed: boolean;
+
+  constructor({
+    label = '', icon = '', iconRight = '', allowed = true,
+    userId = '', textColor = '',
+  }: UserListDropdownInformationProps) {
+    this.userId = userId;
+    this.label = label;
+    this.icon = icon;
+    this.iconRight = iconRight;
+    this.textColor = textColor;
+    this.allowed = allowed;
+    this.type = UserListDropdownItemType.INFORMATION;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `UserListDropdownInformation_${id}`;
   };
 }
 
@@ -675,6 +732,69 @@ export class UserCameraDropdownSeparator implements UserCameraDropdownItem {
   };
 }
 
+// UserListItemAdditionalInformation Extensible Area
+
+export interface UserListItemAdditionalInformation extends PluginProvidedUiItemDescriptor {
+  userId: string;
+}
+interface UserListItemIconProps {
+  userId: string;
+  icon: string;
+}
+
+export class UserListItemIcon implements UserListItemAdditionalInformation {
+  id: string = '';
+
+  type: UserListItemAdditionalInformationType;
+
+  userId: string;
+
+  icon: string;
+
+  constructor({
+    icon = '', userId = '',
+  }: UserListItemIconProps) {
+    this.icon = icon;
+    this.userId = userId;
+    this.type = UserListItemAdditionalInformationType.ICON;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `UserListItemIcon_${id}`;
+  };
+}
+
+interface UserListItemLabelProps {
+  userId: string;
+  icon: string;
+  label: string;
+}
+
+export class UserListItemLabel implements UserListItemAdditionalInformation {
+  id: string = '';
+
+  type: UserListItemAdditionalInformationType;
+
+  userId: string;
+
+  icon: string;
+
+  label: string;
+
+  constructor({
+    icon = '', userId = '', label = '',
+  }: UserListItemLabelProps) {
+    this.icon = icon;
+    this.label = label;
+    this.userId = userId;
+    this.type = UserListItemAdditionalInformationType.LABEL;
+  }
+
+  setItemId: (id: string) => void = (id: string) => {
+    this.id = `UserListItemLabel_${id}`;
+  };
+}
+
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
   PresentationToolbarItem[]) => void;
@@ -715,6 +835,10 @@ export type SetUserCameraDropdownItems = (
   userCameraDropdownItem: UserCameraDropdownItem[]
 ) => void;
 
+export type SetUserListItemAdditionalInformation = (
+  userListItemAdditionalInformation: UserListItemAdditionalInformation[]
+) => void;
+
 export interface PluginApi {
   setPresentationToolbarItems: SetPresentationToolbarItems;
   setUserListDropdownItems: SetUserListDropdownItems;
@@ -726,6 +850,10 @@ export interface PluginApi {
   setOptionsDropdownItems: SetOptionsDropdownItems;
   setCameraSettingsDropdownItems: SetCameraSettingsDropdownItems;
   setUserCameraDropdownItems: SetUserCameraDropdownItems;
+  setUserListItemAdditionalInformation: SetUserListItemAdditionalInformation;
+  useDataChannel?: UseDataChannel;
+  mapOfDispatchers: MapOfDispatchers;
+  pluginName?: string;
 }
 
 export interface PluginBrowserWindow extends Window {
