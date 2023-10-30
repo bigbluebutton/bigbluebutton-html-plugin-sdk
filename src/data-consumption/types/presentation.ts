@@ -1,5 +1,5 @@
 export interface CurrentPresentationPageUrls {
-    thumbnail: string
+    thumb: string
     png: string
     svg: string
     text: string

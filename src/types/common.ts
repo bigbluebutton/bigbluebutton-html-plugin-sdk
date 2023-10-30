@@ -27,6 +27,15 @@ export interface PluginProvidedUiItemDescriptor {
   setItemId: (id: string) => void;
 }
 
+export interface CustomEventHook<T> {
+  data: T;
+  hook: string;
+}
+
+export interface CustomEventHookWrapper<T> extends Event {
+  detail: CustomEventHook<T>;
+}
+
 export interface GraphqlVariables {
   [key: string]: any;
 }
@@ -36,19 +45,12 @@ export interface CustomEventParameter {
   variables?: GraphqlVariables;
 }
 
-export interface CustomEventHook<T> {
-  data: T;
-  hook: string;
-
+export interface CustomEventHookWithParameters<T> extends CustomEventHook<T> {
   /**
    * This essentially is the query to activate parameterized hooks
    * it is not mandatory for all hooks.
    */
-  parameter?: CustomEventParameter;
-}
-
-export interface CustomEventHookWrapper<T> extends Event {
-  detail: CustomEventHook<T>;
+  parameter: CustomEventParameter;
 }
 
 // Extensible Areas

@@ -5,10 +5,10 @@ export interface Presentation {
 
 export interface Page {
   num: number;
-  urls: string;
+  urlsJson: UrlsJson;
 }
 
-export interface ParsedUrls {
+export interface UrlsJson {
   thumb: string;
   text: string;
   svg: string;

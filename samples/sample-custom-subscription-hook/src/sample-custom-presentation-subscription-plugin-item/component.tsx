@@ -5,13 +5,13 @@ import './style.css';
 
 import * as BbbPluginSdk from 'bigbluebutton-html-plugin-sdk';
 import { SampleCustomSubscriptionPluginProps } from '../types';
-import { ParsedUrls, Presentation } from './types';
+import { UrlsJson, Presentation } from './types';
 
 function SampleCustomPresentationSubscriptionPlugin({ pluginUuid: uuid }: SampleCustomSubscriptionPluginProps):
  React.ReactElement{
   const pluginApi: BbbPluginSdk.PluginApi = BbbPluginSdk.getPluginApi(uuid);
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [nextSlideUrls, setNextSlideUrls] = useState<ParsedUrls>()
+  const [nextSlideUrls, setNextSlideUrls] = useState<UrlsJson>()
 
   const currentPresentation = BbbPluginSdk.useCurrentPresentation();
   const nextSlidePage = currentPresentation?.currentPage?.num + 1 || 1;
@@ -22,7 +22,7 @@ function SampleCustomPresentationSubscriptionPlugin({ pluginUuid: uuid }: Sample
         presentationId
         pages (where: {num: {_eq: $nextSlidePage}}) {
           num
-          urls
+          urlsJson
         }
       }
     }
@@ -35,7 +35,7 @@ function SampleCustomPresentationSubscriptionPlugin({ pluginUuid: uuid }: Sample
   const presentationNextPage: Presentation[] | undefined = dataResult?.pres_presentation;
 
   const handleFetchPresentationData = (presentationNextPage: Presentation[]) => {
-    const nextSlideUrlsObject: ParsedUrls = JSON.parse(presentationNextPage[0].pages[0].urls);
+    const nextSlideUrlsObject: UrlsJson = presentationNextPage[0].pages[0].urlsJson;
     setNextSlideUrls(nextSlideUrlsObject);
     setShowModal(true);
   };
