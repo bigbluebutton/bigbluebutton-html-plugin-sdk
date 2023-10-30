@@ -12,6 +12,8 @@ import {
   CameraSettingsDropdownItemType,
   UserCameraDropdownItemType,
   UserListItemAdditionalInformationType,
+  UseDataChannel,
+  MapOfDispatchers,
 } from '../index';
 
 type PluginProvidedUiItemType = UserListDropdownItemType |
@@ -35,6 +37,15 @@ export interface CustomEventHook<T> {
 
 export interface CustomEventHookWrapper<T> extends Event {
   detail: CustomEventHook<T>;
+}
+
+export interface DataChannelPluginHookEventDetailParameter {
+  channelName: string;
+  pluginName: string;
+}
+
+export interface DataChannelPluginHookEventDetail<T> extends CustomEventHook<T> {
+  parameters: DataChannelPluginHookEventDetailParameter;
 }
 
 // Extensible Areas
@@ -822,6 +833,9 @@ export interface PluginApi {
   setCameraSettingsDropdownItems: SetCameraSettingsDropdownItems;
   setUserCameraDropdownItems: SetUserCameraDropdownItems;
   setUserListItemAdditionalInformation: SetUserListItemAdditionalInformation;
+  useDataChannel?: UseDataChannel;
+  mapOfDispatchers: MapOfDispatchers;
+  pluginName?: string;
 }
 
 export interface PluginBrowserWindow extends Window {

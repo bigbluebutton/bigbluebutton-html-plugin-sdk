@@ -7,12 +7,18 @@ enum BbbHookEvents {
 enum BbbHooks {
   UseCurrentPresentation = 'BbbHooks::UseCurrentPresentation',
   UseLoadedUserList = 'BbbHooks::UseLoadedUserList',
-  UseCurrentUser = 'BbbHooks::UseCurrentUser'
+  UseCurrentUser = 'BbbHooks::UseCurrentUser',
+  UseUsersOverview = 'BbbHooks::UseUsersOverview'
+}
+
+enum BbbDataChannel {
+  UseDataChannel = 'BbbDataChannel::UseDataChannel',
 }
 
 export const Internal = {
   BbbHookEvents,
   BbbHooks,
+  BbbDataChannel,
 };
 
 export enum BbbUiEvents {
@@ -21,6 +27,13 @@ export enum BbbUiEvents {
   ChatInputChanged = 'CHAT_INPUT_CHANGED',
   ChatInputFocused = 'CHAT_INPUT_FOCUSED',
   ChatInputUnfocused = 'CHAT_INPUT_UNFOCUSED',
+}
+
+// Role
+export enum Role {
+  PRESENTER = 'PRESENTER',
+  MODERATOR = 'MODERATOR',
+  VIEWER = 'VIEWER',
 }
 
 // Presentation toolbar items types:
