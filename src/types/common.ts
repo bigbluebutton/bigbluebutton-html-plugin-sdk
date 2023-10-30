@@ -12,6 +12,8 @@ import {
   CameraSettingsDropdownItemType,
   UserCameraDropdownItemType,
   UserListItemAdditionalInformationType,
+  UseDataChannel,
+  MapOfDispatchers,
   FloatingWindowItemType,
 } from '../index';
 
@@ -36,6 +38,15 @@ export interface CustomEventHook<T> {
 
 export interface CustomEventHookWrapper<T> extends Event {
   detail: CustomEventHook<T>;
+}
+
+export interface DataChannelPluginHookEventDetailParameter {
+  channelName: string;
+  pluginName: string;
+}
+
+export interface DataChannelPluginHookEventDetail<T> extends CustomEventHook<T> {
+  parameters: DataChannelPluginHookEventDetailParameter;
 }
 
 // Extensible Areas
@@ -881,6 +892,9 @@ export interface PluginApi {
   setUserCameraDropdownItems: SetUserCameraDropdownItems;
   setUserListItemAdditionalInformation: SetUserListItemAdditionalInformation;
   setFloatingWindowItems: SetFloatingWindowItems;
+  useDataChannel?: UseDataChannel;
+  mapOfDispatchers: MapOfDispatchers;
+  pluginName?: string;
 }
 
 export interface PluginBrowserWindow extends Window {
