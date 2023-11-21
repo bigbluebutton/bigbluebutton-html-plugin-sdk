@@ -1,5 +1,5 @@
 {
-  "name": "sample-user-list-icon-plugin",
+  "name": "sample-user-list-item-additional-information-plugin",
   "version": "0.1.0",
   "private": true,
   "main": "./src/index.tsx",

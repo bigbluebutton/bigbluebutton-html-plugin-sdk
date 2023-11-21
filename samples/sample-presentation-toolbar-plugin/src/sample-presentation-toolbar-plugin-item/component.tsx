@@ -3,16 +3,20 @@ import { useState, useEffect } from 'react';
 import * as ReactModal from 'react-modal';
 import './style.css';
 
-import * as BbbPluginSdk from 'bigbluebutton-html-plugin-sdk';
+import { BbbPluginSdk, CurrentPresentation, PluginApi,
+  PresentationToolbarButton, PresentationToolbarItem,
+  PresentationToolbarSpinner,
+} from 'bigbluebutton-html-plugin-sdk/';
 import { SamplePresentationToolbarPluginProps } from './types';
 
 function SamplePresentationToolbarPlugin({ pluginUuid: uuid }: SamplePresentationToolbarPluginProps) {
+  BbbPluginSdk.initialize(uuid);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [isIdle, setIsIdle] = useState<boolean>(false);
-  const pluginApi: BbbPluginSdk.PluginApi = BbbPluginSdk.getPluginApi(uuid);
+  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
   const [currentSlideText, setCurrentSlideText] = useState<string>('');
 
-  const currentPresentation = BbbPluginSdk.useCurrentPresentation();
+  const { data: currentPresentation } = pluginApi.useCurrentPresentation();
 
   const setPresentationItemSpinner = () => {
     setIsIdle(true);
@@ -25,8 +29,8 @@ function SamplePresentationToolbarPlugin({ pluginUuid: uuid }: SamplePresentatio
   const requestLastPages = (currentTxtUri: string) => fetch(currentTxtUri)
     .then((response) => response.text());
 
-  const handleFetchPresentationData = (currentPres: BbbPluginSdk.CurrentPresentation) => {
-    const currentTxtUri = currentPres.currentPage.urls.text;
+  const handleFetchPresentationData = (currentPres: CurrentPresentation) => {
+    const currentTxtUri = currentPres.currentPage.urlsJson.text;
     requestLastPages(currentTxtUri).then((currentPageContent) => {
       setCurrentSlideText(currentPageContent);
       setShowModal(true);
@@ -45,9 +49,9 @@ function SamplePresentationToolbarPlugin({ pluginUuid: uuid }: SamplePresentatio
   };
 
   useEffect(() => {
-    let currentObjectToSendToClient: BbbPluginSdk.PresentationToolbarItem;
+    let currentObjectToSendToClient: PresentationToolbarItem;
     if (!isIdle) {
-      currentObjectToSendToClient = new BbbPluginSdk.PresentationToolbarButton({
+      currentObjectToSendToClient = new PresentationToolbarButton({
         label: '10 seconds',
         tooltip: 'this is a button injected by plugin',
         onClick: () => {
@@ -56,7 +60,7 @@ function SamplePresentationToolbarPlugin({ pluginUuid: uuid }: SamplePresentatio
         },
       });
     } else {
-      currentObjectToSendToClient = new BbbPluginSdk.PresentationToolbarSpinner();
+      currentObjectToSendToClient = new PresentationToolbarSpinner();
     }
     pluginApi.setPresentationToolbarItems([currentObjectToSendToClient]);
   }, [isIdle, currentPresentation]);

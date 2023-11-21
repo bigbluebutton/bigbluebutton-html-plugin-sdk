@@ -6,21 +6,34 @@ SDK for developing BigBlueButton plugins, examples of implementations can be fou
 
 ## API
 ### Extensible UI areas
-- Presentation toolbar items (button, separator, spinner)
-
-- User list dropdown items (option, separator)
-
 - Action bar items (button, separator)
 
 - Action Button Dropdown Items (option, separator)
 
 - Audio settings dropdown items (option, separator)
 
+- Camera settings dropdown items (option, separator)
+
+- Nav bar items (button, info)
+
 - Presentation dropdown items (option, separator) 
 
-- Nav bar (button, info) 
+- Presentation toolbar items (button, separator, spinner)
+
+- User camera settings dropdown items (option, separator)
+
+- User list dropdown items (option, separator)
+
+- User list item additional information (item, label)
 
 ### Realtime data consumption
-- `useCurrentPresentation` hook: provides information regarding the current presentation.
+- `useCurrentPresentation` hook: provides information regarding the current presentation;
 
-- `useLoadedUserList` hook: provides information regarding the loaded user list (displayed in the screen)
+- `useLoadedUserList` hook: provides information regarding the loaded user list (displayed in the screen);
+
+- `useCurrentUser` hook: provides information regarding the current user;
+
+- `useUsersBasicInfo` hook: provides information regarding all users (only crucial information: userId, name and role);
+
+### Real time data exchange
+- `useDataChannel` hook: this will allow you to exchange information (Send and receive) amongst different users through the same plugin;

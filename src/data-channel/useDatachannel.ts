@@ -1,10 +1,16 @@
 import { useState, useEffect } from 'react';
 import {
-  CustomEventHookWrapper, Internal,
   DispatcherFunction,
   UseDataChannelAuxiliary,
   PluginApi,
+  HookEventWrapper,
+  UpdatedEventDetails,
+  SubscribedEventDetails,
+  UnsubscribedEventDetails,
 } from '../index';
+import {
+  HookEvents, Hooks,
+} from '../core/enum';
 
 const createChannelIdentifier = (channelName: string, pluginName: string) => `${channelName}::${pluginName}`;
 
@@ -16,8 +22,9 @@ const useDataChannel = (<T>(channelName: string,
 
   const channelIdentifier = createChannelIdentifier(channelName, pluginName);
 
-  const handleDataChange: EventListener = ((customEvent: CustomEventHookWrapper<T>) => {
-    setData(customEvent.detail.data);
+  const handleDataChange: EventListener = ((customEvent: HookEventWrapper<T>) => {
+    const eventDetail = customEvent.detail as UpdatedEventDetails<T>;
+    setData(eventDetail.data);
   }) as EventListener;
 
   const handleListenToChangeDisPatcherFunction: EventListener = (
@@ -35,17 +42,17 @@ const useDataChannel = (<T>(channelName: string,
       handleListenToChangeDisPatcherFunction,
     );
 
-    window.dispatchEvent(new CustomEvent(Internal.BbbHookEvents.Subscribe, {
+    window.dispatchEvent(new CustomEvent<SubscribedEventDetails>(HookEvents.SUBSCRIBED, {
       detail: {
-        hook: Internal.BbbDataChannel.UseDataChannel,
-        parameters: { channelName, pluginName },
+        hook: Hooks.DATA_CHANNEL,
+        hookArguments: { channelName, pluginName },
       },
     }));
     return () => {
-      window.dispatchEvent(new CustomEvent(Internal.BbbHookEvents.Unsubscribe, {
+      window.dispatchEvent(new CustomEvent<UnsubscribedEventDetails>(HookEvents.UNSUBSCRIBED, {
         detail: {
-          hook: Internal.BbbDataChannel.UseDataChannel,
-          parameters: { channelName, pluginName },
+          hook: Hooks.DATA_CHANNEL,
+          hookArguments: { channelName, pluginName },
         },
       }));
       window.removeEventListener(channelIdentifier, handleDataChange);

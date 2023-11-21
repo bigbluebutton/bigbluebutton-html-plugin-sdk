@@ -1,4 +1,10 @@
-import { PluginApi, Role } from '..';
+import { PluginApi } from '..';
+import { Role } from './enums';
+
+export interface DataChannelArguments {
+  pluginName: string;
+  channelName: string;
+}
 
 export interface ToUserId {
   userId: string;

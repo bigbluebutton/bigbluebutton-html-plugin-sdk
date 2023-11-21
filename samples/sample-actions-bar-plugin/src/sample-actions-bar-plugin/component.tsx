@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 
-import * as BbbPluginSdk from 'bigbluebutton-html-plugin-sdk';
+import { ActionsBarButton, ActionsBarItem, ActionsBarPosition, ActionsBarSeparator, BbbPluginSdk, GraphqlResponseWrapper, PluginApi, UsersBasicInfoResponseFromGraphqlWrapper, useUsersBasicInfo } from 'bigbluebutton-html-plugin-sdk';
 import { SampleActionsBarPluginProps } from './types';
 
 function SampleActionsBarPlugin({
   pluginUuid: uuid,
 }: SampleActionsBarPluginProps): React.ReactNode {
-  const pluginApi: BbbPluginSdk.PluginApi = BbbPluginSdk.getPluginApi(uuid);
+  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
 
   useEffect(() => {
     const buttonToUserListItem:
-          BbbPluginSdk.ActionsBarItem = new BbbPluginSdk.ActionsBarButton({
+          ActionsBarItem = new ActionsBarButton({
             icon: 'user',
             tooltip: 'This will make an alert dialog',
             allowed: true,
@@ -20,17 +20,17 @@ function SampleActionsBarPlugin({
             },
             hasDropdownButton: false,
             listOfDropdownItems: [],
-            position: BbbPluginSdk.ActionsBarPosition.RIGHT,
+            position: ActionsBarPosition.RIGHT,
           });
     const dropdownToUserListItem:
-      BbbPluginSdk.ActionsBarItem = new BbbPluginSdk.ActionsBarSeparator({
-          position: BbbPluginSdk.ActionsBarPosition.RIGHT,
+      ActionsBarItem = new ActionsBarSeparator({
+          position: ActionsBarPosition.RIGHT,
         });
     
     pluginApi.setActionsBarItems([dropdownToUserListItem, buttonToUserListItem]);
   }, []);
 
-  const users: BbbPluginSdk.UserOverview[] = BbbPluginSdk.useUsersOverview();
+  const users: GraphqlResponseWrapper<UsersBasicInfoResponseFromGraphqlWrapper> = useUsersBasicInfo();
 
   useEffect(() => {
     console.log("Users Overview: ", users);

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import * as ReactModal from 'react-modal';
 import './style.css';
 
-import * as BbbPluginSdk from 'bigbluebutton-html-plugin-sdk';
+import { BbbPluginSdk, PluginApi, UserListDropdownInformation, UserListDropdownItem, UserListDropdownOption, UserListDropdownSeparator } from 'bigbluebutton-html-plugin-sdk';
 import { SampleUserListDropdownPluginProps } from './types';
 
 import { ModeratorTag } from '../moderator-tag/component';
@@ -11,40 +11,39 @@ import { ModeratorTag } from '../moderator-tag/component';
 interface ModalInfo {
   userId: string
   userName: string
-  talking: boolean
-  isModerator: boolean
+  role: string
 }
 
 function SampleUserListDropdownPlugin({
   pluginUuid: uuid,
 }: SampleUserListDropdownPluginProps) {
+  BbbPluginSdk.initialize(uuid);
   const [showModal, setShowModal] = useState(false);
   const [modalInfo, setModalInfo] = useState<ModalInfo>({} as ModalInfo);
-  const pluginApi: BbbPluginSdk.PluginApi = BbbPluginSdk.getPluginApi(uuid);
-  const loadedUserList = BbbPluginSdk.useLoadedUserList();
-
+  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
+  const { data: loadedUserList } = pluginApi.useLoadedUserList();
   useEffect(() => {
     if (loadedUserList !== undefined && loadedUserList.length > 0) {
       const listOfInformationToSend:
-      Array<BbbPluginSdk.UserListDropdownItem> = loadedUserList.map(
+      Array<UserListDropdownItem> = loadedUserList.map(
         (user) => {
           const buttonToUserListItem:
-            BbbPluginSdk.UserListDropdownItem = new BbbPluginSdk.UserListDropdownInformation({
+            UserListDropdownItem = new UserListDropdownInformation({
               label: '1 pending assignment',
               iconRight: 'warning',
               userId: user.userId,
               textColor: 'red',
               allowed: true,
             });
-          return buttonToUserListItem as BbbPluginSdk.UserListDropdownItem;
+          return buttonToUserListItem as UserListDropdownItem;
         },
       );
       
       const listOfOptionsToSend:
-      Array<BbbPluginSdk.UserListDropdownItem> = loadedUserList.map(
+      Array<UserListDropdownItem> = loadedUserList.map(
         (user) => {
           const buttonToUserListItem:
-            BbbPluginSdk.UserListDropdownItem = new BbbPluginSdk.UserListDropdownOption({
+            UserListDropdownItem = new UserListDropdownOption({
               label: 'Click to see participant information',
               icon: 'user',
               userId: user.userId,
@@ -54,24 +53,23 @@ function SampleUserListDropdownPlugin({
                 setModalInfo({
                   userId: user.userId,
                   userName: user.name,
-                  talking: user?.voice?.talking,
-                  isModerator: user.isModerator,
+                  role: user.role,
                 } as ModalInfo);
                 setShowModal(true);
               },
             });
-          return buttonToUserListItem as BbbPluginSdk.UserListDropdownItem;
+          return buttonToUserListItem as UserListDropdownItem;
         },
       );
       
       const listOfDropdownsToSend:
-      Array<BbbPluginSdk.UserListDropdownItem> = loadedUserList.map(
+      Array<UserListDropdownItem> = loadedUserList.map(
         (user) => {
           const dropdownToUserListItem:
-            BbbPluginSdk.UserListDropdownItem = new BbbPluginSdk.UserListDropdownSeparator({
+            UserListDropdownItem = new UserListDropdownSeparator({
               userId: user.userId,
             });
-          return dropdownToUserListItem as BbbPluginSdk.UserListDropdownItem;
+          return dropdownToUserListItem as UserListDropdownItem;
         },
       );
       pluginApi.setUserListDropdownItems([...listOfInformationToSend, ...listOfDropdownsToSend, ...listOfOptionsToSend]);
@@ -113,7 +111,7 @@ function SampleUserListDropdownPlugin({
             <td className="table-right">Role: </td>
             <td className="table-left">
               <ModeratorTag
-                isModerator={modalInfo.isModerator}
+                isModerator={modalInfo.role === 'moderator'}
               />
             </td>
           </tr>
