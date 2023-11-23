@@ -1,6 +1,6 @@
 import {
   Hooks,
-} from '../../../../core';
+} from '../../../../core/enum';
 import {
   CurrentPresentation,
 } from './types';

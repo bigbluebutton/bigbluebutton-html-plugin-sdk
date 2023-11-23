@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import * as ReactModal from 'react-modal';
 import './style.css';
 
-import { BbbPluginSdk, PluginApi, PresentationToolbarButton, PresentationToolbarItem, VariablesObjectWrapper } from 'bigbluebutton-html-plugin-sdk';
+import { BbbPluginSdk, PluginApi, PresentationToolbarButton, PresentationToolbarItem, CustomSubscriptionHookOptions } from 'bigbluebutton-html-plugin-sdk';
 import { SampleCustomSubscriptionPluginProps } from '../types';
 import { UrlsJson, Presentation, PresentationFromGraphqlWrapper } from './types';
 
@@ -31,7 +31,7 @@ function SampleCustomPresentationSubscriptionPlugin({ pluginUuid: uuid }: Sample
     variables: {
       nextSlidePage
     }
-  } as VariablesObjectWrapper);
+  } as CustomSubscriptionHookOptions);
 
   const presentationNextPage: Presentation[] | undefined = dataResult ? dataResult.pres_presentation : undefined ;
 

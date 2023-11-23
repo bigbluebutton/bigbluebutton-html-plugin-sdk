@@ -4,6 +4,9 @@ export enum NavBarItemType {
   INFO = 'NAV_BAR_INFO',
 }
 
+/**
+ * Enum with the position to insert the navigation bar item (Information or Button)
+ */
 export enum NavBarItemPosition {
   LEFT = 'left',
   CENTER = 'center',

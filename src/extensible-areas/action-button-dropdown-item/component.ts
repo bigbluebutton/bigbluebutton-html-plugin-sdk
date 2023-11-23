@@ -20,6 +20,17 @@ export class ActionButtonDropdownOption implements ActionButtonDropdownItem {
 
   onClick: () => void;
 
+  /**
+   * Returns the option for the action button dropdown
+   *
+   * @param label - label to be displayed on the option
+   * @param icon - icon to be displayed on the option
+   * @param tooltip - tooltip to be displayed when hovering over option
+   * @param allowed - boolean indicating whether the option should be displayed
+   * @param onClick - function to be called when clicking
+   *
+   * @returns the option to be displayed in the action button dropdown
+   */
   constructor({
     label = '', icon = '', tooltip = '', allowed = true, onClick = () => {},
   }: ActionButtonDropdownOptionProps) {

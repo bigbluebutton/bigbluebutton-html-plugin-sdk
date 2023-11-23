@@ -1,11 +1,11 @@
 import { createDataConsumptionHook } from '../../../factory/hookCreator';
 import { Hooks } from '../../../../core/enum';
-import { CustomSubscriptionArguments, VariablesObjectWrapper } from './types';
+import { CustomSubscriptionArguments, CustomSubscriptionHookOptions, UseCustomSubscriptionFunction } from './types';
 
-export const useCustomSubscription = <T>(
+export const useCustomSubscription: UseCustomSubscriptionFunction = <T>(
   query: string,
-  variablesObjectWrapper?: VariablesObjectWrapper,
+  options?: CustomSubscriptionHookOptions,
 ) => createDataConsumptionHook<T>(Hooks.CUSTOM_SUBSCRIPTION, {
   query,
-  variables: variablesObjectWrapper?.variables,
+  variables: options?.variables,
 } as CustomSubscriptionArguments);

@@ -1,3 +1,8 @@
-export * from './component';
-export * from './types';
-export * from './enums';
+export {
+  PresentationToolbarButton,
+  PresentationToolbarSpinner,
+  PresentationToolbarSeparator,
+} from './component';
+export {
+  PresentationToolbarItem,
+} from './types';

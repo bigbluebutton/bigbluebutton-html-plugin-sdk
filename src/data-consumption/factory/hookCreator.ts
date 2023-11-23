@@ -15,6 +15,42 @@ import {
   makeCustomHookIdentifierFromArgs,
 } from '../utils';
 
+const updateCustomHookSubscription = (
+  hookName: Hooks,
+  handleCustomSubscriptionUpdateEvent: EventListener,
+  previousQuery?: string,
+  previousVariables?: object,
+  currentQuery?: string,
+  currentVariables?: object,
+) => {
+  window.dispatchEvent(
+    new CustomEvent<UnsubscribedEventDetails>(HookEvents.UNSUBSCRIBED, {
+      detail: {
+        hook: hookName,
+        hookArguments: {
+          query: previousQuery,
+          variables: previousVariables,
+        },
+      },
+    }),
+  );
+  window.dispatchEvent(
+    new CustomEvent<SubscribedEventDetails>(HookEvents.SUBSCRIBED, {
+      detail: {
+        hook: hookName,
+        hookArguments: {
+          query: currentQuery,
+          variables: currentVariables,
+        },
+      },
+    }),
+  );
+  window.addEventListener(
+    HookEvents.UPDATED,
+    handleCustomSubscriptionUpdateEvent,
+  );
+};
+
 export const createDataConsumptionHook = <T>(
   hookName: Hooks,
   hookArguments?: CustomSubscriptionArguments,
@@ -82,39 +118,16 @@ export const createDataConsumptionHook = <T>(
   }, []);
 
   useEffect(() => {
-    if (hookName === Hooks.CUSTOM_SUBSCRIPTION) {
-      if (prevQueryRef?.current !== queryState || prevVariablesRef.current !== variablesState) {
-        window.dispatchEvent(
-          new CustomEvent<UnsubscribedEventDetails>(HookEvents.UNSUBSCRIBED, {
-            detail: {
-              hook: hookName,
-              hookArguments: {
-                query: prevQueryRef.current,
-                variables: prevVariablesRef.current,
-              },
-            },
-          }),
-        );
-        window.dispatchEvent(
-          new CustomEvent<SubscribedEventDetails>(HookEvents.SUBSCRIBED, {
-            detail: {
-              hook: hookName,
-              hookArguments: {
-                query: queryState,
-                variables: variablesState,
-              },
-            },
-          }),
-        );
-        window.removeEventListener(
-          HookEvents.UPDATED,
-          handleCustomSubscriptionUpdateEvent,
-        );
-        window.addEventListener(
-          HookEvents.UPDATED,
-          handleCustomSubscriptionUpdateEvent,
-        );
-      }
+    if (hookName === Hooks.CUSTOM_SUBSCRIPTION
+      && (prevQueryRef?.current !== queryState || prevVariablesRef.current !== variablesState)) {
+      updateCustomHookSubscription(
+        hookName,
+        handleCustomSubscriptionUpdateEvent,
+        prevQueryRef.current,
+        prevVariablesRef.current,
+        queryState,
+        variablesState,
+      );
     }
   }, [queryState, variablesState]);
   return hookData;

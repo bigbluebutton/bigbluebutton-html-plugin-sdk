@@ -1,3 +1,10 @@
-export * from './component';
-export * from './types';
-export * from './enums';
+export {
+  NavBarButton,
+  NavBarInfo,
+} from './component';
+export {
+  NavBarItem,
+} from './types';
+export {
+  NavBarItemPosition,
+} from './enums';

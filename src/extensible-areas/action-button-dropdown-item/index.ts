@@ -1,3 +1,7 @@
-export * from './component';
-export * from './types';
-export * from './enums';
+export {
+  ActionButtonDropdownOption,
+  ActionButtonDropdownSeparator,
+} from './component';
+export {
+  ActionButtonDropdownItem,
+} from './types';

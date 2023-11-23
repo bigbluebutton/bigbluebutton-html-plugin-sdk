@@ -1,5 +1,13 @@
 import { PluginProvidedUiItemDescriptor } from '../base';
 
+/**
+ * User List Item Additional Information - The general user list item additional information item
+ *
+ * @remarks
+ * This area is essentially below the user name of an item of the user list, it is possible
+ * to add icons, and labels, for now.
+ * Mandatory to have the `userId`
+ */
 export interface UserListItemAdditionalInformation extends PluginProvidedUiItemDescriptor {
   userId: string;
 }

@@ -1,7 +1,6 @@
 import { ActionsBarPosition, ActionsBarItemType } from './enums';
 import {
-  ActionsBarItem, ActionsBarButtonProps,
-  ActionsBarButtonDropdownItem, ActionsBarSeparatorProps,
+  ActionsBarItem, ActionsBarButtonProps, ActionsBarSeparatorProps,
 } from './types';
 
 // ActionsBarItem Extensible Area
@@ -15,26 +14,27 @@ export class ActionsBarButton implements ActionsBarItem {
 
   tooltip: string;
 
-  allowed: boolean;
-
-  hasDropdownButton: boolean;
-
-  listOfDropdownItems: ActionsBarButtonDropdownItem[];
-
   position: ActionsBarPosition;
 
   onClick: () => void;
 
+  /**
+   * Returns object to be used in the setter for action bar. In this case,
+   * a button.
+   *
+   * @param icon - icon to be used in the button for the action bar
+   * @param tooltip - tooltip to be displayed when hovering the button
+   * @param onClick - function to be called when clicking the button
+   * @param position - position that this button will be displayed, see {@link ActionsBarPosition}
+   *
+   * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5)
+   */
   constructor({
-    icon = '', tooltip = '', allowed = true, onClick = () => {},
-    hasDropdownButton = false, listOfDropdownItems = [], position = ActionsBarPosition.RIGHT,
+    icon = '', tooltip = '', onClick = () => {}, position = ActionsBarPosition.RIGHT,
   }: ActionsBarButtonProps) {
     this.icon = icon;
     this.tooltip = tooltip;
-    this.allowed = allowed;
     this.onClick = onClick;
-    this.hasDropdownButton = hasDropdownButton;
-    this.listOfDropdownItems = listOfDropdownItems;
     this.position = position;
     this.type = ActionsBarItemType.BUTTON;
   }
@@ -51,6 +51,14 @@ export class ActionsBarSeparator implements ActionsBarItem {
 
   type: ActionsBarItemType;
 
+  /**
+   * Returns object to be used in the setter for action bar. In this case,
+   * a separator.
+   *
+   * @param position - position that this button will be displayed, see {@link ActionsBarPosition}
+   *
+   * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5)
+   */
   constructor({
     position = ActionsBarPosition.RIGHT,
   }: ActionsBarSeparatorProps) {

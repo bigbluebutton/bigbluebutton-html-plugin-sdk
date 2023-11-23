@@ -1,7 +1,6 @@
 import { PresentationToolbarItemType } from './enums';
 import {
   PresentationToolbarItem, PresentationToolbarButtonProps,
-  PresentationToolbarSeparatorProps,
 } from './types';
 
 // PresentationToolbarItem Extensible Area
@@ -17,6 +16,16 @@ export class PresentationToolbarButton implements PresentationToolbarItem {
 
   onClick: () => void;
 
+  /**
+   * Returns object to be used in the setter for presentation toolbar. In this case
+   * a button.
+   *
+   * @param label - label to be displayed in the button
+   * @param tooltip - tooltip to be displayed when hovering the button
+   * @param onClick - function to be called when clicking the button
+   *
+   * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5)
+   */
   constructor({ label = '', tooltip = '', onClick = () => {} }: PresentationToolbarButtonProps) {
     this.label = label;
     this.tooltip = tooltip;
@@ -34,6 +43,12 @@ export class PresentationToolbarSpinner implements PresentationToolbarItem {
 
   type: PresentationToolbarItemType;
 
+  /**
+   * Returns object to be used in the setter for presentation toolbar. In this case
+   * a spinner (ring that will be rotating).
+   *
+   * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5)
+   */
   constructor() {
     this.type = PresentationToolbarItemType.SPINNER;
   }
@@ -48,10 +63,13 @@ export class PresentationToolbarSeparator implements PresentationToolbarItem {
 
   type: PresentationToolbarItemType;
 
-  width: number;
-
-  constructor({ width } : PresentationToolbarSeparatorProps) {
-    this.width = width;
+  /**
+   * Returns object to be used in the setter for presentation toolbar. In this case
+   * a separator.
+   *
+   * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5)
+   */
+  constructor() {
     this.type = PresentationToolbarItemType.SEPARATOR;
   }
 

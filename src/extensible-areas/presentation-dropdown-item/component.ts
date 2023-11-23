@@ -16,6 +16,17 @@ export class PresentationDropdownOption implements PresentationDropdownItem {
 
   onClick: () => void;
 
+  /**
+   * Returns object to be used in the setter for the Presentation Dropdown. In this case,
+   * an option (clickable).
+   *
+   * @param label - label to be displayed in the presentation dropdown option.
+   * @param icon - icon to be displayed in the presentation dropdown.
+   * It goes in the left side of it.
+   * @param onClick - function to be called when clicking the option.
+   *
+   * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5).
+   */
   constructor({
     label = '', icon = '', onClick = () => {},
   }: PresentationDropdownOptionProps) {
@@ -35,6 +46,12 @@ export class PresentationDropdownSeparator implements PresentationDropdownItem {
 
   type: PresentationDropdownItemType;
 
+  /**
+   * Returns object to be used in the setter for the Presentation Dropdown. In this case,
+   * a separator (horizontal thin black line).
+
+   * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5).
+   */
   constructor() {
     this.type = PresentationDropdownItemType.SEPARATOR;
   }

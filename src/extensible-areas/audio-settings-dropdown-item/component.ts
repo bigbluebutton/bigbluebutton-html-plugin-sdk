@@ -16,6 +16,16 @@ export class AudioSettingsDropdownOption implements AudioSettingsDropdownItem {
 
   onClick: () => void;
 
+  /**
+   * Returns object to be used in the setter for the audio settings dropdown. In this case,
+   * an option.
+   *
+   * @param label - label to be displayed in audio settings dropdown option
+   * @param icon - icon to be used in the option for the dropdown. It goes in the left side of it
+   * @param onClick - function to be called when clicking the button
+   *
+   * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5)
+   */
   constructor({
     label = '', icon = '', onClick = () => {},
   }: AudioSettingsDropdownOptionProps) {
@@ -35,6 +45,15 @@ export class AudioSettingsDropdownSeparator implements AudioSettingsDropdownItem
 
   type: AudioSettingsDropdownItemType;
 
+  /**
+   * Returns object to be used in the setter for the audio settings dropdown. In this case,
+   * a separator.
+   *
+   * @remarks
+   * It will display a horizontal thin black line inside the dropdown.
+   *
+   * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5)
+   */
   constructor() {
     this.type = AudioSettingsDropdownItemType.SEPARATOR;
   }

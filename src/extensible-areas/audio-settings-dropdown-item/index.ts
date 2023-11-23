@@ -1,3 +1,7 @@
-export * from './component';
-export * from './types';
-export * from './enums';
+export {
+  AudioSettingsDropdownOption,
+  AudioSettingsDropdownSeparator,
+} from './component';
+export {
+  AudioSettingsDropdownItem,
+} from './types';

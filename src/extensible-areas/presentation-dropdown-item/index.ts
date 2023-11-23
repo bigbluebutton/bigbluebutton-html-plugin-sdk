@@ -1,3 +1,7 @@
-export * from './component';
-export * from './types';
-export * from './enums';
+export {
+  PresentationDropdownOption,
+  PresentationDropdownSeparator,
+} from './component';
+export {
+  PresentationDropdownItem,
+} from './types';

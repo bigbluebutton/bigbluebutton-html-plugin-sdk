@@ -19,7 +19,5 @@ export interface NavBarButtonProps {
 export interface NavBarInfoProps {
   label: string;
   hasSeparator: boolean;
-  icon: string;
-  disabled: boolean;
   position: NavBarItemPosition;
 }

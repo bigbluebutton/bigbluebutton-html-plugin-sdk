@@ -10,6 +10,6 @@ export interface UsersBasicInfoResponseFromGraphqlWrapper {
   user: UsersBasicInfoData[];
 }
 
-export type UseUsersBasicInfo = () => GraphqlResponseWrapper<
+export type UseUsersBasicInfoFunction = () => GraphqlResponseWrapper<
   UsersBasicInfoResponseFromGraphqlWrapper
 >;

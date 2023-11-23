@@ -6,4 +6,4 @@ export interface LoadedUserListData {
   role: string;
 }
 
-export type UseLoadedUserList = () => GraphqlResponseWrapper<LoadedUserListData[]>;
+export type UseLoadedUserListFunction = () => GraphqlResponseWrapper<LoadedUserListData[]>;

@@ -1,29 +1,33 @@
 import { useState, useEffect } from 'react';
 import {
   DispatcherFunction,
-  UseDataChannelAuxiliary,
-  PluginApi,
-  HookEventWrapper,
-  UpdatedEventDetails,
-  SubscribedEventDetails,
-  UnsubscribedEventDetails,
+  UseDataChannelStaticFunction,
+} from './types';
+import {
+  GraphqlResponseWrapper,
 } from '../index';
 import {
   HookEvents, Hooks,
 } from '../core/enum';
+import { PluginApi } from '../core/api/types';
+import {
+  HookEventWrapper, SubscribedEventDetails, UnsubscribedEventDetails, UpdatedEventDetails,
+} from '../core/types';
 
-const createChannelIdentifier = (channelName: string, pluginName: string) => `${channelName}::${pluginName}`;
+export const createChannelIdentifier = (channelName: string, pluginName: string) => `${channelName}::${pluginName}`;
 
-const useDataChannel = (<T>(channelName: string,
+export const useDataChannel = (<T>(channelName: string,
   pluginName: string, pluginApi: PluginApi,
   ) => {
-  const [data, setData] = useState<T>();
+  const [data, setData] = useState<GraphqlResponseWrapper<T>>({ loading: true });
   const [dispatcherFunction, setDispatcherFunction] = useState<DispatcherFunction>();
 
   const channelIdentifier = createChannelIdentifier(channelName, pluginName);
 
-  const handleDataChange: EventListener = ((customEvent: HookEventWrapper<T>) => {
-    const eventDetail = customEvent.detail as UpdatedEventDetails<T>;
+  const handleDataChange: EventListener = ((
+    customEvent: HookEventWrapper<GraphqlResponseWrapper<T>>,
+  ) => {
+    const eventDetail = customEvent.detail as UpdatedEventDetails<GraphqlResponseWrapper<T>>;
     setData(eventDetail.data);
   }) as EventListener;
 
@@ -59,9 +63,4 @@ const useDataChannel = (<T>(channelName: string,
     };
   }, []);
   return [data, dispatcherFunction];
-}) as UseDataChannelAuxiliary;
-
-export {
-  createChannelIdentifier,
-  useDataChannel,
-};
+}) as UseDataChannelStaticFunction;

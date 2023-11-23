@@ -18,6 +18,4 @@ export interface CurrentPresentation {
   currentPage: CurrentPresentationPage
 }
 
-export interface CurrentPresentationResponse {}
-
-export type UseCurrentPresentation = () => GraphqlResponseWrapper<CurrentPresentation>;
+export type UseCurrentPresentationFunction = () => GraphqlResponseWrapper<CurrentPresentation>;

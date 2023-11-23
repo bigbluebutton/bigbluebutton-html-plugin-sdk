@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 
-import { BbbPluginSdk, CameraSettingsDropdownOption, CameraSettingsDropdownSeparator, CurrentPresentation, PluginApi, VariablesObjectWrapper, useCurrentPresentation, useCustomSubscription } from 'bigbluebutton-html-plugin-sdk';
+import { BbbPluginSdk, CameraSettingsDropdownOption, CameraSettingsDropdownSeparator, PluginApi, } from 'bigbluebutton-html-plugin-sdk';
 import { SampleCameraSettingsDropdownPluginProps } from './types';
 
 function SampleCameraSettingsDropdownPlugin({ pluginUuid: uuid }: SampleCameraSettingsDropdownPluginProps): React.ReactElement<SampleCameraSettingsDropdownPluginProps> {

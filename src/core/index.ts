@@ -1,4 +1,3 @@
-export * from './enum';
-export * from './api/BbbPluginSdk';
-export * from './api/types';
-export * from './types';
+export { BbbPluginSdk } from './api/BbbPluginSdk';
+export { PluginApi } from './api/types';
+export { GraphqlResponseWrapper } from './types';

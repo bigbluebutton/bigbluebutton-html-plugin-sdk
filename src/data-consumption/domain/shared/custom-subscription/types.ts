@@ -5,11 +5,11 @@ export interface CustomSubscriptionArguments {
   variables?: object;
 }
 
-export interface VariablesObjectWrapper {
+export interface CustomSubscriptionHookOptions {
   variables: object;
 }
 
-export type UseCustomSubscription = <T>(
+export type UseCustomSubscriptionFunction = <T>(
   query: string,
-  variablesObjectWrapper?: VariablesObjectWrapper,
+  variablesObjectWrapper?: CustomSubscriptionHookOptions,
 ) => GraphqlResponseWrapper<T>;

@@ -16,6 +16,16 @@ export class UserCameraDropdownOption implements UserCameraDropdownItem {
 
   onClick: () => void;
 
+  /**
+   * Returns object to be used in the setter for User Camera Dropdown. In this case
+   * an option.
+   *
+   * @param label - label to be displayed in the option.
+   * @param icon - icon to be displayed in the option. Left side of it.
+   * @param onClick - function to be called when clicking the button
+   *
+   * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5)
+   */
   constructor({
     label = '', icon = '', onClick = () => {},
   }: UserCameraDropdownOptionProps) {
@@ -35,6 +45,12 @@ export class UserCameraDropdownSeparator implements UserCameraDropdownItem {
 
   type: UserCameraDropdownItemType;
 
+  /**
+   * Returns object to be used in the setter for User Camera Dropdown. In this case
+   * a separator.
+   *
+   * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5)
+   */
   constructor() {
     this.type = UserCameraDropdownItemType.SEPARATOR;
   }

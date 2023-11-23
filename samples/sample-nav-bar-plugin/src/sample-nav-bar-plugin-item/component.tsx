@@ -20,8 +20,6 @@ function SampleNavBarPlugin({ pluginUuid: uuid }: SampleNavBarPluginProps): Reac
       hasSeparator: true,
     });
     const info = new NavBarInfo({
-      icon: "user",
-      disabled: false,
       label: 'Information here',
       hasSeparator: true,
       position: NavBarItemPosition.CENTER,

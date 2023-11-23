@@ -1,2 +1,1 @@
-export * from './custom-subscription/hooks';
-export * from './custom-subscription/types';
+export { CustomSubscriptionHookOptions } from './custom-subscription/types';

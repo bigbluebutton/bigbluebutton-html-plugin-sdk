@@ -1,17 +1,23 @@
-import { PluginApi } from '..';
-import { Role } from './enums';
+import { GraphqlResponseWrapper, PluginApi } from '..';
+import { DataChannelDispatcherUserRole } from './enums';
 
 export interface DataChannelArguments {
   pluginName: string;
   channelName: string;
 }
 
+/**
+ * Type to specify the useId that will be able to receive the data sent in the dispatcher function.
+ */
 export interface ToUserId {
   userId: string;
 }
 
+/**
+ * Type to specify the role that will be able to receive the data sent in the dispatcher function.
+ */
 export interface ToRole {
-  role: Role;
+  role: DataChannelDispatcherUserRole;
 }
 
 export type ObjectTo = ToUserId | ToRole;
@@ -22,15 +28,11 @@ export interface MapOfDispatchers {
   [key: string]: DispatcherFunction
 }
 
-export type UseDataChannel = <T>(
+export type UseDataChannelFunctionFromPluginApi = <T>(
   channelName: string,
-) => [T, DispatcherFunction];
+) => [GraphqlResponseWrapper<T>, DispatcherFunction];
 
-export type UseDataChannelAuxiliary = <T>(
+export type UseDataChannelStaticFunction = <T>(
   channelName: string, pluginName: string,
   pluginApi: PluginApi,
-) => [T, DispatcherFunction?];
-
-export type UseDataChannelAPi = <T>(
-  channelName: string
-) => [T, DispatcherFunction?];
+) => [GraphqlResponseWrapper<T>, DispatcherFunction?];

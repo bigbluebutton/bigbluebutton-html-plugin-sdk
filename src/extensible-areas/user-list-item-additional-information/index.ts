@@ -1,3 +1,7 @@
-export * from './component';
-export * from './types';
-export * from './enums';
+export {
+  UserListItemIcon,
+  UserListItemLabel,
+} from './component';
+export {
+  UserListItemAdditionalInformation,
+} from './types';

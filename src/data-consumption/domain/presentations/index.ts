@@ -1,2 +1,1 @@
-export * from './current-presentation/hooks';
-export * from './current-presentation/types';
+export { CurrentPresentation } from './current-presentation/types';

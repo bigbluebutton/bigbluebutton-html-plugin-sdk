@@ -1,5 +1,8 @@
 import { PluginProvidedUiItemDescriptor } from '../base';
 
+/**
+ * Interface for a generic item for the action button dropdown.
+ */
 export interface ActionButtonDropdownItem extends PluginProvidedUiItemDescriptor{
 }
 

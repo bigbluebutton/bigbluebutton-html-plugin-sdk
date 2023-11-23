@@ -1,3 +1,10 @@
-export * from './component';
-export * from './types';
-export * from './enums';
+export {
+  ActionsBarButton,
+  ActionsBarSeparator,
+} from './component';
+export {
+  ActionsBarItem,
+} from './types';
+export {
+  ActionsBarPosition,
+} from './enums';

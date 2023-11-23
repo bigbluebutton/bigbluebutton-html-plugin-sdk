@@ -7,4 +7,4 @@ export interface CurrentUserData {
   presenter: boolean
 }
 
-export type UseCurrentUser = () => GraphqlResponseWrapper<CurrentUserData> | undefined;
+export type UseCurrentUserFunction = () => GraphqlResponseWrapper<CurrentUserData> | undefined;

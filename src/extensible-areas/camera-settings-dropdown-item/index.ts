@@ -1,3 +1,7 @@
-export * from './component';
-export * from './types';
-export * from './enums';
+export {
+  CameraSettingsDropdownOption,
+  CameraSettingsDropdownSeparator,
+} from './component';
+export {
+  CameraSettingsDropdownItem,
+} from './types';

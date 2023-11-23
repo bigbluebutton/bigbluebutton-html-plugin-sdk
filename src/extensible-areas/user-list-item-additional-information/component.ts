@@ -15,6 +15,17 @@ export class UserListItemIcon implements UserListItemAdditionalInformation {
 
   icon: string;
 
+  /**
+   * Returns object to be used in the setter for the User List Item Additional information Item.
+   * In this case, a icon.
+   *
+   * @param icon - icon to be used in the user list item additional information.
+   * It goes on the left side of it.
+   * @param userId - the userId in which this information will appear when the user
+   * list item is clicked.
+   *
+   * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5).
+   */
   constructor({
     icon = '', userId = '',
   }: UserListItemIconProps) {
@@ -39,6 +50,18 @@ export class UserListItemLabel implements UserListItemAdditionalInformation {
 
   label: string;
 
+  /**
+   * Returns object to be used in the setter for the User List Item Additional information Item.
+   * In this case, a label (Information).
+   *
+   * @param label - text to be displayed in the user list item.
+   * @param icon - icon to be used in the user list item additional information.
+   * It goes on the left side of it.
+   * @param userId - the userId in which this information will appear when the user
+   * list item is clicked.
+   *
+   * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5).
+   */
   constructor({
     icon = '', userId = '', label = '',
   }: UserListItemLabelProps) {
