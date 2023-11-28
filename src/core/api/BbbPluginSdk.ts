@@ -29,6 +29,7 @@ import { useLoadedUserList } from '../../data-consumption/domain/users/loaded-us
 import { useCurrentUser } from '../../data-consumption/domain/users/current-user/hooks';
 import { useUsersBasicInfo } from '../../data-consumption/domain/users/users-basic-info/hooks';
 import { getSessionToken } from '../auxiliar/session-token/getter';
+import { getJoinUrl } from '../auxiliar/join-url/getter';
 
 declare const window: PluginBrowserWindow;
 
@@ -105,6 +106,7 @@ export abstract class BbbPluginSdk {
           '': () => {},
         },
         getSessionToken: () => getSessionToken(),
+        getJoinUrl: (params) => getJoinUrl(params),
         pluginName,
       };
     }
