@@ -1,34 +1,40 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 
-import * as BbbPluginSdk from 'bigbluebutton-html-plugin-sdk';
+import { BbbPluginSdk, PluginApi, Role, ToRole, ToUserId } from 'bigbluebutton-html-plugin-sdk';
 import { SampleDataChannelPluginProps } from './types';
+
+interface DataExampleType {
+  first_example_field: number;
+  second_example_field: string;
+}
+
 function SampleDataChannelPlugin(
-  { pluginUuid: uuid, pluginName }: SampleDataChannelPluginProps
+  { pluginUuid: uuid }: SampleDataChannelPluginProps
 ): React.ReactNode {
-  const pluginApi: BbbPluginSdk.PluginApi = BbbPluginSdk.getPluginApi(uuid);
-  const [data, dispatcher] = pluginApi.useDataChannel('selectRandomUser');
+  BbbPluginSdk.initialize(uuid);
+  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
+  const [data, dispatcher] = pluginApi.useDataChannel<DataExampleType>('selectRandomUser');
 
   useEffect(() => {
     console.log("Log to verify the data flow and the dispatcher: ", data, dispatcher)
-  }, [data, dispatcher])
+  }, [data, dispatcher]);
   
 
   useEffect(() => {
     if (dispatcher) dispatcher({
       first_example_field: 1234,
       second_example_field: 'string as an example',
-    }, [
+    } as DataExampleType, [
       {
-        role: BbbPluginSdk.Role.MODERATOR
-      } as BbbPluginSdk.ToRole,
+        role: Role.MODERATOR
+      } as ToRole,
       {
         userId: 'userId-123'
-      } as BbbPluginSdk.ToUserId,
+      } as ToUserId,
     ]);
-  }, [dispatcher])
+  }, [dispatcher]);
 
-  console.log()
   return null;
 }
 

@@ -3,22 +3,23 @@ import { useState, useEffect } from 'react';
 import * as ReactModal from 'react-modal';
 import './style.css';
 
-import * as BbbPluginSdk from 'bigbluebutton-html-plugin-sdk';
+import { BbbPluginSdk, PluginApi, CurrentPresentation, ActionButtonDropdownSeparator, ActionButtonDropdownOption } from 'bigbluebutton-html-plugin-sdk';
 import { SampleActionButtonDropdownPluginProps } from './types';
 
 function SampleActionButtonDropdownPlugin({ pluginUuid: uuid }: SampleActionButtonDropdownPluginProps) {
+  BbbPluginSdk.initialize(uuid);
   const [showModal, setShowModal] = useState<boolean>(false);
-  const pluginApi: BbbPluginSdk.PluginApi = BbbPluginSdk.getPluginApi(uuid);
+  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
   const [currentSlideText, setCurrentSlideText] = useState<string>('');
-  const currentUser = BbbPluginSdk.useCurrentUser();
+  const { data: currentUser } = pluginApi.useCurrentUser();
 
-  const currentPresentation = BbbPluginSdk.useCurrentPresentation();
+  const { data: currentPresentation } = pluginApi.useCurrentPresentation();
 
   const requestLastPages = (currentTxtUri: string) => fetch(currentTxtUri)
     .then((response) => response.text());
 
-  const handleFetchPresentationData = (currentPres: BbbPluginSdk.CurrentPresentation) => {
-    const currentTxtUri = currentPres.currentPage.urls.text;
+  const handleFetchPresentationData = (currentPres: CurrentPresentation) => {
+    const currentTxtUri = currentPres.currentPage.urlsJson.text;
     requestLastPages(currentTxtUri).then((currentPageContent) => {
       setCurrentSlideText(currentPageContent);
       setShowModal(true);
@@ -38,8 +39,8 @@ function SampleActionButtonDropdownPlugin({ pluginUuid: uuid }: SampleActionButt
   useEffect(() => {
     if (currentUser?.presenter){
       pluginApi.setActionButtonDropdownItems([
-        new BbbPluginSdk.ActionButtonDropdownSeparator(),
-        new BbbPluginSdk.ActionButtonDropdownOption({
+        new ActionButtonDropdownSeparator(),
+        new ActionButtonDropdownOption({
           label: 'Fetch presentation content',
           icon: 'copy',
           tooltip: 'this is a button injected by plugin',

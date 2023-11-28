@@ -1,18 +1,18 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 
-import * as BbbPluginSdk from 'bigbluebutton-html-plugin-sdk';
+import { AudioSettingsDropdownItem, AudioSettingsDropdownOption, AudioSettingsDropdownSeparator, BbbPluginSdk, PluginApi } from 'bigbluebutton-html-plugin-sdk';
 import { SampleAudioSettingsDropdownPluginProps } from './types';
 
 
 function SampleAudioSettingsDropdownPlugin({
   pluginUuid: uuid,
 }: SampleAudioSettingsDropdownPluginProps): React.ReactElement<SampleAudioSettingsDropdownPluginProps> {
-  const pluginApi: BbbPluginSdk.PluginApi = BbbPluginSdk.getPluginApi(uuid);
+  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
 
   useEffect(() => {
     const buttonToAudioSettingsDropdown:
-      BbbPluginSdk.AudioSettingsDropdownItem = new BbbPluginSdk.AudioSettingsDropdownOption({
+      AudioSettingsDropdownItem = new AudioSettingsDropdownOption({
         label: 'Click to send alert message',
         icon: 'user',
         onClick: () => {
@@ -21,7 +21,7 @@ function SampleAudioSettingsDropdownPlugin({
       });
       
     const separatorToAudioSettingsDropdown:
-      BbbPluginSdk.AudioSettingsDropdownItem = new BbbPluginSdk.AudioSettingsDropdownSeparator();
+      AudioSettingsDropdownItem = new AudioSettingsDropdownSeparator();
     pluginApi.setAudioSettingsDropdownItems([separatorToAudioSettingsDropdown, buttonToAudioSettingsDropdown]);
   }, []);
 
