@@ -1,3 +1,4 @@
-export function getSessionToken(): string {
-  return document.location.href.split('sessionToken=')[1];
+export function getSessionToken(): string | undefined {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('sessionToken') || undefined;
 }

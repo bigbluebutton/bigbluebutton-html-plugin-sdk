@@ -1,1 +1,1 @@
-export type GetSessionTokenFunction = () => string;
+export type GetSessionTokenFunction = () => string | undefined;
