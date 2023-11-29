@@ -26,6 +26,11 @@ SDK for developing BigBlueButton plugins, examples of implementations can be fou
 
 - User list item additional information (item, label)
 
+### Getters available through the API:
+- `getSessionToken`: returns the user session token located on the user's URL.
+
+- `getJoinUrl`: returns the join url associated with the parameters passed as an argument. Since it fetches the BigBlueButton API, this getter method is asynchronous.
+
 ### Realtime data consumption
 - `useCurrentPresentation` hook: provides information regarding the current presentation;
 
