@@ -15,6 +15,7 @@ import { UseCurrentUserFunction } from '../../data-consumption/domain/users/curr
 import { UseUsersBasicInfoFunction } from '../../data-consumption/domain/users/users-basic-info/types';
 import { UseCustomSubscriptionFunction } from '../../data-consumption/domain/shared/custom-subscription/types';
 import { MapOfDispatchers, UseDataChannelFunctionFromPluginApi } from '../../data-channel/types';
+import { GetSessionTokenFunction } from '../auxiliar/session-token/types';
 
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
@@ -131,6 +132,8 @@ export interface PluginApi {
    */
   useDataChannel?: UseDataChannelFunctionFromPluginApi;
   mapOfDispatchers: MapOfDispatchers;
+  // --- Auxiliary functions ---
+  getSessionToken?: GetSessionTokenFunction;
 }
 
 export interface PluginBrowserWindow extends Window {

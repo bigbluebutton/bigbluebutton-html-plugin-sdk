@@ -28,6 +28,7 @@ import {
 import { useLoadedUserList } from '../../data-consumption/domain/users/loaded-user-list/hooks';
 import { useCurrentUser } from '../../data-consumption/domain/users/current-user/hooks';
 import { useUsersBasicInfo } from '../../data-consumption/domain/users/users-basic-info/hooks';
+import { getSessionToken } from '../auxiliar/session-token/getter';
 
 declare const window: PluginBrowserWindow;
 
@@ -103,6 +104,7 @@ export abstract class BbbPluginSdk {
         mapOfDispatchers: {
           '': () => {},
         },
+        getSessionToken: () => getSessionToken(),
         pluginName,
       };
     }
