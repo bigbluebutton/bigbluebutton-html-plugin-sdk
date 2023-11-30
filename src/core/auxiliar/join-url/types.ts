@@ -1,1 +1,1 @@
-export type GetJoinUrlFunction = (params: Map<string, string>) => Promise<string>;
+export type GetJoinUrlFunction = (params: {[key: string]: string}) => Promise<string>;
