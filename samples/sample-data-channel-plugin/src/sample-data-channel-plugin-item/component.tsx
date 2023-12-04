@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 
-import { BbbPluginSdk, PluginApi, Role, ToRole, ToUserId } from 'bigbluebutton-html-plugin-sdk';
+import { BbbPluginSdk, PluginApi, DataChannelDispatcherUserRole, ToRole, ToUserId } from 'bigbluebutton-html-plugin-sdk';
 import { SampleDataChannelPluginProps } from './types';
 
 interface DataExampleType {
@@ -27,7 +27,7 @@ function SampleDataChannelPlugin(
       second_example_field: 'string as an example',
     } as DataExampleType, [
       {
-        role: Role.MODERATOR
+        role: DataChannelDispatcherUserRole.MODERATOR
       } as ToRole,
       {
         userId: 'userId-123'

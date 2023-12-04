@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import {
+  DataChannelMessagesWrapper,
   DispatcherFunction,
   UseDataChannelStaticFunction,
 } from './types';
@@ -19,15 +20,19 @@ export const createChannelIdentifier = (channelName: string, pluginName: string)
 export const useDataChannel = (<T>(channelName: string,
   pluginName: string, pluginApi: PluginApi,
   ) => {
-  const [data, setData] = useState<GraphqlResponseWrapper<T>>({ loading: true });
+  const [data, setData] = useState<GraphqlResponseWrapper<DataChannelMessagesWrapper<T>>>(
+    { loading: true },
+  );
   const [dispatcherFunction, setDispatcherFunction] = useState<DispatcherFunction>();
 
   const channelIdentifier = createChannelIdentifier(channelName, pluginName);
 
   const handleDataChange: EventListener = ((
-    customEvent: HookEventWrapper<GraphqlResponseWrapper<T>>,
+    customEvent: HookEventWrapper<GraphqlResponseWrapper<DataChannelMessagesWrapper<T>>>,
   ) => {
-    const eventDetail = customEvent.detail as UpdatedEventDetails<GraphqlResponseWrapper<T>>;
+    const eventDetail = customEvent.detail as UpdatedEventDetails<
+      GraphqlResponseWrapper<DataChannelMessagesWrapper<T>>
+    >;
     setData(eventDetail.data);
   }) as EventListener;
 
