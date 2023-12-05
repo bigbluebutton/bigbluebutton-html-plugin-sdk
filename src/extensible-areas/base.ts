@@ -2,6 +2,7 @@ import { ActionButtonDropdownItemType } from './action-button-dropdown-item/enum
 import { ActionsBarItemType } from './actions-bar-item/enums';
 import { AudioSettingsDropdownItemType } from './audio-settings-dropdown-item/enums';
 import { CameraSettingsDropdownItemType } from './camera-settings-dropdown-item/enums';
+import { FloatingWindowItemType } from './floating-window/enums';
 import { NavBarItemType } from './nav-bar-item/enums';
 import { OptionsDropdownItemType } from './options-dropdown-item/enums';
 import { PresentationDropdownItemType } from './presentation-dropdown-item/enums';
@@ -15,7 +16,7 @@ type PluginProvidedUiItemType = PresentationToolbarItemType |
   ActionsBarItemType | AudioSettingsDropdownItemType |
   PresentationDropdownItemType | NavBarItemType | OptionsDropdownItemType |
   CameraSettingsDropdownItemType | UserCameraDropdownItemType |
-  UserListItemAdditionalInformationType;
+  UserListItemAdditionalInformationType | FloatingWindowItemType;
 
 export interface PluginProvidedUiItemDescriptor {
   /** Defined by BigBlueButton Plugin Engine. */
