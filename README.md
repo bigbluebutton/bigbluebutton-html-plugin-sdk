@@ -26,6 +26,8 @@ SDK for developing BigBlueButton plugins, examples of implementations can be fou
 
 - User list item additional information (item, label)
 
+- Floating window item (floatingWindow)
+
 ### Getters available through the API:
 - `getSessionToken`: returns the user session token located on the user's URL.
 
