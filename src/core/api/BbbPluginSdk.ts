@@ -28,8 +28,9 @@ import {
 import { useLoadedUserList } from '../../data-consumption/domain/users/loaded-user-list/hooks';
 import { useCurrentUser } from '../../data-consumption/domain/users/current-user/hooks';
 import { useUsersBasicInfo } from '../../data-consumption/domain/users/users-basic-info/hooks';
-import { getSessionToken } from '../auxiliar/session-token/getter';
-import { getJoinUrl } from '../auxiliar/join-url/getter';
+import { getSessionToken } from '../auxiliary/session-token/getter';
+import { getJoinUrl } from '../auxiliary/join-url/getter';
+import { usePluginSettings } from '../../data-consumption/domain/settings';
 
 declare const window: PluginBrowserWindow;
 
@@ -69,6 +70,7 @@ export abstract class BbbPluginSdk {
         channelName: string,
       ) => useDataChannel(channelName, pluginName, window.bbb_plugins[uuid])
     ) as UseDataChannelFunctionFromPluginApi;
+      pluginApi.usePluginSettings = () => usePluginSettings(pluginName);
     } else {
       throw new Error('Plugin name not set');
     }

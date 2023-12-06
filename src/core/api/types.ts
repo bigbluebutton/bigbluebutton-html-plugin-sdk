@@ -15,8 +15,9 @@ import { UseCurrentUserFunction } from '../../data-consumption/domain/users/curr
 import { UseUsersBasicInfoFunction } from '../../data-consumption/domain/users/users-basic-info/types';
 import { UseCustomSubscriptionFunction } from '../../data-consumption/domain/shared/custom-subscription/types';
 import { MapOfDispatchers, UseDataChannelFunctionFromPluginApi } from '../../data-channel/types';
-import { GetSessionTokenFunction } from '../auxiliar/session-token/types';
-import { GetJoinUrlFunction } from '../auxiliar/join-url/types';
+import { GetSessionTokenFunction } from '../auxiliary/session-token/types';
+import { GetJoinUrlFunction } from '../auxiliary/join-url/types';
+import { UsePluginSettingsFunction } from '../../data-consumption/domain/settings/plugin-settings/types';
 
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
@@ -111,6 +112,15 @@ export interface PluginApi {
    *
    */
   useUsersBasicInfo?: UseUsersBasicInfoFunction;
+  /**
+   * Returns an object containing the settings for the current plugin (with pluginName
+   * defined in the pluginApi). It needs to be explicitly written in the client settings
+   * within the plugin's directive
+   *
+   * @returns `GraphqlResponseWrapper` with the plugin specific settings.
+   *
+   */
+  usePluginSettings?: UsePluginSettingsFunction;
   /**
    * Returns an object containing the data on the current presentation being displayed
    * in the presentation area, and its current page.
