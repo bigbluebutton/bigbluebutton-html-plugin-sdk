@@ -30,6 +30,8 @@ import { useCurrentUser } from '../../data-consumption/domain/users/current-user
 import { useUsersBasicInfo } from '../../data-consumption/domain/users/users-basic-info/hooks';
 import { getSessionToken } from '../auxiliar/session-token/getter';
 import { getJoinUrl } from '../auxiliar/join-url/getter';
+import { EventPayloads, UiEventsHookEventWrapper, UseUiEventFunction } from '../../ui-events/types';
+import { useUiEvent } from '../../ui-events/hooks';
 
 declare const window: PluginBrowserWindow;
 
@@ -63,6 +65,12 @@ export abstract class BbbPluginSdk {
     pluginApi.useLoadedUserList = (() => useLoadedUserList()) as UseLoadedUserListFunction;
     pluginApi.useCurrentUser = (() => useCurrentUser()) as UseCurrentUserFunction;
     pluginApi.useUsersBasicInfo = (() => useUsersBasicInfo()) as UseUsersBasicInfoFunction;
+    pluginApi.useUiEvent = (<
+      T extends keyof EventPayloads
+    >(
+      eventName: T,
+      callback: (payload: UiEventsHookEventWrapper<EventPayloads[T]>) => void,
+    ) => useUiEvent(eventName, callback)) as UseUiEventFunction;
     const pluginName = pluginApi?.pluginName;
     if (pluginName) {
       pluginApi.useDataChannel = ((
