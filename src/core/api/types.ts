@@ -17,6 +17,7 @@ import { UseCustomSubscriptionFunction } from '../../data-consumption/domain/sha
 import { MapOfDispatchers, UseDataChannelFunctionFromPluginApi } from '../../data-channel/types';
 import { GetSessionTokenFunction } from '../auxiliar/session-token/types';
 import { GetJoinUrlFunction } from '../auxiliar/join-url/types';
+import { UseUiEventFunction } from '../../ui-events/types';
 
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
@@ -119,6 +120,17 @@ export interface PluginApi {
    *
    */
   useCustomSubscription?: UseCustomSubscriptionFunction;
+  /**
+   * Function to react to some event of your choice amongst the available. It does not
+   * return anything.
+   *
+   * @param eventName The name of the event chosen to react to.
+   *
+   * @param callback The callback function to call every time the event is fired from the
+   * core of BBB. The arguments of the callback is the payload of the event (if any).
+   *
+   */
+  useUiEvent?: UseUiEventFunction;
   // --- DataChannel Hook ---
   /**
    * Returns an array with tha data wrapped in the `GraphqlResponseWrapper` in the first
