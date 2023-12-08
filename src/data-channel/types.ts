@@ -28,11 +28,25 @@ export interface MapOfDispatchers {
   [key: string]: DispatcherFunction
 }
 
+export interface DataChannelMessageResponseType<T> {
+  createdAt: string;
+  dataChannel: string;
+  fromUserId: string;
+  messageId: string;
+  payloadJson: T;
+  pluginName: string;
+  toRoles: string[];
+}
+
+export interface DataChannelMessagesWrapper<T> {
+  pluginDataChannelMessage: DataChannelMessageResponseType<T>[];
+}
+
 export type UseDataChannelFunctionFromPluginApi = <T>(
   channelName: string,
-) => [GraphqlResponseWrapper<T>, DispatcherFunction];
+) => [GraphqlResponseWrapper<DataChannelMessagesWrapper<T>>, DispatcherFunction];
 
 export type UseDataChannelStaticFunction = <T>(
   channelName: string, pluginName: string,
   pluginApi: PluginApi,
-) => [GraphqlResponseWrapper<T>, DispatcherFunction?];
+) => [GraphqlResponseWrapper<DataChannelMessagesWrapper<T>>, DispatcherFunction?];

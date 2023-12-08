@@ -1,5 +1,5 @@
 {
-  "name": "sample-options-dropdown-plugin",
+  "name": "sample-ui-events-plugin",
   "version": "0.1.0",
   "private": true,
   "main": "./src/index.tsx",

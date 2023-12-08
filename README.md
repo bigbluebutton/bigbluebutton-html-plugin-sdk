@@ -46,3 +46,6 @@ SDK for developing BigBlueButton plugins, examples of implementations can be fou
 
 ### Real time data exchange
 - `useDataChannel` hook: this will allow you to exchange information (Send and receive) amongst different users through the same plugin;
+
+### Real time event reaction
+- `useUiEvent` hook: this will allow you to react to certain events fired from the BBB core (refer to the sample-ui-events-plugin in the samples directory for example on how to use some of the events);
