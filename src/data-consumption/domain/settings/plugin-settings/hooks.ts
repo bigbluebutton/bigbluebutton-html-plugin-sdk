@@ -6,6 +6,8 @@ import { filterPluginSpecificSettings } from './utils';
 export const usePluginSettings = (
   pluginName: string,
 ) => filterPluginSpecificSettings(useCustomSubscription<
-    PluginSettingsResponseFromGraphqlWrapper>(
-      PLUGIN_SETTINGS_QUERY,
-    ), pluginName);
+    PluginSettingsResponseFromGraphqlWrapper>(PLUGIN_SETTINGS_QUERY, {
+      variables: {
+        pluginName,
+      },
+    }));
