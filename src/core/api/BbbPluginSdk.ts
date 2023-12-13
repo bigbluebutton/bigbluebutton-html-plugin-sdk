@@ -10,7 +10,7 @@ import {
 import {
   UseDataChannelFunctionFromPluginApi,
 } from '../../data-channel/types';
-
+import { uiCommands } from '../../ui-commands/commands';
 import {
   CustomSubscriptionHookOptions,
 } from '../../index';
@@ -71,6 +71,7 @@ export abstract class BbbPluginSdk {
       eventName: T,
       callback: (payload: UiEventsHookEventWrapper<EventPayloads[T]>) => void,
     ) => useUiEvent(eventName, callback)) as UseUiEventFunction;
+    pluginApi.uiCommands = uiCommands;
     const pluginName = pluginApi?.pluginName;
     if (pluginName) {
       pluginApi.useDataChannel = ((

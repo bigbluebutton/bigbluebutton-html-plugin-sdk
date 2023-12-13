@@ -47,3 +47,10 @@ SDK for developing BigBlueButton plugins, examples of implementations can be fou
 
 ### Real time event reaction
 - `useUiEvent` hook: this will allow you to react to certain events fired from the BBB core (refer to the sample-ui-events-plugin in the samples directory for example on how to use some of the events);
+
+### Ui Commands to automatize tasks in BBB
+`uiCommands` object: It basically contains all the possible commands available to the developer to interact with the core BBB UI, see the ones implemented down below:
+  - chat:
+    - form: 
+      - open: this function will open the sidebar chat panel automatically;
+      - fill: this function will fill the form input field of the chat passed in the argument as {text: string}
