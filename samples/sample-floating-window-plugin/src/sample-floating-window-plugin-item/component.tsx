@@ -45,7 +45,7 @@ function SampleFloatingWindowPlugin({ pluginUuid: uuid }: SampleFloatingWindowPl
         }
       });
       pluginApi.setActionsBarItems([]);
-      pluginApi.setFloatingWindowItems([floatingWindow]);
+      pluginApi.setFloatingWindows([floatingWindow]);
     } else if (isMinimized && !isClosed) {
       const restoringButton: ActionsBarItem = new ActionsBarButton({
           icon: 'copy',
@@ -56,10 +56,10 @@ function SampleFloatingWindowPlugin({ pluginUuid: uuid }: SampleFloatingWindowPl
           position: ActionsBarPosition.RIGHT,
         }
       );
-      pluginApi.setFloatingWindowItems([]);
+      pluginApi.setFloatingWindows([]);
       pluginApi.setActionsBarItems([restoringButton]);
     } else {
-      pluginApi.setFloatingWindowItems([]);
+      pluginApi.setFloatingWindows([]);
       pluginApi.setActionsBarItems([]);
     }
   }, [isMinimized, isClosed]);

@@ -12,6 +12,6 @@ export interface FloatingWindowProps {
   contentFunction: (element: HTMLElement) => void;
 }
 
-export type SetFloatingWindowItems = (
-  FloatingWindowItems: FloatingWindowItem[]
+export type SetFloatingWindows = (
+  FloatingWindows: FloatingWindowItem[]
 ) => void;
