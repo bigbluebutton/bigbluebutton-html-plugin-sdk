@@ -1,3 +1,4 @@
+import { UiCommands } from 'src/ui-commands/types';
 import { ActionButtonDropdownItem } from '../../extensible-areas/action-button-dropdown-item/types';
 import { ActionsBarItem } from '../../extensible-areas/actions-bar-item/types';
 import { AudioSettingsDropdownItem } from '../../extensible-areas/audio-settings-dropdown-item/types';
@@ -16,8 +17,10 @@ import { UseUsersBasicInfoFunction } from '../../data-consumption/domain/users/u
 import { SetFloatingWindowItems } from '../../extensible-areas/floating-window/types';
 import { UseCustomSubscriptionFunction } from '../../data-consumption/domain/shared/custom-subscription/types';
 import { MapOfDispatchers, UseDataChannelFunctionFromPluginApi } from '../../data-channel/types';
-import { GetSessionTokenFunction } from '../auxiliar/session-token/types';
-import { GetJoinUrlFunction } from '../auxiliar/join-url/types';
+import { GetSessionTokenFunction } from '../auxiliary/session-token/types';
+import { GetJoinUrlFunction } from '../auxiliary/join-url/types';
+import { UsePluginSettingsFunction } from '../../data-consumption/domain/settings/plugin-settings/types';
+import { UseUiEventFunction } from '../../ui-events/types';
 
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
@@ -114,6 +117,15 @@ export interface PluginApi {
    */
   useUsersBasicInfo?: UseUsersBasicInfoFunction;
   /**
+   * Returns an object containing the settings for the current plugin (with pluginName
+   * defined in the pluginApi). It needs to be explicitly written in the client settings
+   * within the plugin's directive
+   *
+   * @returns `GraphqlResponseWrapper` with the plugin specific settings.
+   *
+   */
+  usePluginSettings?: UsePluginSettingsFunction;
+  /**
    * Returns an object containing the data on the current presentation being displayed
    * in the presentation area, and its current page.
    *
@@ -121,6 +133,17 @@ export interface PluginApi {
    *
    */
   useCustomSubscription?: UseCustomSubscriptionFunction;
+  /**
+   * Function to react to some event of your choice amongst the available. It does not
+   * return anything.
+   *
+   * @param eventName The name of the event chosen to react to.
+   *
+   * @param callback The callback function to call every time the event is fired from the
+   * core of BBB. The arguments of the callback is the payload of the event (if any).
+   *
+   */
+  useUiEvent?: UseUiEventFunction;
   // --- DataChannel Hook ---
   /**
    * Returns an array with tha data wrapped in the `GraphqlResponseWrapper` in the first
@@ -135,6 +158,8 @@ export interface PluginApi {
    */
   useDataChannel?: UseDataChannelFunctionFromPluginApi;
   mapOfDispatchers: MapOfDispatchers;
+  // --- Ui-Commands ---
+  uiCommands?: UiCommands;
   // --- Auxiliary functions ---
   getSessionToken?: GetSessionTokenFunction;
   getJoinUrl?: GetJoinUrlFunction;

@@ -44,5 +44,17 @@ SDK for developing BigBlueButton plugins, examples of implementations can be fou
 
 - `useCustomSubscription` hook: with this hook, the developer can query pretty much anything graphql can provide. Note: Make sure that, on BBB version change, the custom subscriptions you make will work as expected.
 
+- `usePluginSettings` hook: it provides all the specific settings regarding the current plugin it's been loaded from.
+
 ### Real time data exchange
 - `useDataChannel` hook: this will allow you to exchange information (Send and receive) amongst different users through the same plugin;
+
+### Real time event reaction
+- `useUiEvent` hook: this will allow you to react to certain events fired from the BBB core (refer to the sample-ui-events-plugin in the samples directory for example on how to use some of the events);
+
+### Ui Commands to automatize tasks in BBB
+`uiCommands` object: It basically contains all the possible commands available to the developer to interact with the core BBB UI, see the ones implemented down below:
+  - chat:
+    - form: 
+      - open: this function will open the sidebar chat panel automatically;
+      - fill: this function will fill the form input field of the chat passed in the argument as {text: string}

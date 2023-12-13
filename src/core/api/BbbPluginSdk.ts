@@ -10,7 +10,7 @@ import {
 import {
   UseDataChannelFunctionFromPluginApi,
 } from '../../data-channel/types';
-
+import { uiCommands } from '../../ui-commands/commands';
 import {
   CustomSubscriptionHookOptions,
 } from '../../index';
@@ -28,8 +28,11 @@ import {
 import { useLoadedUserList } from '../../data-consumption/domain/users/loaded-user-list/hooks';
 import { useCurrentUser } from '../../data-consumption/domain/users/current-user/hooks';
 import { useUsersBasicInfo } from '../../data-consumption/domain/users/users-basic-info/hooks';
-import { getSessionToken } from '../auxiliar/session-token/getter';
-import { getJoinUrl } from '../auxiliar/join-url/getter';
+import { getSessionToken } from '../auxiliary/session-token/getter';
+import { getJoinUrl } from '../auxiliary/join-url/getter';
+import { usePluginSettings } from '../../data-consumption/domain/settings';
+import { EventPayloads, UiEventsHookEventWrapper, UseUiEventFunction } from '../../ui-events/types';
+import { useUiEvent } from '../../ui-events/hooks';
 
 declare const window: PluginBrowserWindow;
 
@@ -63,12 +66,20 @@ export abstract class BbbPluginSdk {
     pluginApi.useLoadedUserList = (() => useLoadedUserList()) as UseLoadedUserListFunction;
     pluginApi.useCurrentUser = (() => useCurrentUser()) as UseCurrentUserFunction;
     pluginApi.useUsersBasicInfo = (() => useUsersBasicInfo()) as UseUsersBasicInfoFunction;
+    pluginApi.useUiEvent = (<
+      T extends keyof EventPayloads
+    >(
+      eventName: T,
+      callback: (payload: UiEventsHookEventWrapper<EventPayloads[T]>) => void,
+    ) => useUiEvent(eventName, callback)) as UseUiEventFunction;
+    pluginApi.uiCommands = uiCommands;
     const pluginName = pluginApi?.pluginName;
     if (pluginName) {
       pluginApi.useDataChannel = ((
         channelName: string,
       ) => useDataChannel(channelName, pluginName, window.bbb_plugins[uuid])
     ) as UseDataChannelFunctionFromPluginApi;
+      pluginApi.usePluginSettings = () => usePluginSettings(pluginName);
     } else {
       throw new Error('Plugin name not set');
     }
