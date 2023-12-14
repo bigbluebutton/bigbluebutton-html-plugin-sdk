@@ -14,6 +14,7 @@ import { UseCurrentPresentationFunction } from '../../data-consumption/domain/pr
 import { UseLoadedUserListFunction } from '../../data-consumption/domain/users/loaded-user-list/types';
 import { UseCurrentUserFunction } from '../../data-consumption/domain/users/current-user/types';
 import { UseUsersBasicInfoFunction } from '../../data-consumption/domain/users/users-basic-info/types';
+import { SetFloatingWindows } from '../../extensible-areas/floating-window/types';
 import { UseCustomSubscriptionFunction } from '../../data-consumption/domain/shared/custom-subscription/types';
 import { MapOfDispatchers, UseDataChannelFunctionFromPluginApi } from '../../data-channel/types';
 import { GetSessionTokenFunction } from '../auxiliary/session-token/types';
@@ -82,6 +83,7 @@ export interface PluginApi {
   setCameraSettingsDropdownItems: SetCameraSettingsDropdownItems;
   setUserCameraDropdownItems: SetUserCameraDropdownItems;
   setUserListItemAdditionalInformation: SetUserListItemAdditionalInformation;
+  setFloatingWindows: SetFloatingWindows;
   // --- DataConsumption Hooks ---
   /**
    * Returns an object containing the data on the current presentation being displayed

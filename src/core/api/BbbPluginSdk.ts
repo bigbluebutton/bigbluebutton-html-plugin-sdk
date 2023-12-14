@@ -113,6 +113,7 @@ export abstract class BbbPluginSdk {
         setCameraSettingsDropdownItems: () => {},
         setUserCameraDropdownItems: () => {},
         setUserListItemAdditionalInformation: () => {},
+        setFloatingWindows: () => {},
         mapOfDispatchers: {
           '': () => {},
         },
