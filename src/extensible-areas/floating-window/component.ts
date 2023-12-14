@@ -1,12 +1,12 @@
-import { FloatingWindowItemType } from './enums';
-import { FloatingWindowItem, FloatingWindowProps } from './types';
+import { FloatingWindowType } from './enums';
+import { FloatingWindowInterface, FloatingWindowProps } from './types';
 
 // FloatingWindow Extensible Area
 
-export class FloatingWindow implements FloatingWindowItem {
+export class FloatingWindow implements FloatingWindowInterface {
   id: string = '';
 
-  type: FloatingWindowItemType;
+  type: FloatingWindowType;
 
   top: number;
 
@@ -51,10 +51,10 @@ export class FloatingWindow implements FloatingWindowItem {
     this.boxShadow = boxShadow;
 
     this.contentFunction = contentFunction;
-    this.type = FloatingWindowItemType.CONTAINER;
+    this.type = FloatingWindowType.CONTAINER;
   }
 
   setItemId: (id: string) => void = (id: string) => {
-    this.id = `UserListItemIcon_${id}`;
+    this.id = `FloatingWindow_${id}`;
   };
 }

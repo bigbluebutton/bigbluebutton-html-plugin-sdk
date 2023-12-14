@@ -1,4 +1,4 @@
-// Floating window item types:
-export enum FloatingWindowItemType {
-  CONTAINER = 'FLOATING_WINDOW_ITEM_CONTAINER',
+// Floating window types:
+export enum FloatingWindowType {
+  CONTAINER = 'FLOATING_WINDOW_CONTAINER',
 }

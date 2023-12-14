@@ -2,5 +2,5 @@ export {
   FloatingWindow,
 } from './component';
 export {
-  FloatingWindowItem,
+  FloatingWindowInterface,
 } from './types';

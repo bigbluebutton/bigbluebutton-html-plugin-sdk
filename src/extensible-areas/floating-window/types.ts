@@ -1,6 +1,6 @@
 import { PluginProvidedUiItemDescriptor } from '../base';
 
-export interface FloatingWindowItem extends PluginProvidedUiItemDescriptor {
+export interface FloatingWindowInterface extends PluginProvidedUiItemDescriptor {
 }
 
 export interface FloatingWindowProps {
@@ -13,5 +13,5 @@ export interface FloatingWindowProps {
 }
 
 export type SetFloatingWindows = (
-  FloatingWindows: FloatingWindowItem[]
+  FloatingWindows: FloatingWindowInterface[]
 ) => void;
