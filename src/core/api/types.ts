@@ -18,6 +18,7 @@ import { MapOfDispatchers, UseDataChannelFunctionFromPluginApi } from '../../dat
 import { GetSessionTokenFunction } from '../auxiliar/session-token/types';
 import { GetJoinUrlFunction } from '../auxiliar/join-url/types';
 import { UseUiEventFunction } from '../../ui-events/types';
+import { UseLoadedChatMessagesFunction } from '../../data-consumption/domain/chat/loaded-chat-messages/types';
 
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
@@ -112,6 +113,13 @@ export interface PluginApi {
    *
    */
   useUsersBasicInfo?: UseUsersBasicInfoFunction;
+   /**
+   * Returns an object containing brief data on the messages already loaded in the chat.
+   *
+   * @returns `GraphqlResponseWrapper` with the LoadedChatMessages.
+   *
+   */
+  useLoadedChatMessages?: UseLoadedChatMessagesFunction;
   /**
    * Returns an object containing the data on the current presentation being displayed
    * in the presentation area, and its current page.
