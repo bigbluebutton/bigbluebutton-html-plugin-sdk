@@ -42,6 +42,8 @@ SDK for developing BigBlueButton plugins, examples of implementations can be fou
 
 - `useUsersBasicInfo` hook: provides information regarding all users (only crucial information: userId, name and role);
 
+- `useLoadedChatMessages` hook: provides information regarding the loaded chat messages;
+
 - `useCustomSubscription` hook: with this hook, the developer can query pretty much anything graphql can provide. Note: Make sure that, on BBB version change, the custom subscriptions you make will work as expected.
 
 - `usePluginSettings` hook: it provides all the specific settings regarding the current plugin it's been loaded from.

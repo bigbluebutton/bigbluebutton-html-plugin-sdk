@@ -33,6 +33,8 @@ import { getJoinUrl } from '../auxiliary/join-url/getter';
 import { usePluginSettings } from '../../data-consumption/domain/settings';
 import { EventPayloads, UiEventsHookEventWrapper, UseUiEventFunction } from '../../ui-events/types';
 import { useUiEvent } from '../../ui-events/hooks';
+import { UseLoadedChatMessagesFunction } from '../../data-consumption/domain/chat/loaded-chat-messages/types';
+import { useLoadedChatMessages } from '../../data-consumption/domain/chat/loaded-chat-messages/hooks';
 
 declare const window: PluginBrowserWindow;
 
@@ -66,6 +68,8 @@ export abstract class BbbPluginSdk {
     pluginApi.useLoadedUserList = (() => useLoadedUserList()) as UseLoadedUserListFunction;
     pluginApi.useCurrentUser = (() => useCurrentUser()) as UseCurrentUserFunction;
     pluginApi.useUsersBasicInfo = (() => useUsersBasicInfo()) as UseUsersBasicInfoFunction;
+    pluginApi.useLoadedChatMessages = (
+      () => useLoadedChatMessages()) as UseLoadedChatMessagesFunction;
     pluginApi.useUiEvent = (<
       T extends keyof EventPayloads
     >(

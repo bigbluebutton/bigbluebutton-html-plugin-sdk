@@ -21,6 +21,7 @@ import { GetSessionTokenFunction } from '../auxiliary/session-token/types';
 import { GetJoinUrlFunction } from '../auxiliary/join-url/types';
 import { UsePluginSettingsFunction } from '../../data-consumption/domain/settings/plugin-settings/types';
 import { UseUiEventFunction } from '../../ui-events/types';
+import { UseLoadedChatMessagesFunction } from '../../data-consumption/domain/chat/loaded-chat-messages/types';
 
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
@@ -116,6 +117,13 @@ export interface PluginApi {
    *
    */
   useUsersBasicInfo?: UseUsersBasicInfoFunction;
+   /**
+   * Returns an object containing brief data on the messages already loaded in the chat.
+   *
+   * @returns `GraphqlResponseWrapper` with the LoadedChatMessages.
+   *
+   */
+  useLoadedChatMessages?: UseLoadedChatMessagesFunction;
   /**
    * Returns an object containing the settings for the current plugin (with pluginName
    * defined in the pluginApi). It needs to be explicitly written in the client settings
