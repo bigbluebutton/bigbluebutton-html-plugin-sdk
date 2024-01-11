@@ -9,3 +9,7 @@ export enum DataChannelDispatcherUserRole {
   MODERATOR = 'MODERATOR',
   VIEWER = 'VIEWER',
 }
+
+export enum DataChannelHooks {
+  DATA_CHANNEL = 'Hooks::DataChannel',
+}

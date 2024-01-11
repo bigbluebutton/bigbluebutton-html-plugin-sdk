@@ -1,4 +1,4 @@
-import { UiCommands } from 'src/ui-commands/types';
+import { UiCommands } from '../../ui-commands/types';
 import { ActionButtonDropdownItem } from '../../extensible-areas/action-button-dropdown-item/types';
 import { ActionsBarItem } from '../../extensible-areas/actions-bar-item/types';
 import { AudioSettingsDropdownItem } from '../../extensible-areas/audio-settings-dropdown-item/types';

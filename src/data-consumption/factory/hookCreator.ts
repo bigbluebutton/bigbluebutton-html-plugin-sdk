@@ -14,6 +14,7 @@ import {
   makeCustomHookIdentifier,
   makeCustomHookIdentifierFromArgs,
 } from '../utils';
+import { DataConsumptionHooks } from '../enums';
 
 const updateCustomHookSubscription = (
   hookName: Hooks,
@@ -118,7 +119,7 @@ export const createDataConsumptionHook = <T>(
   }, []);
 
   useEffect(() => {
-    if (hookName === Hooks.CUSTOM_SUBSCRIPTION
+    if (hookName === DataConsumptionHooks.CUSTOM_SUBSCRIPTION
       && (prevQueryRef?.current !== queryState || prevVariablesRef.current !== variablesState)) {
       updateCustomHookSubscription(
         hookName,

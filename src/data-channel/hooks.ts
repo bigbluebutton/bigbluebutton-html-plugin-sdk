@@ -8,12 +8,13 @@ import {
   GraphqlResponseWrapper,
 } from '../index';
 import {
-  HookEvents, Hooks,
+  HookEvents,
 } from '../core/enum';
 import { PluginApi } from '../core/api/types';
 import {
   HookEventWrapper, SubscribedEventDetails, UnsubscribedEventDetails, UpdatedEventDetails,
 } from '../core/types';
+import { DataChannelHooks } from './enums';
 
 export const createChannelIdentifier = (channelName: string, pluginName: string) => `${channelName}::${pluginName}`;
 
@@ -53,14 +54,14 @@ export const useDataChannel = (<T>(channelName: string,
 
     window.dispatchEvent(new CustomEvent<SubscribedEventDetails>(HookEvents.SUBSCRIBED, {
       detail: {
-        hook: Hooks.DATA_CHANNEL,
+        hook: DataChannelHooks.DATA_CHANNEL,
         hookArguments: { channelName, pluginName },
       },
     }));
     return () => {
       window.dispatchEvent(new CustomEvent<UnsubscribedEventDetails>(HookEvents.UNSUBSCRIBED, {
         detail: {
-          hook: Hooks.DATA_CHANNEL,
+          hook: DataChannelHooks.DATA_CHANNEL,
           hookArguments: { channelName, pluginName },
         },
       }));
