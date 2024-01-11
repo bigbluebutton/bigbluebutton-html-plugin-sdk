@@ -2,6 +2,7 @@ import { ApolloError } from '@apollo/client';
 import { CustomSubscriptionArguments } from '../data-consumption/domain/shared/custom-subscription/types';
 import { Hooks } from './enum';
 import { DataChannelArguments } from '../data-channel/types';
+import { DomElementManipulationArguments } from '../dom-element-manipulation/type';
 
 /**
  * Wrapper for the data that comes from the core. With this more complex object
@@ -16,7 +17,8 @@ export interface GraphqlResponseWrapper<TData> {
   error?: ApolloError;
 }
 
-export type HookArguments = CustomSubscriptionArguments | DataChannelArguments;
+export type HookArguments = CustomSubscriptionArguments | DataChannelArguments
+  | DomElementManipulationArguments;
 
 export interface UpdatedEventDetails<T> {
   hook: Hooks;

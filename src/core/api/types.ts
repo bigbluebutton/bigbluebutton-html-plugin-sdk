@@ -1,4 +1,5 @@
 import { UiCommands } from '../../ui-commands/types';
+import { UseChatMessageDomElementsFunction } from '../../dom-element-manipulation/chat/message/types';
 import { ActionButtonDropdownItem } from '../../extensible-areas/action-button-dropdown-item/types';
 import { ActionsBarItem } from '../../extensible-areas/actions-bar-item/types';
 import { AudioSettingsDropdownItem } from '../../extensible-areas/audio-settings-dropdown-item/types';
@@ -168,6 +169,16 @@ export interface PluginApi {
   mapOfDispatchers: MapOfDispatchers;
   // --- Ui-Commands ---
   uiCommands?: UiCommands;
+  // --- Dom element manipulation
+  /**
+   * Returns an array with the DOM elements for the chat messages.
+   *
+   * @param messageIds - Ids of the chat messages one wants to retrieve in the form of an array
+   * @returns The array of an object with DOM elements (in this case, div) and the id
+   * of the chat message
+   *
+   */
+  useChatMessageDomElements?: UseChatMessageDomElementsFunction;
   // --- Auxiliary functions ---
   getSessionToken?: GetSessionTokenFunction;
   getJoinUrl?: GetJoinUrlFunction;

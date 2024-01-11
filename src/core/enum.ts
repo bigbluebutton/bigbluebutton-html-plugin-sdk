@@ -1,4 +1,5 @@
-import { DataChannelHooks } from 'src/data-channel/enums';
+import { DataChannelHooks } from '../data-channel/enums';
+import { DomElementManipulationHooks } from '../dom-element-manipulation/enums';
 import { DataConsumptionHooks } from '../data-consumption/enums';
 
 export enum HookEvents {
@@ -7,4 +8,4 @@ export enum HookEvents {
   UNSUBSCRIBED = 'PLUGIN_UNSUBSCRIBED_FROM_HOOK'
 }
 
-export type Hooks = DataConsumptionHooks | DataChannelHooks;
+export type Hooks = DataConsumptionHooks | DataChannelHooks | DomElementManipulationHooks;
