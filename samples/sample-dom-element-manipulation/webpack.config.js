@@ -13,6 +13,9 @@ module.exports = {
     host: "localhost",
     hot: false,
     liveReload: false,
+    client: {
+      overlay: false,
+    },
   },
   module: {
     rules: [
