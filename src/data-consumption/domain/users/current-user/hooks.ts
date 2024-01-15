@@ -1,8 +1,8 @@
-import { Hooks } from '../../../../core/enum';
+import { DataConsumptionHooks } from '../../../../data-consumption/enums';
 import { createDataConsumptionHook } from '../../../factory/hookCreator';
 import { CurrentUserData } from './types';
 
 export const useCurrentUser = () => createDataConsumptionHook<
 CurrentUserData>(
-  Hooks.CURRENT_USER,
+  DataConsumptionHooks.CURRENT_USER,
 );
