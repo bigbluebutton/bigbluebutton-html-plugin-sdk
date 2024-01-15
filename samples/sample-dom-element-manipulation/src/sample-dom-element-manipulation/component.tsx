@@ -25,12 +25,12 @@ function SampleDomElementManipulation({ pluginUuid: uuid }: SampleDomElementMani
     }
   }, [response])
 
-  const chatMessages = pluginApi.useChatMessageDomElements(chatIdsToApplyHighlights);
+  const chatMessagesDomElements = pluginApi.useChatMessageDomElements(chatIdsToApplyHighlights);
 
-  chatMessages?.forEach((chatMessage) => {
+  chatMessagesDomElements?.forEach((chatMessageDomElement) => {
 
-    const mention = chatMessage.innerHTML.match(REGEX); 
-    chatMessage.innerHTML = chatMessage.innerHTML.replace(mention[0], `<span style="color: #4185cf; background-color: #f2f6f8;">${mention[0]}</span>`);
+    const mention = chatMessageDomElement.innerHTML.match(REGEX); 
+    chatMessageDomElement.innerHTML = chatMessageDomElement.innerHTML.replace(mention[0], `<span style="color: #4185cf; background-color: #f2f6f8;">${mention[0]}</span>`);
   })
   return null;
 }
