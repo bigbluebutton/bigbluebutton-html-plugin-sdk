@@ -60,3 +60,6 @@ SDK for developing BigBlueButton plugins, examples of implementations can be fou
     - form: 
       - open: this function will open the sidebar chat panel automatically;
       - fill: this function will fill the form input field of the chat passed in the argument as {text: string}
+
+### Dom Element Manipulation
+- `useChatMessageDomElements` hook: This hook will return the dom element of a chat message reactively, so one can modify whatever is inside, such as text, css, js, etc.;

@@ -10,9 +10,12 @@ module.exports = {
   devServer: {
     allowedHosts: "all",
     port: 4701,
-    host: "127.0.0.1",
+    host: "localhost",
     hot: false,
     liveReload: false,
+    client: {
+      overlay: false,
+    },
   },
   module: {
     rules: [

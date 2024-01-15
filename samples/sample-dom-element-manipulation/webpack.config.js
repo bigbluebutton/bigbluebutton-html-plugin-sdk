@@ -1,8 +1,8 @@
 module.exports = {
   entry: './src/index.tsx',
   output: {
-    filename: 'SampleDataChannelPlugin.js',
-    library: 'SampleDataChannelPlugin',
+    filename: 'SampleDomElementManipulation.js',
+    library: 'SampleDomElementManipulation',
     libraryTarget: 'umd',
     publicPath: '/static/',
     globalObject: 'this',

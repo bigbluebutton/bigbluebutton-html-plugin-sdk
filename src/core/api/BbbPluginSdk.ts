@@ -35,6 +35,7 @@ import { EventPayloads, UiEventsHookEventWrapper, UseUiEventFunction } from '../
 import { useUiEvent } from '../../ui-events/hooks';
 import { UseLoadedChatMessagesFunction } from '../../data-consumption/domain/chat/loaded-chat-messages/types';
 import { useLoadedChatMessages } from '../../data-consumption/domain/chat/loaded-chat-messages/hooks';
+import { useChatMessageDomElements } from '../../dom-element-manipulation/chat/message/hooks';
 
 declare const window: PluginBrowserWindow;
 
@@ -76,6 +77,9 @@ export abstract class BbbPluginSdk {
       eventName: T,
       callback: (payload: UiEventsHookEventWrapper<EventPayloads[T]>) => void,
     ) => useUiEvent(eventName, callback)) as UseUiEventFunction;
+    pluginApi.useChatMessageDomElements = (
+      messageIds: string[],
+    ) => useChatMessageDomElements(messageIds);
     pluginApi.uiCommands = uiCommands;
     const pluginName = pluginApi?.pluginName;
     if (pluginName) {
