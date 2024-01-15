@@ -8,6 +8,9 @@ module.exports = {
     globalObject: 'this',
   },
   devServer: {
+    allowedHosts: "all",
+    port: 4701,
+    host: "127.0.0.1",
     hot: false,
     liveReload: false,
   },
