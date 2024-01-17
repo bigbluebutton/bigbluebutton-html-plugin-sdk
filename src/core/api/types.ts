@@ -23,6 +23,7 @@ import { GetJoinUrlFunction } from '../auxiliary/join-url/types';
 import { UsePluginSettingsFunction } from '../../data-consumption/domain/settings/plugin-settings/types';
 import { UseUiEventFunction } from '../../ui-events/types';
 import { UseLoadedChatMessagesFunction } from '../../data-consumption/domain/chat/loaded-chat-messages/types';
+import { UseTalkingIndicatorFunction } from '../../data-consumption/domain/user-voice/talking-indicator/types';
 
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
@@ -134,6 +135,14 @@ export interface PluginApi {
    *
    */
   usePluginSettings?: UsePluginSettingsFunction;
+    /**
+   * Returns an object containing a list user-voice with the main properties of that object,
+   * that being talking (boolean), startTime (number), muted (boolean) and userId (string).
+   *
+   * @returns `GraphqlResponseWrapper` with the list of user-voice.
+   *
+   */
+  useTalkingIndicator?: UseTalkingIndicatorFunction;
   /**
    * Returns an object containing the data on the current presentation being displayed
    * in the presentation area, and its current page.
