@@ -1,11 +1,11 @@
 import { AudioSettingsDropdownItemType } from './enums';
 import {
-  AudioSettingsDropdownItem, AudioSettingsDropdownOptionProps,
+  AudioSettingsDropdownInterface, AudioSettingsDropdownOptionProps,
 } from './types';
 
-// AudioSettingsDropdownItem Extensible Area
+// AudioSettingsDropdown Extensible Area
 
-export class AudioSettingsDropdownOption implements AudioSettingsDropdownItem {
+export class AudioSettingsDropdownOption implements AudioSettingsDropdownInterface {
   id: string = '';
 
   type: AudioSettingsDropdownItemType;
@@ -40,7 +40,7 @@ export class AudioSettingsDropdownOption implements AudioSettingsDropdownItem {
   };
 }
 
-export class AudioSettingsDropdownSeparator implements AudioSettingsDropdownItem {
+export class AudioSettingsDropdownSeparator implements AudioSettingsDropdownInterface {
   id: string = '';
 
   type: AudioSettingsDropdownItemType;

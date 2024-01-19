@@ -3,7 +3,7 @@ export {
   ActionsBarSeparator,
 } from './component';
 export {
-  ActionsBarItem,
+  ActionsBarInterface,
 } from './types';
 export {
   ActionsBarPosition,

@@ -1,11 +1,11 @@
 import { UserCameraDropdownItemType } from './enums';
 import {
-  UserCameraDropdownItem, UserCameraDropdownOptionProps,
+  UserCameraDropdownInterface, UserCameraDropdownOptionProps,
 } from './types';
 
-// UserCameraDropdownItem Extensible Area
+// UserCameraDropdown Extensible Area
 
-export class UserCameraDropdownOption implements UserCameraDropdownItem {
+export class UserCameraDropdownOption implements UserCameraDropdownInterface {
   id: string = '';
 
   type: UserCameraDropdownItemType;
@@ -40,7 +40,7 @@ export class UserCameraDropdownOption implements UserCameraDropdownItem {
   };
 }
 
-export class UserCameraDropdownSeparator implements UserCameraDropdownItem {
+export class UserCameraDropdownSeparator implements UserCameraDropdownInterface {
   id: string = '';
 
   type: UserCameraDropdownItemType;

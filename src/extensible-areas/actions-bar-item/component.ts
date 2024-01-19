@@ -1,11 +1,11 @@
 import { ActionsBarPosition, ActionsBarItemType } from './enums';
 import {
-  ActionsBarItem, ActionsBarButtonProps, ActionsBarSeparatorProps,
+  ActionsBarInterface, ActionsBarButtonProps, ActionsBarSeparatorProps,
 } from './types';
 
-// ActionsBarItem Extensible Area
+// ActionsBar Extensible Area
 
-export class ActionsBarButton implements ActionsBarItem {
+export class ActionsBarButton implements ActionsBarInterface {
   id: string = '';
 
   type: ActionsBarItemType;
@@ -44,7 +44,7 @@ export class ActionsBarButton implements ActionsBarItem {
   };
 }
 
-export class ActionsBarSeparator implements ActionsBarItem {
+export class ActionsBarSeparator implements ActionsBarInterface {
   position: ActionsBarPosition;
 
   id: string = '';

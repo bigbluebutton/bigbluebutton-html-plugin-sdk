@@ -3,5 +3,5 @@ export {
   AudioSettingsDropdownSeparator,
 } from './component';
 export {
-  AudioSettingsDropdownItem,
+  AudioSettingsDropdownInterface,
 } from './types';

@@ -1,12 +1,12 @@
 import { NavBarItemType, NavBarItemPosition } from './enums';
 import {
-  NavBarItem, NavBarButtonProps,
+  NavBarInterface, NavBarButtonProps,
   NavBarInfoProps,
 } from './types';
 
-// NavBarItem Extensible Area
+// NavBar Extensible Area
 
-export class NavBarButton implements NavBarItem {
+export class NavBarButton implements NavBarInterface {
   id: string = '';
 
   type: NavBarItemType;
@@ -60,7 +60,7 @@ export class NavBarButton implements NavBarItem {
   };
 }
 
-export class NavBarInfo implements NavBarItem {
+export class NavBarInfo implements NavBarInterface {
   id: string = '';
 
   type: NavBarItemType;

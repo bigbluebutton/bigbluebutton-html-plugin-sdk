@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useEffect } from 'react';
 
 import {
-  ActionsBarButton, ActionsBarItem, ActionsBarPosition, ActionsBarSeparator,
+  ActionsBarButton, ActionsBarInterface, ActionsBarPosition, ActionsBarSeparator,
   BbbPluginSdk, GraphqlResponseWrapper, PluginApi, UsersBasicInfoResponseFromGraphqlWrapper 
 } from 'bigbluebutton-html-plugin-sdk';
 import { SampleActionsBarPluginProps } from './types';
@@ -15,7 +15,7 @@ function SampleActionsBarPlugin({
 
   useEffect(() => {
     const buttonToUserListItem:
-          ActionsBarItem = new ActionsBarButton({
+          ActionsBarInterface = new ActionsBarButton({
             icon: 'user',
             tooltip: 'This will make an alert dialog',
             onClick: () => {
@@ -24,7 +24,7 @@ function SampleActionsBarPlugin({
             position: ActionsBarPosition.RIGHT,
           });
     const dropdownToUserListItem:
-      ActionsBarItem = new ActionsBarSeparator({
+      ActionsBarInterface = new ActionsBarSeparator({
           position: ActionsBarPosition.RIGHT,
         });
     

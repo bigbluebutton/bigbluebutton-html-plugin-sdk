@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import * as ReactModal from 'react-modal';
 import './style.css';
 
-import { BbbPluginSdk, PluginApi, PresentationToolbarButton, PresentationToolbarItem, CustomSubscriptionHookOptions } from 'bigbluebutton-html-plugin-sdk';
+import { BbbPluginSdk, PluginApi, PresentationToolbarButton, PresentationToolbarInterface, CustomSubscriptionHookOptions } from 'bigbluebutton-html-plugin-sdk';
 import { SampleCustomSubscriptionPluginProps } from '../types';
 import { UrlsJson, Presentation, PresentationFromGraphqlWrapper } from './types';
 
@@ -46,7 +46,7 @@ function SampleCustomPresentationSubscriptionPlugin({ pluginUuid: uuid }: Sample
   };
 
   useEffect(() => {
-    const currentObjectToSendToClient: PresentationToolbarItem = 
+    const currentObjectToSendToClient: PresentationToolbarInterface = 
       new PresentationToolbarButton({
         label: 'See preview of next slide',
         tooltip: 'It requests the content of the next slide',

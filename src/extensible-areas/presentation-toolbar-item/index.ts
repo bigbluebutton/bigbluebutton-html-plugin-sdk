@@ -4,5 +4,5 @@ export {
   PresentationToolbarSeparator,
 } from './component';
 export {
-  PresentationToolbarItem,
+  PresentationToolbarInterface,
 } from './types';

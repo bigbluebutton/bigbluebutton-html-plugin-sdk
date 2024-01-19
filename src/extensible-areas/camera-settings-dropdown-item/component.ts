@@ -1,11 +1,11 @@
 import { CameraSettingsDropdownItemType } from './enums';
 import {
-  CameraSettingsDropdownItem, CameraSettingsDropdownOptionProps,
+  CameraSettingsDropdownInterface, CameraSettingsDropdownOptionProps,
 } from './types';
 
-// CameraSettingsDropdownItem Extensible Area
+// CameraSettingsDropdown Extensible Area
 
-export class CameraSettingsDropdownOption implements CameraSettingsDropdownItem {
+export class CameraSettingsDropdownOption implements CameraSettingsDropdownInterface {
   id: string = '';
 
   type: CameraSettingsDropdownItemType;
@@ -40,7 +40,7 @@ export class CameraSettingsDropdownOption implements CameraSettingsDropdownItem 
   };
 }
 
-export class CameraSettingsDropdownSeparator implements CameraSettingsDropdownItem {
+export class CameraSettingsDropdownSeparator implements CameraSettingsDropdownInterface {
   id: string = '';
 
   type: CameraSettingsDropdownItemType;

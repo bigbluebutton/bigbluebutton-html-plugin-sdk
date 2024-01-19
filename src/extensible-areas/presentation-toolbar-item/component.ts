@@ -1,11 +1,11 @@
 import { PresentationToolbarItemType } from './enums';
 import {
-  PresentationToolbarItem, PresentationToolbarButtonProps,
+  PresentationToolbarInterface, PresentationToolbarButtonProps,
 } from './types';
 
-// PresentationToolbarItem Extensible Area
+// PresentationToolbar Extensible Area
 
-export class PresentationToolbarButton implements PresentationToolbarItem {
+export class PresentationToolbarButton implements PresentationToolbarInterface {
   id: string = '';
 
   type: PresentationToolbarItemType;
@@ -38,7 +38,7 @@ export class PresentationToolbarButton implements PresentationToolbarItem {
   };
 }
 
-export class PresentationToolbarSpinner implements PresentationToolbarItem {
+export class PresentationToolbarSpinner implements PresentationToolbarInterface {
   id: string = '';
 
   type: PresentationToolbarItemType;
@@ -58,7 +58,7 @@ export class PresentationToolbarSpinner implements PresentationToolbarItem {
   };
 }
 
-export class PresentationToolbarSeparator implements PresentationToolbarItem {
+export class PresentationToolbarSeparator implements PresentationToolbarInterface {
   id: string = '';
 
   type: PresentationToolbarItemType;

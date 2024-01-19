@@ -1,16 +1,16 @@
 import { UiCommands } from '../../ui-commands/types';
 import { UseChatMessageDomElementsFunction } from '../../dom-element-manipulation/chat/message/types';
-import { ActionButtonDropdownItem } from '../../extensible-areas/action-button-dropdown-item/types';
-import { ActionsBarItem } from '../../extensible-areas/actions-bar-item/types';
-import { AudioSettingsDropdownItem } from '../../extensible-areas/audio-settings-dropdown-item/types';
-import { CameraSettingsDropdownItem } from '../../extensible-areas/camera-settings-dropdown-item/types';
-import { NavBarItem } from '../../extensible-areas/nav-bar-item/types';
-import { OptionsDropdownItem } from '../../extensible-areas/options-dropdown-item/types';
-import { PresentationDropdownItem } from '../../extensible-areas/presentation-dropdown-item/types';
-import { UserCameraDropdownItem } from '../../extensible-areas/user-camera-dropdown-item/types';
-import { UserListDropdownItem } from '../../extensible-areas/user-list-dropdown-item/types';
-import { UserListItemAdditionalInformation } from '../../extensible-areas/user-list-item-additional-information/types';
-import { PresentationToolbarItem } from '../../extensible-areas/presentation-toolbar-item/types';
+import { ActionButtonDropdownInterface } from '../../extensible-areas/action-button-dropdown-item/types';
+import { ActionsBarInterface } from '../../extensible-areas/actions-bar-item/types';
+import { AudioSettingsDropdownInterface } from '../../extensible-areas/audio-settings-dropdown-item/types';
+import { CameraSettingsDropdownInterface } from '../../extensible-areas/camera-settings-dropdown-item/types';
+import { NavBarInterface } from '../../extensible-areas/nav-bar-item/types';
+import { OptionsDropdownInterface } from '../../extensible-areas/options-dropdown-item/types';
+import { PresentationDropdownInterface } from '../../extensible-areas/presentation-dropdown-item/types';
+import { UserCameraDropdownInterface } from '../../extensible-areas/user-camera-dropdown-item/types';
+import { UserListDropdownInterface } from '../../extensible-areas/user-list-dropdown-item/types';
+import { UserListItemAdditionalInformationInterface } from '../../extensible-areas/user-list-item-additional-information/types';
+import { PresentationToolbarInterface } from '../../extensible-areas/presentation-toolbar-item/types';
 import { UseCurrentPresentationFunction } from '../../data-consumption/domain/presentations/current-presentation/types';
 import { UseLoadedUserListFunction } from '../../data-consumption/domain/users/loaded-user-list/types';
 import { UseCurrentUserFunction } from '../../data-consumption/domain/users/current-user/types';
@@ -26,46 +26,46 @@ import { UseLoadedChatMessagesFunction } from '../../data-consumption/domain/cha
 
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
-  PresentationToolbarItem[]) => void;
+  PresentationToolbarInterface[]) => void;
 
 export type SetUserListDropdownItems = (
-  userListDropdownItem: UserListDropdownItem[]
+  userListDropdownItem: UserListDropdownInterface[]
 ) => void;
 
 export type SetActionButtonDropdownItems = (
-  actionButtonDropdownItem: ActionButtonDropdownItem[]
+  actionButtonDropdownInterface: ActionButtonDropdownInterface[]
 ) => void;
 
 export type SetActionsBarItems = (
-  actionsBarItems: ActionsBarItem[]
+  actionsBarItems: ActionsBarInterface[]
 ) => void;
 
 export type SetAudioSettingsDropdownItems = (
-  audioSettingsDropdownItem: AudioSettingsDropdownItem[]
+  audioSettingsDropdownItem: AudioSettingsDropdownInterface[]
 ) => void;
 
 export type SetPresentationDropdownItems = (
-  userListDropdownItem: PresentationDropdownItem[]
+  userListDropdownItem: PresentationDropdownInterface[]
 ) => void;
 
 export type SetNavBarItems = (
-  userListDropdownItem: NavBarItem[]
+  userListDropdownItem: NavBarInterface[]
 ) => void;
 
 export type SetOptionsDropdownItems = (
-  optionsDropdownItem: OptionsDropdownItem[]
+  optionsDropdownItem: OptionsDropdownInterface[]
 ) => void;
 
 export type SetCameraSettingsDropdownItems = (
-  cameraSettingsDropdownItem: CameraSettingsDropdownItem[]
+  cameraSettingsDropdownItem: CameraSettingsDropdownInterface[]
 ) => void;
 
 export type SetUserCameraDropdownItems = (
-  userCameraDropdownItem: UserCameraDropdownItem[]
+  userCameraDropdownItem: UserCameraDropdownInterface[]
 ) => void;
 
 export type SetUserListItemAdditionalInformation = (
-  userListItemAdditionalInformation: UserListItemAdditionalInformation[]
+  userListItemAdditionalInformation: UserListItemAdditionalInformationInterface[]
 ) => void;
 
 /**

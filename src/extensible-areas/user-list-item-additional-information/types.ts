@@ -8,7 +8,7 @@ import { PluginProvidedUiItemDescriptor } from '../base';
  * to add icons, and labels, for now.
  * Mandatory to have the `userId`
  */
-export interface UserListItemAdditionalInformation extends PluginProvidedUiItemDescriptor {
+export interface UserListItemAdditionalInformationInterface extends PluginProvidedUiItemDescriptor {
   userId: string;
 }
 export interface UserListItemIconProps {

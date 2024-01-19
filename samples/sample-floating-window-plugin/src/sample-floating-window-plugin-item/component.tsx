@@ -2,7 +2,7 @@ import * as ReactDOM from 'react-dom/client';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 
-import { FloatingWindow, PluginApi, BbbPluginSdk, ActionsBarItem, ActionsBarButton, ActionsBarPosition } from 'bigbluebutton-html-plugin-sdk';
+import { FloatingWindow, PluginApi, BbbPluginSdk, ActionsBarInterface, ActionsBarButton, ActionsBarPosition } from 'bigbluebutton-html-plugin-sdk';
 import { SampleFloatingWindowPluginProps } from './types';
 import StickyNote from '../floating-personal-notes/component';
 import enums from '../utils/events';
@@ -47,7 +47,7 @@ function SampleFloatingWindowPlugin({ pluginUuid: uuid }: SampleFloatingWindowPl
       pluginApi.setActionsBarItems([]);
       pluginApi.setFloatingWindows([floatingWindow]);
     } else if (isMinimized && !isClosed) {
-      const restoringButton: ActionsBarItem = new ActionsBarButton({
+      const restoringButton: ActionsBarInterface = new ActionsBarButton({
           icon: 'copy',
           tooltip: 'Open private notes floating window',
           onClick: () => {

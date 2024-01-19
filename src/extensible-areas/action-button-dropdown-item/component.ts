@@ -1,11 +1,11 @@
 import { ActionButtonDropdownItemType } from './enums';
 import {
-  ActionButtonDropdownItem, ActionButtonDropdownOptionProps,
+  ActionButtonDropdownInterface, ActionButtonDropdownOptionProps,
 } from './types';
 
-// ActionButtonDropdownItem Extensible Area
+// ActionButtonDropdown Extensible Area
 
-export class ActionButtonDropdownOption implements ActionButtonDropdownItem {
+export class ActionButtonDropdownOption implements ActionButtonDropdownInterface {
   id: string = '';
 
   type: ActionButtonDropdownItemType;
@@ -47,7 +47,7 @@ export class ActionButtonDropdownOption implements ActionButtonDropdownItem {
   };
 }
 
-export class ActionButtonDropdownSeparator implements ActionButtonDropdownItem {
+export class ActionButtonDropdownSeparator implements ActionButtonDropdownInterface {
   id: string = '';
 
   type: ActionButtonDropdownItemType;

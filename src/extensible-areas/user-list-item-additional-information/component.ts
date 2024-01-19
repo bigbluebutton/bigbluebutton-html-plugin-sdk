@@ -1,12 +1,12 @@
 import { UserListItemAdditionalInformationType } from './enums';
 import {
-  UserListItemAdditionalInformation, UserListItemIconProps,
+  UserListItemAdditionalInformationInterface, UserListItemIconProps,
   UserListItemLabelProps,
 } from './types';
 
 // UserListItemAdditionalInformation Extensible Area
 
-export class UserListItemIcon implements UserListItemAdditionalInformation {
+export class UserListItemIcon implements UserListItemAdditionalInformationInterface {
   id: string = '';
 
   type: UserListItemAdditionalInformationType;
@@ -39,7 +39,7 @@ export class UserListItemIcon implements UserListItemAdditionalInformation {
   };
 }
 
-export class UserListItemLabel implements UserListItemAdditionalInformation {
+export class UserListItemLabel implements UserListItemAdditionalInformationInterface {
   id: string = '';
 
   type: UserListItemAdditionalInformationType;

@@ -3,5 +3,5 @@ export {
   CameraSettingsDropdownSeparator,
 } from './component';
 export {
-  CameraSettingsDropdownItem,
+  CameraSettingsDropdownInterface,
 } from './types';

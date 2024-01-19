@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 
-import { BbbPluginSdk, PluginApi, PresentationDropdownItem, PresentationDropdownOption, PresentationDropdownSeparator } from 'bigbluebutton-html-plugin-sdk';
+import { BbbPluginSdk, PluginApi, PresentationDropdownInterface, PresentationDropdownOption, PresentationDropdownSeparator } from 'bigbluebutton-html-plugin-sdk';
 import { SamplePresentationDropdownPluginProps } from './types';
 
 function SamplePresentationDropdownPlugin({
@@ -11,7 +11,7 @@ function SamplePresentationDropdownPlugin({
 
   useEffect(() => {
     const presentationDropdownOption:
-      PresentationDropdownItem = new PresentationDropdownOption({
+      PresentationDropdownInterface = new PresentationDropdownOption({
         label: 'Click to see alert from plugin',
         icon: 'user',
         onClick: () => {
@@ -20,7 +20,7 @@ function SamplePresentationDropdownPlugin({
       });
       
     const presentationDropdownSeparator:
-      PresentationDropdownItem = new PresentationDropdownSeparator();
+      PresentationDropdownInterface = new PresentationDropdownSeparator();
     pluginApi.setPresentationDropdownItems([presentationDropdownSeparator, presentationDropdownOption]);
   }, []);
 

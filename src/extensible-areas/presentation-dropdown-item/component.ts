@@ -1,11 +1,11 @@
 import { PresentationDropdownItemType } from './enums';
 import {
-  PresentationDropdownItem, PresentationDropdownOptionProps,
+  PresentationDropdownInterface, PresentationDropdownOptionProps,
 } from './types';
 
-// PresentationDropdownItem Extensible Area
+// PresentationDropdown Extensible Area
 
-export class PresentationDropdownOption implements PresentationDropdownItem {
+export class PresentationDropdownOption implements PresentationDropdownInterface {
   id: string = '';
 
   type: PresentationDropdownItemType;
@@ -41,7 +41,7 @@ export class PresentationDropdownOption implements PresentationDropdownItem {
   };
 }
 
-export class PresentationDropdownSeparator implements PresentationDropdownItem {
+export class PresentationDropdownSeparator implements PresentationDropdownInterface {
   id: string = '';
 
   type: PresentationDropdownItemType;

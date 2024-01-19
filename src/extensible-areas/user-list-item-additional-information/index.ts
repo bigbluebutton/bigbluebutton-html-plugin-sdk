@@ -3,5 +3,5 @@ export {
   UserListItemLabel,
 } from './component';
 export {
-  UserListItemAdditionalInformation,
+  UserListItemAdditionalInformationInterface,
 } from './types';
