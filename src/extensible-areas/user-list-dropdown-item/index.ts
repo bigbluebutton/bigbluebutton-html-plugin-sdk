@@ -4,5 +4,5 @@ export {
   UserListDropdownInformation,
 } from './component';
 export {
-  UserListDropdownItem,
+  UserListDropdownInterface,
 } from './types';

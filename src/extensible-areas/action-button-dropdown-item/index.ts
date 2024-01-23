@@ -3,5 +3,5 @@ export {
   ActionButtonDropdownSeparator,
 } from './component';
 export {
-  ActionButtonDropdownItem,
+  ActionButtonDropdownInterface,
 } from './types';

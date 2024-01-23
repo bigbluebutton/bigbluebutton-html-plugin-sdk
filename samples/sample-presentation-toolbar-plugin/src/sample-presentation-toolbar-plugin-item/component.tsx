@@ -4,7 +4,7 @@ import * as ReactModal from 'react-modal';
 import './style.css';
 
 import { BbbPluginSdk, CurrentPresentation, PluginApi,
-  PresentationToolbarButton, PresentationToolbarItem,
+  PresentationToolbarButton, PresentationToolbarInterface,
   PresentationToolbarSpinner,
 } from 'bigbluebutton-html-plugin-sdk/';
 import { SamplePresentationToolbarPluginProps } from './types';
@@ -49,7 +49,7 @@ function SamplePresentationToolbarPlugin({ pluginUuid: uuid }: SamplePresentatio
   };
 
   useEffect(() => {
-    let currentObjectToSendToClient: PresentationToolbarItem;
+    let currentObjectToSendToClient: PresentationToolbarInterface;
     if (!isIdle) {
       currentObjectToSendToClient = new PresentationToolbarButton({
         label: '10 seconds',

@@ -1,11 +1,11 @@
 import { OptionsDropdownItemType } from './enums';
 import {
-  OptionsDropdownItem, OptionsDropdownOptionProps,
+  OptionsDropdownInterface, OptionsDropdownOptionProps,
 } from './types';
 
-// OptionsDropdownItem Extensible Area
+// OptionsDropdown Extensible Area
 
-export class OptionsDropdownOption implements OptionsDropdownItem {
+export class OptionsDropdownOption implements OptionsDropdownInterface {
   id: string = '';
 
   type: OptionsDropdownItemType;
@@ -40,7 +40,7 @@ export class OptionsDropdownOption implements OptionsDropdownItem {
   };
 }
 
-export class OptionsDropdownSeparator implements OptionsDropdownItem {
+export class OptionsDropdownSeparator implements OptionsDropdownInterface {
   id: string = '';
 
   type: OptionsDropdownItemType;

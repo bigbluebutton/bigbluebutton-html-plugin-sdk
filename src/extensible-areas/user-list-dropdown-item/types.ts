@@ -7,7 +7,7 @@ import { PluginProvidedUiItemDescriptor } from '../base';
  * This dropdown is located on the bottom left corner of the user webcam area.
  * Mandatory to have the `userId`
  */
-export interface UserListDropdownItem extends PluginProvidedUiItemDescriptor{
+export interface UserListDropdownInterface extends PluginProvidedUiItemDescriptor{
   userId: string;
 }
 

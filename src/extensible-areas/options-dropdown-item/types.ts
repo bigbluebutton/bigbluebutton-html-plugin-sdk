@@ -7,7 +7,7 @@ import { PluginProvidedUiItemDescriptor } from '../base';
  * This dropdown is related to the options menu on the top right corner of the UI
  * (the 3 dots)
  */
-export interface OptionsDropdownItem extends PluginProvidedUiItemDescriptor{
+export interface OptionsDropdownInterface extends PluginProvidedUiItemDescriptor{
 }
 
 export interface OptionsDropdownOptionProps {

@@ -3,5 +3,5 @@ export {
   UserCameraDropdownSeparator,
 } from './component';
 export {
-  UserCameraDropdownItem,
+  UserCameraDropdownInterface,
 } from './types';

@@ -7,7 +7,7 @@ import { PluginProvidedUiItemDescriptor } from '../base';
  * To make this dropdown appear, the user needs to enter with audio, either listen only
  * or microphone. This will make a small downward arrow appear (chevron).
  */
-export interface AudioSettingsDropdownItem extends PluginProvidedUiItemDescriptor{
+export interface AudioSettingsDropdownInterface extends PluginProvidedUiItemDescriptor{
 }
 
 export interface AudioSettingsDropdownOptionProps {

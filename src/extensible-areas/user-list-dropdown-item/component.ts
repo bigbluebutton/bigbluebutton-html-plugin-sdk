@@ -1,12 +1,12 @@
 import {
-  UserListDropdownItem, UserListDropdownOptionProps,
+  UserListDropdownInterface, UserListDropdownOptionProps,
   UserListDropdownSeparatorProps, UserListDropdownInformationProps,
 } from './types';
 import { UserListDropdownItemType } from './enums';
 
-// UserListDropdownItem Extensible Area
+// UserListDropdown Extensible Area
 
-export class UserListDropdownOption implements UserListDropdownItem {
+export class UserListDropdownOption implements UserListDropdownInterface {
   id: string = '';
 
   userId: string;
@@ -55,7 +55,7 @@ export class UserListDropdownOption implements UserListDropdownItem {
   };
 }
 
-export class UserListDropdownSeparator implements UserListDropdownItem {
+export class UserListDropdownSeparator implements UserListDropdownInterface {
   id: string = '';
 
   userId: string;
@@ -81,7 +81,7 @@ export class UserListDropdownSeparator implements UserListDropdownItem {
   };
 }
 
-export class UserListDropdownInformation implements UserListDropdownItem {
+export class UserListDropdownInformation implements UserListDropdownInterface {
   id: string = '';
 
   userId: string;

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import * as ReactModal from 'react-modal';
 import './style.css';
 
-import { BbbPluginSdk, PluginApi, UserListDropdownInformation, UserListDropdownItem, UserListDropdownOption, UserListDropdownSeparator } from 'bigbluebutton-html-plugin-sdk';
+import { BbbPluginSdk, PluginApi, UserListDropdownInformation, UserListDropdownInterface, UserListDropdownOption, UserListDropdownSeparator } from 'bigbluebutton-html-plugin-sdk';
 import { SampleUserListDropdownPluginProps } from './types';
 
 import { ModeratorTag } from '../moderator-tag/component';
@@ -25,25 +25,25 @@ function SampleUserListDropdownPlugin({
   useEffect(() => {
     if (loadedUserList !== undefined && loadedUserList.length > 0) {
       const listOfInformationToSend:
-      Array<UserListDropdownItem> = loadedUserList.map(
+      Array<UserListDropdownInterface> = loadedUserList.map(
         (user) => {
           const buttonToUserListItem:
-            UserListDropdownItem = new UserListDropdownInformation({
+            UserListDropdownInterface = new UserListDropdownInformation({
               label: '1 pending assignment',
               iconRight: 'warning',
               userId: user.userId,
               textColor: 'red',
               allowed: true,
             });
-          return buttonToUserListItem as UserListDropdownItem;
+          return buttonToUserListItem as UserListDropdownInterface;
         },
       );
       
       const listOfOptionsToSend:
-      Array<UserListDropdownItem> = loadedUserList.map(
+      Array<UserListDropdownInterface> = loadedUserList.map(
         (user) => {
           const buttonToUserListItem:
-            UserListDropdownItem = new UserListDropdownOption({
+            UserListDropdownInterface = new UserListDropdownOption({
               label: 'Click to see participant information',
               icon: 'user',
               userId: user.userId,
@@ -58,18 +58,18 @@ function SampleUserListDropdownPlugin({
                 setShowModal(true);
               },
             });
-          return buttonToUserListItem as UserListDropdownItem;
+          return buttonToUserListItem as UserListDropdownInterface;
         },
       );
       
       const listOfDropdownsToSend:
-      Array<UserListDropdownItem> = loadedUserList.map(
+      Array<UserListDropdownInterface> = loadedUserList.map(
         (user) => {
           const dropdownToUserListItem:
-            UserListDropdownItem = new UserListDropdownSeparator({
+            UserListDropdownInterface = new UserListDropdownSeparator({
               userId: user.userId,
             });
-          return dropdownToUserListItem as UserListDropdownItem;
+          return dropdownToUserListItem as UserListDropdownInterface;
         },
       );
       pluginApi.setUserListDropdownItems([...listOfInformationToSend, ...listOfDropdownsToSend, ...listOfOptionsToSend]);

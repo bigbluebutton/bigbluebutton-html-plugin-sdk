@@ -1,7 +1,7 @@
 import { PluginProvidedUiItemDescriptor } from '../base';
 import { NavBarItemPosition } from './enums';
 
-export interface NavBarItem extends PluginProvidedUiItemDescriptor{
+export interface NavBarInterface extends PluginProvidedUiItemDescriptor{
   position: NavBarItemPosition;
   hasSeparator: boolean;
 }

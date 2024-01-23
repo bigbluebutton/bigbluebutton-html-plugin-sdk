@@ -3,5 +3,5 @@ export {
   OptionsDropdownSeparator,
 } from './component';
 export {
-  OptionsDropdownItem,
+  OptionsDropdownInterface,
 } from './types';

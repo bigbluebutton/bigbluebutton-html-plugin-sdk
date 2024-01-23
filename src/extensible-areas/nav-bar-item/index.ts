@@ -3,7 +3,7 @@ export {
   NavBarInfo,
 } from './component';
 export {
-  NavBarItem,
+  NavBarInterface,
 } from './types';
 export {
   NavBarItemPosition,

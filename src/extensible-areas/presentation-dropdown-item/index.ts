@@ -3,5 +3,5 @@ export {
   PresentationDropdownSeparator,
 } from './component';
 export {
-  PresentationDropdownItem,
+  PresentationDropdownInterface,
 } from './types';
