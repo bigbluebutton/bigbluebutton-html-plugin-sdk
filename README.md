@@ -48,6 +48,8 @@ SDK for developing BigBlueButton plugins, examples of implementations can be fou
 
 - `usePluginSettings` hook: it provides all the specific settings regarding the current plugin it's been loaded from.
 
+- `useTalkingIndicator` hook: it gives you invormation on the user-voice data, that is, who is talking or muted.
+
 ### Real time data exchange
 - `useDataChannel` hook: this will allow you to exchange information (Send and receive) amongst different users through the same plugin;
 
@@ -60,6 +62,9 @@ SDK for developing BigBlueButton plugins, examples of implementations can be fou
     - form: 
       - open: this function will open the sidebar chat panel automatically;
       - fill: this function will fill the form input field of the chat passed in the argument as {text: string}
+  - external-video:
+    - volume:
+      - set: this function will set the external video volume to a certain number between 0 and 1 (that is 0% and);
 
 ### Dom Element Manipulation
 - `useChatMessageDomElements` hook: This hook will return the dom element of a chat message reactively, so one can modify whatever is inside, such as text, css, js, etc.;
