@@ -1,0 +1,1 @@
+export const RESET_DATA_CHANNEL = 'RESET_DATA_CHANNEL';

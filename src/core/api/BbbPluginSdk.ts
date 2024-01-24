@@ -87,9 +87,9 @@ export abstract class BbbPluginSdk {
     const pluginName = pluginApi?.pluginName;
     if (pluginName) {
       pluginApi.useDataChannel = ((
-        channelName: string,
-      ) => useDataChannel(channelName, pluginName, window.bbb_plugins[uuid])
-    ) as UseDataChannelFunctionFromPluginApi;
+          channelName: string,
+        ) => useDataChannel(channelName, pluginName, window.bbb_plugins[uuid])
+      ) as UseDataChannelFunctionFromPluginApi;
       pluginApi.usePluginSettings = () => usePluginSettings(pluginName);
     } else {
       throw new Error('Plugin name not set');
