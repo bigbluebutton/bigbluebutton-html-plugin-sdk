@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import {
   DataChannelMessagesWrapper,
+  DeletionObject,
   DispatcherFunction,
   UseDataChannelStaticFunction,
 } from './types';
@@ -12,11 +13,12 @@ import {
 } from '../core/enum';
 import { PluginApi } from '../core/api/types';
 import {
-  HookEventWrapper, SubscribedEventDetails, UnsubscribedEventDetails, UpdatedEventDetails,
+  HookEventWrapper, SubscribedEventDetails, UnsubscribedEventDetails,UpdatedEventDetails,
 } from '../core/types';
 import { DataChannelHooks } from './enums';
-
-export const createChannelIdentifier = (channelName: string, pluginName: string) => `${channelName}::${pluginName}`;
+import { createChannelIdentifier } from './utils';
+import { DeletionFunction } from './types';
+import { deletionFunctionUtil } from './utils';
 
 export const useDataChannel = (<T>(channelName: string,
   pluginName: string, pluginApi: PluginApi,
@@ -25,6 +27,10 @@ export const useDataChannel = (<T>(channelName: string,
     { loading: true },
   );
   const [dispatcherFunction, setDispatcherFunction] = useState<DispatcherFunction>();
+
+  const deletionFunction: DeletionFunction = (
+    deletionObjects: DeletionObject[]
+  ) => deletionFunctionUtil(deletionObjects, channelName, pluginName);
 
   const channelIdentifier = createChannelIdentifier(channelName, pluginName);
 
@@ -54,19 +60,19 @@ export const useDataChannel = (<T>(channelName: string,
 
     window.dispatchEvent(new CustomEvent<SubscribedEventDetails>(HookEvents.SUBSCRIBED, {
       detail: {
-        hook: DataChannelHooks.DATA_CHANNEL,
+        hook: DataChannelHooks.DATA_CHANNEL_BUILDER,
         hookArguments: { channelName, pluginName },
       },
     }));
     return () => {
       window.dispatchEvent(new CustomEvent<UnsubscribedEventDetails>(HookEvents.UNSUBSCRIBED, {
         detail: {
-          hook: DataChannelHooks.DATA_CHANNEL,
+          hook: DataChannelHooks.DATA_CHANNEL_BUILDER,
           hookArguments: { channelName, pluginName },
         },
       }));
       window.removeEventListener(channelIdentifier, handleDataChange);
     };
   }, []);
-  return [data, dispatcherFunction];
+  return [data, dispatcherFunction, deletionFunction];
 }) as UseDataChannelStaticFunction;
