@@ -2,9 +2,11 @@
 
 ## What is it?
 
-The Sample Action Button Dropdown Plugin serves as a demonstration of how developers can create their own custom plugins. This plugin includes a separator after the ordinary actions menu options and a button that displays the label "Fetch presentation content". When you click on the button, the menu will close and open a pop-up with the current presentation.
+The Sample Action Button Dropdown Plugin serves as a demonstration of how developers can create their own custom plugins. This plugin includes a separator after the ordinary actions menu options, a button that displays the label "Fetch presentation content" and another button that reads "Set different content in presentation area". When you click the first button, the menu will close and open a pop-up with the current presentation. And for the second button, the idea is to open a new content in the presentation area.
 
 ![Gif of plugin demo](./public/assets/plugin.gif)
+
+
 
 ## Running the Plugin from Source
 

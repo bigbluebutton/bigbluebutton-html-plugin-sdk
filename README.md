@@ -28,6 +28,8 @@ SDK for developing BigBlueButton plugins, examples of implementations can be fou
 
 - Floating window item (floatingWindow)
 
+- Generic component (genericComponent)
+
 ### Getters available through the API:
 - `getSessionToken`: returns the user session token located on the user's URL.
 
@@ -65,6 +67,9 @@ SDK for developing BigBlueButton plugins, examples of implementations can be fou
   - external-video:
     - volume:
       - set: this function will set the external video volume to a certain number between 0 and 1 (that is 0% and);
+  - layout:
+    - set: This function set the current layout with its argument (example: LayoutComponentListEnum.GENERIC_COMPONENT)
+    - unset: This function unset the current layout with its argument (example: LayoutComponentListEnum.GENERIC_COMPONENT)
 
 ### Dom Element Manipulation
 - `useChatMessageDomElements` hook: This hook will return the dom element of a chat message reactively, so one can modify whatever is inside, such as text, css, js, etc.;
