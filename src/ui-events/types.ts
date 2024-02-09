@@ -1,7 +1,9 @@
+import { ExternalVideoVolumeEventPayloads } from './external-video/volume/types';
 import { ChatFormEventPayloads } from './chat/form/types';
 import { UserListEventPayloads } from './user-list/types';
 
-export type EventPayloads = ChatFormEventPayloads & UserListEventPayloads;
+export type EventPayloads = ChatFormEventPayloads
+  & UserListEventPayloads & ExternalVideoVolumeEventPayloads;
 
 export type EventNames = keyof EventPayloads;
 
