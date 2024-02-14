@@ -3,14 +3,23 @@ import { useState, useEffect } from 'react';
 import * as ReactModal from 'react-modal';
 import './style.css';
 
-import { BbbPluginSdk, PluginApi, CurrentPresentation, ActionButtonDropdownSeparator, ActionButtonDropdownOption } from 'bigbluebutton-html-plugin-sdk';
+import { BbbPluginSdk, PluginApi, CurrentPresentation, ActionButtonDropdownSeparator, ActionButtonDropdownOption, GenericComponent } from 'bigbluebutton-html-plugin-sdk';
 import { SampleActionButtonDropdownPluginProps } from './types';
+import { LayoutComponentListEnum } from 'bigbluebutton-html-plugin-sdk/dist/cjs/ui-commands/layout/enums';
+import * as ReactDOM from 'react-dom/client';
+import { TestComponent } from '../components/test-component/component';
+
+export interface DataExampleType {
+  first_example_field: number;
+  second_example_field: string;
+}
 
 function SampleActionButtonDropdownPlugin({ pluginUuid: uuid }: SampleActionButtonDropdownPluginProps) {
   BbbPluginSdk.initialize(uuid);
   const [showModal, setShowModal] = useState<boolean>(false);
   const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
   const [currentSlideText, setCurrentSlideText] = useState<string>('');
+  const [showingPresentationContent, setShowingPresentationContent] = useState(false);
   const { data: currentUser } = pluginApi.useCurrentUser();
 
   const { data: currentPresentation } = pluginApi.useCurrentPresentation();
@@ -36,6 +45,16 @@ function SampleActionButtonDropdownPlugin({ pluginUuid: uuid }: SampleActionButt
     setShowModal(false);
   };
 
+  const handleChangePresentationAreaContent = () => {
+    if (showingPresentationContent) {
+      pluginApi.uiCommands.layout.unset(LayoutComponentListEnum.GENERIC_COMPONENT);
+      setShowingPresentationContent(false)
+    } else {
+      pluginApi.uiCommands.layout.set(LayoutComponentListEnum.GENERIC_COMPONENT);
+      setShowingPresentationContent(true)
+    }
+  } 
+
   useEffect(() => {
     if (currentUser?.presenter){
       pluginApi.setActionButtonDropdownItems([
@@ -49,9 +68,45 @@ function SampleActionButtonDropdownPlugin({ pluginUuid: uuid }: SampleActionButt
             handleFetchPresentationData(currentPresentation);
           },
         }),
+        new ActionButtonDropdownOption({
+          label: showingPresentationContent ? 'Return previous presentation content' : 'Set different content in presentation area',
+          icon: 'copy',
+          tooltip: 'this is a button injected by plugin',
+          allowed: true,
+          onClick: handleChangePresentationAreaContent,
+        }),
       ]);
     }
   }, [currentPresentation, currentUser]);
+
+  useEffect(() => {
+    pluginApi.setGenericComponents([
+      new GenericComponent({
+        contentFunction: (element: HTMLElement) => {
+          const root = ReactDOM.createRoot(element);
+          root.render(
+            <React.StrictMode>
+              <TestComponent 
+                uuid={uuid}
+              />
+            </React.StrictMode>,
+          )
+        }
+      }),
+      new GenericComponent({
+        contentFunction: (element: HTMLElement) => {
+          const root = ReactDOM.createRoot(element);
+          root.render(
+            <React.StrictMode>
+              <TestComponent 
+                uuid={uuid}
+              />
+            </React.StrictMode>,
+          )
+        }
+      })
+    ])
+  }, [])
 
   return (
     <ReactModal

@@ -13,7 +13,7 @@ export const volume = {
     if (volumeToBeSet <= 1 && volumeToBeSet >= 0) {
       window.dispatchEvent(
         new CustomEvent<
-        SetExternalVideoVolumeCommandArguments
+          SetExternalVideoVolumeCommandArguments
         >(ExternalVideoVolumeCommandsEnum.SET, {
           detail: setExternalVideoVolumeCommandArguments,
         }),

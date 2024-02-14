@@ -1,11 +1,9 @@
 import { UiCommandsChatObject } from './chat/types';
 import { UiCommandsExternalVideoObject } from './external-video/types';
-
-export interface UiCommandsEventWrapper<T> extends Event{
-  detail: T;
-}
+import { UiCommandsLayoutObject } from './layout/types';
 
 export interface UiCommands {
   chat: UiCommandsChatObject;
   externalVideo: UiCommandsExternalVideoObject;
+  layout: UiCommandsLayoutObject;
 }

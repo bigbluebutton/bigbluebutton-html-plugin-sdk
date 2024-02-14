@@ -24,6 +24,7 @@ import { UsePluginSettingsFunction } from '../../data-consumption/domain/setting
 import { UseUiEventFunction } from '../../ui-events/types';
 import { UseLoadedChatMessagesFunction } from '../../data-consumption/domain/chat/loaded-chat-messages/types';
 import { UseTalkingIndicatorFunction } from '../../data-consumption/domain/user-voice/talking-indicator/types';
+import { GenericComponentInterface } from '../../extensible-areas/generic-component/types';
 
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
@@ -69,6 +70,10 @@ export type SetUserListItemAdditionalInformation = (
   userListItemAdditionalInformation: UserListItemAdditionalInformationInterface[]
 ) => void;
 
+export type SetGenericComponents = (
+  genericComponents: GenericComponentInterface[]
+) => void;
+
 /**
  * Object that makes plugin hooks and extensible area setters available for developers to use.
  */
@@ -87,6 +92,7 @@ export interface PluginApi {
   setUserCameraDropdownItems: SetUserCameraDropdownItems;
   setUserListItemAdditionalInformation: SetUserListItemAdditionalInformation;
   setFloatingWindows: SetFloatingWindows;
+  setGenericComponents: SetGenericComponents;
   // --- DataConsumption Hooks ---
   /**
    * Returns an object containing the data on the current presentation being displayed
