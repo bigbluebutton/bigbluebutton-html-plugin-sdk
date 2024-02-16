@@ -25,6 +25,7 @@ import { UseUiEventFunction } from '../../ui-events/types';
 import { UseLoadedChatMessagesFunction } from '../../data-consumption/domain/chat/loaded-chat-messages/types';
 import { UseTalkingIndicatorFunction } from '../../data-consumption/domain/user-voice/talking-indicator/types';
 import { GenericComponentInterface } from '../../extensible-areas/generic-component/types';
+import { UseUiDataFunction } from '../../ui-data-hooks/types';
 
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
@@ -184,6 +185,18 @@ export interface PluginApi {
   mapOfDispatchers: MapOfDispatchers;
   // --- Ui-Commands ---
   uiCommands?: UiCommands;
+  // --- Ui-Data-Hook ---
+  /**
+   * Function that returns the ui data the developer wants from.
+   *
+   * @param dataName The name of ui data chosen to be returned.
+   *
+   * @param defaultValue Default value to be return if there is none from the ui
+   *
+   * @returns The data object according to the UiDataName chosen as the parameter
+   *
+   */
+  useUiData?: UseUiDataFunction;
   // --- Dom element manipulation
   /**
    * Returns an array with the DOM elements for the chat messages.
