@@ -38,6 +38,7 @@ import { useLoadedChatMessages } from '../../data-consumption/domain/chat/loaded
 import { useChatMessageDomElements } from '../../dom-element-manipulation/chat/message/hooks';
 import { UseTalkingIndicatorFunction } from '../../data-consumption/domain/user-voice/talking-indicator/types';
 import { useTalkingIndicator } from '../../data-consumption/domain/user-voice/talking-indicator/hooks';
+import { useUiData } from '../../ui-data-hooks/hooks';
 
 declare const window: PluginBrowserWindow;
 
@@ -84,11 +85,12 @@ export abstract class BbbPluginSdk {
       messageIds: string[],
     ) => useChatMessageDomElements(messageIds);
     pluginApi.uiCommands = uiCommands;
+    pluginApi.useUiData = useUiData;
     const pluginName = pluginApi?.pluginName;
     if (pluginName) {
       pluginApi.useDataChannel = ((
-          channelName: string,
-        ) => useDataChannel(channelName, pluginName, window.bbb_plugins[uuid])
+        channelName: string,
+      ) => useDataChannel(channelName, pluginName, window.bbb_plugins[uuid])
       ) as UseDataChannelFunctionFromPluginApi;
       pluginApi.usePluginSettings = () => usePluginSettings(pluginName);
     } else {
