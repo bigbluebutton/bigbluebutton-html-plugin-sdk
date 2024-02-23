@@ -1,6 +1,10 @@
+import { ChatFormUiDataPayloads } from './chat/form/types';
+import { ExternalVideoVolumeUiDataPayloads } from './external-video/volume/types';
 import { IntlLocaleUiDataPayloads } from './intl/locale/types';
+import { UserListUiDataPayloads } from './user-list/types';
 
-export type UiDataPayloads = IntlLocaleUiDataPayloads;
+export type UiDataPayloads = IntlLocaleUiDataPayloads & ChatFormUiDataPayloads
+& UserListUiDataPayloads & ExternalVideoVolumeUiDataPayloads;
 
 export type UiDataNames = keyof UiDataPayloads;
 

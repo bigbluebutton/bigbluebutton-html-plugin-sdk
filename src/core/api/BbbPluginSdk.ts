@@ -31,8 +31,6 @@ import { useUsersBasicInfo } from '../../data-consumption/domain/users/users-bas
 import { getSessionToken } from '../auxiliary/session-token/getter';
 import { getJoinUrl } from '../auxiliary/join-url/getter';
 import { usePluginSettings } from '../../data-consumption/domain/settings';
-import { EventPayloads, UiEventsHookEventWrapper, UseUiEventFunction } from '../../ui-events/types';
-import { useUiEvent } from '../../ui-events/hooks';
 import { UseLoadedChatMessagesFunction } from '../../data-consumption/domain/chat/loaded-chat-messages/types';
 import { useLoadedChatMessages } from '../../data-consumption/domain/chat/loaded-chat-messages/hooks';
 import { useChatMessageDomElements } from '../../dom-element-manipulation/chat/message/hooks';
@@ -75,12 +73,6 @@ export abstract class BbbPluginSdk {
     pluginApi.useTalkingIndicator = (() => useTalkingIndicator()) as UseTalkingIndicatorFunction;
     pluginApi.useLoadedChatMessages = (
       () => useLoadedChatMessages()) as UseLoadedChatMessagesFunction;
-    pluginApi.useUiEvent = (<
-      T extends keyof EventPayloads
-    >(
-      eventName: T,
-      callback: (payload: UiEventsHookEventWrapper<EventPayloads[T]>) => void,
-    ) => useUiEvent(eventName, callback)) as UseUiEventFunction;
     pluginApi.useChatMessageDomElements = (
       messageIds: string[],
     ) => useChatMessageDomElements(messageIds);

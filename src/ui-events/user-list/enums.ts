@@ -1,4 +1,0 @@
-export enum UserListEventsNames {
-  USER_LIST_OPENED = 'USER_LIST_OPENED',
-  USER_LIST_CLOSED = 'USER_LIST_CLOSED',
-}
