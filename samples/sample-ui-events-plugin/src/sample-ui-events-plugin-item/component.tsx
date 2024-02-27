@@ -1,36 +1,21 @@
 import * as React from 'react';
 
-import { BbbPluginSdk, ChatFormEventsNames, PluginApi, UserListEventsNames } from 'bigbluebutton-html-plugin-sdk';
+import { BbbPluginSdk, ChatFormUiDataNames, ExternalVideoVolumeUiDataNames, PluginApi, UserListUiDataNames } from 'bigbluebutton-html-plugin-sdk';
 import { SampleUiEventsPluginProps } from './types';
 
 function SampleUiEventsPlugin({ pluginUuid: uuid }: SampleUiEventsPluginProps): 
 React.ReactElement<SampleUiEventsPluginProps> {
   BbbPluginSdk.initialize(uuid);
   const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
-  pluginApi.useUiEvent(UserListEventsNames.USER_LIST_OPENED, () => {
-      console.log("Event testing (USER_LIST_OPENED)");
-  });
-  
-  pluginApi.useUiEvent(ChatFormEventsNames.CHAT_INPUT_TEXT_CHANGED, (
-    event
-  ) => {
-      console.log("Event testing (CHAT_INPUT_TEXT_CHANGED)---> ", event.detail.text);
-  });
+  const userListOpened = pluginApi.useUiData(UserListUiDataNames.USER_LIST_IS_OPEN, {value: true});
+  const currentChatText = pluginApi.useUiData(ChatFormUiDataNames.CURRENT_CHAT_INPUT_TEXT, {text: ''});
+  const currentChatFocused = pluginApi.useUiData(ChatFormUiDataNames.CHAT_INPUT_IS_FOCUSED, {value: false});
+  const currentExternalVideoVolume = pluginApi.useUiData(ExternalVideoVolumeUiDataNames.CURRENT_VOLUME_VALUE, {value: 1});
+  const isMutedExternalVideo = pluginApi.useUiData(ExternalVideoVolumeUiDataNames.IS_VOLUME_MUTED, {value: false});
 
-  pluginApi.useUiEvent(ChatFormEventsNames.CHAT_INPUT_FOCUSED, () => {
-      console.log("Event testing (CHAT_INPUT_FOCUSED)");
-  });
-  
-  pluginApi.useUiEvent(ChatFormEventsNames.CHAT_INPUT_UNFOCUSED, () => {
-      console.log("Event testing (CHAT_INPUT_UNFOCUSED)");
-  });
-  
-  pluginApi.useUiEvent(UserListEventsNames.USER_LIST_CLOSED, () => {
-      console.log("Event testing (USER_LIST_CLOSED)");
-  });
-
-
-
+  React.useEffect(() => {
+    console.log('Showing the uiData: ', { userListOpened, currentChatText, currentChatFocused, currentExternalVideoVolume, isMutedExternalVideo })
+  }, [userListOpened, currentChatText, currentChatFocused, currentExternalVideoVolume, isMutedExternalVideo])
   return null;
 }
 

@@ -55,12 +55,14 @@ SDK for developing BigBlueButton plugins, examples of implementations can be fou
 ### Real time data exchange
 - `useDataChannel` hook: this will allow you to exchange information (Send and receive) amongst different users through the same plugin;
 
-### Real time event reaction
-- `useUiEvent` hook: this will allow you to react to certain events fired from the BBB core (refer to the sample-ui-events-plugin in the samples directory for example on how to use some of the events);
-
 ### Real time ui data consumption
 - `useUiData` hook: This will return certain data from the UI depending on the parameter the developer uses. It works just like the useUiEvent hook, but instead of passing a callback as a parameter to be run everytime the event occurs, it will return the data directly, keep in mind that the second parameter is the default value that this function will assume. Possible choices:
   - IntlLocaleUiDataNames.CURRENT_LOCALE;
+  - ChatFormUiDataNames.CURRENT_CHAT_INPUT_TEXT;
+  - ChatFormUiDataNames.CHAT_INPUT_IS_FOCUSED;
+  - ExternalVideoVolumeUiDataNames.CURRENT_VOLUME_VALUE;
+  - ExternalVideoVolumeUiDataNames.IS_VOLUME_MUTED;
+  - UserListUiDataNames.USER_LIST_IS_OPEN;
 
 Example of usage:
 ```typscript
