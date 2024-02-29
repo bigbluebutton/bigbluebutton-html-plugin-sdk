@@ -21,8 +21,7 @@ export class FloatingWindow implements FloatingWindowInterface {
   contentFunction: (element: HTMLElement) => void;
 
   /**
-   * Returns object to be used in the setter for the Navigation Bar. In this case,
-   * a button.
+   * Returns object to be used in the setter for the Floating Window
    *
    * @param top - position in which the the top left corner of the floating window is relative
    * to the top of the rendered window.

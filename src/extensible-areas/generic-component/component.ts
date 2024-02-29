@@ -11,11 +11,10 @@ export class GenericComponent implements GenericComponentInterface {
   contentFunction: (element: HTMLElement) => void;
 
   /**
-   * Returns object to be used in the setter for the Navigation Bar. In this case,
-   * a button.
+   * Returns object to be used in the setter as a generic component
    *
    * @param contentFunction - function that gives the html element to render the content of
-   * the floating window
+   * the generic component
    *
    * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5).
    */

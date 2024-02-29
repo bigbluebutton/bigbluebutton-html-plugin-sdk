@@ -1,11 +1,11 @@
 import { ChatFormUiDataPayloads } from './chat/form/types';
 import { ExternalVideoVolumeUiDataPayloads } from './external-video/volume/types';
 import { IntlLocaleUiDataPayloads } from './intl/locale/types';
+import { LayoutPresentationAreaUiDataPayloads } from './layout/presentation-area/types';
 import { UserListUiDataPayloads } from './user-list/types';
 
 export type UiDataPayloads = IntlLocaleUiDataPayloads & ChatFormUiDataPayloads
-& UserListUiDataPayloads & ExternalVideoVolumeUiDataPayloads;
-
+& UserListUiDataPayloads & ExternalVideoVolumeUiDataPayloads & LayoutPresentationAreaUiDataPayloads
 export type UiDataNames = keyof UiDataPayloads;
 
 export interface UiDataHookPayloadWrapper<T> extends Event {
