@@ -54,4 +54,7 @@ export type UseDataChannelFunctionFromPluginApi = <T>(
 export type UseDataChannelStaticFunction = <T>(
   channelName: string, pluginName: string,
   pluginApi: PluginApi,
-) => [GraphqlResponseWrapper<DataChannelMessagesWrapper<T>>, DispatcherFunction?, DeletionFunction?];
+) => [
+  GraphqlResponseWrapper<DataChannelMessagesWrapper<T>>,
+   DispatcherFunction?, DeletionFunction?
+];

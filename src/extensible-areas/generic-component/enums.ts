@@ -1,4 +1,4 @@
-// Floating window types:
+// Generic Component types:
 export enum GenericComponentType {
-  CONTAINER = 'FLOATING_WINDOW_CONTAINER',
+  CONTAINER = 'GENERIC_COMPONENT',
 }
