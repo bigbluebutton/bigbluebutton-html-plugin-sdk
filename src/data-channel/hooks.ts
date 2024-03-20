@@ -4,6 +4,7 @@ import {
   DeletionObject,
   DispatcherFunction,
   UseDataChannelStaticFunction,
+  DeletionFunction,
 } from './types';
 import {
   GraphqlResponseWrapper,
@@ -13,12 +14,10 @@ import {
 } from '../core/enum';
 import { PluginApi } from '../core/api/types';
 import {
-  HookEventWrapper, SubscribedEventDetails, UnsubscribedEventDetails,UpdatedEventDetails,
+  HookEventWrapper, SubscribedEventDetails, UnsubscribedEventDetails, UpdatedEventDetails,
 } from '../core/types';
 import { DataChannelHooks } from './enums';
-import { createChannelIdentifier } from './utils';
-import { DeletionFunction } from './types';
-import { deletionFunctionUtil } from './utils';
+import { deletionFunctionUtil, createChannelIdentifier } from './utils';
 
 export const useDataChannel = (<T>(channelName: string,
   pluginName: string, pluginApi: PluginApi,
@@ -29,7 +28,7 @@ export const useDataChannel = (<T>(channelName: string,
   const [dispatcherFunction, setDispatcherFunction] = useState<DispatcherFunction>();
 
   const deletionFunction: DeletionFunction = (
-    deletionObjects: DeletionObject[]
+    deletionObjects: DeletionObject[],
   ) => deletionFunctionUtil(deletionObjects, channelName, pluginName);
 
   const channelIdentifier = createChannelIdentifier(channelName, pluginName);
