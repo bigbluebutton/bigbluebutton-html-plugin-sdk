@@ -28,51 +28,51 @@ import { UseUiDataFunction } from '../../ui-data-hooks/types';
 
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
-  PresentationToolbarInterface[]) => void;
+  PresentationToolbarInterface[]) => string[];
 
 export type SetUserListDropdownItems = (
   userListDropdownItem: UserListDropdownInterface[]
-) => void;
+) => string[];
 
 export type SetActionButtonDropdownItems = (
   actionButtonDropdownInterface: ActionButtonDropdownInterface[]
-) => void;
+) => string[];
 
 export type SetActionsBarItems = (
   actionsBarItems: ActionsBarInterface[]
-) => void;
+) => string[];
 
 export type SetAudioSettingsDropdownItems = (
   audioSettingsDropdownItem: AudioSettingsDropdownInterface[]
-) => void;
+) => string[];
 
 export type SetPresentationDropdownItems = (
   userListDropdownItem: PresentationDropdownInterface[]
-) => void;
+) => string[];
 
 export type SetNavBarItems = (
   userListDropdownItem: NavBarInterface[]
-) => void;
+) => string[];
 
 export type SetOptionsDropdownItems = (
   optionsDropdownItem: OptionsDropdownInterface[]
-) => void;
+) => string[];
 
 export type SetCameraSettingsDropdownItems = (
   cameraSettingsDropdownItem: CameraSettingsDropdownInterface[]
-) => void;
+) => string[];
 
 export type SetUserCameraDropdownItems = (
   userCameraDropdownItem: UserCameraDropdownInterface[]
-) => void;
+) => string[];
 
 export type SetUserListItemAdditionalInformation = (
   userListItemAdditionalInformation: UserListItemAdditionalInformationInterface[]
-) => void;
+) => string[];
 
 export type SetGenericComponents = (
   genericComponents: GenericComponentInterface[]
-) => void;
+) => string[];
 
 /**
  * Object that makes plugin hooks and extensible area setters available for developers to use.
