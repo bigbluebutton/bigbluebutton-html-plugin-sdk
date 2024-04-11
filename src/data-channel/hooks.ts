@@ -3,9 +3,9 @@ import {
   DeletionObject,
   PushFunction,
   UseDataChannelStaticFunction,
-  DeletionFunction,
   DataChannelMessageResponseType,
   DataChannelArguments,
+  DeletionFunction,
 } from './types';
 import {
   GraphqlResponseWrapper,
