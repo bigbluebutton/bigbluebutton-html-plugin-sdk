@@ -1,10 +1,12 @@
 import { GraphqlResponseWrapper, PluginApi } from '..';
-import { DataChannelDispatcherUserRole } from './enums';
+import { DataChannelDispatcherUserRole, DataChannelTypes } from './enums';
 import { RESET_DATA_CHANNEL } from './constants';
 
 export interface DataChannelArguments {
+  dataChannelType?: DataChannelTypes;
   pluginName: string;
   channelName: string;
+  subChannelName: string;
 }
 
 /**
@@ -25,12 +27,12 @@ export type ObjectTo = ToUserId | ToRole;
 
 export type DeletionObject = typeof RESET_DATA_CHANNEL | string;
 
-export type DispatcherFunction = <T>(objectToDispatch: T, objectsTo?: ObjectTo[]) => void;
+export type PushFunction<T = object> = (objectToBePushed: T, receivers?: ObjectTo[]) => void;
 
 export type DeletionFunction = (deletionObjects: DeletionObject[]) => void;
 
 export interface MapOfDispatchers {
-  [key: string]: DispatcherFunction;
+  [key: string]: PushFunction;
 }
 
 export interface DataChannelMessageResponseType<T> {
@@ -43,18 +45,16 @@ export interface DataChannelMessageResponseType<T> {
   toRoles: string[];
 }
 
-export interface DataChannelMessagesWrapper<T> {
-  pluginDataChannelMessage: DataChannelMessageResponseType<T>[];
-}
-
 export type UseDataChannelFunctionFromPluginApi = <T>(
-  channelName: string,
-) => [GraphqlResponseWrapper<DataChannelMessagesWrapper<T>>, DispatcherFunction, DeletionFunction];
+  channelName: string, dataChannelType?: DataChannelTypes, subChannelName?: string,
+) => [GraphqlResponseWrapper<DataChannelMessageResponseType<T>[]>,
+  PushFunction<T>, DeletionFunction
+];
 
 export type UseDataChannelStaticFunction = <T>(
-  channelName: string, pluginName: string,
-  pluginApi: PluginApi,
+  channelName: string, subChannelName: string, pluginName: string,
+  pluginApi: PluginApi, dataChannelType: DataChannelTypes,
 ) => [
-  GraphqlResponseWrapper<DataChannelMessagesWrapper<T>>,
-   DispatcherFunction?, DeletionFunction?
+  GraphqlResponseWrapper<DataChannelMessageResponseType<T>[]>,
+  PushFunction<T>?, DeletionFunction?
 ];

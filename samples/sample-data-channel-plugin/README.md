@@ -20,6 +20,11 @@ npm start
   plugins:
     - name: SampleDataChannelPlugin
       url: http://127.0.0.1:4701/static/SampleDataChannelPlugin.js
+      - name: public-channel
+        writePermission: ['moderator','presenter']
+        deletePermission:
+            - moderator
+            - sender
 ```
 
 Mind that for this Plugin there is also a special configuration to insert in this file, which is the data-channels part, see example below:

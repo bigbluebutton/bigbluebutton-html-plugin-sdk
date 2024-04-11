@@ -15,3 +15,9 @@ export enum DataChannelHooks {
   DATA_CHANNEL_RESET = 'Hooks::DataChannelReset',
   DATA_CHANNEL_DELETE = 'Hooks::DataChannelDelete',
 }
+
+export enum DataChannelTypes {
+  All_ITEMS = 'Hooks::DataChannel::AllItems',
+  NEW_ITEMS = 'Hooks::DataChannel::NewItems',
+  LATEST_ITEM = 'Hooks::DataChannel::LatestItem',
+}

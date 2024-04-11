@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import {
-  DataChannelMessagesWrapper,
   DeletionObject,
-  DispatcherFunction,
+  PushFunction,
   UseDataChannelStaticFunction,
+  DeletionFunction,
+  DataChannelMessageResponseType,
+  DataChannelArguments,
 } from './types';
 import {
   GraphqlResponseWrapper,
@@ -13,34 +15,37 @@ import {
 } from '../core/enum';
 import { PluginApi } from '../core/api/types';
 import {
-  HookEventWrapper, SubscribedEventDetails, UnsubscribedEventDetails,UpdatedEventDetails,
+  HookEventWrapper, SubscribedEventDetails, UnsubscribedEventDetails, UpdatedEventDetails,
 } from '../core/types';
-import { DataChannelHooks } from './enums';
-import { createChannelIdentifier } from './utils';
-import { DeletionFunction } from './types';
-import { deletionFunctionUtil } from './utils';
+import { DataChannelHooks, DataChannelTypes } from './enums';
+import { createChannelIdentifier, deletionFunctionUtil } from './utils';
 
-export const useDataChannel = (<T>(channelName: string,
+export const useDataChannelGeneral = (<T>(
+  channelName: string, subChannelName: string,
   pluginName: string, pluginApi: PluginApi,
+  dataChannelType: DataChannelTypes,
   ) => {
-  const [data, setData] = useState<GraphqlResponseWrapper<DataChannelMessagesWrapper<T>>>(
+  const [data, setData] = useState<GraphqlResponseWrapper<DataChannelMessageResponseType<T>[]>>(
     { loading: true },
   );
-  const [dispatcherFunction, setDispatcherFunction] = useState<DispatcherFunction>();
+  const [dispatcherFunction, setDispatcherFunction] = useState<PushFunction<T>>();
 
   const deletionFunction: DeletionFunction = (
-    deletionObjects: DeletionObject[]
-  ) => deletionFunctionUtil(deletionObjects, channelName, pluginName);
+    deletionObjects: DeletionObject[],
+  ) => deletionFunctionUtil(deletionObjects, channelName, subChannelName, pluginName);
 
-  const channelIdentifier = createChannelIdentifier(channelName, pluginName);
+  const channelIdentifier = createChannelIdentifier(channelName, subChannelName, pluginName);
 
   const handleDataChange: EventListener = ((
-    customEvent: HookEventWrapper<GraphqlResponseWrapper<DataChannelMessagesWrapper<T>>>,
+    customEvent: HookEventWrapper<GraphqlResponseWrapper<DataChannelMessageResponseType<T>[]>>,
   ) => {
     const eventDetail = customEvent.detail as UpdatedEventDetails<
-      GraphqlResponseWrapper<DataChannelMessagesWrapper<T>>
+      GraphqlResponseWrapper<DataChannelMessageResponseType<T>[]>
     >;
-    setData(eventDetail.data);
+    const hookArguments = eventDetail?.hookArguments as DataChannelArguments;
+    if (hookArguments?.dataChannelType === dataChannelType) {
+      setData(eventDetail.data);
+    }
   }) as EventListener;
 
   const handleListenToChangeDisPatcherFunction: EventListener = (
@@ -61,14 +66,18 @@ export const useDataChannel = (<T>(channelName: string,
     window.dispatchEvent(new CustomEvent<SubscribedEventDetails>(HookEvents.SUBSCRIBED, {
       detail: {
         hook: DataChannelHooks.DATA_CHANNEL_BUILDER,
-        hookArguments: { channelName, pluginName },
+        hookArguments: {
+          channelName, pluginName, dataChannelType, subChannelName,
+        },
       },
     }));
     return () => {
       window.dispatchEvent(new CustomEvent<UnsubscribedEventDetails>(HookEvents.UNSUBSCRIBED, {
         detail: {
           hook: DataChannelHooks.DATA_CHANNEL_BUILDER,
-          hookArguments: { channelName, pluginName },
+          hookArguments: {
+            channelName, pluginName, dataChannelType, subChannelName,
+          },
         },
       }));
       window.removeEventListener(channelIdentifier, handleDataChange);
