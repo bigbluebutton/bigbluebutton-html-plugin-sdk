@@ -31,15 +31,15 @@ export type PushFunction<T = object> = (objectToBePushed: T, receivers?: ObjectT
 
 export type DeletionFunction = (deletionObjects: DeletionObject[]) => void;
 
-export interface MapOfDispatchers {
+export interface MapOfPushFunctions {
   [key: string]: PushFunction;
 }
 
-export interface DataChannelMessageResponseType<T> {
+export interface DataChannelEntryResponseType<T> {
   createdAt: string;
-  dataChannel: string;
+  channelName: string;
   fromUserId: string;
-  messageId: string;
+  entryId: string;
   payloadJson: T;
   pluginName: string;
   toRoles: string[];
@@ -47,7 +47,7 @@ export interface DataChannelMessageResponseType<T> {
 
 export type UseDataChannelFunctionFromPluginApi = <T>(
   channelName: string, dataChannelType?: DataChannelTypes, subChannelName?: string,
-) => [GraphqlResponseWrapper<DataChannelMessageResponseType<T>[]>,
+) => [GraphqlResponseWrapper<DataChannelEntryResponseType<T>[]>,
   PushFunction<T>, DeletionFunction
 ];
 
@@ -55,6 +55,6 @@ export type UseDataChannelStaticFunction = <T>(
   channelName: string, subChannelName: string, pluginName: string,
   pluginApi: PluginApi, dataChannelType: DataChannelTypes,
 ) => [
-  GraphqlResponseWrapper<DataChannelMessageResponseType<T>[]>,
+  GraphqlResponseWrapper<DataChannelEntryResponseType<T>[]>,
   PushFunction<T>?, DeletionFunction?
 ];

@@ -3,7 +3,7 @@ import {
   DeletionObject,
   PushFunction,
   UseDataChannelStaticFunction,
-  DataChannelMessageResponseType,
+  DataChannelEntryResponseType,
   DataChannelArguments,
   DeletionFunction,
 } from './types';
@@ -25,7 +25,7 @@ export const useDataChannelGeneral = (<T>(
   pluginName: string, pluginApi: PluginApi,
   dataChannelType: DataChannelTypes,
   ) => {
-  const [data, setData] = useState<GraphqlResponseWrapper<DataChannelMessageResponseType<T>[]>>(
+  const [data, setData] = useState<GraphqlResponseWrapper<DataChannelEntryResponseType<T>[]>>(
     { loading: true },
   );
   const [dispatcherFunction, setDispatcherFunction] = useState<PushFunction<T>>();
@@ -37,10 +37,10 @@ export const useDataChannelGeneral = (<T>(
   const channelIdentifier = createChannelIdentifier(channelName, subChannelName, pluginName);
 
   const handleDataChange: EventListener = ((
-    customEvent: HookEventWrapper<GraphqlResponseWrapper<DataChannelMessageResponseType<T>[]>>,
+    customEvent: HookEventWrapper<GraphqlResponseWrapper<DataChannelEntryResponseType<T>[]>>,
   ) => {
     const eventDetail = customEvent.detail as UpdatedEventDetails<
-      GraphqlResponseWrapper<DataChannelMessageResponseType<T>[]>
+      GraphqlResponseWrapper<DataChannelEntryResponseType<T>[]>
     >;
     const hookArguments = eventDetail?.hookArguments as DataChannelArguments;
     if (hookArguments?.dataChannelType === dataChannelType) {

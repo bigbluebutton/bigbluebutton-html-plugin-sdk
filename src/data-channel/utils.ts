@@ -1,5 +1,5 @@
 import {
-  DataChannelMessageResponseType,
+  DataChannelEntryResponseType,
   DeletionObject,
 } from './types';
 import {
@@ -15,8 +15,8 @@ import { RESET_DATA_CHANNEL } from './constants';
 export const createChannelIdentifier = (channelName: string, subChannelName: string, pluginName: string) => `${channelName}::${subChannelName}::${pluginName}`;
 
 export const formatResponseForPubSubOrKeyValue = <T>(
-  dataResult: GraphqlResponseWrapper<DataChannelMessageResponseType<T>[]>,
-): GraphqlResponseWrapper<DataChannelMessageResponseType<T>> => ({
+  dataResult: GraphqlResponseWrapper<DataChannelEntryResponseType<T>[]>,
+): GraphqlResponseWrapper<DataChannelEntryResponseType<T>> => ({
     ...dataResult,
     data: dataResult.data ? dataResult.data[0] : undefined,
   });
