@@ -59,7 +59,7 @@ So for this hook to read the data from the data channel, the developer will be a
 
 - ALL_ITEMS: Fetches all items from specific data-channel and specific subchannel-name since the begining of the meeting from the newest to the latest (It can be used as a history);
 - LATEST_ITEM: Fetches only the latest item pushed to the data-channel within a specific subchannel-name since the begining of the meeting;
-- NEW_ITEMS: Fetches only the latest item pushed to the data-channel within a specific subchannel-name since the user entered the meeting (It will not see things sent previous to the entering moment);
+- NEW_ITEMS: Fetches the new items pushed to the data-channel within a specific subchannel-name since the moment that the `useDataChannel` hook has been called (It will not see entries sent previous to that moment);
 
 One can find examples of usage any of the plugin samples or official ones. The syntax is described ahead:
 
