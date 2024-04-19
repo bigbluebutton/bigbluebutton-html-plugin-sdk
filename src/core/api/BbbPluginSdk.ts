@@ -128,7 +128,7 @@ export abstract class BbbPluginSdk {
         setUserListItemAdditionalInformation: () => [],
         setFloatingWindows: () => [],
         setGenericComponents: () => [],
-        mapOfDispatchers: {
+        mapOfPushFunctions: {
           '': () => {},
         },
         getSessionToken: () => getSessionToken(),

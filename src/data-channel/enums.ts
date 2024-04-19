@@ -1,10 +1,10 @@
 // Role
 /**
  * Enum for each role in possible for a user to assume in the meeting
- * The developer can specify them when dispatching data with the dispatcher function
+ * The developer can specify them when pushing data with the push function
  * returned from the `pluginApi.useChannel`.
  */
-export enum DataChannelDispatcherUserRole {
+export enum DataChannelPushFunctionUserRole {
   PRESENTER = 'PRESENTER',
   MODERATOR = 'MODERATOR',
   VIEWER = 'VIEWER',

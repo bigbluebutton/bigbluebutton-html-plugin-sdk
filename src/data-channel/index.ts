@@ -1,8 +1,8 @@
-export { DataChannelDispatcherUserRole, DataChannelTypes } from './enums';
+export { DataChannelPushFunctionUserRole, DataChannelTypes } from './enums';
 export {
   ToUserId,
   ToRole,
-  DeletionFunction,
+  DeleteFunction,
   PushFunction,
 } from './types';
 export { RESET_DATA_CHANNEL } from './constants';

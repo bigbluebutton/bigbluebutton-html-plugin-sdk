@@ -160,17 +160,20 @@ export interface PluginApi {
   // --- DataChannel Hook ---
   /**
    * Returns an array with tha data wrapped in the `GraphqlResponseWrapper` in the first
-   * position of the array and the dispatcher function in which one plugin can inform
-   * the others.
+   * position of the array, the push function with which one plugin can inform
+   * the others in second position, and at last, the deleteFunction .
    *
    * This is used for the different plugins in the meeting to communicate.
    *
    * @param channelName - the channel name in which you want to communicate
-   * @returns The array of data wrapped in the `GraphqlResponseWrapper` and the dispatcher function
+   * @param dataChannelType - format with which you want to consume the data
+   * @param subChannelName - subchannel name within a certain data-channel
+   * @returns The array of data wrapped in the `GraphqlResponseWrapper`,
+   * the push function and delete function
    *
    */
   useDataChannel?: UseDataChannelFunctionFromPluginApi;
-  mapOfDispatchers: MapOfPushFunctions;
+  mapOfPushFunctions: MapOfPushFunctions;
   // --- Ui-Commands ---
   uiCommands?: UiCommands;
   // --- Ui-Data-Hook ---

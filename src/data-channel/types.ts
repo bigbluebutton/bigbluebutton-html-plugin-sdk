@@ -1,5 +1,5 @@
 import { GraphqlResponseWrapper, PluginApi } from '..';
-import { DataChannelDispatcherUserRole, DataChannelTypes } from './enums';
+import { DataChannelPushFunctionUserRole, DataChannelTypes } from './enums';
 import { RESET_DATA_CHANNEL } from './constants';
 
 export interface DataChannelArguments {
@@ -10,26 +10,26 @@ export interface DataChannelArguments {
 }
 
 /**
- * Type to specify the useId that will be able to receive the data sent in the dispatcher function.
+ * Type to specify the useId that will be able to receive the data sent in the push function.
  */
 export interface ToUserId {
   userId: string;
 }
 
 /**
- * Type to specify the role that will be able to receive the data sent in the dispatcher function.
+ * Type to specify the role that will be able to receive the data sent in the push function.
  */
 export interface ToRole {
-  role: DataChannelDispatcherUserRole;
+  role: DataChannelPushFunctionUserRole;
 }
 
 export type ObjectTo = ToUserId | ToRole;
 
-export type DeletionObject = typeof RESET_DATA_CHANNEL | string;
+export type ObjectToDelete = typeof RESET_DATA_CHANNEL | string;
 
 export type PushFunction<T = object> = (objectToBePushed: T, receivers?: ObjectTo[]) => void;
 
-export type DeletionFunction = (deletionObjects: DeletionObject[]) => void;
+export type DeleteFunction = (objectToDelete: ObjectToDelete[]) => void;
 
 export interface MapOfPushFunctions {
   [key: string]: PushFunction;
@@ -38,6 +38,7 @@ export interface MapOfPushFunctions {
 export interface DataChannelEntryResponseType<T> {
   createdAt: string;
   channelName: string;
+  subChannelName: string;
   fromUserId: string;
   entryId: string;
   payloadJson: T;
@@ -48,7 +49,7 @@ export interface DataChannelEntryResponseType<T> {
 export type UseDataChannelFunctionFromPluginApi = <T>(
   channelName: string, dataChannelType?: DataChannelTypes, subChannelName?: string,
 ) => [GraphqlResponseWrapper<DataChannelEntryResponseType<T>[]>,
-  PushFunction<T>, DeletionFunction
+  PushFunction<T>, DeleteFunction
 ];
 
 export type UseDataChannelStaticFunction = <T>(
@@ -56,5 +57,5 @@ export type UseDataChannelStaticFunction = <T>(
   pluginApi: PluginApi, dataChannelType: DataChannelTypes,
 ) => [
   GraphqlResponseWrapper<DataChannelEntryResponseType<T>[]>,
-  PushFunction<T>?, DeletionFunction?
+  PushFunction<T>?, DeleteFunction?
 ];

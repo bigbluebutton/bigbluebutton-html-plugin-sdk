@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import {
-  DeletionObject,
+  ObjectToDelete,
   PushFunction,
   UseDataChannelStaticFunction,
   DataChannelEntryResponseType,
   DataChannelArguments,
-  DeletionFunction,
+  DeleteFunction,
 } from './types';
 import {
   GraphqlResponseWrapper,
@@ -18,7 +18,7 @@ import {
   HookEventWrapper, SubscribedEventDetails, UnsubscribedEventDetails, UpdatedEventDetails,
 } from '../core/types';
 import { DataChannelHooks, DataChannelTypes } from './enums';
-import { createChannelIdentifier, deletionFunctionUtil } from './utils';
+import { createChannelIdentifier, deleteFunctionUtil } from './utils';
 
 export const useDataChannelGeneral = (<T>(
   channelName: string, subChannelName: string,
@@ -28,11 +28,11 @@ export const useDataChannelGeneral = (<T>(
   const [data, setData] = useState<GraphqlResponseWrapper<DataChannelEntryResponseType<T>[]>>(
     { loading: true },
   );
-  const [dispatcherFunction, setDispatcherFunction] = useState<PushFunction<T>>();
+  const [pushFunction, setPushFunction] = useState<PushFunction<T>>();
 
-  const deletionFunction: DeletionFunction = (
-    deletionObjects: DeletionObject[],
-  ) => deletionFunctionUtil(deletionObjects, channelName, subChannelName, pluginName);
+  const deleteFunction: DeleteFunction = (
+    objectToDelete: ObjectToDelete[],
+  ) => deleteFunctionUtil(objectToDelete, channelName, subChannelName, pluginName);
 
   const channelIdentifier = createChannelIdentifier(channelName, subChannelName, pluginName);
 
@@ -48,19 +48,19 @@ export const useDataChannelGeneral = (<T>(
     }
   }) as EventListener;
 
-  const handleListenToChangeDisPatcherFunction: EventListener = (
+  const handleListenToChangePushFunction: EventListener = (
     () => {
-      setDispatcherFunction(() => pluginApi.mapOfDispatchers[channelIdentifier]);
+      setPushFunction(() => pluginApi.mapOfPushFunctions[channelIdentifier]);
       window.removeEventListener(
-        `${channelIdentifier}::dispatcherFunction`,
-        handleListenToChangeDisPatcherFunction,
+        `${channelIdentifier}::pushFunction`,
+        handleListenToChangePushFunction,
       );
     }) as EventListener;
   useEffect(() => {
     window.addEventListener(channelIdentifier, handleDataChange);
     window.addEventListener(
-      `${channelIdentifier}::dispatcherFunction`,
-      handleListenToChangeDisPatcherFunction,
+      `${channelIdentifier}::pushFunction`,
+      handleListenToChangePushFunction,
     );
 
     window.dispatchEvent(new CustomEvent<SubscribedEventDetails>(HookEvents.SUBSCRIBED, {
@@ -83,5 +83,5 @@ export const useDataChannelGeneral = (<T>(
       window.removeEventListener(channelIdentifier, handleDataChange);
     };
   }, []);
-  return [data, dispatcherFunction, deletionFunction];
+  return [data, pushFunction, deleteFunction];
 }) as UseDataChannelStaticFunction;

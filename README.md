@@ -105,7 +105,7 @@ export interface ToUserId {
   userId: string;
 }
 export interface ToRole {
-  role: DataChannelDispatcherUserRole;
+  role: DataChannelPushFunctionUserRole;
 }
 
 export type ObjectTo = ToUserId | ToRole;

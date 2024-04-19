@@ -16,13 +16,13 @@ function SampleDataChannelPlugin(
   BbbPluginSdk.initialize(uuid);
   // This Plugin only keeps track of a variable
   const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
-  const [dataResultDefaultAllItems, dispatcherDefault, deleteFunctionDefault] = pluginApi.useDataChannel<DataExampleType>('public-channel', DataChannelTypes.All_ITEMS);
-  const [ dataResultDefaultLastItem ] = pluginApi.useDataChannel<DataExampleType>('public-channel', DataChannelTypes.LATEST_ITEM);
-  const [dataResultNewSubChannel, dispatcherNewSubChannel, deleteFunctionNewSubChannel] = pluginApi.useDataChannel<DataExampleType>('public-channel', DataChannelTypes.All_ITEMS, 'newSubChannel');
+  const [ dataResponseDefaultAllItems, pushFunctionDefault, deleteFunctionDefault ] = pluginApi.useDataChannel<DataExampleType>('public-channel', DataChannelTypes.All_ITEMS);
+  const [ dataResponseDefaultLastItem ] = pluginApi.useDataChannel<DataExampleType>('public-channel', DataChannelTypes.LATEST_ITEM);
+  const [ dataResponseNewSubChannel, pushToNewSubChannel, deleteFunctionNewSubChannel ] = pluginApi.useDataChannel<DataExampleType>('public-channel', DataChannelTypes.All_ITEMS, 'newSubChannel');
 
   useEffect(() => {
-    console.log("Log to verify the data flow and the dispatcher: ", dataResultDefaultAllItems, dataResultDefaultLastItem, dataResultNewSubChannel);
-  }, [dataResultDefaultAllItems, dataResultNewSubChannel, dataResultDefaultLastItem]);
+    console.log("Log to verify the data flow: ", dataResponseDefaultAllItems, dataResponseDefaultLastItem, dataResponseNewSubChannel);
+  }, [dataResponseDefaultAllItems, dataResponseNewSubChannel, dataResponseDefaultLastItem]);
   
 
   useEffect(() => {
@@ -34,13 +34,13 @@ function SampleDataChannelPlugin(
         tooltip: 'this is a button injected by plugin',
         allowed: true,
         onClick: () => {
-          const currentValue = dataResultDefaultAllItems.data && dataResultDefaultAllItems.data.length > 0 ? dataResultDefaultAllItems.data[0].payloadJson.first_example_field : 0;
+          const currentValue = dataResponseDefaultAllItems.data && dataResponseDefaultAllItems.data.length > 0 ? dataResponseDefaultAllItems.data[0].payloadJson.first_example_field : 0;
           const nextValue = currentValue + 1;
-          if (dispatcherDefault) dispatcherDefault({
+          if (pushFunctionDefault) pushFunctionDefault({
             first_example_field: nextValue,
             second_example_field: 'string as an example',
             } as DataExampleType);
-          if (dispatcherNewSubChannel) dispatcherNewSubChannel({
+          if (pushToNewSubChannel) pushToNewSubChannel({
               first_example_field: currentValue,
               second_example_field: 'string as an example',
             } as DataExampleType);
@@ -60,7 +60,7 @@ function SampleDataChannelPlugin(
         },
       }),
     ])
-  }, [dataResultDefaultAllItems, dispatcherDefault, dataResultNewSubChannel, dispatcherDefault]);
+  }, [dataResponseDefaultAllItems, pushFunctionDefault, dataResponseNewSubChannel, pushFunctionDefault]);
   return null;
 }
 

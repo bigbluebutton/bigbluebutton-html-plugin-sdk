@@ -1,6 +1,6 @@
 import {
   DataChannelEntryResponseType,
-  DeletionObject,
+  ObjectToDelete,
 } from './types';
 import {
   HookEvents,
@@ -21,14 +21,14 @@ export const formatResponseForPubSubOrKeyValue = <T>(
     data: dataResult.data ? dataResult.data[0] : undefined,
   });
 
-export const deletionFunctionUtil = (
-  deletionObjects: DeletionObject[],
+export const deleteFunctionUtil = (
+  objectsToDelete: ObjectToDelete[],
   channelName: string,
   subChannelName: string,
   pluginName: string,
 ) => {
-  deletionObjects.forEach((deletionObject) => {
-    if (deletionObject === RESET_DATA_CHANNEL) {
+  objectsToDelete.forEach((objectToDelete) => {
+    if (objectToDelete === RESET_DATA_CHANNEL) {
       window.dispatchEvent(new CustomEvent<UpdatedEventDetails<void>>(HookEvents.UPDATED, {
         detail: {
           hook: DataChannelHooks.DATA_CHANNEL_RESET,
@@ -41,7 +41,7 @@ export const deletionFunctionUtil = (
         detail: {
           hook: DataChannelHooks.DATA_CHANNEL_DELETE,
           hookArguments: { channelName, pluginName, subChannelName },
-          data: deletionObject,
+          data: objectToDelete,
         },
       }));
     }
