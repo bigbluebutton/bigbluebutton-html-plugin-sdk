@@ -1,5 +1,5 @@
 import { GraphqlResponseWrapper, PluginApi } from '..';
-import { DataChannelPushFunctionUserRole, DataChannelTypes } from './enums';
+import { DataChannelPushEntryFunctionUserRole, DataChannelTypes } from './enums';
 import { RESET_DATA_CHANNEL } from './constants';
 
 export interface DataChannelArguments {
@@ -20,19 +20,19 @@ export interface ToUserId {
  * Type to specify the role that will be able to receive the data sent in the push function.
  */
 export interface ToRole {
-  role: DataChannelPushFunctionUserRole;
+  role: DataChannelPushEntryFunctionUserRole;
 }
 
 export type ObjectTo = ToUserId | ToRole;
 
 export type ObjectToDelete = typeof RESET_DATA_CHANNEL | string;
 
-export type PushFunction<T = object> = (objectToBePushed: T, receivers?: ObjectTo[]) => void;
+export type PushEntryFunction<T = object> = (objectToBePushed: T, receivers?: ObjectTo[]) => void;
 
-export type DeleteFunction = (objectToDelete: ObjectToDelete[]) => void;
+export type DeleteEntryFunction = (objectToDelete: ObjectToDelete[]) => void;
 
-export interface MapOfPushFunctions {
-  [key: string]: PushFunction;
+export interface MapOfPushEntryFunctions {
+  [key: string]: PushEntryFunction;
 }
 
 export interface DataChannelEntryResponseType<T> {
@@ -49,7 +49,7 @@ export interface DataChannelEntryResponseType<T> {
 export type UseDataChannelFunctionFromPluginApi = <T>(
   channelName: string, dataChannelType?: DataChannelTypes, subChannelName?: string,
 ) => [GraphqlResponseWrapper<DataChannelEntryResponseType<T>[]>,
-  PushFunction<T>, DeleteFunction
+  PushEntryFunction<T>, DeleteEntryFunction
 ];
 
 export type UseDataChannelStaticFunction = <T>(
@@ -57,5 +57,5 @@ export type UseDataChannelStaticFunction = <T>(
   pluginApi: PluginApi, dataChannelType: DataChannelTypes,
 ) => [
   GraphqlResponseWrapper<DataChannelEntryResponseType<T>[]>,
-  PushFunction<T>?, DeleteFunction?
+  PushEntryFunction<T>?, DeleteEntryFunction?
 ];

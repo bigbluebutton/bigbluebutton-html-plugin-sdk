@@ -66,8 +66,8 @@ One can find examples of usage any of the plugin samples or official ones. The s
 ```typescript
 const [
   response, // Data that will be returned
-  pushFunction, // Function to push another item to the data-channel
-  deleteFunction, // Function to delete specific item or wipe all
+  pushEntryFunction, // Function to push another item to the data-channel
+  deleteEntryFunction, // Function to delete specific item or wipe all
 ] = useDataChannel(
   channelName, // Defined according to what is on settings.yml from bbb-htlm5
   DataChannelTypes.All_ITEMS, // | LATEST_ITEM | NEW_ITEMS -> ALL_ITEMS is default 
@@ -97,15 +97,15 @@ All the permission for writing and deleting must be in the yaml too just like th
 
 If no permission is mentioned in the yaml (writing or deleting), no one will be able proceed with that specific action:
 
-The `pushFunction` has a minor detail to pay attention to, it is possible to specify the users who you want to send the item to, if none is specified, all will receive the item, such as done ahead:
+The `pushEntryFunction` has a minor detail to pay attention to, it is possible to specify the users who you want to send the item to, if none is specified, all will receive the item, such as done ahead:
 
 ```typescript
-pushFunction(objectToBePushed: T, receivers?: ObjectTo[])
+pushEntryFunction(objectToBePushed: T, receivers?: ObjectTo[])
 export interface ToUserId {
   userId: string;
 }
 export interface ToRole {
-  role: DataChannelPushFunctionUserRole;
+  role: DataChannelPushEntryFunctionUserRole;
 }
 
 export type ObjectTo = ToUserId | ToRole;

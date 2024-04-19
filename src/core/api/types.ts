@@ -17,7 +17,7 @@ import { UseCurrentUserFunction } from '../../data-consumption/domain/users/curr
 import { UseUsersBasicInfoFunction } from '../../data-consumption/domain/users/users-basic-info/types';
 import { SetFloatingWindows } from '../../extensible-areas/floating-window/types';
 import { UseCustomSubscriptionFunction } from '../../data-consumption/domain/shared/custom-subscription/types';
-import { MapOfPushFunctions, UseDataChannelFunctionFromPluginApi } from '../../data-channel/types';
+import { MapOfPushEntryFunctions, UseDataChannelFunctionFromPluginApi } from '../../data-channel/types';
 import { GetSessionTokenFunction } from '../auxiliary/session-token/types';
 import { GetJoinUrlFunction } from '../auxiliary/join-url/types';
 import { UsePluginSettingsFunction } from '../../data-consumption/domain/settings/plugin-settings/types';
@@ -161,7 +161,7 @@ export interface PluginApi {
   /**
    * Returns an array with tha data wrapped in the `GraphqlResponseWrapper` in the first
    * position of the array, the push function with which one plugin can inform
-   * the others in second position, and at last, the deleteFunction .
+   * the others in second position, and at last, the deleteEntryFunction .
    *
    * This is used for the different plugins in the meeting to communicate.
    *
@@ -173,7 +173,7 @@ export interface PluginApi {
    *
    */
   useDataChannel?: UseDataChannelFunctionFromPluginApi;
-  mapOfPushFunctions: MapOfPushFunctions;
+  mapOfPushEntryFunctions: MapOfPushEntryFunctions;
   // --- Ui-Commands ---
   uiCommands?: UiCommands;
   // --- Ui-Data-Hook ---

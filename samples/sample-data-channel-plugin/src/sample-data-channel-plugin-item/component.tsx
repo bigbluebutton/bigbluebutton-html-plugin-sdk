@@ -16,9 +16,9 @@ function SampleDataChannelPlugin(
   BbbPluginSdk.initialize(uuid);
   // This Plugin only keeps track of a variable
   const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
-  const [ dataResponseDefaultAllItems, pushFunctionDefault, deleteFunctionDefault ] = pluginApi.useDataChannel<DataExampleType>('public-channel', DataChannelTypes.All_ITEMS);
+  const [ dataResponseDefaultAllItems, pushEntryFunctionDefault, deleteEntryFunctionDefault ] = pluginApi.useDataChannel<DataExampleType>('public-channel', DataChannelTypes.All_ITEMS);
   const [ dataResponseDefaultLastItem ] = pluginApi.useDataChannel<DataExampleType>('public-channel', DataChannelTypes.LATEST_ITEM);
-  const [ dataResponseNewSubChannel, pushToNewSubChannel, deleteFunctionNewSubChannel ] = pluginApi.useDataChannel<DataExampleType>('public-channel', DataChannelTypes.All_ITEMS, 'newSubChannel');
+  const [ dataResponseNewSubChannel, pushToNewSubChannel, deleteEntryFunctionNewSubChannel ] = pluginApi.useDataChannel<DataExampleType>('public-channel', DataChannelTypes.All_ITEMS, 'newSubChannel');
 
   useEffect(() => {
     console.log("Log to verify the data flow: ", dataResponseDefaultAllItems, dataResponseDefaultLastItem, dataResponseNewSubChannel);
@@ -36,7 +36,7 @@ function SampleDataChannelPlugin(
         onClick: () => {
           const currentValue = dataResponseDefaultAllItems.data && dataResponseDefaultAllItems.data.length > 0 ? dataResponseDefaultAllItems.data[0].payloadJson.first_example_field : 0;
           const nextValue = currentValue + 1;
-          if (pushFunctionDefault) pushFunctionDefault({
+          if (pushEntryFunctionDefault) pushEntryFunctionDefault({
             first_example_field: nextValue,
             second_example_field: 'string as an example',
             } as DataExampleType);
@@ -51,16 +51,16 @@ function SampleDataChannelPlugin(
         tooltip: 'this is a button injected by plugin',
         allowed: true,
         onClick: () => {
-          if (deleteFunctionDefault) {
-            deleteFunctionDefault([RESET_DATA_CHANNEL]);
+          if (deleteEntryFunctionDefault) {
+            deleteEntryFunctionDefault([RESET_DATA_CHANNEL]);
           }
-          if (deleteFunctionNewSubChannel) {
-            deleteFunctionNewSubChannel([RESET_DATA_CHANNEL]);
+          if (deleteEntryFunctionNewSubChannel) {
+            deleteEntryFunctionNewSubChannel([RESET_DATA_CHANNEL]);
           }
         },
       }),
     ])
-  }, [dataResponseDefaultAllItems, pushFunctionDefault, dataResponseNewSubChannel, pushFunctionDefault]);
+  }, [dataResponseDefaultAllItems, pushEntryFunctionDefault, dataResponseNewSubChannel, pushEntryFunctionDefault]);
   return null;
 }
 

@@ -21,7 +21,7 @@ export const formatResponseForPubSubOrKeyValue = <T>(
     data: dataResult.data ? dataResult.data[0] : undefined,
   });
 
-export const deleteFunctionUtil = (
+export const deleteEntryFunctionUtil = (
   objectsToDelete: ObjectToDelete[],
   channelName: string,
   subChannelName: string,

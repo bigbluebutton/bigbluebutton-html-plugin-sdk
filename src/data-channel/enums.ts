@@ -4,7 +4,7 @@
  * The developer can specify them when pushing data with the push function
  * returned from the `pluginApi.useChannel`.
  */
-export enum DataChannelPushFunctionUserRole {
+export enum DataChannelPushEntryFunctionUserRole {
   PRESENTER = 'PRESENTER',
   MODERATOR = 'MODERATOR',
   VIEWER = 'VIEWER',
