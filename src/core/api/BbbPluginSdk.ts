@@ -1,9 +1,10 @@
-import { UseLoadedUserListFunction } from 'src/data-consumption/domain/users/loaded-user-list/types';
-import { UseCurrentUserFunction } from 'src/data-consumption/domain/users/current-user/types';
+import { UseLoadedUserListFunction } from '../../data-consumption/domain/users/loaded-user-list/types';
+import { UseCurrentUserFunction } from '../../data-consumption/domain/users/current-user/types';
 import {
   UseCurrentPresentationFunction,
-} from 'src/data-consumption/domain/presentations/current-presentation/types';
-import { UseUsersBasicInfoFunction } from 'src/data-consumption/domain/users/users-basic-info/types';
+} from '../../data-consumption/domain/presentations/current-presentation/types';
+import { UseUsersBasicInfoFunction } from '../../data-consumption/domain/users/users-basic-info/types';
+import { DataChannelTypes } from '../../data-channel/enums';
 import {
   UseCustomSubscriptionFunction,
 } from '../../data-consumption/domain/shared/custom-subscription/types';
@@ -18,7 +19,7 @@ import {
   PluginApi,
   PluginBrowserWindow,
 } from './types';
-import { useDataChannel } from '../../data-channel/hooks';
+import { useDataChannelGeneral } from '../../data-channel/hooks';
 import {
   useCurrentPresentation,
 } from '../../data-consumption/domain/presentations/current-presentation/hooks';
@@ -82,8 +83,15 @@ export abstract class BbbPluginSdk {
     if (pluginName) {
       pluginApi.useDataChannel = ((
         channelName: string,
-      ) => useDataChannel(channelName, pluginName, window.bbb_plugins[uuid])
-      ) as UseDataChannelFunctionFromPluginApi;
+        dataChannelType: DataChannelTypes = DataChannelTypes.All_ITEMS,
+        subChannelName: string = 'default',
+      ) => useDataChannelGeneral(
+        channelName,
+        subChannelName,
+        pluginName,
+        window.bbb_plugins[uuid],
+        dataChannelType,
+      )) as UseDataChannelFunctionFromPluginApi;
       pluginApi.usePluginSettings = () => usePluginSettings(pluginName);
     } else {
       throw new Error('Plugin name not set');
@@ -120,7 +128,7 @@ export abstract class BbbPluginSdk {
         setUserListItemAdditionalInformation: () => [],
         setFloatingWindows: () => [],
         setGenericComponents: () => [],
-        mapOfDispatchers: {
+        mapOfPushEntryFunctions: {
           '': () => {},
         },
         getSessionToken: () => getSessionToken(),

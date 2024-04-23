@@ -17,7 +17,7 @@ import { UseCurrentUserFunction } from '../../data-consumption/domain/users/curr
 import { UseUsersBasicInfoFunction } from '../../data-consumption/domain/users/users-basic-info/types';
 import { SetFloatingWindows } from '../../extensible-areas/floating-window/types';
 import { UseCustomSubscriptionFunction } from '../../data-consumption/domain/shared/custom-subscription/types';
-import { MapOfDispatchers, UseDataChannelFunctionFromPluginApi } from '../../data-channel/types';
+import { MapOfPushEntryFunctions, UseDataChannelFunctionFromPluginApi } from '../../data-channel/types';
 import { GetSessionTokenFunction } from '../auxiliary/session-token/types';
 import { GetJoinUrlFunction } from '../auxiliary/join-url/types';
 import { UsePluginSettingsFunction } from '../../data-consumption/domain/settings/plugin-settings/types';
@@ -160,17 +160,20 @@ export interface PluginApi {
   // --- DataChannel Hook ---
   /**
    * Returns an array with tha data wrapped in the `GraphqlResponseWrapper` in the first
-   * position of the array and the dispatcher function in which one plugin can inform
-   * the others.
+   * position of the array, the push function with which one plugin can inform
+   * the others in second position, and at last, the deleteEntryFunction .
    *
    * This is used for the different plugins in the meeting to communicate.
    *
    * @param channelName - the channel name in which you want to communicate
-   * @returns The array of data wrapped in the `GraphqlResponseWrapper` and the dispatcher function
+   * @param dataChannelType - format with which you want to consume the data
+   * @param subChannelName - subchannel name within a certain data-channel
+   * @returns The array of data wrapped in the `GraphqlResponseWrapper`,
+   * the push function and delete function
    *
    */
   useDataChannel?: UseDataChannelFunctionFromPluginApi;
-  mapOfDispatchers: MapOfDispatchers;
+  mapOfPushEntryFunctions: MapOfPushEntryFunctions;
   // --- Ui-Commands ---
   uiCommands?: UiCommands;
   // --- Ui-Data-Hook ---

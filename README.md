@@ -55,6 +55,62 @@ SDK for developing BigBlueButton plugins, examples of implementations can be fou
 ### Real time data exchange
 - `useDataChannel` hook: this will allow you to exchange information (Send and receive) amongst different users through the same plugin;
 
+So for this hook to read the data from the data channel, the developer will be able to choose the format in which they want it.The possible formats are described down below:
+
+- ALL_ITEMS: Fetches all items from specific data-channel and specific subchannel-name since the begining of the meeting from the newest to the latest (It can be used as a history);
+- LATEST_ITEM: Fetches only the latest item pushed to the data-channel within a specific subchannel-name since the begining of the meeting;
+- NEW_ITEMS: Fetches the new items pushed to the data-channel within a specific subchannel-name since the moment that the `useDataChannel` hook has been called (It will not see entries sent previous to that moment);
+
+One can find examples of usage any of the plugin samples or official ones. The syntax is described ahead:
+
+```typescript
+const [
+  response, // Data that will be returned
+  pushEntryFunction, // Function to push another item to the data-channel
+  deleteEntryFunction, // Function to delete specific item or wipe all
+] = useDataChannel(
+  channelName, // Defined according to what is on settings.yml from bbb-htlm5
+  DataChannelTypes.All_ITEMS, // | LATEST_ITEM | NEW_ITEMS -> ALL_ITEMS is default 
+  subChannelName = 'default', // If no subchannelName is specified, it will be 'default'
+);
+```
+
+Wiping all data off will delete every item from the specific data-channel within the specific subchannel-name.
+
+The data-channel name must be written in the settings.yml.
+
+All the permission for writing and deleting must be in the yaml too just like the example below:
+
+```yaml
+  plugins:
+    - name: PluginName
+      url: http://<your-hosted-plugin>/PluginName.js
+      dataChannels:
+        - name: channel-name
+          # writePermission options: moderator, presenter, all
+          writePermission: ['moderator','presenter']
+          # deletePermission options: moderator, sender, presenter, all
+          deletePermission:
+            - moderator
+            - sender
+```
+
+If no permission is mentioned in the yaml (writing or deleting), no one will be able proceed with that specific action:
+
+The `pushEntryFunction` has a minor detail to pay attention to, it is possible to specify the users who you want to send the item to, if none is specified, all will receive the item, such as done ahead:
+
+```typescript
+pushEntryFunction(objectToBePushed: T, receivers?: ObjectTo[])
+export interface ToUserId {
+  userId: string;
+}
+export interface ToRole {
+  role: DataChannelPushEntryFunctionUserRole;
+}
+
+export type ObjectTo = ToUserId | ToRole;
+```
+
 ### Real time ui data consumption
 - `useUiData` hook: This will return certain data from the UI depending on the parameter the developer uses. It works just like the useUiEvent hook, but instead of passing a callback as a parameter to be run everytime the event occurs, it will return the data directly, keep in mind that the second parameter is the default value that this function will assume. Possible choices:
   - IntlLocaleUiDataNames.CURRENT_LOCALE;

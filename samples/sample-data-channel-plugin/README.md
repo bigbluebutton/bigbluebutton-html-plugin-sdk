@@ -20,6 +20,12 @@ npm start
   plugins:
     - name: SampleDataChannelPlugin
       url: http://127.0.0.1:4701/static/SampleDataChannelPlugin.js
+      dataChannels:
+        - name: public-channel
+          writePermission: ['moderator','presenter']
+          deletePermission:
+              - moderator
+              - sender
 ```
 
 Mind that for this Plugin there is also a special configuration to insert in this file, which is the data-channels part, see example below:
@@ -29,12 +35,11 @@ Mind that for this Plugin there is also a special configuration to insert in thi
     - name: SampleDataChannelPlugin
       url: http://<your-hosted-plugin>/SampleDataChannelPlugin.js
       dataChannels:
-        - name: selectRandomUser
-          # writePermission options: moderator, presenter, all
-          writePermission: ['moderator','presenter']
         - name: public-channel
-          # writePermission options: moderator, presenter, all
-          writePermission: ['all']
+          writePermission: ['moderator','presenter']
+          deletePermission:
+              - moderator
+              - sender
 ```
 
 With the config above, you can also have another data-channel called `public-channel`.
