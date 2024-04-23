@@ -47,3 +47,10 @@ done
 # Display a message indicating the successful version update
 echo "Bumped version of $DEPENDENCY_NAME to $NEW_VERSION"
 
+# Add package and package-lock
+git add package-lock.json package.json samples/*/package-lock.json samples/*/package.json
+
+git commit -m "Bump version to $NEW_VERSION"
+git tag v$NEW_VERSION
+git push origin v$NEW_VERSION
+
