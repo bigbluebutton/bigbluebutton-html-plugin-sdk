@@ -37,6 +37,7 @@ import { useChatMessageDomElements } from '../../dom-element-manipulation/chat/m
 import { UseTalkingIndicatorFunction } from '../../data-consumption/domain/user-voice/talking-indicator/types';
 import { useTalkingIndicator } from '../../data-consumption/domain/user-voice/talking-indicator/hooks';
 import { useUiData } from '../../ui-data-hooks/hooks';
+import { serverCommands } from '../../server-commands/commands';
 
 declare const window: PluginBrowserWindow;
 
@@ -77,6 +78,7 @@ export abstract class BbbPluginSdk {
       messageIds: string[],
     ) => useChatMessageDomElements(messageIds);
     pluginApi.uiCommands = uiCommands;
+    pluginApi.serverCommands = serverCommands;
     pluginApi.useUiData = useUiData;
     const pluginName = pluginApi?.pluginName;
     if (pluginName) {

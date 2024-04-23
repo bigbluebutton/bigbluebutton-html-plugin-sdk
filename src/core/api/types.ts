@@ -25,6 +25,7 @@ import { UseLoadedChatMessagesFunction } from '../../data-consumption/domain/cha
 import { UseTalkingIndicatorFunction } from '../../data-consumption/domain/user-voice/talking-indicator/types';
 import { GenericComponentInterface } from '../../extensible-areas/generic-component/types';
 import { UseUiDataFunction } from '../../ui-data-hooks/types';
+import { ServerCommands } from '../../server-commands/types';
 
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
@@ -173,6 +174,8 @@ export interface PluginApi {
   mapOfDispatchers: MapOfDispatchers;
   // --- Ui-Commands ---
   uiCommands?: UiCommands;
+  // --- Server Commands ---
+  serverCommands?: ServerCommands;
   // --- Ui-Data-Hook ---
   /**
    * Function that returns the ui data the developer wants from.
