@@ -1,11 +1,82 @@
-# BigBlueButton SDK for HTML plugins
+# BigBlueButton SDK for HTML5 Client Plugins
 
-## Information
+This repository contains the SDK for developing BigBlueButton plugins.
+Plugins are React components that can be loaded from external sources
+by the BigBlueButton HTML5 client to extend its functionalities.
 
-SDK for developing BigBlueButton plugins, examples of implementations can be found in `./samples/sample-presentation-toolbar-plugin` (Refer to `./samples/sample-presentation-toolbar-plugin/README.md`) or `./samples/sample-user-list-dropdown-plugin`.
+## Examples
+
+A variety of example implementations to manipulate different parts of the
+BBB client can be found in the [`samples`](samples) folder.
+
+## Usage
+
+This is a general instruction on how to use a plugin.
+For a detailed configuration example of each use case,
+have a look at the READMEs in the respective [samples](samples)-folders.
+
+### Running the Plugin from Source
+
+For development purposes you can run a plugin locally from source.
+
+For example if you take the [`sample-action-button-dropdown-plugin`](samples/sample-action-button-dropdown-plugin),
+you do the following:
+
+1. Start the development server:
+    ```bash
+    cd $HOME/src/bigbluebutton-html-plugin-sdk/samples/sample-action-button-dropdown-plugin
+    npm install
+    npm start
+    ```
+
+2. Add reference to it on BigBlueButton's `settings.yml`:
+    ```yaml
+    public:
+      plugins:
+        - name: SampleActionButtonDropdownPlugin
+          url: http://127.0.0.1:4701/static/SampleActionButtonDropdownPlugin.js
+    ```
+
+_N.B.:_ Be aware that in this case the url is interpreted from the plugin in the browser,
+so the localhost is actually your local development machine.
+
+### Building the Plugin
+
+To build a plugin for production use
+(again, using the example of [`sample-action-button-dropdown-plugin`](samples/sample-action-button-dropdown-plugin)),
+follow these steps:
+
+```bash
+cd $HOME/src/bigbluebutton-html-plugin-sdk/samples/sample-action-button-dropdown-plugin
+npm install
+npm run build-bundle
+```
+
+The above command will generate the `dist` folder, containing the bundled JavaScript file named `SampleActionButtonDropdownPlugin.js`.
+This file can be hosted on any HTTPS server.
+
+To use the plugin with BigBlueButton, add the plugin's URL to `settings.yml` as shown below:
+
+```yaml
+public:
+  app:
+    ... // All app configurations
+  plugins:
+    - name: SampleActionButtonDropdownPlugin
+      url: <<PLUGIN_URL>>
+  ... // All other configurations
+```
+
+#### Hosting the Plugin on a BBB Server
+
+While the plugin can be hosted on any Server, it is also possible to host the bundled file directly on
+a BigBlueButton server. For that you copy the `dist/SampleActionButtonDropdownPlugin.js` to the folder `/var/www/bigbluebutton-default/assets/plugins`.
+In this case, the `<<PLUGIN_URL>>` will be `https://<your-host>/plugins/SampleActionButtonDropdownPlugin.js`.
 
 ## API
+
 ### Extensible UI areas
+
 - Action bar items (button, separator)
 
 - Action Button Dropdown Items (option, separator)
@@ -16,7 +87,7 @@ SDK for developing BigBlueButton plugins, examples of implementations can be fou
 
 - Nav bar items (button, info)
 
-- Presentation dropdown items (option, separator) 
+- Presentation dropdown items (option, separator)
 
 - Presentation toolbar items (button, separator, spinner)
 
@@ -31,11 +102,13 @@ SDK for developing BigBlueButton plugins, examples of implementations can be fou
 - Generic component (genericComponent)
 
 ### Getters available through the API:
+
 - `getSessionToken`: returns the user session token located on the user's URL.
 
 - `getJoinUrl`: returns the join url associated with the parameters passed as an argument. Since it fetches the BigBlueButton API, this getter method is asynchronous.
 
 ### Realtime data consumption
+
 - `useCurrentPresentation` hook: provides information regarding the current presentation;
 
 - `useLoadedUserList` hook: provides information regarding the loaded user list (displayed in the screen);
@@ -53,6 +126,7 @@ SDK for developing BigBlueButton plugins, examples of implementations can be fou
 - `useTalkingIndicator` hook: it gives you invormation on the user-voice data, that is, who is talking or muted.
 
 ### Real time data exchange
+
 - `useDataChannel` hook: this will allow you to exchange information (Send and receive) amongst different users through the same plugin;
 
 So for this hook to read the data from the data channel, the developer will be able to choose the format in which they want it.The possible formats are described down below:
@@ -70,7 +144,7 @@ const [
   deleteEntryFunction, // Function to delete specific item or wipe all
 ] = useDataChannel(
   channelName, // Defined according to what is on settings.yml from bbb-htlm5
-  DataChannelTypes.All_ITEMS, // | LATEST_ITEM | NEW_ITEMS -> ALL_ITEMS is default 
+  DataChannelTypes.All_ITEMS, // | LATEST_ITEM | NEW_ITEMS -> ALL_ITEMS is default
   subChannelName = 'default', // If no subchannelName is specified, it will be 'default'
 );
 ```
@@ -82,6 +156,7 @@ The data-channel name must be written in the settings.yml.
 All the permission for writing and deleting must be in the yaml too just like the example below:
 
 ```yaml
+public:
   plugins:
     - name: PluginName
       url: http://<your-hosted-plugin>/PluginName.js
@@ -112,6 +187,7 @@ export type ObjectTo = ToUserId | ToRole;
 ```
 
 ### Real time ui data consumption
+
 - `useUiData` hook: This will return certain data from the UI depending on the parameter the developer uses. It works just like the useUiEvent hook, but instead of passing a callback as a parameter to be run everytime the event occurs, it will return the data directly, keep in mind that the second parameter is the default value that this function will assume. Possible choices:
   - IntlLocaleUiDataNames.CURRENT_LOCALE;
   - ChatFormUiDataNames.CURRENT_CHAT_INPUT_TEXT;
@@ -128,11 +204,11 @@ const currentLocale = pluginApi.useUiData(IntlLocaleUiDataNames.CURRENT_LOCALE, 
   });
 ```
 
-
 ### Ui Commands to automatize tasks in BBB
+
 `uiCommands` object: It basically contains all the possible commands available to the developer to interact with the core BBB UI, see the ones implemented down below:
   - chat:
-    - form: 
+    - form:
       - open: this function will open the sidebar chat panel automatically;
       - fill: this function will fill the form input field of the chat passed in the argument as {text: string}
   - external-video:
@@ -143,4 +219,5 @@ const currentLocale = pluginApi.useUiData(IntlLocaleUiDataNames.CURRENT_LOCALE, 
     - unset: This function unset the current layout with its argument (example: LayoutComponentListEnum.GENERIC_COMPONENT)
 
 ### Dom Element Manipulation
+
 - `useChatMessageDomElements` hook: This hook will return the dom element of a chat message reactively, so one can modify whatever is inside, such as text, css, js, etc.;
