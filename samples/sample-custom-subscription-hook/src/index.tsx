@@ -11,9 +11,9 @@ const root = ReactDOM.createRoot(document.getElementById(uuid));
 root.render(
   <React.StrictMode>
     <SampleCustomUserSubscriptionPlugin {...{
-        pluginUuid: uuid,
-        pluginName,
-      }}
+      pluginUuid: uuid,
+      pluginName,
+    }}
     />
     <SampleCustomPresentationSubscriptionPlugin {...{
       pluginUuid: uuid,

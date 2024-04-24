@@ -1,4 +1,4 @@
-import { LayoutComponentListEnum } from "./enums";
+import { LayoutComponentListEnum } from './enums';
 
 export interface UiCommandsLayoutObject {
     set: (layoutToSet: LayoutComponentListEnum) => void;

@@ -3,13 +3,17 @@ import { useState, useEffect } from 'react';
 import * as ReactModal from 'react-modal';
 import './style.css';
 
-import { BbbPluginSdk, CurrentPresentation, PluginApi,
+import {
+  BbbPluginSdk, CurrentPresentation, PluginApi,
   PresentationToolbarButton, PresentationToolbarInterface,
   PresentationToolbarSpinner,
 } from 'bigbluebutton-html-plugin-sdk/';
 import { SamplePresentationToolbarPluginProps } from './types';
+import logger from '../utils/logger';
 
-function SamplePresentationToolbarPlugin({ pluginUuid: uuid }: SamplePresentationToolbarPluginProps) {
+function SamplePresentationToolbarPlugin(
+  { pluginUuid: uuid }: SamplePresentationToolbarPluginProps,
+) {
   BbbPluginSdk.initialize(uuid);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [isIdle, setIsIdle] = useState<boolean>(false);
@@ -35,7 +39,7 @@ function SamplePresentationToolbarPlugin({ pluginUuid: uuid }: SamplePresentatio
       setCurrentSlideText(currentPageContent);
       setShowModal(true);
     }).catch((err) => {
-      console.log(`Error while requesting data from bbb-web. Could not get the base text, error: ${err.message}`);
+      logger.error(`Error while requesting data from bbb-web. Could not get the base text, error: ${err.message}`);
     }).finally(() => {
       setTimeout(() => {
         setShowModal(false);

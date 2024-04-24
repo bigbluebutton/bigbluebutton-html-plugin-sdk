@@ -4,19 +4,20 @@ import { useEffect } from 'react';
 import { BbbPluginSdk } from 'bigbluebutton-html-plugin-sdk';
 import { SampleCustomSubscriptionPluginProps } from '../types';
 import { UserAggregateGraphqlResultWrapper } from './types';
+import logger from '../utils/logger';
 
 function SampleCustomSubscriptionPlugin({
   pluginUuid: uuid,
 }: SampleCustomSubscriptionPluginProps):
- React.ReactElement{
+ React.ReactElement {
   BbbPluginSdk.initialize(uuid);
   const pluginApi = BbbPluginSdk.getPluginApi(uuid);
 
   const { data: currentUser } = pluginApi.useCurrentUser();
 
-  let selfName = ""
+  let selfName = '';
   if (currentUser) {
-    selfName = currentUser.name
+    selfName = currentUser.name;
   }
 
   const { data: dataResult } = pluginApi.useCustomSubscription<UserAggregateGraphqlResultWrapper>(`
@@ -30,14 +31,14 @@ function SampleCustomSubscriptionPlugin({
   `, {
     variables: {
       name: selfName,
-    }
+    },
   });
 
   useEffect(() => {
     const selfNameUsersCount = dataResult?.user_aggregate.aggregate.count;
-    
+
     if (selfNameUsersCount > 1) {
-      alert(`There is ${selfNameUsersCount} users with the same name as you`)
+      logger.info(`There is ${selfNameUsersCount} users with the same name as you`);
     }
   }, [dataResult]);
 

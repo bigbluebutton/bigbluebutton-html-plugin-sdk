@@ -3,20 +3,30 @@ import { useEffect, useState } from 'react';
 import * as ReactModal from 'react-modal';
 import './style.css';
 
-import { BbbPluginSdk, PluginApi, PresentationToolbarButton, PresentationToolbarInterface, CustomSubscriptionHookOptions } from 'bigbluebutton-html-plugin-sdk';
+import {
+  BbbPluginSdk,
+  PluginApi,
+  PresentationToolbarButton,
+  PresentationToolbarInterface,
+  CustomSubscriptionHookOptions,
+} from 'bigbluebutton-html-plugin-sdk';
 import { SampleCustomSubscriptionPluginProps } from '../types';
 import { UrlsJson, Presentation, PresentationFromGraphqlWrapper } from './types';
 
-function SampleCustomPresentationSubscriptionPlugin({ pluginUuid: uuid }: SampleCustomSubscriptionPluginProps):
- React.ReactElement{
-  BbbPluginSdk.initialize(uuid)
+function SampleCustomPresentationSubscriptionPlugin(
+  { pluginUuid: uuid }: SampleCustomSubscriptionPluginProps,
+):
+ React.ReactElement {
+  BbbPluginSdk.initialize(uuid);
   const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [nextSlideUrls, setNextSlideUrls] = useState<UrlsJson>()
+  const [nextSlideUrls, setNextSlideUrls] = useState<UrlsJson>();
 
   const { data: currentPresentation } = pluginApi.useCurrentPresentation();
-  const nextSlidePage = currentPresentation?.currentPage?.num + 1 || 1;
-
+  let nextSlidePage = 1;
+  if (currentPresentation?.currentPage?.num) {
+    nextSlidePage = currentPresentation.currentPage.num + 1;
+  }
   const { data: dataResult } = pluginApi.useCustomSubscription<PresentationFromGraphqlWrapper>(`
       subscription Presentation($nextSlidePage: Int!) {
         pres_presentation (where: {current: {_eq: true}}) {
@@ -29,14 +39,15 @@ function SampleCustomPresentationSubscriptionPlugin({ pluginUuid: uuid }: Sample
       }
     `, {
     variables: {
-      nextSlidePage
-    }
+      nextSlidePage,
+    },
   } as CustomSubscriptionHookOptions);
 
-  const presentationNextPage: Presentation[] | undefined = dataResult ? dataResult.pres_presentation : undefined ;
+  const presentationNextPage: Presentation[] | undefined = dataResult
+    ? dataResult.pres_presentation : undefined;
 
-  const handleFetchPresentationData = (presentationNextPage: Presentation[]) => {
-    const nextSlideUrlsObject: UrlsJson = presentationNextPage[0].pages[0].urlsJson;
+  const handleFetchPresentationData = (pageToFetch: Presentation[]) => {
+    const nextSlideUrlsObject: UrlsJson = pageToFetch[0].pages[0].urlsJson;
     setNextSlideUrls(nextSlideUrlsObject);
     setShowModal(true);
   };
@@ -46,8 +57,8 @@ function SampleCustomPresentationSubscriptionPlugin({ pluginUuid: uuid }: Sample
   };
 
   useEffect(() => {
-    const currentObjectToSendToClient: PresentationToolbarInterface = 
-      new PresentationToolbarButton({
+    const currentObjectToSendToClient
+      : PresentationToolbarInterface = new PresentationToolbarButton({
         label: 'See preview of next slide',
         tooltip: 'It requests the content of the next slide',
         onClick: () => {
@@ -73,12 +84,14 @@ function SampleCustomPresentationSubscriptionPlugin({ pluginUuid: uuid }: Sample
       >
         <h1>Preview of next slide: </h1>
         <div className="slide-text-container">
-          {nextSlideUrls !== undefined ?
-            <img
-              width='90%'
-              src={nextSlideUrls.svg}
-            /> : null
-          }
+          {nextSlideUrls !== undefined
+            ? (
+              <img
+                width="90%"
+                src={nextSlideUrls.svg}
+                alt="next slide for the current presentation"
+              />
+            ) : null}
         </div>
         <button
           type="button"

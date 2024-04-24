@@ -5,7 +5,8 @@ export const volume = {
   /**
    * Sets the volume of the external video to a certain level. Needs to be a value between 0 and 1.
    *
-   * @param setExternalVideoVolumeCommandArguments the volume to which the core will set in the external video.
+   * @param setExternalVideoVolumeCommandArguments the volume to which the core will set in the
+   * external video.
    * Refer to {@link SetExternalVideoVolumeCommandArguments} to understand the argument structure.
    */
   set: (setExternalVideoVolumeCommandArguments: SetExternalVideoVolumeCommandArguments) => {
@@ -19,8 +20,7 @@ export const volume = {
         }),
       );
     } else {
-      console.warn('Not possible to set a volume less than zero or higher than 1.');
+      throw new Error('Not possible to set a volume less than zero or higher than one');
     }
-    
   },
 };

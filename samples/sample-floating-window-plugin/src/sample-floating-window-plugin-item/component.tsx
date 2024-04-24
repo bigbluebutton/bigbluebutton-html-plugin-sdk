@@ -2,12 +2,21 @@ import * as ReactDOM from 'react-dom/client';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 
-import { FloatingWindow, PluginApi, BbbPluginSdk, ActionsBarInterface, ActionsBarButton, ActionsBarPosition } from 'bigbluebutton-html-plugin-sdk';
+import {
+  FloatingWindow,
+  PluginApi,
+  BbbPluginSdk,
+  ActionsBarInterface,
+  ActionsBarButton,
+  ActionsBarPosition,
+} from 'bigbluebutton-html-plugin-sdk';
 import { SampleFloatingWindowPluginProps } from './types';
 import StickyNote from '../floating-personal-notes/component';
 import enums from '../utils/events';
 
-function SampleFloatingWindowPlugin({ pluginUuid: uuid }: SampleFloatingWindowPluginProps): React.ReactElement {
+function SampleFloatingWindowPlugin(
+  { pluginUuid: uuid }: SampleFloatingWindowPluginProps,
+): React.ReactElement {
   const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
   const [textContent, setTextContent] = useState('');
   const [isMinimized, setIsMinimized] = useState(false);
@@ -18,7 +27,7 @@ function SampleFloatingWindowPlugin({ pluginUuid: uuid }: SampleFloatingWindowPl
       setTextContent(event.detail.textContent);
       setIsMinimized(true);
     }) as EventListener;
-    
+
   const handleCloseWindow: EventListener = (
     () => {
       setIsClosed(true);
@@ -38,24 +47,23 @@ function SampleFloatingWindowPlugin({ pluginUuid: uuid }: SampleFloatingWindowPl
             <React.StrictMode>
               <StickyNote
                 initialTextContent={textContent}
-                initialTitle='Personal notes (not saved)'
+                initialTitle="Personal notes (not saved)"
               />
             </React.StrictMode>,
           );
-        }
+        },
       });
       pluginApi.setActionsBarItems([]);
       pluginApi.setFloatingWindows([floatingWindow]);
     } else if (isMinimized && !isClosed) {
       const restoringButton: ActionsBarInterface = new ActionsBarButton({
-          icon: 'copy',
-          tooltip: 'Open private notes floating window',
-          onClick: () => {
-            setIsMinimized(false)
-          },
-          position: ActionsBarPosition.RIGHT,
-        }
-      );
+        icon: 'copy',
+        tooltip: 'Open private notes floating window',
+        onClick: () => {
+          setIsMinimized(false);
+        },
+        position: ActionsBarPosition.RIGHT,
+      });
       pluginApi.setFloatingWindows([]);
       pluginApi.setActionsBarItems([restoringButton]);
     } else {
@@ -65,12 +73,12 @@ function SampleFloatingWindowPlugin({ pluginUuid: uuid }: SampleFloatingWindowPl
   }, [isMinimized, isClosed]);
 
   useEffect(() => {
-    window.addEventListener(enums.SampleFloatingWindow.MINIMIZE_WINDOW, handleMinimizeWindow)
-    window.addEventListener(enums.SampleFloatingWindow.CLOSE_WINDOW, handleCloseWindow)
+    window.addEventListener(enums.SampleFloatingWindow.MINIMIZE_WINDOW, handleMinimizeWindow);
+    window.addEventListener(enums.SampleFloatingWindow.CLOSE_WINDOW, handleCloseWindow);
     return () => {
-      window.removeEventListener(enums.SampleFloatingWindow.MINIMIZE_WINDOW, handleMinimizeWindow)
-      window.removeEventListener(enums.SampleFloatingWindow.CLOSE_WINDOW, handleCloseWindow)
-    }
+      window.removeEventListener(enums.SampleFloatingWindow.MINIMIZE_WINDOW, handleMinimizeWindow);
+      window.removeEventListener(enums.SampleFloatingWindow.CLOSE_WINDOW, handleCloseWindow);
+    };
   }, []);
 
   return null;

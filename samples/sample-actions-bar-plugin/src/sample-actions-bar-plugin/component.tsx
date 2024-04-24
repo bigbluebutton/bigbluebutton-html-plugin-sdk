@@ -3,9 +3,10 @@ import { useEffect } from 'react';
 
 import {
   ActionsBarButton, ActionsBarInterface, ActionsBarPosition, ActionsBarSeparator,
-  BbbPluginSdk, GraphqlResponseWrapper, PluginApi, UsersBasicInfoResponseFromGraphqlWrapper 
+  BbbPluginSdk, GraphqlResponseWrapper, PluginApi, UsersBasicInfoResponseFromGraphqlWrapper,
 } from 'bigbluebutton-html-plugin-sdk';
 import { SampleActionsBarPluginProps } from './types';
+import logger from '../utils/logger';
 
 function SampleActionsBarPlugin({
   pluginUuid: uuid,
@@ -19,23 +20,24 @@ function SampleActionsBarPlugin({
             icon: 'user',
             tooltip: 'This will make an alert dialog',
             onClick: () => {
-              alert("The action bar button from plugin was clicked")
+              logger.info('The action bar button from plugin was clicked');
             },
             position: ActionsBarPosition.RIGHT,
           });
     const dropdownToUserListItem:
       ActionsBarInterface = new ActionsBarSeparator({
-          position: ActionsBarPosition.RIGHT,
-        });
-    
+        position: ActionsBarPosition.RIGHT,
+      });
+
     pluginApi.setActionsBarItems([dropdownToUserListItem, buttonToUserListItem]);
   }, []);
 
-  const users: GraphqlResponseWrapper<UsersBasicInfoResponseFromGraphqlWrapper> = pluginApi.useUsersBasicInfo();
+  const users: GraphqlResponseWrapper<UsersBasicInfoResponseFromGraphqlWrapper> = pluginApi
+    .useUsersBasicInfo();
 
   useEffect(() => {
-    console.log("Users Overview: ", users);
-  }, [users])
+    logger.info('Users Overview: ', users);
+  }, [users]);
   return null;
 }
 

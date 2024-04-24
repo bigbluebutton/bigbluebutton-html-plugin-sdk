@@ -1,7 +1,7 @@
 export interface UserAggregate {
   aggregate: {
     count: number;
-  } 
+  }
 }
 
 export interface UserAggregateGraphqlResultWrapper {

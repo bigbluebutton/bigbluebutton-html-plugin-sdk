@@ -3,18 +3,28 @@ import { useState, useEffect } from 'react';
 import * as ReactModal from 'react-modal';
 import './style.css';
 
-import { BbbPluginSdk, PluginApi, CurrentPresentation, ActionButtonDropdownSeparator, ActionButtonDropdownOption, GenericComponent } from 'bigbluebutton-html-plugin-sdk';
-import { SampleActionButtonDropdownPluginProps } from './types';
+import {
+  BbbPluginSdk,
+  PluginApi,
+  CurrentPresentation,
+  ActionButtonDropdownSeparator,
+  ActionButtonDropdownOption,
+  GenericComponent,
+} from 'bigbluebutton-html-plugin-sdk';
 import { LayoutComponentListEnum } from 'bigbluebutton-html-plugin-sdk/dist/cjs/ui-commands/layout/enums';
 import * as ReactDOM from 'react-dom/client';
-import { TestComponent } from '../components/test-component/component';
+import { SampleActionButtonDropdownPluginProps } from './types';
+import { GenericComponentExample } from '../generic-component-example/component';
+import logger from '../../utils/logger';
 
 export interface DataExampleType {
   first_example_field: number;
   second_example_field: string;
 }
 
-function SampleActionButtonDropdownPlugin({ pluginUuid: uuid }: SampleActionButtonDropdownPluginProps) {
+function SampleActionButtonDropdownPlugin(
+  { pluginUuid: uuid }: SampleActionButtonDropdownPluginProps,
+) {
   BbbPluginSdk.initialize(uuid);
   const [showModal, setShowModal] = useState<boolean>(false);
   const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
@@ -33,7 +43,7 @@ function SampleActionButtonDropdownPlugin({ pluginUuid: uuid }: SampleActionButt
       setCurrentSlideText(currentPageContent);
       setShowModal(true);
     }).catch((err) => {
-      console.log(`Error while requesting data from bbb-web. Could not get the base text, error: ${err.message}`);
+      logger.error(`Error while requesting data from bbb-web. Could not get the base text, error: ${err.message}`);
     }).finally(() => {
       setTimeout(() => {
         setShowModal(false);
@@ -48,15 +58,15 @@ function SampleActionButtonDropdownPlugin({ pluginUuid: uuid }: SampleActionButt
   const handleChangePresentationAreaContent = () => {
     if (showingPresentationContent) {
       pluginApi.uiCommands.layout.unset(LayoutComponentListEnum.GENERIC_COMPONENT);
-      setShowingPresentationContent(false)
+      setShowingPresentationContent(false);
     } else {
       pluginApi.uiCommands.layout.set(LayoutComponentListEnum.GENERIC_COMPONENT);
-      setShowingPresentationContent(true)
+      setShowingPresentationContent(true);
     }
-  } 
+  };
 
   useEffect(() => {
-    if (currentUser?.presenter){
+    if (currentUser?.presenter) {
       pluginApi.setActionButtonDropdownItems([
         new ActionButtonDropdownSeparator(),
         new ActionButtonDropdownOption({
@@ -86,27 +96,27 @@ function SampleActionButtonDropdownPlugin({ pluginUuid: uuid }: SampleActionButt
           const root = ReactDOM.createRoot(element);
           root.render(
             <React.StrictMode>
-              <TestComponent 
+              <GenericComponentExample
                 uuid={uuid}
               />
             </React.StrictMode>,
-          )
-        }
+          );
+        },
       }),
       new GenericComponent({
         contentFunction: (element: HTMLElement) => {
           const root = ReactDOM.createRoot(element);
           root.render(
             <React.StrictMode>
-              <TestComponent 
+              <GenericComponentExample
                 uuid={uuid}
               />
             </React.StrictMode>,
-          )
-        }
-      })
-    ])
-  }, [])
+          );
+        },
+      }),
+    ]);
+  }, []);
 
   return (
     <ReactModal

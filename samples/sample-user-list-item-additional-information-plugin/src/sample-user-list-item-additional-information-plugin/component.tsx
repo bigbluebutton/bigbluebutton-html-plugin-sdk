@@ -1,13 +1,15 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 
-import { BbbPluginSdk, PluginApi, UserListItemIcon, UserListItemLabel } from 'bigbluebutton-html-plugin-sdk';
+import {
+  BbbPluginSdk, PluginApi, UserListItemIcon, UserListItemLabel,
+} from 'bigbluebutton-html-plugin-sdk';
 import { SampleUserListItemAdditionalInformationPluginProps } from './types';
 
-function SampleUserListItemAdditionalInformationPlugin({
-  pluginUuid: uuid,
-}: SampleUserListItemAdditionalInformationPluginProps): React.ReactElement<SampleUserListItemAdditionalInformationPluginProps> {
-  BbbPluginSdk.initialize(uuid)
+function SampleUserListItemAdditionalInformationPlugin(
+  { pluginUuid: uuid }: SampleUserListItemAdditionalInformationPluginProps,
+): React.ReactElement<SampleUserListItemAdditionalInformationPluginProps> {
+  BbbPluginSdk.initialize(uuid);
   const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
   const { data: loadedUserList } = pluginApi.useLoadedUserList();
 
@@ -24,7 +26,7 @@ function SampleUserListItemAdditionalInformationPlugin({
           return userListItemIcon as UserListItemIcon;
         },
       );
-      
+
       const listOfUserListLabelToSend:
       Array<UserListItemIcon> = loadedUserList.map(
         (user) => {
@@ -38,7 +40,9 @@ function SampleUserListItemAdditionalInformationPlugin({
         },
       );
 
-      pluginApi.setUserListItemAdditionalInformation([...listOfUserListIconToSend, ...listOfUserListLabelToSend]);
+      pluginApi.setUserListItemAdditionalInformation(
+        [...listOfUserListIconToSend, ...listOfUserListLabelToSend],
+      );
     }
   }, [loadedUserList]);
 

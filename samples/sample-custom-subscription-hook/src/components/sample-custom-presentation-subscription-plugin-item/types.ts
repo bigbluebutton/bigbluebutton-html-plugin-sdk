@@ -1,13 +1,13 @@
-export interface Page {
-  num: number;
-  urlsJson: UrlsJson;
-}
-
 export interface UrlsJson {
   thumb: string;
   text: string;
   svg: string;
   png: string;
+}
+
+export interface Page {
+  num: number;
+  urlsJson: UrlsJson;
 }
 
 export interface Presentation {

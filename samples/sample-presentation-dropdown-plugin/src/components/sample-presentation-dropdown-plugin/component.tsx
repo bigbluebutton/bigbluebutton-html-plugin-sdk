@@ -1,12 +1,19 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 
-import { BbbPluginSdk, PluginApi, PresentationDropdownInterface, PresentationDropdownOption, PresentationDropdownSeparator } from 'bigbluebutton-html-plugin-sdk';
+import {
+  BbbPluginSdk,
+  PluginApi,
+  PresentationDropdownInterface,
+  PresentationDropdownOption,
+  PresentationDropdownSeparator,
+} from 'bigbluebutton-html-plugin-sdk';
 import { SamplePresentationDropdownPluginProps } from './types';
+import logger from '../../utils/logger';
 
-function SamplePresentationDropdownPlugin({
-  pluginUuid: uuid,
-}: SamplePresentationDropdownPluginProps): React.ReactElement<SamplePresentationDropdownPluginProps> {
+function SamplePresentationDropdownPlugin(
+  { pluginUuid: uuid }: SamplePresentationDropdownPluginProps,
+): React.ReactElement<SamplePresentationDropdownPluginProps> {
   const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
 
   useEffect(() => {
@@ -15,13 +22,15 @@ function SamplePresentationDropdownPlugin({
         label: 'Click to see alert from plugin',
         icon: 'user',
         onClick: () => {
-          alert("Alert from plugin")
+          logger.info('Log from presentation dropdown plugins');
         },
       });
-      
+
     const presentationDropdownSeparator:
       PresentationDropdownInterface = new PresentationDropdownSeparator();
-    pluginApi.setPresentationDropdownItems([presentationDropdownSeparator, presentationDropdownOption]);
+    pluginApi.setPresentationDropdownItems(
+      [presentationDropdownSeparator, presentationDropdownOption],
+    );
   }, []);
 
   return null;

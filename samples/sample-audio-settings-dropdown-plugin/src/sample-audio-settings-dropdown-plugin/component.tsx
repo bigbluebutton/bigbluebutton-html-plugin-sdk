@@ -1,13 +1,18 @@
 import * as React from 'react';
 import { useEffect } from 'react';
+import {
+  AudioSettingsDropdownInterface,
+  AudioSettingsDropdownOption,
+  AudioSettingsDropdownSeparator,
+  BbbPluginSdk, PluginApi,
+} from 'bigbluebutton-html-plugin-sdk';
 
-import { AudioSettingsDropdownInterface, AudioSettingsDropdownOption, AudioSettingsDropdownSeparator, BbbPluginSdk, PluginApi } from 'bigbluebutton-html-plugin-sdk';
+import logger from '../utils/logger';
 import { SampleAudioSettingsDropdownPluginProps } from './types';
 
-
-function SampleAudioSettingsDropdownPlugin({
-  pluginUuid: uuid,
-}: SampleAudioSettingsDropdownPluginProps): React.ReactElement<SampleAudioSettingsDropdownPluginProps> {
+function SampleAudioSettingsDropdownPlugin(
+  { pluginUuid: uuid }: SampleAudioSettingsDropdownPluginProps,
+): React.ReactElement<SampleAudioSettingsDropdownPluginProps> {
   const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
 
   useEffect(() => {
@@ -16,18 +21,18 @@ function SampleAudioSettingsDropdownPlugin({
         label: 'Click to send alert message',
         icon: 'user',
         onClick: () => {
-          alert("Alert popup from plugin");
+          logger.info('Alert from plugin');
         },
       });
-      
+
     const separatorToAudioSettingsDropdown:
       AudioSettingsDropdownInterface = new AudioSettingsDropdownSeparator();
-    pluginApi.setAudioSettingsDropdownItems([separatorToAudioSettingsDropdown, buttonToAudioSettingsDropdown]);
+    pluginApi.setAudioSettingsDropdownItems(
+      [separatorToAudioSettingsDropdown, buttonToAudioSettingsDropdown],
+    );
   }, []);
 
-  return (
-    <></>
-  );
+  return null;
 }
 
 export default SampleAudioSettingsDropdownPlugin;
