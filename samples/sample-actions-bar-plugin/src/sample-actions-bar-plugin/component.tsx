@@ -18,7 +18,7 @@ function SampleActionsBarPlugin({
     const buttonToUserListItem:
           ActionsBarInterface = new ActionsBarButton({
             icon: 'user',
-            tooltip: 'This will make an alert dialog',
+            tooltip: 'This will log on the console.',
             onClick: () => {
               logger.info('The action bar button from plugin was clicked');
             },

@@ -16,7 +16,7 @@ function SampleCameraSettingsDropdownPlugin(
     pluginApi.setCameraSettingsDropdownItems([
       new CameraSettingsDropdownSeparator(),
       new CameraSettingsDropdownOption({
-        label: 'Send alert from plugin',
+        label: 'This will log on the console',
         icon: 'user',
         onClick: () => {
           logger.info('Log from camera settings plugin');

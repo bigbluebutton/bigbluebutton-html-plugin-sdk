@@ -18,10 +18,10 @@ function SampleAudioSettingsDropdownPlugin(
   useEffect(() => {
     const buttonToAudioSettingsDropdown:
       AudioSettingsDropdownInterface = new AudioSettingsDropdownOption({
-        label: 'Click to send alert message',
+        label: 'Click to send log message',
         icon: 'user',
         onClick: () => {
-          logger.info('Alert from plugin');
+          logger.info('Log from audio settings dropdown plugin');
         },
       });
 

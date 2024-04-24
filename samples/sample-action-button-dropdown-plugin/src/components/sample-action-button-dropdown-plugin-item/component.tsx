@@ -10,8 +10,9 @@ import {
   ActionButtonDropdownSeparator,
   ActionButtonDropdownOption,
   GenericComponent,
+  LayoutPresentatioAreaUiDataNames,
+  UiLayouts,
 } from 'bigbluebutton-html-plugin-sdk';
-import { LayoutComponentListEnum } from 'bigbluebutton-html-plugin-sdk/dist/cjs/ui-commands/layout/enums';
 import * as ReactDOM from 'react-dom/client';
 import { SampleActionButtonDropdownPluginProps } from './types';
 import { GenericComponentExample } from '../generic-component-example/component';
@@ -29,8 +30,14 @@ function SampleActionButtonDropdownPlugin(
   const [showModal, setShowModal] = useState<boolean>(false);
   const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
   const [currentSlideText, setCurrentSlideText] = useState<string>('');
-  const [showingPresentationContent, setShowingPresentationContent] = useState(false);
+  const [
+    showingGenericComponentInPresentationArea,
+    setShowingGenericComponentInPresentationArea,
+  ] = useState(false);
   const { data: currentUser } = pluginApi.useCurrentUser();
+  const layoutInformation = pluginApi.useUiData(LayoutPresentatioAreaUiDataNames.CURRENT_ELEMENT, [{
+    isOpen: true,
+  }]);
 
   const { data: currentPresentation } = pluginApi.useCurrentPresentation();
 
@@ -56,14 +63,32 @@ function SampleActionButtonDropdownPlugin(
   };
 
   const handleChangePresentationAreaContent = () => {
-    if (showingPresentationContent) {
-      pluginApi.uiCommands.layout.unset(LayoutComponentListEnum.GENERIC_COMPONENT);
-      setShowingPresentationContent(false);
+    if (!showingGenericComponentInPresentationArea) {
+      pluginApi.setGenericComponents([
+        new GenericComponent({
+          contentFunction: (element: HTMLElement) => {
+            const root = ReactDOM.createRoot(element);
+            root.render(
+              <React.StrictMode>
+                <GenericComponentExample
+                  uuid={uuid}
+                />
+              </React.StrictMode>,
+            );
+          },
+        }),
+      ]);
     } else {
-      pluginApi.uiCommands.layout.set(LayoutComponentListEnum.GENERIC_COMPONENT);
-      setShowingPresentationContent(true);
+      pluginApi.setGenericComponents([]);
     }
   };
+
+  useEffect(() => {
+    const lastInTheLayout = layoutInformation[layoutInformation.length - 1];
+    setShowingGenericComponentInPresentationArea(
+      lastInTheLayout.currentElement === UiLayouts.GENERIC_COMPONENT && lastInTheLayout.isOpen,
+    );
+  }, [layoutInformation]);
 
   useEffect(() => {
     if (currentUser?.presenter) {
@@ -79,7 +104,7 @@ function SampleActionButtonDropdownPlugin(
           },
         }),
         new ActionButtonDropdownOption({
-          label: showingPresentationContent ? 'Return previous presentation content' : 'Set different content in presentation area',
+          label: showingGenericComponentInPresentationArea ? 'Return previous presentation content' : 'Set different content in presentation area',
           icon: 'copy',
           tooltip: 'this is a button injected by plugin',
           allowed: true,
@@ -87,36 +112,7 @@ function SampleActionButtonDropdownPlugin(
         }),
       ]);
     }
-  }, [currentPresentation, currentUser]);
-
-  useEffect(() => {
-    pluginApi.setGenericComponents([
-      new GenericComponent({
-        contentFunction: (element: HTMLElement) => {
-          const root = ReactDOM.createRoot(element);
-          root.render(
-            <React.StrictMode>
-              <GenericComponentExample
-                uuid={uuid}
-              />
-            </React.StrictMode>,
-          );
-        },
-      }),
-      new GenericComponent({
-        contentFunction: (element: HTMLElement) => {
-          const root = ReactDOM.createRoot(element);
-          root.render(
-            <React.StrictMode>
-              <GenericComponentExample
-                uuid={uuid}
-              />
-            </React.StrictMode>,
-          );
-        },
-      }),
-    ]);
-  }, []);
+  }, [currentPresentation, currentUser, showingGenericComponentInPresentationArea]);
 
   return (
     <ReactModal

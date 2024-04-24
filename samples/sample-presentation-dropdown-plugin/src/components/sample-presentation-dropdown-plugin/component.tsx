@@ -19,7 +19,7 @@ function SamplePresentationDropdownPlugin(
   useEffect(() => {
     const presentationDropdownOption:
       PresentationDropdownInterface = new PresentationDropdownOption({
-        label: 'Click to see alert from plugin',
+        label: 'This will log on the console',
         icon: 'user',
         onClick: () => {
           logger.info('Log from presentation dropdown plugins');

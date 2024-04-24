@@ -14,11 +14,11 @@ function SampleNavBarPlugin({ pluginUuid: uuid }: SampleNavBarPluginProps): Reac
     const button = new NavBarButton({
       icon: 'user',
       disabled: false,
-      label: 'Click to send alert',
+      label: 'This will log on the console',
       tooltip: 'this is a button injected by plugin',
       position: NavBarItemPosition.RIGHT,
       onClick: () => {
-        logger.info('Alert sent from plugin');
+        logger.info('Log from nav bar plugin');
       },
       hasSeparator: true,
     });

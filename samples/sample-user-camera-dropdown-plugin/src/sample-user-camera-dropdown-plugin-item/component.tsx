@@ -15,7 +15,7 @@ React.ReactElement<SampleUserCameraDropdownPluginProps> {
     pluginApi.setUserCameraDropdownItems([
       new UserCameraDropdownSeparator(),
       new UserCameraDropdownOption({
-        label: 'Send alert from plugin',
+        label: 'This will log on the console',
         icon: 'user',
         onClick: () => {
           logger.info('Alert sent from plugin');

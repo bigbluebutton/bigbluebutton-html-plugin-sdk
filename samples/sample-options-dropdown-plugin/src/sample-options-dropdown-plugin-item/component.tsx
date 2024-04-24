@@ -15,7 +15,7 @@ function SampleOptionsDropdownPlugin(
   useEffect(() => {
     pluginApi.setOptionsDropdownItems([
       new OptionsDropdownOption({
-        label: 'Send an alert popup',
+        label: 'This will log on the console',
         icon: 'copy',
         onClick: () => {
           logger.info('Log from options dropdown plugin');
