@@ -2,7 +2,7 @@
 
 ## What is it?
 
-The Sample Options Dropdown Plugin serves as a demonstration of how developers can create their own custom plugins. This plugin includes a separator after an option with label "Send an alert popup". When you click on the button, the menu will close and open an alert pop-up.
+The Sample Options Dropdown Plugin serves as a demonstration of how developers can create their own custom plugins. This plugin includes a separator after an option. When you click on the button, the menu will close and log something in the console.
 
 ![Gif of plugin demo](./public/assets/plugin.gif)
 

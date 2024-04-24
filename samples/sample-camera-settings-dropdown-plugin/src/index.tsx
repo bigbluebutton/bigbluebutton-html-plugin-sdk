@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
-import SampleCameraSettingsDropdownPlugin from './sample-camera-settings-dropdown-plugin-item/component';
+import SampleCameraSettingsDropdownPlugin from './components/sample-camera-settings-dropdown-plugin-item/component';
 
 const uuid = document.currentScript?.getAttribute('uuid') || 'root';
 

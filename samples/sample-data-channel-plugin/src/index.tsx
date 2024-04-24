@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
-import SampleDataChannelPlugin from './sample-data-channel-plugin-item/component';
+import SampleDataChannelPlugin from './components/sample-data-channel-plugin-item/component';
 
 const uuid = document.currentScript?.getAttribute('uuid') || 'root';
 

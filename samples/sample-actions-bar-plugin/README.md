@@ -2,7 +2,7 @@
 
 ## What is it?
 
-The Sample Action bar items Plugin serves as a demonstration of how developers can create their own custom plugins, in this case it goes into the actions bar. This plugin includes a separator and a button with a user icon that will alert the user with the message "The action bar button from plugin was clicked".
+The Sample Action bar items Plugin serves as a demonstration of how developers can create their own custom plugins, in this case it goes into the actions bar. This plugin includes a separator and a button with a user icon that will log in the console user with the message "The action bar button from plugin was clicked".
 
 ![Gif of plugin demo](./public/assets/plugin.gif)
 

@@ -2,7 +2,7 @@
 
 ## What is it?
 
-The Sample Camera Settings Dropdown Plugin serves as a demonstration of how developers can create their own custom plugins. This plugin includes a separator after the ordinary actions menu options and a button that displays the label "Send alert from plugin". When you click on the button, it will open an alert with a message, and then close the menu dropdown.
+The Sample Camera Settings Dropdown Plugin serves as a demonstration of how developers can create their own custom plugins. This plugin includes a separator after the ordinary actions menu options and a button. When you click on the button, it will log a message on the console, and then close the menu dropdown.
 
 ![Gif of plugin demo](./public/assets/plugin.gif)
 

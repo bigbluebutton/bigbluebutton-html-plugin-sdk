@@ -6,7 +6,7 @@ The Sample Custom Hook Plugin serves as a demonstration of how developers can cr
 
 ![Gif of plugin demo](./public/assets/plugin-hook-presentation.gif)
 
-Another feature of this plugin is the alert popup that appears with the count of the users with the same name as the current user (self user).
+Another feature of this plugin is the log that appears in the console with the count of the users with the same name as the current user (self user).
 
 ![Gif of plugin demo](./public/assets/plugin-hook-user.gif)
 

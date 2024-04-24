@@ -3,7 +3,14 @@ import { useState, useEffect } from 'react';
 import * as ReactModal from 'react-modal';
 import './style.css';
 
-import { BbbPluginSdk, PluginApi, UserListDropdownInformation, UserListDropdownInterface, UserListDropdownOption, UserListDropdownSeparator } from 'bigbluebutton-html-plugin-sdk';
+import {
+  BbbPluginSdk,
+  PluginApi,
+  UserListDropdownInformation,
+  UserListDropdownInterface,
+  UserListDropdownOption,
+  UserListDropdownSeparator,
+} from 'bigbluebutton-html-plugin-sdk';
 import { SampleUserListDropdownPluginProps } from './types';
 
 import { ModeratorTag } from '../moderator-tag/component';
@@ -38,7 +45,7 @@ function SampleUserListDropdownPlugin({
           return buttonToUserListItem as UserListDropdownInterface;
         },
       );
-      
+
       const listOfOptionsToSend:
       Array<UserListDropdownInterface> = loadedUserList.map(
         (user) => {
@@ -61,7 +68,7 @@ function SampleUserListDropdownPlugin({
           return buttonToUserListItem as UserListDropdownInterface;
         },
       );
-      
+
       const listOfDropdownsToSend:
       Array<UserListDropdownInterface> = loadedUserList.map(
         (user) => {
@@ -72,7 +79,9 @@ function SampleUserListDropdownPlugin({
           return dropdownToUserListItem as UserListDropdownInterface;
         },
       );
-      pluginApi.setUserListDropdownItems([...listOfInformationToSend, ...listOfDropdownsToSend, ...listOfOptionsToSend]);
+      pluginApi.setUserListDropdownItems(
+        [...listOfInformationToSend, ...listOfDropdownsToSend, ...listOfOptionsToSend],
+      );
     }
   }, [loadedUserList]);
 

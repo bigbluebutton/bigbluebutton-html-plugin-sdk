@@ -2,7 +2,7 @@
 
 ## What is it?
 
-The Sample Nav Bar Plugin serves as a demonstration of how developers can create their own custom plugins. This plugin includes a button that displays the label "Click to send alert" and also an information title that reads "Information here". When you click on the button, an alert pop up will appear.
+The Sample Nav Bar Plugin serves as a demonstration of how developers can create their own custom plugins. This plugin includes a button. When you click on the button, a log will appear in the console.
 
 ![Gif of plugin demo](./public/assets/plugin.gif)
 

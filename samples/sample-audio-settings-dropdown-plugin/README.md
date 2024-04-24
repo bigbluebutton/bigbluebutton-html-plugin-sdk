@@ -2,7 +2,7 @@
 
 ## What is it?
 
-The Sample Audio Settings Dropdown Plugin serves as a demonstration of how developers can create their own custom plugins, in this case it goes into the audio settings dropdown. This plugin includes a separator and an option for the user to click with the label "Click to send alert message". When the user clicks on the option, an alert popup with the message "Alert popup for plugin". See example below.
+The Sample Audio Settings Dropdown Plugin serves as a demonstration of how developers can create their own custom plugins, in this case it goes into the audio settings dropdown. This plugin includes a separator and an option for the user to click. When the user clicks on the option, a log will appear in the console. See example below.
 
 ![Gif of plugin demo](./public/assets/plugin.gif)
 

@@ -2,7 +2,7 @@
 
 ## What is it?
 
-The Sample User Camera Dropdown Plugin serves as a demonstration of how developers can create their own custom plugins. This plugin includes a separator after the ordinary dropdown menu option, it reads the label "Send alert from plugin". When you click it, an alert popup will be displayed.
+The Sample User Camera Dropdown Plugin serves as a demonstration of how developers can create their own custom plugins. This plugin includes a separator after the ordinary dropdown menu option. When you click it, a log will be displayed in the console.
 
 ![Gif of plugin demo](./public/assets/plugin.gif)
 
