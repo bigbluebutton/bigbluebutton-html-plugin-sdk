@@ -6,46 +6,17 @@ The Sample User Camera Dropdown Plugin serves as a demonstration of how develope
 
 ![Gif of plugin demo](./public/assets/plugin.gif)
 
-## Running the Plugin from Source
+See the **Usage** section of the main README to see how to build and run plugins.
 
-1. Start the development server:
+## Configuration Example
 
-```bash
-cd $HOME/src/bigbluebutton-html-plugin-sdk/samples/sample-user-camera-dropdown-plugin
-npm install
-npm start
-```
-
-2. Add reference to it on BigBlueButton's `settings.yml`:
-
-```yaml
-  plugins:
-    - name: SampleUserCameraDropdownPlugin
-      url: http://127.0.0.1:4701/static/SampleUserCameraDropdownPlugin.js
-```
-
-## Building the Plugin
-
-To build the plugin for production use, follow these steps:
-
-```bash
-cd $HOME/src/bigbluebutton-html-plugin-sdk/samples/sample-user-camera-dropdown-plugin
-npm install
-npm run build-bundle
-```
-
-The above command will generate the `dist` folder, containing the bundled JavaScript file named `SampleUserCameraDropdownPlugin.js`. This file can be hosted on any HTTPS server.
-
-To use the plugin with BigBlueButton, add the plugin's URL to `settings.yml` as shown below:
+Add this to the `settings.yml` of the BBB HTML5-client:
 
 ```yaml
 public:
-  app:
-    ... // All app configurations
   plugins:
     - name: SampleUserCameraDropdownPlugin
       url: <<PLUGIN_URL>>
-  ... // All other configurations
 ```
 
-Alternatively, you can host the bundled file on the BigBlueButton server by copying `dist/SampleUserCameraDropdownPlugin.js` to the folder `/var/www/bigbluebutton-default/assets/plugins`. In this case, the `<<PLUGIN_URL>>` will be `https://<your-host>/plugins/SampleUserCameraDropdownPlugin.js`.
+Where `<<PLUGIN_URL>>` is the URL that points to the location where your bundled `SampleUserCameraDropdownPlugin.js`-file is hosted.
