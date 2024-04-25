@@ -6,6 +6,4 @@ export * from './data-channel';
 
 export * from './ui-data-hooks';
 
-export * from './ui-commands';
-
 export * from './core';
