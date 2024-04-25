@@ -1,0 +1,56 @@
+{
+  "name": "sample-use-meeting-plugin",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./src/index.tsx",
+  "dependencies": {
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/node": "^20.3.1",
+    "@types/react": "^18.2.13",
+    "@types/react-dom": "^18.2.6",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "bigbluebutton-html-plugin-sdk": "0.0.46",
+    "path": "^0.12.7",
+    "react": "^18.2.0",
+    "browser-bunyan": "^1.8.0",
+    "react-dom": "^18.2.0",
+    "react-modal": "^3.16.1",
+    "react-select": "^5.7.3"
+  },
+  "scripts": {
+    "build-bundle": "webpack --mode production",
+    "start": "webpack serve --mode development"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "typescript": "^5.1.3",
+    "@babel/core": "^7.21.8",
+    "@babel/preset-env": "^7.21.5",
+    "@babel/preset-react": "^7.18.6",
+    "@types/react-modal": "^3.16.0",
+    "babel-loader": "^9.1.2",
+    "css-loader": "^6.7.4",
+    "@typescript-eslint/eslint-plugin": "^6.2.0",
+    "@typescript-eslint/parser": "^6.2.0",
+    "eslint": "^8.45.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "style-loader": "^3.3.3",
+    "ts-loader": "^9.4.3",
+    "webpack": "^5.83.1",
+    "webpack-cli": "^5.1.1",
+    "webpack-dev-server": "^4.15.1"
+  }
+}

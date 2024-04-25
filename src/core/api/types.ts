@@ -25,6 +25,7 @@ import { UseLoadedChatMessagesFunction } from '../../data-consumption/domain/cha
 import { UseTalkingIndicatorFunction } from '../../data-consumption/domain/user-voice/talking-indicator/types';
 import { GenericComponentInterface } from '../../extensible-areas/generic-component/types';
 import { UseUiDataFunction } from '../../ui-data-hooks/types';
+import { UseMeetingFunction } from '../../data-consumption/domain/meeting/from-core/types';
 
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
@@ -118,6 +119,14 @@ export interface PluginApi {
    *
    */
   useCurrentUser?: UseCurrentUserFunction;
+  /**
+   * Returns an object containing the data on the current meeting, i.e. the meeting on which the
+   * plugin is running.
+   *
+   * @returns `GraphqlResponseWrapper` with the CurrentMeeting type.
+   *
+   */
+  useMeeting?: UseMeetingFunction;
   /**
    * Returns an object containing the brief data on every user in te meeting.
    *
