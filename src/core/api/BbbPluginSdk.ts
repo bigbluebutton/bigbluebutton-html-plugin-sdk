@@ -38,6 +38,8 @@ import { useChatMessageDomElements } from '../../dom-element-manipulation/chat/m
 import { UseTalkingIndicatorFunction } from '../../data-consumption/domain/user-voice/talking-indicator/types';
 import { useTalkingIndicator } from '../../data-consumption/domain/user-voice/talking-indicator/hooks';
 import { useUiData } from '../../ui-data-hooks/hooks';
+import { UseMeetingFunction } from '../../data-consumption/domain/meeting/from-core/types';
+import { useMeeting } from '../../data-consumption/domain/meeting/from-core/hooks';
 
 declare const window: PluginBrowserWindow;
 
@@ -70,6 +72,7 @@ export abstract class BbbPluginSdk {
       () => useCurrentPresentation()) as UseCurrentPresentationFunction;
     pluginApi.useLoadedUserList = (() => useLoadedUserList()) as UseLoadedUserListFunction;
     pluginApi.useCurrentUser = (() => useCurrentUser()) as UseCurrentUserFunction;
+    pluginApi.useMeeting = (() => useMeeting()) as UseMeetingFunction;
     pluginApi.useUsersBasicInfo = (() => useUsersBasicInfo()) as UseUsersBasicInfoFunction;
     pluginApi.useTalkingIndicator = (() => useTalkingIndicator()) as UseTalkingIndicatorFunction;
     pluginApi.useLoadedChatMessages = (
