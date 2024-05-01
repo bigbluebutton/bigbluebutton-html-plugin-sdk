@@ -4,9 +4,9 @@ import { useEffect } from 'react';
 import {
   BbbPluginSdk, PluginApi, ActionButtonDropdownOption,
   RESET_DATA_CHANNEL, DataChannelTypes,
+  pluginLogger,
 } from 'bigbluebutton-html-plugin-sdk';
 import { SampleDataChannelPluginProps } from './types';
-import logger from '../../utils/logger';
 
 interface DataExampleType {
   first_example_field: number;
@@ -24,7 +24,7 @@ function SampleDataChannelPlugin(
   const [dataResponseNewSubChannel, pushToNewSubChannel, deleteEntryFunctionNewSubChannel] = pluginApi.useDataChannel<DataExampleType>('public-channel', DataChannelTypes.All_ITEMS, 'newSubChannel');
 
   useEffect(() => {
-    logger.info('Log to verify the data flow: ', dataResponseDefaultAllItems, dataResponseDefaultLastItem, dataResponseNewSubChannel);
+    pluginLogger.info('Log to verify the data flow: ', dataResponseDefaultAllItems, dataResponseDefaultLastItem, dataResponseNewSubChannel);
   }, [dataResponseDefaultAllItems, dataResponseNewSubChannel, dataResponseDefaultLastItem]);
 
   useEffect(() => {

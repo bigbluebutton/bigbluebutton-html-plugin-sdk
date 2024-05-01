@@ -1,10 +1,12 @@
 import * as React from 'react';
 
 import {
-  BbbPluginSdk, ChatFormUiDataNames, ExternalVideoVolumeUiDataNames, PluginApi, UserListUiDataNames,
+  BbbPluginSdk,
+  ChatFormUiDataNames,
+  ExternalVideoVolumeUiDataNames,
+  PluginApi, pluginLogger, UserListUiDataNames,
 } from 'bigbluebutton-html-plugin-sdk';
 import { SampleUiEventsPluginProps } from './types';
-import logger from '../utils/logger';
 
 function SampleUiEventsPlugin({ pluginUuid: uuid }: SampleUiEventsPluginProps):
 React.ReactElement<SampleUiEventsPluginProps> {
@@ -21,7 +23,7 @@ React.ReactElement<SampleUiEventsPluginProps> {
     .useUiData(ExternalVideoVolumeUiDataNames.IS_VOLUME_MUTED, { value: false });
 
   React.useEffect(() => {
-    logger.info('Showing the uiData: ', {
+    pluginLogger.info('Showing the uiData: ', {
       userListOpened,
       currentChatText,
       currentChatFocused,

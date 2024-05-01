@@ -7,3 +7,5 @@ export * from './data-channel';
 export * from './ui-data-hooks';
 
 export * from './core';
+
+export * from './utils';
