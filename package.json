@@ -59,6 +59,8 @@
     "apollo"
   ],
   "dependencies": {
-    "@apollo/client": "^3.8.7"
+    "@apollo/client": "^3.8.7",
+    "@browser-bunyan/console-formatted-stream": "^1.8.0",
+    "browser-bunyan": "^1.8.0"
   }
 }

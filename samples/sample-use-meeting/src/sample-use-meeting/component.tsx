@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import {
   BbbPluginSdk, PluginApi,
+  pluginLogger,
 } from 'bigbluebutton-html-plugin-sdk';
 import { SampleUseMeetingPluginProps } from './types';
 
@@ -13,8 +14,7 @@ React.ReactElement<SampleUseMeetingPluginProps> {
 
   React.useEffect(() => {
     const meetingInfo = meetingInfoGraphqlResponse?.data;
-    // TODO: Properly config logger;
-    console.log('Showing meeting information ', meetingInfo);
+    pluginLogger.info('Showing meeting information ', meetingInfo);
   }, [meetingInfoGraphqlResponse]);
   return null;
 }

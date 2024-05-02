@@ -3,9 +3,9 @@ import { useEffect } from 'react';
 
 import {
   BbbPluginSdk, NavBarButton, NavBarInfo, NavBarItemPosition, PluginApi,
+  pluginLogger,
 } from 'bigbluebutton-html-plugin-sdk';
 import { SampleNavBarPluginProps } from './types';
-import logger from '../utils/logger';
 
 function SampleNavBarPlugin({ pluginUuid: uuid }: SampleNavBarPluginProps): React.ReactElement {
   const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
@@ -18,7 +18,7 @@ function SampleNavBarPlugin({ pluginUuid: uuid }: SampleNavBarPluginProps): Reac
       tooltip: 'this is a button injected by plugin',
       position: NavBarItemPosition.RIGHT,
       onClick: () => {
-        logger.info('Log from nav bar plugin');
+        pluginLogger.info('Log from nav bar plugin');
       },
       hasSeparator: true,
     });
