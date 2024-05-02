@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
-import SamplePresentationDropdownPlugin from './sample-presentation-dropdown-plugin/component';
+import SamplePresentationDropdownPlugin from './components/sample-presentation-dropdown-plugin/component';
 
 const uuid = document.currentScript?.getAttribute('uuid') || 'root';
 

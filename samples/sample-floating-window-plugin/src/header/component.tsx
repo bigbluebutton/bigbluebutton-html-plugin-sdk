@@ -6,22 +6,22 @@ interface HeaderProps {
   textContent: string;
 }
 
-const Header = ({ textContent }: HeaderProps) => {
+function Header({ textContent }: HeaderProps) {
   const handleYellowClick = () => {
-    dispatchEvent(new CustomEvent( enums.SampleFloatingWindow.MINIMIZE_WINDOW, {
+    dispatchEvent(new CustomEvent(enums.SampleFloatingWindow.MINIMIZE_WINDOW, {
       detail: { textContent },
-    }))
-  }
+    }));
+  };
   const handleRedClick = () => {
-    dispatchEvent(new CustomEvent(enums.SampleFloatingWindow.CLOSE_WINDOW))
-  }
+    dispatchEvent(new CustomEvent(enums.SampleFloatingWindow.CLOSE_WINDOW));
+  };
 
   return (
     <Styled.HeaderWrapper>
-      <Styled.RedDot onClick={handleRedClick}/>
+      <Styled.RedDot onClick={handleRedClick} />
       <Styled.YellowDot onClick={handleYellowClick} />
     </Styled.HeaderWrapper>
   );
-};
+}
 
 export default Header;
