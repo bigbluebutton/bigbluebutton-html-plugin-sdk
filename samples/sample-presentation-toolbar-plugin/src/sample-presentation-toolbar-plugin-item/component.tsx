@@ -5,11 +5,11 @@ import './style.css';
 
 import {
   BbbPluginSdk, CurrentPresentation, PluginApi,
+  pluginLogger,
   PresentationToolbarButton, PresentationToolbarInterface,
   PresentationToolbarSpinner,
 } from 'bigbluebutton-html-plugin-sdk/';
 import { SamplePresentationToolbarPluginProps } from './types';
-import logger from '../utils/logger';
 
 function SamplePresentationToolbarPlugin(
   { pluginUuid: uuid }: SamplePresentationToolbarPluginProps,
@@ -39,7 +39,7 @@ function SamplePresentationToolbarPlugin(
       setCurrentSlideText(currentPageContent);
       setShowModal(true);
     }).catch((err) => {
-      logger.error(`Error while requesting data from bbb-web. Could not get the base text, error: ${err.message}`);
+      pluginLogger.error(`Error while requesting data from bbb-web. Could not get the base text, error: ${err.message}`);
     }).finally(() => {
       setTimeout(() => {
         setShowModal(false);

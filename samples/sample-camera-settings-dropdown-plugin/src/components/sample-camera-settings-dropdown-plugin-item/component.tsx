@@ -3,9 +3,9 @@ import { useEffect } from 'react';
 
 import {
   BbbPluginSdk, CameraSettingsDropdownOption, CameraSettingsDropdownSeparator, PluginApi,
+  pluginLogger,
 } from 'bigbluebutton-html-plugin-sdk';
 import { SampleCameraSettingsDropdownPluginProps } from './types';
-import logger from '../../utils/logger';
 
 function SampleCameraSettingsDropdownPlugin(
   { pluginUuid: uuid }: SampleCameraSettingsDropdownPluginProps,
@@ -19,7 +19,7 @@ function SampleCameraSettingsDropdownPlugin(
         label: 'This will log on the console',
         icon: 'user',
         onClick: () => {
-          logger.info('Log from camera settings plugin');
+          pluginLogger.info('Log from camera settings plugin');
         },
       }),
     ]);

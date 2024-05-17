@@ -3,9 +3,9 @@ import { useEffect } from 'react';
 
 import {
   BbbPluginSdk, OptionsDropdownOption, OptionsDropdownSeparator, PluginApi,
+  pluginLogger,
 } from 'bigbluebutton-html-plugin-sdk';
 import { SampleOptionsDropdownPluginProps } from './types';
-import logger from '../utils/logger';
 
 function SampleOptionsDropdownPlugin(
   { pluginUuid: uuid }: SampleOptionsDropdownPluginProps,
@@ -18,7 +18,7 @@ function SampleOptionsDropdownPlugin(
         label: 'This will log on the console',
         icon: 'copy',
         onClick: () => {
-          logger.info('Log from options dropdown plugin');
+          pluginLogger.info('Log from options dropdown plugin');
         },
       }),
       new OptionsDropdownSeparator(),

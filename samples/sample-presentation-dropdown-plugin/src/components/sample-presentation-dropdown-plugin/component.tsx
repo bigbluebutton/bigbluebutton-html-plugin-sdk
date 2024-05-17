@@ -4,12 +4,12 @@ import { useEffect } from 'react';
 import {
   BbbPluginSdk,
   PluginApi,
+  pluginLogger,
   PresentationDropdownInterface,
   PresentationDropdownOption,
   PresentationDropdownSeparator,
 } from 'bigbluebutton-html-plugin-sdk';
 import { SamplePresentationDropdownPluginProps } from './types';
-import logger from '../../utils/logger';
 
 function SamplePresentationDropdownPlugin(
   { pluginUuid: uuid }: SamplePresentationDropdownPluginProps,
@@ -22,7 +22,7 @@ function SamplePresentationDropdownPlugin(
         label: 'This will log on the console',
         icon: 'user',
         onClick: () => {
-          logger.info('Log from presentation dropdown plugins');
+          pluginLogger.info('Log from presentation dropdown plugins');
         },
       });
 

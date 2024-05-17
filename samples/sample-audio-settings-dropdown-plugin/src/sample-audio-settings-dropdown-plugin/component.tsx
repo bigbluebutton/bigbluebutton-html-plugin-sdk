@@ -5,9 +5,9 @@ import {
   AudioSettingsDropdownOption,
   AudioSettingsDropdownSeparator,
   BbbPluginSdk, PluginApi,
+  pluginLogger,
 } from 'bigbluebutton-html-plugin-sdk';
 
-import logger from '../utils/logger';
 import { SampleAudioSettingsDropdownPluginProps } from './types';
 
 function SampleAudioSettingsDropdownPlugin(
@@ -21,7 +21,7 @@ function SampleAudioSettingsDropdownPlugin(
         label: 'Click to send log message',
         icon: 'user',
         onClick: () => {
-          logger.info('Log from audio settings dropdown plugin');
+          pluginLogger.info('Log from audio settings dropdown plugin');
         },
       });
 

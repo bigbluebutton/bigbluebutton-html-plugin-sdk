@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 
-import { BbbPluginSdk } from 'bigbluebutton-html-plugin-sdk';
+import { BbbPluginSdk, pluginLogger } from 'bigbluebutton-html-plugin-sdk';
 import { SampleCustomSubscriptionPluginProps } from '../types';
 import { UserAggregateGraphqlResultWrapper } from './types';
-import logger from '../utils/logger';
 
 function SampleCustomSubscriptionPlugin({
   pluginUuid: uuid,
@@ -38,7 +37,7 @@ function SampleCustomSubscriptionPlugin({
     const selfNameUsersCount = dataResult?.user_aggregate.aggregate.count;
 
     if (selfNameUsersCount > 1) {
-      logger.info(`There is ${selfNameUsersCount} users with the same name as you`);
+      pluginLogger.info(`There is ${selfNameUsersCount} users with the same name as you`);
     }
   }, [dataResult]);
 

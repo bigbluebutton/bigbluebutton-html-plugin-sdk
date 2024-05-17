@@ -3,10 +3,11 @@ import { useEffect } from 'react';
 
 import {
   ActionsBarButton, ActionsBarInterface, ActionsBarPosition, ActionsBarSeparator,
-  BbbPluginSdk, GraphqlResponseWrapper, PluginApi, UsersBasicInfoResponseFromGraphqlWrapper,
+  BbbPluginSdk, GraphqlResponseWrapper,
+  PluginApi, UsersBasicInfoResponseFromGraphqlWrapper,
+  pluginLogger,
 } from 'bigbluebutton-html-plugin-sdk';
 import { SampleActionsBarPluginProps } from './types';
-import logger from '../utils/logger';
 
 function SampleActionsBarPlugin({
   pluginUuid: uuid,
@@ -20,7 +21,7 @@ function SampleActionsBarPlugin({
             icon: 'user',
             tooltip: 'This will log on the console.',
             onClick: () => {
-              logger.info('The action bar button from plugin was clicked');
+              pluginLogger.info('The action bar button from plugin was clicked');
             },
             position: ActionsBarPosition.RIGHT,
           });
@@ -36,7 +37,7 @@ function SampleActionsBarPlugin({
     .useUsersBasicInfo();
 
   useEffect(() => {
-    logger.info('Users Overview: ', users);
+    pluginLogger.info('Users Overview - ', users);
   }, [users]);
   return null;
 }

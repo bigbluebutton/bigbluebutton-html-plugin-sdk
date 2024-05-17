@@ -78,6 +78,21 @@ In this case, the `<<PLUGIN_URL>>` will be `https://<your-host>/plugins/SampleAc
 
 ### Extensible UI areas
 
+Foreach of the following ui-extensible-area, we have a different setter function accessible via `pluginApi`.
+
+Mind that, although each area has its own structure, all the functions follows a certain argument structure, and returns nothing, that would be:
+
+```ts
+pluginApi.setterFunctionExample([{
+  objectProperty1: 'string',
+  objectProperty2: 123,
+}])
+```
+
+See, it is basicaly a function that requires an array as an argument, with which the more items you push to that array, the more of that extensible area you will have.
+
+That being said, here are the extensible areas we have so far:
+
 - Action bar items (button, separator)
 - Action Button Dropdown Items (option, separator)
 - Audio settings dropdown items (option, separator)
@@ -90,6 +105,8 @@ In this case, the `<<PLUGIN_URL>>` will be `https://<your-host>/plugins/SampleAc
 - User list item additional information (item, label)
 - Floating window item (floatingWindow)
 - Generic component (genericComponent)
+
+Mind that no plugin will interfere into another's extensible area. So feel free to set whatever you need into a certain plugin with no worries.
 
 ### Getters available through the API:
 
@@ -107,6 +124,19 @@ In this case, the `<<PLUGIN_URL>>` will be `https://<your-host>/plugins/SampleAc
 - `usePluginSettings` hook: it provides all the specific settings regarding the current plugin it's been loaded from.
 - `useTalkingIndicator` hook: it gives you invormation on the user-voice data, that is, who is talking or muted.
 - `useMeeting` hook: it gives you information on the current meeting that the user is on.
+
+So for these types of hooks, the return will follow the same structure:
+
+```ts
+export interface GraphqlResponseWrapper<TData> {
+  loading: boolean;
+  data?: TData;
+  error?: ApolloError;
+}
+```
+
+So we have the `data`, which is different for each hook, that's why it's a generic, the error, that will be set if, and only if, there is an error, otherwise it is undefined, and loading, which tells the developer if the query is still loading (being fetched) or not.
+
 
 ### Real time data exchange
 
@@ -181,12 +211,20 @@ export type ObjectTo = ToUserId | ToRole;
 
 Example of usage:
 
-```typscript
-const currentLocale = pluginApi.useUiData(IntlLocaleUiDataNames.CURRENT_LOCALE, {
+```ts
+  const currentLocale = pluginApi.useUiData(IntlLocaleUiDataNames.CURRENT_LOCALE, {
     locale: 'en',
     fallbackLocale: 'en',
   });
+  // Do something with the currentLocale:
+  currentLocale.locale;
+  currentLocale.fallbackLocale;
+
 ```
+
+Mind that foreach enum we have, a different type of fallback is needed as the second argument. In the example above, we want the `intl`, so the second argument, will follow the structure depicted.
+
+One other thing is that the type of the return is precisely the same type required as the second argument.
 
 ### Ui Commands to automatize tasks in BBB
 
@@ -199,10 +237,101 @@ const currentLocale = pluginApi.useUiData(IntlLocaleUiDataNames.CURRENT_LOCALE, 
 - external-video:
   - volume:
     - set: this function will set the external video volume to a certain number between 0 and 1 (that is 0% and);
-- layout:
-  - set: This function set the current layout with its argument (example: LayoutComponentListEnum.GENERIC_COMPONENT)
-  - unset: This function unset the current layout with its argument (example: LayoutComponentListEnum.GENERIC_COMPONENT)
+
+See usage ahead:
+
+```ts
+  pluginApi.uiCommands.chat.form.open();
+  pluginApi.uiCommands.chat.form.fill({
+    text: 'Just an example message filled by the plugin',
+  });
+```
+
+So the idea is that we have a `uiCommands` object and at a point, there will be the command to do the intended action, such as open the chat form and/or fill it, as demonstrated above
 
 ### Dom Element Manipulation
 
 - `useChatMessageDomElements` hook: This hook will return the dom element of a chat message reactively, so one can modify whatever is inside, such as text, css, js, etc.;
+
+
+### Frequently Asked Questions (FAQ)
+
+**How do I remove a certain extensible area that I don't want anymore?**
+It is pretty simple: just set an empty array of elements of that specific extensible area.
+Or simply remove the specific item of the array and set the new array to that extensible area in the next iteration.
+
+See example below:
+
+```ts
+// First iteration:
+  // Define both variables:
+  const dropdownToUserListItem = { ... };
+  const buttonToUserListItem = { ... };
+  pluginApi.setActionsBarItems([dropdownToUserListItem, buttonToUserListItem]);
+
+// Second iteration:
+  // Redefine variable(s):
+  const newButtonToUserListItem = { ... };
+  pluginApi.setActionsBarItems([newButtonToUserListItem]);
+
+// Third iteration:
+  // I don't want any of this extensible-area:
+  pluginApi.setActionsBarItems([]);
+  // All set from this plugin will disappear from the UI;
+```
+
+**How to propperly build a plugin?**
+Just go to your plugin folder, install dependencies and run the build command as follows:
+
+```bash
+cd my-plugin-folder/
+npm i
+npm run build-bundl
+```
+
+At this point, another folder will be created into the plugin directory called "dist/" inside of that folder you will find the plugin itself `MyPlugin.js`. Remember that the name of this file will be the same as defined in the `webpack.config.js`, such as:
+
+```js
+module.exports = {
+  // ... Other configurations
+  output: {
+    filename: 'MyPlugin.js'
+  }
+  // ... Other configurations
+}
+```
+
+**Does the builded plugin need to be in the same BBB server?**
+No, feel free to host it anywhere you want, just make sure to point the URL from `settings.yml`correctly.
+
+**I am making my plugin based on a sample inside the SDK, but somehow, the sample is not working properly, what do I do to run it in dev mode and make it work?**
+Well there are several motives to why the sample is not working properly, so I will go through each one of them briefly:
+
+- The config has not been set properly inside `bbb-html5.yml`, see [this section to configure your plugin](#running-the-plugin-from-source);
+- The plugin is not even running in dev mode, it could be the port already in use, or typescript and/or javascript errors (Make sure to initialize the `pluginApi` as any of the samples inside a react function component);
+- It could be an error with that sample indeed, or that feature the plugin uses broke (it is not usual, but can happen since BBB is constantly changing and enhancing its features with its wonderful community). If that happens, just open an issue in the [SDK's github](https://github.com/bigbluebutton/bigbluebutton-html-plugin-sdk) detailing the error you are facing. And thank you in advance for reporting it back to us so we can improve each time.
+
+**How to troubleshoot the plugins? See if it has loaded in the BBB, for instance.**
+Well, each time a set of plugins are listed in the `bbb-html5.yml`, it will fire some logs based on the amount of plugins that it need to load inside the client. So open the console in the browser by pressing F12 key in your keyboard and search for the following log:
+
+```log
+<ratio of loaded plugins> plugins loaded
+```
+
+If 1 out of 5 plugins loaded, you'll see "1/5 plugins loaded", and so on.
+
+Also, when a plugin loaded, the client will log it's name like:
+
+```log
+Loaded plugin MyPlugin
+```
+
+Sometimes, there could be the case of a plugin to not load properly and an error will log with the following message:
+
+```log
+Error when loading plugin MyPlugin, error:  {"isTrusted":true}
+```
+
+In this case, the URL that leads to the plugin is not available or leads to an error. But it can log something different, so pay attention to what the error message will tell you.
+
+Lastly, there are, of course, other scenarios and different informative logs, but these are the most common and important ones. Please contact us if you feel we left something out!

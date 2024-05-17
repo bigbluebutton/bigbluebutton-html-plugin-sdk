@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+import { useEffect } from 'react';
 import { UseLoadedUserListFunction } from '../../data-consumption/domain/users/loaded-user-list/types';
 import { UseCurrentUserFunction } from '../../data-consumption/domain/users/current-user/types';
 import {
@@ -64,6 +66,7 @@ export abstract class BbbPluginSdk {
    *
    */
   public static initialize(uuid: string) {
+    if (!this.isReactEnvironment()) throw new Error('Initializing pluginApi outside of a react function component. It should be done inside');
     const pluginApi: PluginApi = window.bbb_plugins[uuid];
     pluginApi.useCustomSubscription = ((
       query: string,
@@ -101,6 +104,20 @@ export abstract class BbbPluginSdk {
     } else {
       throw new Error('Plugin name not set');
     }
+  }
+
+  private static isReactEnvironment(): boolean {
+    const fn = console.error;
+    try {
+      console.error = () => {};
+      useEffect(() => {}, []);
+    } catch {
+      console.error = fn;
+      console.error('[PLUGIN-ERROR] Error: Initializing pluginApi outside of a react function component. It should be done inside');
+      return false;
+    }
+    console.error = fn;
+    return true;
   }
 
   /**

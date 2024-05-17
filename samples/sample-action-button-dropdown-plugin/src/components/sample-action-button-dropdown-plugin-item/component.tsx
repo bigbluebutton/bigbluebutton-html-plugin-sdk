@@ -12,11 +12,11 @@ import {
   GenericComponent,
   LayoutPresentatioAreaUiDataNames,
   UiLayouts,
+  pluginLogger,
 } from 'bigbluebutton-html-plugin-sdk';
 import * as ReactDOM from 'react-dom/client';
 import { SampleActionButtonDropdownPluginProps } from './types';
 import { GenericComponentExample } from '../generic-component-example/component';
-import logger from '../../utils/logger';
 
 export interface DataExampleType {
   first_example_field: number;
@@ -50,7 +50,7 @@ function SampleActionButtonDropdownPlugin(
       setCurrentSlideText(currentPageContent);
       setShowModal(true);
     }).catch((err) => {
-      logger.error(`Error while requesting data from bbb-web. Could not get the base text, error: ${err.message}`);
+      pluginLogger.error(`Error while requesting data from bbb-web. Could not get the base text, error: ${err.message}`);
     }).finally(() => {
       setTimeout(() => {
         setShowModal(false);
