@@ -1,0 +1,3 @@
+export enum SidekickContentCommandsEnum {
+  MINIMIZE_CURRENT_PANEL = 'MINIMIZE_CURRENT_PANEL_SIDEKICK_CONTENT_COMMAND',
+}

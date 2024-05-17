@@ -1,5 +1,5 @@
 import { GenericComponentType } from './enums';
-import { GenericComponentInterface, GenericComponentProps } from './types';
+import { GenericComponentInterface, GenericComponentMainContentProps, GenericComponentSidekickContentProps } from './types';
 
 // GenericComponent Extensible Area
 
@@ -18,7 +18,7 @@ export class GenericComponentBase {
    */
   constructor({
     contentFunction,
-  }: GenericComponentProps) {
+  }: GenericComponentMainContentProps) {
     this.contentFunction = contentFunction;
   }
 
@@ -41,7 +41,7 @@ export class GenericComponentMainContent
    */
   constructor({
     contentFunction,
-  }: GenericComponentProps) {
+  }: GenericComponentMainContentProps) {
     super({ contentFunction });
     this.type = GenericComponentType.MAIN_CONTENT;
   }
@@ -50,6 +50,14 @@ export class GenericComponentMainContent
 export class GenericComponentSidekickContent
   extends GenericComponentBase implements GenericComponentInterface {
   type: GenericComponentType;
+
+  menuItemTitle: string;
+
+  menuItemContentMessage: string;
+
+  menuItemIcon: string;
+
+  open: boolean;
 
   /**
    * Returns object to be used in the setter as a generic component
@@ -61,8 +69,16 @@ export class GenericComponentSidekickContent
    */
   constructor({
     contentFunction,
-  }: GenericComponentProps) {
+    menuItemTitle,
+    menuItemContentMessage,
+    menuItemIcon,
+    open,
+  }: GenericComponentSidekickContentProps) {
     super({ contentFunction });
     this.type = GenericComponentType.SIDEKICK_CONTENT;
+    this.menuItemTitle = menuItemTitle;
+    this.menuItemContentMessage = menuItemContentMessage;
+    this.menuItemIcon = menuItemIcon;
+    this.open = open;
   }
 }
