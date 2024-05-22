@@ -1,12 +1,12 @@
-import { GenericComponentType } from './enums';
-import { GenericComponentInterface, GenericComponentProps } from './types';
+import { GenericContentType } from './enums';
+import { GenericContentInterface, GenericContentProps } from './types';
 
-// GenericComponent Extensible Area
+// GenericContent Extensible Area
 
-export class GenericComponent implements GenericComponentInterface {
+export class GenericContent implements GenericContentInterface {
   id: string = '';
 
-  type: GenericComponentType;
+  type: GenericContentType;
 
   contentFunction: (element: HTMLElement) => void;
 
@@ -20,12 +20,12 @@ export class GenericComponent implements GenericComponentInterface {
    */
   constructor({
     contentFunction,
-  }: GenericComponentProps) {
+  }: GenericContentProps) {
     this.contentFunction = contentFunction;
-    this.type = GenericComponentType.CONTAINER;
+    this.type = GenericContentType.CONTAINER;
   }
 
   setItemId: (id: string) => void = (id: string) => {
-    this.id = `GenericComponent_${id}`;
+    this.id = `GenericContent_${id}`;
   };
 }

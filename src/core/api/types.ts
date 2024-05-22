@@ -23,7 +23,7 @@ import { GetJoinUrlFunction } from '../auxiliary/join-url/types';
 import { UsePluginSettingsFunction } from '../../data-consumption/domain/settings/plugin-settings/types';
 import { UseLoadedChatMessagesFunction } from '../../data-consumption/domain/chat/loaded-chat-messages/types';
 import { UseTalkingIndicatorFunction } from '../../data-consumption/domain/user-voice/talking-indicator/types';
-import { GenericComponentInterface } from '../../extensible-areas/generic-component/types';
+import { GenericContentInterface } from '../../extensible-areas/generic-content/types';
 import { UseUiDataFunction } from '../../ui-data-hooks/types';
 import { UseMeetingFunction } from '../../data-consumption/domain/meeting/from-core/types';
 
@@ -71,8 +71,8 @@ export type SetUserListItemAdditionalInformation = (
   userListItemAdditionalInformation: UserListItemAdditionalInformationInterface[]
 ) => string[];
 
-export type SetGenericComponents = (
-  genericComponents: GenericComponentInterface[]
+export type SetGenericContents = (
+  genericContents: GenericContentInterface[]
 ) => string[];
 
 /**
@@ -93,7 +93,7 @@ export interface PluginApi {
   setUserCameraDropdownItems: SetUserCameraDropdownItems;
   setUserListItemAdditionalInformation: SetUserListItemAdditionalInformation;
   setFloatingWindows: SetFloatingWindows;
-  setGenericComponents: SetGenericComponents;
+  setGenericContents: SetGenericContents;
   // --- DataConsumption Hooks ---
   /**
    * Returns an object containing the data on the current presentation being displayed

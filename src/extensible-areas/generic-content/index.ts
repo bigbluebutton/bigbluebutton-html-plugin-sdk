@@ -1,6 +1,6 @@
 export {
-  GenericComponent,
+  GenericContent,
 } from './component';
 export {
-  GenericComponentInterface,
+  GenericContentInterface,
 } from './types';
