@@ -1,5 +1,6 @@
 export {
-  GenericContent,
+  GenericMainContent,
+  GenericSidekickContent,
 } from './component';
 export {
   GenericContentInterface,

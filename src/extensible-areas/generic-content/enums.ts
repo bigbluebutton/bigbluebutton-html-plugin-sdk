@@ -1,4 +1,5 @@
 // Generic Component types:
 export enum GenericContentType {
-  CONTAINER = 'GENERIC_CONTENT',
+  MAIN_CONTENT = 'GENERIC_MAIN_CONTENT',
+  SIDEKICK_CONTENT = 'GENERIC_SIDEKICK_CONTENT',
 }
