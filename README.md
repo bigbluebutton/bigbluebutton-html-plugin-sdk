@@ -97,6 +97,7 @@ That being said, here are the extensible areas we have so far:
 - Action Button Dropdown Items (option, separator)
 - Audio settings dropdown items (option, separator)
 - Camera settings dropdown items (option, separator)
+- Options settings dropdown items (option, separator)
 - Nav bar items (button, info)
 - Presentation dropdown items (option, separator)
 - Presentation toolbar items (button, separator, spinner)
@@ -237,6 +238,10 @@ One other thing is that the type of the return is precisely the same type requir
 - external-video:
   - volume:
     - set: this function will set the external video volume to a certain number between 0 and 1 (that is 0% and);
+- user-list:
+  - form:
+    - open: this function will open the user list panel automatically;
+    - close: this function will close the user list panel automatically (and also the sidebar content if open, to avoid inconsistencies in ui);
 
 See usage ahead:
 
