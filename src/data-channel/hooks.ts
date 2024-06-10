@@ -6,6 +6,7 @@ import {
   DataChannelEntryResponseType,
   DataChannelArguments,
   DeleteEntryFunction,
+  ReplaceEntryFunction,
 } from './types';
 import {
   GraphqlResponseWrapper,
@@ -18,13 +19,13 @@ import {
   HookEventWrapper, SubscribedEventDetails, UnsubscribedEventDetails, UpdatedEventDetails,
 } from '../core/types';
 import { DataChannelHooks, DataChannelTypes } from './enums';
-import { createChannelIdentifier, deleteEntryFunctionUtil } from './utils';
+import { createChannelIdentifier, deleteEntryFunctionUtil, replaceEntryFunctionUtil } from './utils';
 
 export const useDataChannelGeneral = (<T>(
   channelName: string, subChannelName: string,
   pluginName: string, pluginApi: PluginApi,
   dataChannelType: DataChannelTypes,
-  ) => {
+) => {
   const [data, setData] = useState<GraphqlResponseWrapper<DataChannelEntryResponseType<T>[]>>(
     { loading: true },
   );
@@ -33,6 +34,11 @@ export const useDataChannelGeneral = (<T>(
   const deleteEntryFunction: DeleteEntryFunction = (
     objectToDelete: ObjectToDelete[],
   ) => deleteEntryFunctionUtil(objectToDelete, channelName, subChannelName, pluginName);
+
+  const replaceEntryFunction: ReplaceEntryFunction = (
+    entryId,
+    payloadJson,
+  ) => replaceEntryFunctionUtil(entryId, channelName, subChannelName, pluginName, payloadJson);
 
   const channelIdentifier = createChannelIdentifier(channelName, subChannelName, pluginName);
 
@@ -83,5 +89,10 @@ export const useDataChannelGeneral = (<T>(
       window.removeEventListener(channelIdentifier, handleDataChange);
     };
   }, []);
-  return [data, pushEntryFunction, deleteEntryFunction];
+  return [
+    data,
+    pushEntryFunction,
+    deleteEntryFunction,
+    replaceEntryFunction,
+  ];
 }) as UseDataChannelStaticFunction;
