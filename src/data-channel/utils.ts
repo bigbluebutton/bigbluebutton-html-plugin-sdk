@@ -1,6 +1,7 @@
 import {
   DataChannelEntryResponseType,
   ObjectToDelete,
+  ReplaceEntryFunctionArguments,
 } from './types';
 import {
   HookEvents,
@@ -46,4 +47,25 @@ export const deleteEntryFunctionUtil = (
       }));
     }
   });
+};
+
+export const replaceEntryFunctionUtil = <T>(
+  entryId: string,
+  channelName: string,
+  subChannelName: string,
+  pluginName: string,
+  newPayloadJson: T,
+) => {
+  window.dispatchEvent(
+    new CustomEvent<UpdatedEventDetails<ReplaceEntryFunctionArguments<T>>>(HookEvents.UPDATED, {
+      detail: {
+        hook: DataChannelHooks.DATA_CHANNEL_REPLACE,
+        hookArguments: { channelName, pluginName, subChannelName },
+        data: {
+          entryId,
+          payloadJson: newPayloadJson,
+        },
+      },
+    }),
+  );
 };
