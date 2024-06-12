@@ -1,10 +1,5 @@
 name: Typescript - compile code
-on:
-  push:
-    branches:
-      - "main"
-  pull_request:
-    types: [opened, synchronize, reopened]
+on: [pull_request]
 permissions:
   contents: read
 jobs:
