@@ -86,7 +86,8 @@ export abstract class BbbPluginSdk {
     pluginApi.uiCommands = uiCommands;
     pluginApi.useUiData = useUiData;
     const pluginName = pluginApi?.pluginName;
-    if (pluginName) {
+console.log("sss")
+if (pluginName) {
       pluginApi.useDataChannel = ((
         channelName: string,
         dataChannelType: DataChannelTypes = DataChannelTypes.All_ITEMS,

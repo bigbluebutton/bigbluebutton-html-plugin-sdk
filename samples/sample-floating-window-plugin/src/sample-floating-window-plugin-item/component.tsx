@@ -32,7 +32,7 @@ function SampleFloatingWindowPlugin(
     () => {
       setIsClosed(true);
     }) as EventListener;
-
+console.log("sss")
   useEffect(() => {
     if (!isMinimized && !isClosed) {
       const floatingWindow = new FloatingWindow({
