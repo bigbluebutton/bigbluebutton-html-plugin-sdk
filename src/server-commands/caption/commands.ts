@@ -1,19 +1,28 @@
 import { CaptionCommandsEnum } from './enum';
-import { SaveCaptionCommandArguments } from './types';
+import { CaptionSaveCommandArguments } from './types';
 
 export const caption = {
   /**
    * Saves caption texts into the Caption graphql collection.
    *
-   * @param SaveCaptionCommandArguments the text with which the method will save the caption.
-   * Refer to {@link SaveCaptionCommandArguments} to understand the argument structure.
+   * @param captionSaveCommandArguments the text with which the method will save the caption.
+   * Refer to {@link CaptionSaveCommandArguments} to understand the argument structure.
    */
-  save: (saveCaptionCommandArguments: SaveCaptionCommandArguments) => {
+  save: (captionSaveCommandArguments: CaptionSaveCommandArguments) => {
     window.dispatchEvent(
       new CustomEvent<
-        SaveCaptionCommandArguments
+        CaptionSaveCommandArguments
       >(CaptionCommandsEnum.SAVE, {
-        detail: saveCaptionCommandArguments,
+        detail: captionSaveCommandArguments,
+      }),
+    );
+  },
+  addLocale: (captionAddLocaleCommandArguments: string) => {
+    window.dispatchEvent(
+      new CustomEvent<
+        string
+      >(CaptionCommandsEnum.ADD_LOCALE, {
+        detail: captionAddLocaleCommandArguments,
       }),
     );
   },

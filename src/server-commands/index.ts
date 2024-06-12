@@ -1,1 +1,1 @@
-export { CaptionCommandsEnum } from './caption/enum';
+export { CaptionCommandsEnum, CaptionsTypeEnum } from './caption/enum';
