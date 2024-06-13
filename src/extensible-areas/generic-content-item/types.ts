@@ -13,7 +13,3 @@ export interface GenericContentSidekickAreaProps {
   section: string;
   buttonIcon: string;
 }
-
-export type SetGenericContents = (
-  GenericContents: GenericContentInterface[]
-) => void;
