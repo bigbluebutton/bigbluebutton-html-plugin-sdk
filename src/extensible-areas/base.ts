@@ -3,7 +3,7 @@ import { ActionsBarItemType } from './actions-bar-item/enums';
 import { AudioSettingsDropdownItemType } from './audio-settings-dropdown-item/enums';
 import { CameraSettingsDropdownItemType } from './camera-settings-dropdown-item/enums';
 import { FloatingWindowType } from './floating-window/enums';
-import { GenericContentType } from './generic-content/enums';
+import { GenericContentType } from './generic-content-item/enums';
 import { NavBarItemType } from './nav-bar-item/enums';
 import { OptionsDropdownItemType } from './options-dropdown-item/enums';
 import { PresentationDropdownItemType } from './presentation-dropdown-item/enums';

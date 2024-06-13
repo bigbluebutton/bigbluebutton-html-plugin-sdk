@@ -10,4 +10,4 @@ export * from './camera-settings-dropdown-item';
 export * from './user-camera-dropdown-item';
 export * from './user-list-item-additional-information';
 export * from './floating-window';
-export * from './generic-content';
+export * from './generic-content-item';
