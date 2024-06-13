@@ -1,6 +1,6 @@
 ---
-name: HTML5 Issue
-about: Template for creating HTML5 Issue (frontend which you see during a session, not Greenlight).
+name: BBB-Plugin-SDK
+about: Template for creating BBB-Plugin-SDK Issue (SDK to create plugins for Bigbluebutton).
 title: ''
 labels: 'module: client'
 assignees: ''
@@ -29,11 +29,13 @@ A clear and concise description of what you expected to happen.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
-**BBB version:**
+**BBB version, plugin in which The bug happened and SDK version:**
 BigBlueButton continually evolves. Providing the version/build helps us to pinpoint when an issue was introduced.
 Example:
 $ sudo bbb-conf --check | grep BigBlueButton
 BigBlueButton Server 2.2.2 (1816)
+
+The SDK version is mentioned in the package.json file of the plugin, so search for "bigbluebutton-html-plugin-sdk" inside that file.
 
 **Desktop (please complete the following information):**
  - OS: [e.g. Windows, Mac]
