@@ -14,6 +14,7 @@ export enum DataChannelHooks {
   DATA_CHANNEL_BUILDER = 'Hooks::DataChannelBuilder',
   DATA_CHANNEL_RESET = 'Hooks::DataChannelReset',
   DATA_CHANNEL_DELETE = 'Hooks::DataChannelDelete',
+  DATA_CHANNEL_REPLACE = 'Hooks::DataChannelReplace',
 }
 
 export enum DataChannelTypes {
