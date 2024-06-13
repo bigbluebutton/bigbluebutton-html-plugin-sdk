@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
-import SampleGenericContentPlugin from './components/sample-generic-sidekick-content-plugin-item/component';
+import SampleGenericContentSidekickPlugin from './components/sample-generic-content-sidekick-plugin-item/component';
 
 const uuid = document.currentScript?.getAttribute('uuid') || 'root';
 
@@ -9,7 +9,7 @@ const pluginName = document.currentScript?.getAttribute('pluginName') || 'plugin
 const root = ReactDOM.createRoot(document.getElementById(uuid));
 root.render(
   <React.StrictMode>
-    <SampleGenericContentPlugin {...{
+    <SampleGenericContentSidekickPlugin {...{
       pluginUuid: uuid,
       pluginName,
     }}

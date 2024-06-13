@@ -1,5 +1,5 @@
 {
-  "name": "sample-generic-content-plugin",
+  "name": "sample-generic-content-sidekick-plugin",
   "version": "0.1.0",
   "main": "./src/index.tsx",
   "private": true,

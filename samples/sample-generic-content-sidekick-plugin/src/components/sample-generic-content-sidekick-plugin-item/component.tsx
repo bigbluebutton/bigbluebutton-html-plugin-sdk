@@ -7,11 +7,11 @@ import {
   GenericContentSidekickArea,
 } from 'bigbluebutton-html-plugin-sdk';
 import * as ReactDOM from 'react-dom/client';
-import { SampleGenericContentPluginProps } from './types';
-import { GenericContentExample } from '../generic-content-example/component';
+import { SampleGenericContentSidekickPluginProps } from './types';
+import { GenericContentSidekickExample } from '../generic-content-sidekick-example/component';
 
-function SampleGenericContentPlugin(
-  { pluginUuid: uuid }: SampleGenericContentPluginProps,
+function SampleGenericContentSidekickPlugin(
+  { pluginUuid: uuid }: SampleGenericContentSidekickPluginProps,
 ): React.ReactNode {
   BbbPluginSdk.initialize(uuid);
   const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
@@ -26,7 +26,7 @@ function SampleGenericContentPlugin(
           const root = ReactDOM.createRoot(element);
           root.render(
             <React.StrictMode>
-              <GenericContentExample
+              <GenericContentSidekickExample
                 uuid={uuid}
               />
             </React.StrictMode>,
@@ -54,4 +54,4 @@ function SampleGenericContentPlugin(
   return null;
 }
 
-export default SampleGenericContentPlugin;
+export default SampleGenericContentSidekickPlugin;

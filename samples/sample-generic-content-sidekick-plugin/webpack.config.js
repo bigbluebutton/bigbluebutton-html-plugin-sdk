@@ -1,8 +1,8 @@
 module.exports = {
     entry: './src/index.tsx',
     output: {
-      filename: 'SampleGenericContentSidekickAreaPlugin.js',
-      library: 'SampleGenericContentSidekickAreaPlugin',
+      filename: 'SampleGenericContentSidekickPlugin.js',
+      library: 'SampleGenericContentSidekickPlugin',
       libraryTarget: 'umd',
       publicPath: '/static/',
       globalObject: 'this',

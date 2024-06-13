@@ -1,8 +1,8 @@
 import { BbbPluginSdk, PluginApi, LoadedUserListData } from 'bigbluebutton-html-plugin-sdk';
 import * as React from 'react';
-import { GenericContentExampleProps } from './types';
+import { GenericContentSidekickExampleProps } from './types';
 
-export function GenericContentExample(props: GenericContentExampleProps) {
+export function GenericContentSidekickExample(props: GenericContentSidekickExampleProps) {
   const {
     uuid,
   } = props;
