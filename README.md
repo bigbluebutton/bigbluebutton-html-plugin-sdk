@@ -238,10 +238,9 @@ One other thing is that the type of the return is precisely the same type requir
 - external-video:
   - volume:
     - set: this function will set the external video volume to a certain number between 0 and 1 (that is 0% and);
-- user-list:
-  - form:
-    - open: this function will open the user list panel automatically;
-    - close: this function will close the user list panel automatically (and also the sidebar content if open, to avoid inconsistencies in ui);
+- sidekick-options-container:
+  - open: this function will open the sidekick options panel automatically;
+  - close: this function will close the sidekick options panel automatically (and also the sidebar content if open, to avoid inconsistencies in ui);
 
 See usage ahead:
 
