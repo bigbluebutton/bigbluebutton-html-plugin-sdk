@@ -31,7 +31,7 @@ function SampleGenericContentSidekickPlugin(
               />
             </React.StrictMode>,
           );
-        }
+        },
       }),
       new GenericContentSidekickArea({
         name: 'Generic Content 2',
@@ -43,11 +43,11 @@ function SampleGenericContentSidekickPlugin(
             <React.StrictMode>
               <h1>This is the generic content 2</h1>
               <p>Put here anything to be rendered in the sidekick content</p>
-              <iframe width="100%" height="1000px" src="https://en.wikipedia.org/wiki/Main_Page" />
+              <iframe title="wikipedia" width="100%" height="1000px" src="https://en.wikipedia.org/wiki/Main_Page" />
             </React.StrictMode>,
           );
-        }
-      })
+        },
+      }),
     ]);
   }, []);
 
