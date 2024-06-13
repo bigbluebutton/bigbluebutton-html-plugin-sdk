@@ -19,7 +19,4 @@ jobs:
       - name: run npm install
         run: npm install
       - name: typescript code validation with eslint
-        run: |
-          ls
-          pwd
-          npx eslint
+        run: npm run lint
