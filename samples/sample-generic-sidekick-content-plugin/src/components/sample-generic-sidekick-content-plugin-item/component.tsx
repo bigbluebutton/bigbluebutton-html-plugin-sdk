@@ -4,8 +4,7 @@ import { useEffect } from 'react';
 import {
   BbbPluginSdk,
   PluginApi,
-  GenericSidekickContent,
-  GenericMainContent,
+  GenericContentSidekickArea,
 } from 'bigbluebutton-html-plugin-sdk';
 import * as ReactDOM from 'react-dom/client';
 import { SampleGenericContentPluginProps } from './types';
@@ -19,7 +18,7 @@ function SampleGenericContentPlugin(
 
   useEffect(() => {
     pluginApi.setGenericContents([
-      new GenericSidekickContent({
+      new GenericContentSidekickArea({
         name: 'Generic Content 1',
         section: 'Section 1',
         buttonIcon: 'video',
@@ -34,7 +33,7 @@ function SampleGenericContentPlugin(
           );
         }
       }),
-      new GenericSidekickContent({
+      new GenericContentSidekickArea({
         name: 'Generic Content 2',
         section: 'Section 2',
         buttonIcon: 'chat',

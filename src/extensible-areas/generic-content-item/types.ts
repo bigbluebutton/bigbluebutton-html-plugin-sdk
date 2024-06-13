@@ -3,11 +3,11 @@ import { PluginProvidedUiItemDescriptor } from '../base';
 export interface GenericContentInterface extends PluginProvidedUiItemDescriptor {
 }
 
-export interface GenericMainContentProps {
+export interface GenericContentMainAreaProps {
   contentFunction: (element: HTMLElement) => void;
 }
 
-export interface GenericSidekickContentProps {
+export interface GenericContentSidekickAreaProps {
   contentFunction: (element: HTMLElement) => void;
   name: string;
   section: string;

@@ -1,6 +1,6 @@
 export {
-  GenericMainContent,
-  GenericSidekickContent,
+  GenericContentMainArea,
+  GenericContentSidekickArea,
 } from './component';
 export {
   GenericContentInterface,

@@ -9,7 +9,7 @@ import {
   CurrentPresentation,
   ActionButtonDropdownSeparator,
   ActionButtonDropdownOption,
-  GenericMainContent,
+  GenericContentMainArea,
   LayoutPresentatioAreaUiDataNames,
   UiLayouts,
   pluginLogger,
@@ -65,7 +65,7 @@ function SampleActionButtonDropdownPlugin(
   const handleChangePresentationAreaContent = () => {
     if (!showingGenericContentInPresentationArea) {
       pluginApi.setGenericContents([
-        new GenericMainContent({
+        new GenericContentMainArea({
           contentFunction: (element: HTMLElement) => {
             const root = ReactDOM.createRoot(element);
             root.render(

@@ -1,9 +1,9 @@
 import { GenericContentType } from './enums';
-import { GenericContentInterface, GenericMainContentProps, GenericSidekickContentProps } from './types';
+import { GenericContentInterface, GenericContentMainAreaProps, GenericContentSidekickAreaProps } from './types';
 
 // GenericContent Extensible Area
 
-export class GenericMainContent implements GenericContentInterface {
+export class GenericContentMainArea implements GenericContentInterface {
   id: string = '';
 
   type: GenericContentType;
@@ -21,9 +21,9 @@ export class GenericMainContent implements GenericContentInterface {
    */
   constructor({
     contentFunction
-  }: GenericMainContentProps) {
+  }: GenericContentMainAreaProps) {
     this.contentFunction = contentFunction;
-    this.type = GenericContentType.MAIN_CONTENT;
+    this.type = GenericContentType.MAIN_AREA;
   }
 
   setItemId: (id: string) => void = (id: string) => {
@@ -31,7 +31,7 @@ export class GenericMainContent implements GenericContentInterface {
   };
 }
 
-export class GenericSidekickContent implements GenericContentInterface {
+export class GenericContentSidekickArea implements GenericContentInterface {
   id: string = '';
 
   type: GenericContentType;
@@ -60,12 +60,12 @@ export class GenericSidekickContent implements GenericContentInterface {
    */
   constructor({
     contentFunction, name, section, buttonIcon
-  }: GenericSidekickContentProps) {
+  }: GenericContentSidekickAreaProps) {
     this.contentFunction = contentFunction;
     this.name = name;
     this.section = section;
     this.buttonIcon = buttonIcon;
-    this.type = GenericContentType.SIDEKICK_CONTENT;
+    this.type = GenericContentType.SIDEKICK_AREA;
   }
 
   setItemId: (id: string) => void = (id: string) => {
