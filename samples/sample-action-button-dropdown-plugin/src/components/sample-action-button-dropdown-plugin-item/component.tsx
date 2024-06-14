@@ -64,7 +64,7 @@ function SampleActionButtonDropdownPlugin(
 
   const handleChangePresentationAreaContent = () => {
     if (!showingGenericContentInPresentationArea) {
-      pluginApi.setGenericContents([
+      pluginApi.setGenericContentItems([
         new GenericContentMainArea({
           contentFunction: (element: HTMLElement) => {
             const root = ReactDOM.createRoot(element);
@@ -79,7 +79,7 @@ function SampleActionButtonDropdownPlugin(
         }),
       ]);
     } else {
-      pluginApi.setGenericContents([]);
+      pluginApi.setGenericContentItems([]);
     }
   };
 

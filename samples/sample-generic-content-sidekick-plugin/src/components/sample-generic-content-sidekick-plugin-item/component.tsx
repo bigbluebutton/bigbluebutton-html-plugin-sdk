@@ -17,7 +17,7 @@ function SampleGenericContentSidekickPlugin(
   const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
 
   useEffect(() => {
-    pluginApi.setGenericContents([
+    pluginApi.setGenericContentItems([
       new GenericContentSidekickArea({
         name: 'Generic Content 1',
         section: 'Section 1',

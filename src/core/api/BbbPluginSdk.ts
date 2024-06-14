@@ -147,7 +147,7 @@ export abstract class BbbPluginSdk {
         setUserCameraDropdownItems: () => [],
         setUserListItemAdditionalInformation: () => [],
         setFloatingWindows: () => [],
-        setGenericContents: () => [],
+        setGenericContentItems: () => [],
         mapOfPushEntryFunctions: {
           '': () => {},
         },

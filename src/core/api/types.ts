@@ -71,7 +71,7 @@ export type SetUserListItemAdditionalInformation = (
   userListItemAdditionalInformation: UserListItemAdditionalInformationInterface[]
 ) => string[];
 
-export type SetGenericContents = (
+export type SetGenericContentItems = (
   genericContents: GenericContentInterface[]
 ) => string[];
 
@@ -93,7 +93,7 @@ export interface PluginApi {
   setUserCameraDropdownItems: SetUserCameraDropdownItems;
   setUserListItemAdditionalInformation: SetUserListItemAdditionalInformation;
   setFloatingWindows: SetFloatingWindows;
-  setGenericContents: SetGenericContents;
+  setGenericContentItems: SetGenericContentItems;
   // --- DataConsumption Hooks ---
   /**
    * Returns an object containing the data on the current presentation being displayed
