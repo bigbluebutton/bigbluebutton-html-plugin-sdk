@@ -9,14 +9,14 @@ import {
   CurrentPresentation,
   ActionButtonDropdownSeparator,
   ActionButtonDropdownOption,
-  GenericComponent,
+  GenericContentMainArea,
   LayoutPresentatioAreaUiDataNames,
   UiLayouts,
   pluginLogger,
 } from 'bigbluebutton-html-plugin-sdk';
 import * as ReactDOM from 'react-dom/client';
 import { SampleActionButtonDropdownPluginProps } from './types';
-import { GenericComponentExample } from '../generic-component-example/component';
+import { GenericContentExample } from '../generic-content-example/component';
 
 export interface DataExampleType {
   first_example_field: number;
@@ -31,8 +31,8 @@ function SampleActionButtonDropdownPlugin(
   const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
   const [currentSlideText, setCurrentSlideText] = useState<string>('');
   const [
-    showingGenericComponentInPresentationArea,
-    setShowingGenericComponentInPresentationArea,
+    showingGenericContentInPresentationArea,
+    setShowingGenericContentInPresentationArea,
   ] = useState(false);
   const { data: currentUser } = pluginApi.useCurrentUser();
   const layoutInformation = pluginApi.useUiData(LayoutPresentatioAreaUiDataNames.CURRENT_ELEMENT, [{
@@ -63,14 +63,14 @@ function SampleActionButtonDropdownPlugin(
   };
 
   const handleChangePresentationAreaContent = () => {
-    if (!showingGenericComponentInPresentationArea) {
-      pluginApi.setGenericComponents([
-        new GenericComponent({
+    if (!showingGenericContentInPresentationArea) {
+      pluginApi.setGenericContentItems([
+        new GenericContentMainArea({
           contentFunction: (element: HTMLElement) => {
             const root = ReactDOM.createRoot(element);
             root.render(
               <React.StrictMode>
-                <GenericComponentExample
+                <GenericContentExample
                   uuid={uuid}
                 />
               </React.StrictMode>,
@@ -79,14 +79,14 @@ function SampleActionButtonDropdownPlugin(
         }),
       ]);
     } else {
-      pluginApi.setGenericComponents([]);
+      pluginApi.setGenericContentItems([]);
     }
   };
 
   useEffect(() => {
     const lastInTheLayout = layoutInformation[layoutInformation.length - 1];
-    setShowingGenericComponentInPresentationArea(
-      lastInTheLayout.currentElement === UiLayouts.GENERIC_COMPONENT && lastInTheLayout.isOpen,
+    setShowingGenericContentInPresentationArea(
+      lastInTheLayout.currentElement === UiLayouts.GENERIC_CONTENT && lastInTheLayout.isOpen,
     );
   }, [layoutInformation]);
 
@@ -104,7 +104,7 @@ function SampleActionButtonDropdownPlugin(
           },
         }),
         new ActionButtonDropdownOption({
-          label: showingGenericComponentInPresentationArea ? 'Return previous presentation content' : 'Set different content in presentation area',
+          label: showingGenericContentInPresentationArea ? 'Return previous presentation content' : 'Set different content in presentation area',
           icon: 'copy',
           tooltip: 'this is a button injected by plugin',
           allowed: true,
@@ -112,7 +112,7 @@ function SampleActionButtonDropdownPlugin(
         }),
       ]);
     }
-  }, [currentPresentation, currentUser, showingGenericComponentInPresentationArea]);
+  }, [currentPresentation, currentUser, showingGenericContentInPresentationArea]);
 
   return (
     <ReactModal

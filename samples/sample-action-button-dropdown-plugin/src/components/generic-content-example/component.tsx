@@ -1,11 +1,11 @@
 import { BbbPluginSdk, PluginApi } from 'bigbluebutton-html-plugin-sdk';
 import * as React from 'react';
 
-interface GenericComponentExampleProps {
+interface GenericContentExampleProps {
     uuid: string;
 }
 
-export function GenericComponentExample(props: GenericComponentExampleProps) {
+export function GenericContentExample(props: GenericContentExampleProps) {
   const {
     uuid,
   } = props;
