@@ -12,4 +12,5 @@ export interface GenericContentSidekickAreaProps {
   name: string;
   section: string;
   buttonIcon: string;
+  open: boolean;
 }

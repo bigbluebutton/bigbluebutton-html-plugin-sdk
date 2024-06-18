@@ -42,6 +42,8 @@ export class GenericContentSidekickArea implements GenericContentInterface {
 
   buttonIcon: string = '';
 
+  open: boolean = false;
+
   contentFunction: (element: HTMLElement) => void;
 
   /**
@@ -56,17 +58,19 @@ export class GenericContentSidekickArea implements GenericContentInterface {
    * @param section - section name under which the associated sidebar navigation button will be
    *  displayed
    * @param buttonIcon - the icon of the associated sidebar navigation button
+   * @param open - boolean value to decide wether to start open
    *
    * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5).
    */
   constructor({
-    contentFunction, name, section, buttonIcon,
+    contentFunction, name, section, buttonIcon, open,
   }: GenericContentSidekickAreaProps) {
     this.contentFunction = contentFunction;
     this.name = name;
     this.section = section;
     this.buttonIcon = buttonIcon;
     this.type = GenericContentType.SIDEKICK_AREA;
+    this.open = open;
   }
 
   setItemId: (id: string) => void = (id: string) => {

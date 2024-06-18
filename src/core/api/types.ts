@@ -26,6 +26,7 @@ import { UseTalkingIndicatorFunction } from '../../data-consumption/domain/user-
 import { GenericContentInterface } from '../../extensible-areas/generic-content-item/types';
 import { UseUiDataFunction } from '../../ui-data-hooks/types';
 import { UseMeetingFunction } from '../../data-consumption/domain/meeting/from-core/types';
+import { ServerCommands } from '../../server-commands/types';
 
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
@@ -185,6 +186,8 @@ export interface PluginApi {
   mapOfPushEntryFunctions: MapOfPushEntryFunctions;
   // --- Ui-Commands ---
   uiCommands?: UiCommands;
+  // --- Server-Commands ---
+  serverCommands?: ServerCommands
   // --- Ui-Data-Hook ---
   /**
    * Function that returns the ui data the developer wants from.
