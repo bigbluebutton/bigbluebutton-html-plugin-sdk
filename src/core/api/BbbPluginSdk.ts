@@ -42,6 +42,7 @@ import { useTalkingIndicator } from '../../data-consumption/domain/user-voice/ta
 import { useUiData } from '../../ui-data-hooks/hooks';
 import { UseMeetingFunction } from '../../data-consumption/domain/meeting/from-core/types';
 import { useMeeting } from '../../data-consumption/domain/meeting/from-core/hooks';
+import { serverCommands } from '../../server-commands/commands';
 
 declare const window: PluginBrowserWindow;
 
@@ -84,6 +85,7 @@ export abstract class BbbPluginSdk {
       messageIds: string[],
     ) => useChatMessageDomElements(messageIds);
     pluginApi.uiCommands = uiCommands;
+    pluginApi.serverCommands = serverCommands;
     pluginApi.useUiData = useUiData;
     const pluginName = pluginApi?.pluginName;
     if (pluginName) {

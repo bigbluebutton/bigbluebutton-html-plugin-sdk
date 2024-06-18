@@ -4,5 +4,6 @@ export {
   ToRole,
   DeleteEntryFunction,
   PushEntryFunction,
+  DataChannelEntryResponseType,
 } from './types';
 export { RESET_DATA_CHANNEL } from './constants';
