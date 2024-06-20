@@ -53,16 +53,18 @@ export interface DataChannelEntryResponseType<T> {
   toRoles: string[];
 }
 
+export interface UseDataChannelReturnType <T>{
+  data: GraphqlResponseWrapper<DataChannelEntryResponseType<T>[]>,
+  pushEntry: PushEntryFunction<T>,
+  deleteEntry: DeleteEntryFunction,
+  replaceEntry: ReplaceEntryFunction<T>,
+}
+
 export type UseDataChannelFunctionFromPluginApi = <T>(
   channelName: string, dataChannelType?: DataChannelTypes, subChannelName?: string,
-) => [GraphqlResponseWrapper<DataChannelEntryResponseType<T>[]>,
-  PushEntryFunction<T>, DeleteEntryFunction, ReplaceEntryFunction<T>
-];
+) => UseDataChannelReturnType<T>;
 
 export type UseDataChannelStaticFunction = <T>(
   channelName: string, subChannelName: string, pluginName: string,
   pluginApi: PluginApi, dataChannelType: DataChannelTypes,
-) => [
-  GraphqlResponseWrapper<DataChannelEntryResponseType<T>[]>,
-  PushEntryFunction<T>?, DeleteEntryFunction?, ReplaceEntryFunction<T>?
-];
+) => UseDataChannelReturnType<T>;
