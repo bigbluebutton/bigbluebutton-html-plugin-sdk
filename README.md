@@ -138,7 +138,6 @@ export interface GraphqlResponseWrapper<TData> {
 
 So we have the `data`, which is different for each hook, that's why it's a generic, the error, that will be set if, and only if, there is an error, otherwise it is undefined, and loading, which tells the developer if the query is still loading (being fetched) or not.
 
-
 ### Real time data exchange
 
 - `useDataChannel` hook: this will allow you to exchange information (Send and receive) amongst different users through the same plugin;
@@ -149,14 +148,15 @@ So for this hook to read the data from the data channel, the developer will be a
 - LATEST_ITEM: Fetches only the latest item pushed to the data-channel within a specific subchannel-name since the begining of the meeting;
 - NEW_ITEMS: Fetches the new items pushed to the data-channel within a specific subchannel-name since the moment that the `useDataChannel` hook has been called (It will not see entries sent previous to that moment);
 
-One can find examples of usage any of the plugin samples or official ones. The syntax is described ahead:
+An interesting thing about this hook is that it is generic, so, you can use a custom type, and this will be  found not only in the consumer part of the data structure returned, but also in functions in which you need to specify an object to be persisted, meaning it will force the object to be of the type you mentioned previously (that is the case for `pushEntry` and `replaceEntry`). One can find examples of usage of this in the data-channel plugin sample or most of the official ones. The syntax is described below:
 
 ```typescript
-const [
-  response, // Data that will be returned
-  pushEntryFunction, // Function to push another item to the data-channel
-  deleteEntryFunction, // Function to delete specific item or wipe all
-] = useDataChannel(
+const {
+  data: response, // Data that will be returned
+  pushEntry: pushEntryFunction, // Function to push another item to the data-channel
+  deleteEntry: deleteEntryFunction, // Function to delete specific item or wipe all
+  replaceEntry: replaceEntryFunction, // Function replace a specifi item
+} = useDataChannel<CustomType>(
   channelName, // Defined according to what is on settings.yml from bbb-htlm5
   DataChannelTypes.All_ITEMS, // | LATEST_ITEM | NEW_ITEMS -> ALL_ITEMS is default
   subChannelName = 'default', // If no subchannelName is specified, it will be 'default'
@@ -167,7 +167,7 @@ Wiping all data off will delete every item from the specific data-channel within
 
 The data-channel name must be written in the settings.yml.
 
-All the permission for writing and deleting must be in the yaml too just like the example below:
+All the permission for writing and deleting must be in the yaml too just like the example ahead:
 
 ```yaml
 public:
@@ -176,10 +176,10 @@ public:
       url: http://<your-hosted-plugin>/PluginName.js
       dataChannels:
         - name: channel-name
-          # writePermission options: moderator, presenter, all
-          writePermission: ['moderator','presenter']
-          # deletePermission options: moderator, sender, presenter, all
-          deletePermission:
+          # pushPermission options: moderator, presenter, all
+          pushPermission: ['moderator','presenter']
+          # replaceOrDeletePermission options: moderator, presenter, creator, all
+          replaceOrdeletePermission:
             - moderator
             - sender
 ```
@@ -257,7 +257,6 @@ So the idea is that we have a `uiCommands` object and at a point, there will be 
 
 - `useChatMessageDomElements` hook: This hook will return the dom element of a chat message reactively, so one can modify whatever is inside, such as text, css, js, etc.;
 
-
 ### Frequently Asked Questions (FAQ)
 
 **How do I remove a certain extensible area that I don't want anymore?**
@@ -313,7 +312,7 @@ Well there are several motives to why the sample is not working properly, so I w
 
 - The config has not been set properly inside `bbb-html5.yml`, see [this section to configure your plugin](#running-the-plugin-from-source);
 - The plugin is not even running in dev mode, it could be the port already in use, or typescript and/or javascript errors (Make sure to initialize the `pluginApi` as any of the samples inside a react function component);
-- It could be an error with that sample indeed, or that feature the plugin uses broke (it is not usual, but can happen since BBB is constantly changing and enhancing its features with its wonderful community). If that happens, just open an issue in the [SDK's github](https://github.com/bigbluebutton/bigbluebutton-html-plugin-sdk) detailing the error you are facing. And thank you in advance for reporting it back to us so we can improve each time.
+- It could be an error with that sample indeed, or that feature the plugin uses broke (it is not usual, but can happen since BBB is constantly changing and enhancing its features with its wonderful community). If that happens, just open an issue in the [SDK&#39;s github](https://github.com/bigbluebutton/bigbluebutton-html-plugin-sdk) detailing the error you are facing. And thank you in advance for reporting it back to us so we can improve each time.
 
 **How to troubleshoot the plugins? See if it has loaded in the BBB, for instance.**
 Well, each time a set of plugins are listed in the `bbb-html5.yml`, it will fire some logs based on the amount of plugins that it need to load inside the client. So open the console in the browser by pressing F12 key in your keyboard and search for the following log:

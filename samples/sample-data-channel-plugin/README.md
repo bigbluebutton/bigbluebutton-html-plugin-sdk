@@ -18,8 +18,8 @@ public:
       url: <<PLUGIN_URL>>
       dataChannels:
         - name: public-channel
-          writePermission: ['moderator','presenter']
-          deletePermission:
+          pushPermission: ['moderator','presenter']
+          replaceOrDeletePermission:
               - moderator
               - sender
 ```

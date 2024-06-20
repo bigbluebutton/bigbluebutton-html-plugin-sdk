@@ -89,10 +89,10 @@ export const useDataChannelGeneral = (<T>(
       window.removeEventListener(channelIdentifier, handleDataChange);
     };
   }, []);
-  return [
+  return {
     data,
-    pushEntryFunction,
-    deleteEntryFunction,
-    replaceEntryFunction,
-  ];
+    pushEntry: pushEntryFunction,
+    deleteEntry: deleteEntryFunction,
+    replaceEntry: replaceEntryFunction,
+  };
 }) as UseDataChannelStaticFunction;
