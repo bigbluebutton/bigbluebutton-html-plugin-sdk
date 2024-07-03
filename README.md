@@ -204,6 +204,17 @@ export interface ToRole {
 export type ObjectTo = ToUserId | ToRole;
 ```
 
+As well as choose wheather to be recorded (not implemented yet) or/and to be rendered into the analytics.
+
+For it to be rendered into the learning-analytics dashboard, the object structure of this data-channel must have at least the following properties:
+
+```ts
+interface Data {
+  learningAnalyticsDashboardColumnTitle: string;
+  learningAnalyticsDashboardValue: string;
+}
+```
+
 ### Real time ui data consumption
 
 - `useUiData` hook: This will return certain data from the UI depending on the parameter the developer uses. It works just like the useUiEvent hook, but instead of passing a callback as a parameter to be run everytime the event occurs, it will return the data directly, keep in mind that the second parameter is the default value that this function will assume. Possible choices:
