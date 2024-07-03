@@ -27,7 +27,15 @@ export type ObjectTo = ToUserId | ToRole;
 
 export type ObjectToDelete = typeof RESET_DATA_CHANNEL | string;
 
-export type PushEntryFunction<T = object> = (objectToBePushed: T, receivers?: ObjectTo[]) => void;
+export interface PushEntryFunctionOptionArgument {
+  receivers?: ObjectTo[];
+  record?: boolean;
+  analytics?: boolean;
+}
+
+export type PushEntryFunction<T = object> = (
+  objectToBePushed: T, options?: PushEntryFunctionOptionArgument,
+) => void;
 
 export type DeleteEntryFunction = (objectToDelete: ObjectToDelete[]) => void;
 

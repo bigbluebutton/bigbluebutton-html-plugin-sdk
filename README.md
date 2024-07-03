@@ -189,7 +189,11 @@ If no permission is mentioned in the yaml (writing or deleting), no one will be 
 The `pushEntryFunction` has a minor detail to pay attention to, it is possible to specify the users who you want to send the item to, if none is specified, all will receive the item, such as done ahead:
 
 ```typescript
-pushEntryFunction(objectToBePushed: T, receivers?: ObjectTo[])
+pushEntryFunction(objectToBePushed: T, options: {
+  receivers?: ObjectTo[];
+  record?: boolean;
+  analytics?: boolean;
+})
 export interface ToUserId {
   userId: string;
 }
