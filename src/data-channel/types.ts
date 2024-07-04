@@ -29,8 +29,6 @@ export type ObjectToDelete = typeof RESET_DATA_CHANNEL | string;
 
 export interface PushEntryFunctionOptionArgument {
   receivers?: ObjectTo[];
-  record?: boolean;
-  analytics?: boolean;
 }
 
 export type PushEntryFunction<T = object> = (
