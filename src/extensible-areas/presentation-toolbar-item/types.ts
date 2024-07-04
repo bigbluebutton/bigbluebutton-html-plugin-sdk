@@ -8,5 +8,6 @@ export interface PresentationToolbarInterface extends PluginProvidedUiItemDescri
 export interface PresentationToolbarButtonProps {
   label: string;
   tooltip: string;
+  style: React.CSSProperties;
   onClick: () => void;
 }
