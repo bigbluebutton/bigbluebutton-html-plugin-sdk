@@ -191,8 +191,6 @@ The `pushEntryFunction` has a minor detail to pay attention to, it is possible t
 ```typescript
 pushEntryFunction(objectToBePushed: T, options: {
   receivers?: ObjectTo[];
-  record?: boolean;
-  analytics?: boolean;
 })
 export interface ToUserId {
   userId: string;
@@ -202,17 +200,6 @@ export interface ToRole {
 }
 
 export type ObjectTo = ToUserId | ToRole;
-```
-
-As well as choose wheather to be recorded (not implemented yet) or/and to be rendered into the analytics.
-
-For it to be rendered into the learning-analytics dashboard, the object structure of this data-channel must have at least the following properties:
-
-```ts
-interface Data {
-  learningAnalyticsDashboardColumnTitle: string;
-  learningAnalyticsDashboardValue: string;
-}
 ```
 
 ### Real time ui data consumption
@@ -271,6 +258,28 @@ So the idea is that we have a `uiCommands` object and at a point, there will be 
 ### Dom Element Manipulation
 
 - `useChatMessageDomElements` hook: This hook will return the dom element of a chat message reactively, so one can modify whatever is inside, such as text, css, js, etc.;
+
+### Learning Analytics Dashboard integration
+
+- `sendGenericDataForLearningAnalyticsDashboard`: This function will send data for the bbb to render inside the plugin's table
+
+The object structure of this function's argument must be:
+
+```ts
+interface GenericDataForLearningAnalyticsDashboard {
+  cardTitle: string; // Yet to be implemented (future updates)
+  columnTitle: string;
+  value: string;
+}
+```
+
+So that the data will appear in the following form:
+
+|   User    | Count | `<columnTitle>` |
+|    ---    |  :--  |      --:        |
+| user-name |   1   |   `<value>`     |
+
+
 
 ### Frequently Asked Questions (FAQ)
 
