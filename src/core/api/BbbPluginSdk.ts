@@ -43,6 +43,8 @@ import { useUiData } from '../../ui-data-hooks/hooks';
 import { UseMeetingFunction } from '../../data-consumption/domain/meeting/from-core/types';
 import { useMeeting } from '../../data-consumption/domain/meeting/from-core/hooks';
 import { serverCommands } from '../../server-commands/commands';
+import { sendGenericDataForLearningAnalyticsDashboard } from '../../learning-analytics-dashboard/hooks';
+import { GenericDataForLearningAnalyticsDashboard } from '../../learning-analytics-dashboard/types';
 
 declare const window: PluginBrowserWindow;
 
@@ -101,6 +103,9 @@ export abstract class BbbPluginSdk {
         dataChannelType,
       )) as UseDataChannelFunctionFromPluginApi;
       pluginApi.usePluginSettings = () => usePluginSettings(pluginName);
+      pluginApi.sendGenericDataForLearningAnalyticsDashboard = (
+        data: GenericDataForLearningAnalyticsDashboard,
+      ) => sendGenericDataForLearningAnalyticsDashboard(data, pluginName);
     } else {
       throw new Error('Plugin name not set');
     }

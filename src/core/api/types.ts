@@ -27,6 +27,7 @@ import { GenericContentInterface } from '../../extensible-areas/generic-content-
 import { UseUiDataFunction } from '../../ui-data-hooks/types';
 import { UseMeetingFunction } from '../../data-consumption/domain/meeting/from-core/types';
 import { ServerCommands } from '../../server-commands/types';
+import { SendGenericDataForLearningAnalyticsDashboard } from '../../learning-analytics-dashboard/types';
 
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
@@ -213,6 +214,13 @@ export interface PluginApi {
   // --- Auxiliary functions ---
   getSessionToken?: GetSessionTokenFunction;
   getJoinUrl?: GetJoinUrlFunction;
+  /**
+   * Send data to the Learning analytics dashboard
+   *
+   * @param data - object in which one can render in the learning analytics dashboard
+   *
+   */
+  sendGenericDataForLearningAnalyticsDashboard?: SendGenericDataForLearningAnalyticsDashboard;
 }
 
 export interface PluginBrowserWindow extends Window {

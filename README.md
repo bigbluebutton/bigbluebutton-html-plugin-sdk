@@ -189,7 +189,9 @@ If no permission is mentioned in the yaml (writing or deleting), no one will be 
 The `pushEntryFunction` has a minor detail to pay attention to, it is possible to specify the users who you want to send the item to, if none is specified, all will receive the item, such as done ahead:
 
 ```typescript
-pushEntryFunction(objectToBePushed: T, receivers?: ObjectTo[])
+pushEntryFunction(objectToBePushed: T, options: {
+  receivers?: ObjectTo[];
+})
 export interface ToUserId {
   userId: string;
 }
@@ -256,6 +258,28 @@ So the idea is that we have a `uiCommands` object and at a point, there will be 
 ### Dom Element Manipulation
 
 - `useChatMessageDomElements` hook: This hook will return the dom element of a chat message reactively, so one can modify whatever is inside, such as text, css, js, etc.;
+
+### Learning Analytics Dashboard integration
+
+- `sendGenericDataForLearningAnalyticsDashboard`: This function will send data for the bbb to render inside the plugin's table
+
+The object structure of this function's argument must be:
+
+```ts
+interface GenericDataForLearningAnalyticsDashboard {
+  cardTitle: string; // Yet to be implemented (future updates)
+  columnTitle: string;
+  value: string;
+}
+```
+
+So that the data will appear in the following form:
+
+|   User    | Count | `<columnTitle>` |
+|    ---    |  :--  |      --:        |
+| user-name |   1   |   `<value>`     |
+
+
 
 ### Frequently Asked Questions (FAQ)
 

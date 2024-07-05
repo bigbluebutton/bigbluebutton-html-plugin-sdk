@@ -14,6 +14,8 @@ export class PresentationToolbarButton implements PresentationToolbarInterface {
 
   tooltip: string;
 
+  style: React.CSSProperties;
+
   onClick: () => void;
 
   /**
@@ -23,13 +25,17 @@ export class PresentationToolbarButton implements PresentationToolbarInterface {
    * @param label - label to be displayed in the button
    * @param tooltip - tooltip to be displayed when hovering the button
    * @param onClick - function to be called when clicking the button
+   * @param style - style of the button in the presentation toolbar
    *
    * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5)
    */
-  constructor({ label = '', tooltip = '', onClick = () => {} }: PresentationToolbarButtonProps) {
+  constructor({
+    label = '', tooltip = '', onClick = () => {}, style = {},
+  }: PresentationToolbarButtonProps) {
     this.label = label;
     this.tooltip = tooltip;
     this.onClick = onClick;
+    this.style = style;
     this.type = PresentationToolbarItemType.BUTTON;
   }
 
