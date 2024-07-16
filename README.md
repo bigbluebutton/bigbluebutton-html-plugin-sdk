@@ -211,6 +211,7 @@ export type ObjectTo = ToUserId | ToRole;
   - ExternalVideoVolumeUiDataNames.CURRENT_VOLUME_VALUE;
   - ExternalVideoVolumeUiDataNames.IS_VOLUME_MUTED;
   - UserListUiDataNames.USER_LIST_IS_OPEN;
+  - LayoutPresentatioAreaUiDataNames.CURRENT_ELEMENT;
 
 Example of usage:
 
@@ -243,6 +244,9 @@ One other thing is that the type of the return is precisely the same type requir
 - sidekick-options-container:
   - open: this function will open the sidekick options panel automatically;
   - close: this function will close the sidekick options panel automatically (and also the sidebar content if open, to avoid inconsistencies in ui);
+- presentation-area:
+  - open: this function will open the presentation area content automatically;
+  - close: this function will close the presentation area content automatically;
 
 See usage ahead:
 
