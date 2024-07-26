@@ -1,6 +1,9 @@
 import { UserCameraDropdownItemType } from './enums';
 import {
+  OnclickFunctionCallbackArguments,
+  UserCameraDropdownCallbackFunctionsArguments,
   UserCameraDropdownInterface, UserCameraDropdownOptionProps,
+  UserCameraDropdownSeparatorProps,
 } from './types';
 
 // UserCameraDropdown Extensible Area
@@ -14,7 +17,9 @@ export class UserCameraDropdownOption implements UserCameraDropdownInterface {
 
   icon: string;
 
-  onClick: () => void;
+  onClick: (args: OnclickFunctionCallbackArguments) => void;
+
+  displayFunction?: (args: UserCameraDropdownCallbackFunctionsArguments) => boolean;
 
   /**
    * Returns object to be used in the setter for User Camera Dropdown. In this case
@@ -28,7 +33,9 @@ export class UserCameraDropdownOption implements UserCameraDropdownInterface {
    */
   constructor({
     label = '', icon = '', onClick = () => {},
+    displayFunction = () => true,
   }: UserCameraDropdownOptionProps) {
+    this.displayFunction = displayFunction;
     this.label = label;
     this.icon = icon;
     this.onClick = onClick;
@@ -45,13 +52,18 @@ export class UserCameraDropdownSeparator implements UserCameraDropdownInterface 
 
   type: UserCameraDropdownItemType;
 
+  displayFunction?: (args: UserCameraDropdownCallbackFunctionsArguments) => boolean;
+
   /**
    * Returns object to be used in the setter for User Camera Dropdown. In this case
    * a separator.
    *
    * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5)
    */
-  constructor() {
+  constructor({
+    displayFunction,
+  }: UserCameraDropdownSeparatorProps = { displayFunction: () => true }) {
+    this.displayFunction = displayFunction;
     this.type = UserCameraDropdownItemType.SEPARATOR;
   }
 

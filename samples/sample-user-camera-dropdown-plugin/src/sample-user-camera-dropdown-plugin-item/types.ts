@@ -3,4 +3,14 @@ interface SampleUserCameraDropdownPluginProps {
     pluginUuid: string,
 }
 
-export { SampleUserCameraDropdownPluginProps };
+interface VideoStreamsSubscriptionResultType {
+    user_camera?: {
+        streamId: string
+        user: {
+          name: string
+          userId: string
+        };
+    }[];
+}
+
+export { SampleUserCameraDropdownPluginProps, VideoStreamsSubscriptionResultType };
