@@ -37,6 +37,7 @@ import { usePluginSettings } from '../../data-consumption/domain/settings';
 import { UseLoadedChatMessagesFunction } from '../../data-consumption/domain/chat/loaded-chat-messages/types';
 import { useLoadedChatMessages } from '../../data-consumption/domain/chat/loaded-chat-messages/hooks';
 import { useChatMessageDomElements } from '../../dom-element-manipulation/chat/message/hooks';
+import { useUserCameraDomElements } from '../../dom-element-manipulation/user-camera/hooks';
 import { UseTalkingIndicatorFunction } from '../../data-consumption/domain/user-voice/talking-indicator/types';
 import { useTalkingIndicator } from '../../data-consumption/domain/user-voice/talking-indicator/hooks';
 import { useUiData } from '../../ui-data-hooks/hooks';
@@ -86,6 +87,9 @@ export abstract class BbbPluginSdk {
     pluginApi.useChatMessageDomElements = (
       messageIds: string[],
     ) => useChatMessageDomElements(messageIds);
+    pluginApi.useUserCameraDomElements = (
+      streamIds: string[],
+    ) => useUserCameraDomElements(streamIds);
     pluginApi.uiCommands = uiCommands;
     pluginApi.serverCommands = serverCommands;
     pluginApi.useUiData = useUiData;

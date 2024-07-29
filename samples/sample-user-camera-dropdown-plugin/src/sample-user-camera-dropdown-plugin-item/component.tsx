@@ -16,6 +16,12 @@ React.ReactElement<SampleUserCameraDropdownPluginProps> {
     VideoStreamsSubscriptionResultType
   >(VIDEO_STREAMS_SUBSCRIPTION);
 
+  const userCamera = pluginApi.useUserCameraDomElements(
+    videoStreams?.user_camera.map((vs) => vs.streamId),
+  );
+
+  pluginLogger.info(`logging the domElements manipulation for userCamera: (${userCamera}) for streams (${videoStreams})`);
+
   useEffect(() => {
     const randomElement = videoStreams?.user_camera[
       Math.floor(Math.random() * (videoStreams?.user_camera.length ?? 0))
