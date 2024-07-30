@@ -49,8 +49,8 @@ function SampleServerCommandsPluginItem(
           pluginApi.serverCommands.chat.sendCustomPublicChatMessage({
             textMessageInMarkdownFormat: 'This is a custom plugin message!',
             pluginCustomMetadata: uuid,
-          })
-        }
+          });
+        },
       }),
     ]);
   }, []);
@@ -82,6 +82,8 @@ function SampleServerCommandsPluginItem(
   useEffect(() => {
     chatMessagesDomElements?.map((chatMessageDomElement) => {
       const { parentElement } = chatMessageDomElement;
+      if (parentElement.getAttribute('already-styled') === 'true') return false;
+      parentElement.setAttribute('already-styled', 'true');
       parentElement.style.paddingTop = '0.5rem';
       const messageIdFromUi = chatMessageDomElement.getAttribute('data-chat-message-id');
       const div = document.createElement('div');
