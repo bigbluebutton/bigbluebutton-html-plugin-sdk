@@ -40,6 +40,18 @@ function SampleServerCommandsPluginItem(
           });
         },
       }),
+      new ActionButtonDropdownOption({
+        label: 'Send custom chat message',
+        icon: 'chat',
+        tooltip: 'This is a button to send chat message',
+        allowed: true,
+        onClick: () => {
+          pluginApi.serverCommands.chat.sendCustomPublicChatMessage({
+            textMessageInMarkdownFormat: 'This is a custom plugin message!',
+            pluginCustomMetadata: uuid,
+          })
+        }
+      }),
     ]);
   }, []);
 
@@ -48,11 +60,13 @@ function SampleServerCommandsPluginItem(
 
     const messagesToStyle = loadedMessages.data.filter(
       (message) => {
-        if (!message.messageMetadata
-          || !JSON.parse(message.messageMetadata).pluginName) return false;
+        if (!message.messageMetadata) return false;
+
+        const messageMetadata = JSON.parse(message.messageMetadata);
+        if (!messageMetadata.pluginName) return false;
 
         return (
-          JSON.parse(message.messageMetadata).pluginName === pluginName
+          (messageMetadata.pluginName === pluginName) && messageMetadata.custom
         );
       },
     ).map((message) => ({
