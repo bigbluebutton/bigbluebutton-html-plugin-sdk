@@ -1,16 +1,20 @@
-export interface ChatSendPublicChatMessageCommandArguments {
+export interface ChatSendMessageCommandArguments {
   textMessageInMarkdownFormat: string;
   pluginCustomMetadata?: string;
 }
 
-export interface ChatSendPublicChatMessageEventArguments
- extends ChatSendPublicChatMessageCommandArguments{
+export interface ChatSendMessageEventArguments
+ extends ChatSendMessageCommandArguments {
   pluginName: string;
-  chatId: string
+  chatId: string;
+  custom: boolean;
 }
 
 export interface ServerCommandsChatObject {
+  sendCustomPublicChatMessage: (
+    chatSendCustomPublicChatMessageCommandArguments: ChatSendMessageCommandArguments
+  ) => void;
   sendPublicChatMessage: (
-    chatSendPublicChatMessageCommandArguments: ChatSendPublicChatMessageCommandArguments
+    chatSendPublicChatMessageCommandArguments: ChatSendMessageCommandArguments
   ) => void;
 }
