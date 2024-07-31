@@ -29,6 +29,7 @@ import { UseMeetingFunction } from '../../data-consumption/domain/meeting/from-c
 import { ServerCommands } from '../../server-commands/types';
 import { SendGenericDataForLearningAnalyticsDashboard } from '../../learning-analytics-dashboard/types';
 import { UseUserCameraDomElementsFunction } from '../../dom-element-manipulation/user-camera/types';
+import { ScreenshareHelperInterface } from '../../extensible-areas';
 
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
@@ -55,7 +56,11 @@ export type SetPresentationDropdownItems = (
 ) => string[];
 
 export type SetNavBarItems = (
-  userListDropdownItem: NavBarInterface[]
+  navBarItem: NavBarInterface[]
+) => string[];
+
+export type SetScreenshareHelperItems = (
+  screenshareHelperItem: ScreenshareHelperInterface[]
 ) => string[];
 
 export type SetOptionsDropdownItems = (
@@ -91,6 +96,7 @@ export interface PluginApi {
   setAudioSettingsDropdownItems: SetAudioSettingsDropdownItems;
   setPresentationDropdownItems: SetPresentationDropdownItems;
   setNavBarItems: SetNavBarItems;
+  setScreenshareHelperItems: SetScreenshareHelperItems;
   setOptionsDropdownItems: SetOptionsDropdownItems;
   setCameraSettingsDropdownItems: SetCameraSettingsDropdownItems;
   setUserCameraDropdownItems: SetUserCameraDropdownItems;

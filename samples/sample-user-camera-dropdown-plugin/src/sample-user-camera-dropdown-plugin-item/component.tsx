@@ -2,7 +2,13 @@ import * as React from 'react';
 import { useEffect } from 'react';
 
 import {
-  BbbPluginSdk, PluginApi, pluginLogger, UserCameraDropdownOption, UserCameraDropdownSeparator,
+  BbbPluginSdk,
+  PluginApi,
+  pluginLogger,
+  ScreenshareHelperItemPosition,
+  ScreenshareHelperButton,
+  UserCameraDropdownOption,
+  UserCameraDropdownSeparator,
 } from 'bigbluebutton-html-plugin-sdk';
 import { SampleUserCameraDropdownPluginProps, VideoStreamsSubscriptionResultType } from './types';
 import { VIDEO_STREAMS_SUBSCRIPTION } from '../queries';
@@ -21,6 +27,71 @@ React.ReactElement<SampleUserCameraDropdownPluginProps> {
   );
 
   pluginLogger.info(`logging the domElements manipulation for userCamera: (${userCamera}) for streams (${videoStreams})`);
+
+  useEffect(() => {
+    const buttonScreenshare1 = new ScreenshareHelperButton({
+      icon: 'user',
+      disabled: false,
+      label: 'This will log on the console',
+      tooltip: 'this is a button injected by plugin',
+      position: ScreenshareHelperItemPosition.TOP_RIGHT,
+      onClick: () => {
+        pluginLogger.info('Log from nav bar plugin');
+      },
+      hasSeparator: true,
+    });
+
+    const buttonScreenshare5 = new ScreenshareHelperButton({
+      icon: 'popout_window',
+      disabled: false,
+      label: 'This will log on the console',
+      tooltip: 'this is a button injected by plugin',
+      position: ScreenshareHelperItemPosition.TOP_RIGHT,
+      onClick: () => {
+        pluginLogger.info('Log from nav bar plugin');
+      },
+      hasSeparator: true,
+    });
+
+    const buttonScreenshare2 = new ScreenshareHelperButton({
+      icon: 'undo',
+      disabled: false,
+      label: 'This will log on the console',
+      tooltip: 'this is a button injected by plugin',
+      position: ScreenshareHelperItemPosition.TOP_LEFT,
+      onClick: () => {
+        pluginLogger.info('Log from nav bar plugin');
+      },
+      hasSeparator: true,
+    });
+
+    const buttonScreenshare3 = new ScreenshareHelperButton({
+      icon: 'settings',
+      disabled: false,
+      label: 'This will log on the console',
+      tooltip: 'this is a button injected by plugin',
+      position: ScreenshareHelperItemPosition.BOTTOM_LEFT,
+      onClick: () => {
+        pluginLogger.info('Log from nav bar plugin');
+      },
+      hasSeparator: true,
+    });
+
+    const buttonScreenshare4 = new ScreenshareHelperButton({
+      icon: 'plus',
+      disabled: false,
+      label: 'This will log on the console',
+      tooltip: 'this is a button injected by plugin',
+      position: ScreenshareHelperItemPosition.BOTTOM_RIGHT,
+      onClick: () => {
+        pluginLogger.info('Log from nav bar plugin');
+      },
+      hasSeparator: true,
+    });
+    pluginApi.setScreenshareHelperItems([buttonScreenshare1, buttonScreenshare5,
+      buttonScreenshare2, buttonScreenshare3, buttonScreenshare4,
+    ]);
+  }, []);
 
   useEffect(() => {
     const randomElement = videoStreams?.user_camera[
