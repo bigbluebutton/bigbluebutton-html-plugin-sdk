@@ -33,7 +33,7 @@ export const chat = (pluginName: string) => ({
 
   /**
    * Sends custom chat message to the public chat. Custom messages are not rendered by
-   * the BBB client and are meant to be custm-rendered by plugins.
+   * the BBB client and are meant to be rendered in a custom manner by the plugin.
    *
    * @param chatSendMessageCommandArguments the text and custom metadata(optional)
    *  to be sent in the public chat message.
