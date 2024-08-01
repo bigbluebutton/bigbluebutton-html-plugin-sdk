@@ -87,7 +87,6 @@ export abstract class BbbPluginSdk {
       messageIds: string[],
     ) => useChatMessageDomElements(messageIds);
     pluginApi.uiCommands = uiCommands;
-    pluginApi.serverCommands = serverCommands;
     pluginApi.useUiData = useUiData;
     const pluginName = pluginApi?.pluginName;
     if (pluginName) {
@@ -103,6 +102,7 @@ export abstract class BbbPluginSdk {
         dataChannelType,
       )) as UseDataChannelFunctionFromPluginApi;
       pluginApi.usePluginSettings = () => usePluginSettings(pluginName);
+      pluginApi.serverCommands = serverCommands(pluginName);
       pluginApi.sendGenericDataForLearningAnalyticsDashboard = (
         data: GenericDataForLearningAnalyticsDashboard,
       ) => sendGenericDataForLearningAnalyticsDashboard(data, pluginName);

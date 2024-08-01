@@ -1,0 +1,1 @@
+export const PUBLIC_CHAT_ID = 'MAIN-PUBLIC-GROUP-CHAT';

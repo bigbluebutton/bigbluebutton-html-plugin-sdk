@@ -259,6 +259,18 @@ See usage ahead:
 
 So the idea is that we have a `uiCommands` object and at a point, there will be the command to do the intended action, such as open the chat form and/or fill it, as demonstrated above
 
+  ### Server Commands
+  
+  `serverCommands` object: It contains all the possible commands available to the developer to interact with the BBB core server, see the ones implemented down below:
+  
+  - chat:
+    - sendPublicMessage: this function sends a text message along with an optional custom metadata to the public chat
+    > Note: messages sent by plugins are not natively rendered by the client.
+    >   They have to be custom-rendered by plugins using `useLoadedChatMessages` and `useChatMessageDomElements`.
+  - caption:
+    - save: this function saves the given text, locale and caption type
+    - addLocale: this function sends a locale to be added to the available options
+
 ### Dom Element Manipulation
 
 - `useChatMessageDomElements` hook: This hook will return the dom element of a chat message reactively, so one can modify whatever is inside, such as text, css, js, etc.;
