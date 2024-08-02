@@ -104,8 +104,8 @@ React.ReactElement<SampleUserCameraDropdownPluginProps> {
         label: 'This will log on the console',
         icon: 'user',
         displayFunction: ({ userId }) => randomElement?.user.userId === userId,
-        onClick: ({ userId }) => {
-          pluginLogger.info(`Alert sent from plugin, see userId: ${userId}`);
+        onClick: ({ userId, streamId, browserClickEvent }) => {
+          pluginLogger.info(`Alert sent from plugin, see userId: ${userId}; ${streamId}; ${browserClickEvent.clientX}`);
         },
       }),
     ]);
