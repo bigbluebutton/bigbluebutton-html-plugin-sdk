@@ -36,7 +36,7 @@ React.ReactElement<SampleUserCameraDropdownPluginProps> {
       tooltip: 'this is a button injected by plugin',
       position: ScreenshareHelperItemPosition.TOP_RIGHT,
       onClick: () => {
-        pluginLogger.info('Log from nav bar plugin');
+        pluginLogger.info('Logging from the screenshare extensible area');
       },
       hasSeparator: true,
     });
@@ -48,7 +48,7 @@ React.ReactElement<SampleUserCameraDropdownPluginProps> {
       tooltip: 'this is a button injected by plugin',
       position: ScreenshareHelperItemPosition.TOP_RIGHT,
       onClick: () => {
-        pluginLogger.info('Log from nav bar plugin');
+        pluginLogger.info('Logging from the screenshare extensible area');
       },
       hasSeparator: true,
     });
@@ -60,7 +60,7 @@ React.ReactElement<SampleUserCameraDropdownPluginProps> {
       tooltip: 'this is a button injected by plugin',
       position: ScreenshareHelperItemPosition.TOP_LEFT,
       onClick: () => {
-        pluginLogger.info('Log from nav bar plugin');
+        pluginLogger.info('Logging from the screenshare extensible area');
       },
       hasSeparator: true,
     });
@@ -72,7 +72,7 @@ React.ReactElement<SampleUserCameraDropdownPluginProps> {
       tooltip: 'this is a button injected by plugin',
       position: ScreenshareHelperItemPosition.BOTTOM_LEFT,
       onClick: () => {
-        pluginLogger.info('Log from nav bar plugin');
+        pluginLogger.info('Logging from the screenshare extensible area');
       },
       hasSeparator: true,
     });
@@ -84,7 +84,7 @@ React.ReactElement<SampleUserCameraDropdownPluginProps> {
       tooltip: 'this is a button injected by plugin',
       position: ScreenshareHelperItemPosition.BOTTOM_RIGHT,
       onClick: () => {
-        pluginLogger.info('Log from nav bar plugin');
+        pluginLogger.info('Logging from the screenshare extensible area');
       },
       hasSeparator: true,
     });
