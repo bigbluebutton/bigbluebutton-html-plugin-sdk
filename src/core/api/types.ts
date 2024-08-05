@@ -28,6 +28,8 @@ import { UseUiDataFunction } from '../../ui-data-hooks/types';
 import { UseMeetingFunction } from '../../data-consumption/domain/meeting/from-core/types';
 import { ServerCommands } from '../../server-commands/types';
 import { SendGenericDataForLearningAnalyticsDashboard } from '../../learning-analytics-dashboard/types';
+import { UseUserCameraDomElementsFunction } from '../../dom-element-manipulation/user-camera/types';
+import { ScreenshareHelperInterface } from '../../extensible-areas';
 
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
@@ -54,7 +56,11 @@ export type SetPresentationDropdownItems = (
 ) => string[];
 
 export type SetNavBarItems = (
-  userListDropdownItem: NavBarInterface[]
+  navBarItem: NavBarInterface[]
+) => string[];
+
+export type SetScreenshareHelperItems = (
+  screenshareHelperItem: ScreenshareHelperInterface[]
 ) => string[];
 
 export type SetOptionsDropdownItems = (
@@ -90,6 +96,7 @@ export interface PluginApi {
   setAudioSettingsDropdownItems: SetAudioSettingsDropdownItems;
   setPresentationDropdownItems: SetPresentationDropdownItems;
   setNavBarItems: SetNavBarItems;
+  setScreenshareHelperItems: SetScreenshareHelperItems;
   setOptionsDropdownItems: SetOptionsDropdownItems;
   setCameraSettingsDropdownItems: SetCameraSettingsDropdownItems;
   setUserCameraDropdownItems: SetUserCameraDropdownItems;
@@ -211,6 +218,15 @@ export interface PluginApi {
    *
    */
   useChatMessageDomElements?: UseChatMessageDomElementsFunction;
+  /**
+   * Returns an array with the DOM elements for the webcams corresponding to each streamId passed.
+   *
+   * @param streamIds - Ids of the user-camera streams one wants to retrieve in the form of an array
+   * @returns The array of an object with DOM elements (in this case, div) and the id
+   * of the stream
+   *
+   */
+  useUserCameraDomElements?: UseUserCameraDomElementsFunction;
   // --- Auxiliary functions ---
   getSessionToken?: GetSessionTokenFunction;
   getJoinUrl?: GetJoinUrlFunction;

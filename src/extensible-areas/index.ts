@@ -5,6 +5,7 @@ export * from './actions-bar-item';
 export * from './audio-settings-dropdown-item';
 export * from './presentation-dropdown-item';
 export * from './nav-bar-item';
+export * from './screenshare-helper-item';
 export * from './options-dropdown-item';
 export * from './camera-settings-dropdown-item';
 export * from './user-camera-dropdown-item';

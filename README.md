@@ -274,6 +274,7 @@ So the idea is that we have a `uiCommands` object and at a point, there will be 
 ### Dom Element Manipulation
 
 - `useChatMessageDomElements` hook: This hook will return the dom element of a chat message reactively, so one can modify whatever is inside, such as text, css, js, etc.;
+- `useUserCameraDomElements` hook: This hook will return the dom element of each of the user's webcam corresponding to the streamIds passed reactively, so one can modify whatever is inside, such as text, css, js, etc., and also can get the video element within it;
 
 ### Learning Analytics Dashboard integration
 
