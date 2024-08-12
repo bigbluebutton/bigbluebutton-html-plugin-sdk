@@ -264,9 +264,11 @@ So the idea is that we have a `uiCommands` object and at a point, there will be 
   `serverCommands` object: It contains all the possible commands available to the developer to interact with the BBB core server, see the ones implemented down below:
   
   - chat:
-    - sendPublicMessage: this function sends a text message along with an optional custom metadata to the public chat
-    > Note: messages sent by plugins are not natively rendered by the client.
-    >   They have to be custom-rendered by plugins using `useLoadedChatMessages` and `useChatMessageDomElements`.
+    - sendPublicMessage: This function sends a message to the public chat on behalf of the currently logged-in user.
+
+    - sendCustomPublicMessage: This function sends a text message to the public chat, optionally including custom metadata.
+      > **Note**: The custom messages sent by plugins are not automatically rendered by the client. To display these messages, plugins must handle rendering using `useLoadedChatMessages` and `useChatMessageDomElements`.
+
   - caption:
     - save: this function saves the given text, locale and caption type
     - addLocale: this function sends a locale to be added to the available options
