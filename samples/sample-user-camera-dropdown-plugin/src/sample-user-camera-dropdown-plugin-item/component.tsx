@@ -26,7 +26,7 @@ React.ReactElement<SampleUserCameraDropdownPluginProps> {
     videoStreams?.user_camera.map((vs) => vs.streamId),
   );
 
-  pluginLogger.info(`logging the domElements manipulation for userCamera: (${userCamera}) for streams (${videoStreams})`);
+  pluginLogger.info(`logging the domElements manipulation for userCamera: (${userCamera?.length}) for streams (${videoStreams})`);
 
   useEffect(() => {
     const buttonScreenshare1 = new ScreenshareHelperButton({
@@ -47,8 +47,8 @@ React.ReactElement<SampleUserCameraDropdownPluginProps> {
       label: 'This will log on the console',
       tooltip: 'this is a button injected by plugin',
       position: ScreenshareHelperItemPosition.TOP_RIGHT,
-      onClick: () => {
-        pluginLogger.info('Logging from the screenshare extensible area');
+      onClick: (event) => {
+        pluginLogger.info('Logging from the screenshare extensible area, clientX: ', event.browserClickEvent.clientX);
       },
       hasSeparator: true,
     });

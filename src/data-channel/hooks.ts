@@ -69,7 +69,7 @@ export const useDataChannelGeneral = (<T>(
       handleListenToChangePushEntryFunction,
     );
 
-    window.dispatchEvent(new CustomEvent<SubscribedEventDetails>(HookEvents.SUBSCRIBED, {
+    window.dispatchEvent(new CustomEvent<SubscribedEventDetails>(HookEvents.PLUGIN_SUBSCRIBED_TO_BBB_CORE, {
       detail: {
         hook: DataChannelHooks.DATA_CHANNEL_BUILDER,
         hookArguments: {
@@ -78,7 +78,7 @@ export const useDataChannelGeneral = (<T>(
       },
     }));
     return () => {
-      window.dispatchEvent(new CustomEvent<UnsubscribedEventDetails>(HookEvents.UNSUBSCRIBED, {
+      window.dispatchEvent(new CustomEvent<UnsubscribedEventDetails>(HookEvents.PLUGIN_UNSUBSCRIBED_FROM_BBB_CORE, {
         detail: {
           hook: DataChannelHooks.DATA_CHANNEL_BUILDER,
           hookArguments: {

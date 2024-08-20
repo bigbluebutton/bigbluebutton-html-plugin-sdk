@@ -4,6 +4,7 @@ export type UseChatMessageDomElementsFunction = (
 
 export interface ChatMessageDomElementsArguments {
   messageIds: string[];
+  pluginUuid: string;
 }
 
 export interface UpdatedEventDetailsForChatMessageDomElements {

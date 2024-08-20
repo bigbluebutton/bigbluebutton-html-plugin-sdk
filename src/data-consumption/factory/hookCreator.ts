@@ -25,7 +25,7 @@ const updateCustomHookSubscription = (
   currentVariables?: object,
 ) => {
   window.dispatchEvent(
-    new CustomEvent<UnsubscribedEventDetails>(HookEvents.UNSUBSCRIBED, {
+    new CustomEvent<UnsubscribedEventDetails>(HookEvents.PLUGIN_UNSUBSCRIBED_FROM_BBB_CORE, {
       detail: {
         hook: hookName,
         hookArguments: {
@@ -36,7 +36,7 @@ const updateCustomHookSubscription = (
     }),
   );
   window.dispatchEvent(
-    new CustomEvent<SubscribedEventDetails>(HookEvents.SUBSCRIBED, {
+    new CustomEvent<SubscribedEventDetails>(HookEvents.PLUGIN_SUBSCRIBED_TO_BBB_CORE, {
       detail: {
         hook: hookName,
         hookArguments: {
@@ -47,7 +47,7 @@ const updateCustomHookSubscription = (
     }),
   );
   window.addEventListener(
-    HookEvents.UPDATED,
+    HookEvents.BBB_CORE_SENT_NEW_DATA,
     handleCustomSubscriptionUpdateEvent,
   );
 };
@@ -90,9 +90,9 @@ export const createDataConsumptionHook = <T>(
     setVariablesState(() => JSON.parse(sortedStringify(hookArguments?.variables)));
   }
   useEffect(() => {
-    window.addEventListener(HookEvents.UPDATED, handleCustomSubscriptionUpdateEvent);
+    window.addEventListener(HookEvents.BBB_CORE_SENT_NEW_DATA, handleCustomSubscriptionUpdateEvent);
     window.dispatchEvent(
-      new CustomEvent<SubscribedEventDetails>(HookEvents.SUBSCRIBED, {
+      new CustomEvent<SubscribedEventDetails>(HookEvents.PLUGIN_SUBSCRIBED_TO_BBB_CORE, {
         detail: {
           hook: hookName,
           hookArguments,
@@ -101,7 +101,7 @@ export const createDataConsumptionHook = <T>(
     );
     return () => {
       window.dispatchEvent(
-        new CustomEvent<UnsubscribedEventDetails>(HookEvents.UNSUBSCRIBED, {
+        new CustomEvent<UnsubscribedEventDetails>(HookEvents.PLUGIN_UNSUBSCRIBED_FROM_BBB_CORE, {
           detail: {
             hook: hookName,
             hookArguments: {
@@ -112,7 +112,7 @@ export const createDataConsumptionHook = <T>(
         }),
       );
       window.removeEventListener(
-        HookEvents.UPDATED,
+        HookEvents.BBB_CORE_SENT_NEW_DATA,
         handleCustomSubscriptionUpdateEvent,
       );
     };

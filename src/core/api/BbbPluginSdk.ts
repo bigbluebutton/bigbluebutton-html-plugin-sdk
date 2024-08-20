@@ -86,10 +86,10 @@ export abstract class BbbPluginSdk {
       () => useLoadedChatMessages()) as UseLoadedChatMessagesFunction;
     pluginApi.useChatMessageDomElements = (
       messageIds: string[],
-    ) => useChatMessageDomElements(messageIds);
+    ) => useChatMessageDomElements(messageIds, uuid);
     pluginApi.useUserCameraDomElements = (
       streamIds: string[],
-    ) => useUserCameraDomElements(streamIds);
+    ) => useUserCameraDomElements(streamIds, uuid);
     pluginApi.uiCommands = uiCommands;
     pluginApi.useUiData = useUiData;
     const pluginName = pluginApi?.pluginName;
