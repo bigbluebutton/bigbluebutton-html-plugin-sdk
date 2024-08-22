@@ -154,6 +154,7 @@ export abstract class BbbPluginSdk {
         setPresentationDropdownItems: () => [],
         setNavBarItems: () => [],
         setScreenshareHelperItems: () => [],
+        setUserCameraHelperItems: () => [],
         setOptionsDropdownItems: () => [],
         setCameraSettingsDropdownItems: () => [],
         setUserCameraDropdownItems: () => [],

@@ -31,7 +31,7 @@ export const deleteEntryFunctionUtil = (
   objectsToDelete.forEach((objectToDelete) => {
     if (objectToDelete === RESET_DATA_CHANNEL) {
       window.dispatchEvent(
-        new CustomEvent<UpdatedEventDetails<void>>(HookEvents.BBB_CORE_SENT_NEW_DATA, {
+        new CustomEvent<UpdatedEventDetails<void>>(HookEvents.PLUGIN_SENT_CHANGES_TO_BBB_CORE, {
           detail: {
             hook: DataChannelHooks.DATA_CHANNEL_RESET,
             hookArguments: { channelName, pluginName, subChannelName },
@@ -41,7 +41,7 @@ export const deleteEntryFunctionUtil = (
       );
     } else {
       window.dispatchEvent(
-        new CustomEvent<UpdatedEventDetails<string>>(HookEvents.BBB_CORE_SENT_NEW_DATA, {
+        new CustomEvent<UpdatedEventDetails<string>>(HookEvents.PLUGIN_SENT_CHANGES_TO_BBB_CORE, {
           detail: {
             hook: DataChannelHooks.DATA_CHANNEL_DELETE,
             hookArguments: { channelName, pluginName, subChannelName },
@@ -62,15 +62,16 @@ export const replaceEntryFunctionUtil = <T>(
 ) => {
   window.dispatchEvent(
     new CustomEvent<
-      UpdatedEventDetails<ReplaceEntryFunctionArguments<T>>>(HookEvents.BBB_CORE_SENT_NEW_DATA, {
-        detail: {
-          hook: DataChannelHooks.DATA_CHANNEL_REPLACE,
-          hookArguments: { channelName, pluginName, subChannelName },
-          data: {
-            entryId,
-            payloadJson: newPayloadJson,
+      UpdatedEventDetails<
+        ReplaceEntryFunctionArguments<T>>>(HookEvents.PLUGIN_SENT_CHANGES_TO_BBB_CORE, {
+          detail: {
+            hook: DataChannelHooks.DATA_CHANNEL_REPLACE,
+            hookArguments: { channelName, pluginName, subChannelName },
+            data: {
+              entryId,
+              payloadJson: newPayloadJson,
+            },
           },
-        },
-      }),
+        }),
   );
 };

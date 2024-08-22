@@ -69,23 +69,27 @@ export const useDataChannelGeneral = (<T>(
       handleListenToChangePushEntryFunction,
     );
 
-    window.dispatchEvent(new CustomEvent<SubscribedEventDetails>(HookEvents.PLUGIN_SUBSCRIBED_TO_BBB_CORE, {
-      detail: {
-        hook: DataChannelHooks.DATA_CHANNEL_BUILDER,
-        hookArguments: {
-          channelName, pluginName, dataChannelType, subChannelName,
-        },
-      },
-    }));
-    return () => {
-      window.dispatchEvent(new CustomEvent<UnsubscribedEventDetails>(HookEvents.PLUGIN_UNSUBSCRIBED_FROM_BBB_CORE, {
+    window.dispatchEvent(
+      new CustomEvent<SubscribedEventDetails>(HookEvents.PLUGIN_SUBSCRIBED_TO_BBB_CORE, {
         detail: {
           hook: DataChannelHooks.DATA_CHANNEL_BUILDER,
           hookArguments: {
             channelName, pluginName, dataChannelType, subChannelName,
           },
         },
-      }));
+      }),
+    );
+    return () => {
+      window.dispatchEvent(
+        new CustomEvent<UnsubscribedEventDetails>(HookEvents.PLUGIN_UNSUBSCRIBED_FROM_BBB_CORE, {
+          detail: {
+            hook: DataChannelHooks.DATA_CHANNEL_BUILDER,
+            hookArguments: {
+              channelName, pluginName, dataChannelType, subChannelName,
+            },
+          },
+        }),
+      );
       window.removeEventListener(channelIdentifier, handleDataChange);
     };
   }, []);

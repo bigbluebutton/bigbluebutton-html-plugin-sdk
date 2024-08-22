@@ -9,6 +9,7 @@ import { OptionsDropdownItemType } from './options-dropdown-item/enums';
 import { PresentationDropdownItemType } from './presentation-dropdown-item/enums';
 import { PresentationToolbarItemType } from './presentation-toolbar-item/enums';
 import { ScreenshareHelperItemType } from './screenshare-helper-item/enums';
+import { UserCameraHelperItemType } from './user-camera-helper-item/enums';
 import { UserCameraDropdownItemType } from './user-camera-dropdown-item/enums';
 import { UserListDropdownItemType } from './user-list-dropdown-item/enums';
 import { UserListItemAdditionalInformationType } from './user-list-item-additional-information/enums';
@@ -19,7 +20,7 @@ type PluginProvidedUiItemType = PresentationToolbarItemType |
   PresentationDropdownItemType | NavBarItemType | OptionsDropdownItemType |
   CameraSettingsDropdownItemType | UserCameraDropdownItemType |
   UserListItemAdditionalInformationType | FloatingWindowType | GenericContentType |
-  ScreenshareHelperItemType;
+  ScreenshareHelperItemType | UserCameraHelperItemType;
 
 export interface PluginProvidedUiItemDescriptor {
   /** Defined by BigBlueButton Plugin Engine. */

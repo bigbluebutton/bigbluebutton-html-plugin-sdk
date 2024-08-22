@@ -65,7 +65,7 @@ export const useChatMessageDomElements = (messageIds: string[], pluginUuid: stri
     window.addEventListener(HookEvents.BBB_CORE_SENT_NEW_DATA, handleDomElementUpdateEvent);
     window.dispatchEvent(
       new CustomEvent<
-        UpdatedEventDetails<void>>(HookEvents.PLUGIN_MODIFIED_SUBSCRIPTION_TO_BBB_CORE, {
+        UpdatedEventDetails<void>>(HookEvents.PLUGIN_SENT_CHANGES_TO_BBB_CORE, {
           detail: {
             hook: DomElementManipulationHooks.CHAT_MESSAGE,
             hookArguments: {

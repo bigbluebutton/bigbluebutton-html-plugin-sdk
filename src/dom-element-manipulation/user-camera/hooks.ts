@@ -33,40 +33,45 @@ export const useUserCameraDomElements = (streamIds: string[], pluginUuid: string
     }) as EventListener;
 
   useEffect(() => {
-    window.dispatchEvent(new CustomEvent<SubscribedEventDetails>(HookEvents.PLUGIN_SUBSCRIBED_TO_BBB_CORE, {
-      detail: {
-        hook: DomElementManipulationHooks.USER_CAMERA,
-        hookArguments: {
-          streamIds: streamIdsState,
-          pluginUuid,
-        } as UserCameraDomElementsArguments,
-      },
-    }));
-    return () => {
-      window.dispatchEvent(new CustomEvent<UnsubscribedEventDetails>(HookEvents.PLUGIN_UNSUBSCRIBED_FROM_BBB_CORE, {
+    window.dispatchEvent(
+      new CustomEvent<SubscribedEventDetails>(HookEvents.PLUGIN_SUBSCRIBED_TO_BBB_CORE, {
         detail: {
           hook: DomElementManipulationHooks.USER_CAMERA,
           hookArguments: {
-            streamIds,
+            streamIds: streamIdsState,
             pluginUuid,
           } as UserCameraDomElementsArguments,
         },
-      }));
+      }),
+    );
+    return () => {
+      window.dispatchEvent(
+        new CustomEvent<UnsubscribedEventDetails>(HookEvents.PLUGIN_UNSUBSCRIBED_FROM_BBB_CORE, {
+          detail: {
+            hook: DomElementManipulationHooks.USER_CAMERA,
+            hookArguments: {
+              streamIds,
+              pluginUuid,
+            } as UserCameraDomElementsArguments,
+          },
+        }),
+      );
     };
   }, []);
   useEffect(() => {
     window.addEventListener(HookEvents.BBB_CORE_SENT_NEW_DATA, handleDomElementUpdateEvent);
     window.dispatchEvent(
-      new CustomEvent<UpdatedEventDetails<void>>(HookEvents.PLUGIN_MODIFIED_SUBSCRIPTION_TO_BBB_CORE, {
-        detail: {
-          hook: DomElementManipulationHooks.USER_CAMERA,
-          hookArguments: {
-            streamIds: (streamIdsState) || [],
-            pluginUuid,
-          } as UserCameraDomElementsArguments,
-          data: undefined,
-        },
-      }),
+      new CustomEvent<
+        UpdatedEventDetails<void>>(HookEvents.PLUGIN_SENT_CHANGES_TO_BBB_CORE, {
+          detail: {
+            hook: DomElementManipulationHooks.USER_CAMERA,
+            hookArguments: {
+              streamIds: (streamIdsState) || [],
+              pluginUuid,
+            } as UserCameraDomElementsArguments,
+            data: undefined,
+          },
+        }),
     );
     // Runs on code cleanup
     return () => {

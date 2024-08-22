@@ -9,6 +9,8 @@ import {
   ScreenshareHelperButton,
   UserCameraDropdownOption,
   UserCameraDropdownSeparator,
+  UserCameraHelperButton,
+  UserCameraHelperItemPosition,
 } from 'bigbluebutton-html-plugin-sdk';
 import { SampleUserCameraDropdownPluginProps, VideoStreamsSubscriptionResultType } from './types';
 import { VIDEO_STREAMS_SUBSCRIPTION } from '../queries';
@@ -107,6 +109,19 @@ React.ReactElement<SampleUserCameraDropdownPluginProps> {
         onClick: ({ userId, streamId, browserClickEvent }) => {
           pluginLogger.info(`Alert sent from plugin, see userId: ${userId}; ${streamId}; ${browserClickEvent.clientX}`);
         },
+      }),
+    ]);
+    pluginApi.setUserCameraHelperItems([
+      new UserCameraHelperButton({
+        icon: 'popout_window',
+        disabled: false,
+        label: 'This will log on the console',
+        tooltip: 'this is a button injected by plugin',
+        position: UserCameraHelperItemPosition.TOP_RIGHT,
+        onClick: () => {
+          pluginLogger.info('Logging from the screenshare extensible area');
+        },
+        displayFunction: ({ userId }) => randomElement?.user.userId === userId,
       }),
     ]);
   }, [videoStreams]);
