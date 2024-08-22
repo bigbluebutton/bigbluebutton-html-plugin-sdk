@@ -118,8 +118,8 @@ React.ReactElement<SampleUserCameraDropdownPluginProps> {
         label: 'This will log on the console',
         tooltip: 'this is a button injected by plugin',
         position: UserCameraHelperItemPosition.TOP_RIGHT,
-        onClick: () => {
-          pluginLogger.info('Logging from the screenshare extensible area');
+        onClick: ({ browserClickEvent }) => {
+          pluginLogger.info('Logging from the user camera extensible area', browserClickEvent.clientX);
         },
         displayFunction: ({ userId }) => randomElement?.user.userId === userId,
       }),
