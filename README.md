@@ -267,7 +267,7 @@ So the idea is that we have a `uiCommands` object and at a point, there will be 
     - sendPublicMessage: This function sends a message to the public chat on behalf of the currently logged-in user.
 
     - sendCustomPublicMessage: This function sends a text message to the public chat, optionally including custom metadata.
-      > **Note**: The custom messages sent by plugins are not automatically rendered by the client. To display these messages, plugins must handle rendering using `useLoadedChatMessages` and `useChatMessageDomElements`.
+      > **Note**: The custom messages sent by plugins are not automatically rendered by the client. To display these messages, a plugin must handle the rendering using `useLoadedChatMessages` and `useChatMessageDomElements`.
 
   - caption:
     - save: this function saves the given text, locale and caption type
