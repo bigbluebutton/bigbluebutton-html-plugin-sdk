@@ -6,6 +6,8 @@ export interface UserCameraHelperInterface extends PluginProvidedUiItemDescripto
 }
 
 export interface UserCameraHelperButtonOnclickCallback {
+  userId: string;
+  streamId: string;
   browserClickEvent: React.MouseEvent<HTMLElement>;
 }
 
