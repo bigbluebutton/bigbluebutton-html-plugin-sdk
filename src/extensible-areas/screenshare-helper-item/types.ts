@@ -5,6 +5,10 @@ export interface ScreenshareHelperInterface extends PluginProvidedUiItemDescript
   position: ScreenshareHelperItemPosition;
 }
 
+export interface ScreenshareHelperButtonOnclickCallback {
+  browserClickEvent: React.MouseEvent<HTMLElement>;
+}
+
 export interface ScreenshareHelperButtonInterface extends ScreenshareHelperInterface{
   label: string;
 
@@ -16,7 +20,7 @@ export interface ScreenshareHelperButtonInterface extends ScreenshareHelperInter
 
   position: ScreenshareHelperItemPosition;
 
-  onClick: () => void;
+  onClick: (args: ScreenshareHelperButtonOnclickCallback) => void;
 }
 
 export interface ScreenshareHelperButtonProps {
@@ -26,5 +30,5 @@ export interface ScreenshareHelperButtonProps {
   disabled: boolean;
   hasSeparator: boolean;
   position: ScreenshareHelperItemPosition;
-  onClick: () => void;
+  onClick: (args: ScreenshareHelperButtonOnclickCallback) => void;
 }

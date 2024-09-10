@@ -2,6 +2,7 @@ import { ScreenshareHelperItemType, ScreenshareHelperItemPosition } from './enum
 import {
   ScreenshareHelperButtonProps,
   ScreenshareHelperButtonInterface,
+  ScreenshareHelperButtonOnclickCallback,
 } from './types';
 
 // ScreenshareHelper Extensible Area
@@ -21,7 +22,7 @@ export class ScreenshareHelperButton implements ScreenshareHelperButtonInterface
 
   position: ScreenshareHelperItemPosition;
 
-  onClick: () => void;
+  onClick: (args: ScreenshareHelperButtonOnclickCallback) => void;
 
   /**
    * Returns object to be used in the setter for the Screenshare Helper. In this case,

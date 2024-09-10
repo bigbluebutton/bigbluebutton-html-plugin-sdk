@@ -106,6 +106,8 @@ That being said, here are the extensible areas we have so far:
 - User list item additional information (item, label)
 - Floating window item (floatingWindow)
 - Generic Content (main, sidekick)
+- User Camera Helper (button)
+- Screenshare Helper (button)
 
 Mind that no plugin will interfere into another's extensible area. So feel free to set whatever you need into a certain plugin with no worries.
 

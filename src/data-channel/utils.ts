@@ -30,21 +30,25 @@ export const deleteEntryFunctionUtil = (
 ) => {
   objectsToDelete.forEach((objectToDelete) => {
     if (objectToDelete === RESET_DATA_CHANNEL) {
-      window.dispatchEvent(new CustomEvent<UpdatedEventDetails<void>>(HookEvents.UPDATED, {
-        detail: {
-          hook: DataChannelHooks.DATA_CHANNEL_RESET,
-          hookArguments: { channelName, pluginName, subChannelName },
-          data: undefined,
-        },
-      }));
+      window.dispatchEvent(
+        new CustomEvent<UpdatedEventDetails<void>>(HookEvents.PLUGIN_SENT_CHANGES_TO_BBB_CORE, {
+          detail: {
+            hook: DataChannelHooks.DATA_CHANNEL_RESET,
+            hookArguments: { channelName, pluginName, subChannelName },
+            data: undefined,
+          },
+        }),
+      );
     } else {
-      window.dispatchEvent(new CustomEvent<UpdatedEventDetails<string>>(HookEvents.UPDATED, {
-        detail: {
-          hook: DataChannelHooks.DATA_CHANNEL_DELETE,
-          hookArguments: { channelName, pluginName, subChannelName },
-          data: objectToDelete,
-        },
-      }));
+      window.dispatchEvent(
+        new CustomEvent<UpdatedEventDetails<string>>(HookEvents.PLUGIN_SENT_CHANGES_TO_BBB_CORE, {
+          detail: {
+            hook: DataChannelHooks.DATA_CHANNEL_DELETE,
+            hookArguments: { channelName, pluginName, subChannelName },
+            data: objectToDelete,
+          },
+        }),
+      );
     }
   });
 };
@@ -57,15 +61,17 @@ export const replaceEntryFunctionUtil = <T>(
   newPayloadJson: T,
 ) => {
   window.dispatchEvent(
-    new CustomEvent<UpdatedEventDetails<ReplaceEntryFunctionArguments<T>>>(HookEvents.UPDATED, {
-      detail: {
-        hook: DataChannelHooks.DATA_CHANNEL_REPLACE,
-        hookArguments: { channelName, pluginName, subChannelName },
-        data: {
-          entryId,
-          payloadJson: newPayloadJson,
-        },
-      },
-    }),
+    new CustomEvent<
+      UpdatedEventDetails<
+        ReplaceEntryFunctionArguments<T>>>(HookEvents.PLUGIN_SENT_CHANGES_TO_BBB_CORE, {
+          detail: {
+            hook: DataChannelHooks.DATA_CHANNEL_REPLACE,
+            hookArguments: { channelName, pluginName, subChannelName },
+            data: {
+              entryId,
+              payloadJson: newPayloadJson,
+            },
+          },
+        }),
   );
 };

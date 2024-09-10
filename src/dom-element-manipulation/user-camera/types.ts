@@ -4,9 +4,10 @@ export type UseUserCameraDomElementsFunction = (
 
 export interface UserCameraDomElementsArguments {
   streamIds: string[];
+  pluginUuid: string;
 }
 
-export interface UpdatedEventDetailsForUserCameraDomElement {
+export interface UpdatedDataForUserCameraDomElement {
   streamId: string;
   userCameraDomElement: HTMLDivElement;
 }

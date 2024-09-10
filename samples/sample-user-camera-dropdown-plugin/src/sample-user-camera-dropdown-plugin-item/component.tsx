@@ -9,6 +9,8 @@ import {
   ScreenshareHelperButton,
   UserCameraDropdownOption,
   UserCameraDropdownSeparator,
+  UserCameraHelperButton,
+  UserCameraHelperItemPosition,
 } from 'bigbluebutton-html-plugin-sdk';
 import { SampleUserCameraDropdownPluginProps, VideoStreamsSubscriptionResultType } from './types';
 import { VIDEO_STREAMS_SUBSCRIPTION } from '../queries';
@@ -26,7 +28,7 @@ React.ReactElement<SampleUserCameraDropdownPluginProps> {
     videoStreams?.user_camera.map((vs) => vs.streamId),
   );
 
-  pluginLogger.info(`logging the domElements manipulation for userCamera: (${userCamera}) for streams (${videoStreams})`);
+  pluginLogger.info(`logging the domElements manipulation for userCamera: (${userCamera?.length}) for streams (${videoStreams})`);
 
   useEffect(() => {
     const buttonScreenshare1 = new ScreenshareHelperButton({
@@ -47,8 +49,8 @@ React.ReactElement<SampleUserCameraDropdownPluginProps> {
       label: 'This will log on the console',
       tooltip: 'this is a button injected by plugin',
       position: ScreenshareHelperItemPosition.TOP_RIGHT,
-      onClick: () => {
-        pluginLogger.info('Logging from the screenshare extensible area');
+      onClick: ({ browserClickEvent }) => {
+        pluginLogger.info('Logging from the screenshare extensible area, clientX: ', browserClickEvent.clientX);
       },
       hasSeparator: true,
     });
@@ -107,6 +109,19 @@ React.ReactElement<SampleUserCameraDropdownPluginProps> {
         onClick: ({ userId, streamId, browserClickEvent }) => {
           pluginLogger.info(`Alert sent from plugin, see userId: ${userId}; ${streamId}; ${browserClickEvent.clientX}`);
         },
+      }),
+    ]);
+    pluginApi.setUserCameraHelperItems([
+      new UserCameraHelperButton({
+        icon: 'popout_window',
+        disabled: false,
+        label: 'This will log on the console',
+        tooltip: 'this is a button injected by plugin',
+        position: UserCameraHelperItemPosition.TOP_RIGHT,
+        onClick: ({ browserClickEvent }) => {
+          pluginLogger.info('Logging from the user camera extensible area', browserClickEvent.clientX);
+        },
+        displayFunction: ({ userId }) => randomElement?.user.userId === userId,
       }),
     ]);
   }, [videoStreams]);
