@@ -1,4 +1,7 @@
-import { useEffect, useState, useMemo } from 'react';
+import {
+  useEffect, useState,
+  useRef, useMemo,
+} from 'react';
 import { DomElementManipulationHooks } from '../../enums';
 import { HookEvents } from '../../../core/enum';
 import {
@@ -15,7 +18,7 @@ const messageIdFromDomElement = (element: HTMLDivElement) => (element?.getAttrib
 
 export const useChatMessageDomElements = (messageIds: string[], pluginUuid: string) => {
   const [domElements, setDomElements] = useState<RenderedChatMessages>([]);
-  const [messageIdsState, setMessageIdsState] = useState<string[]>((messageIds) || []);
+  const previousMessageIds = useRef<string[]>([]);
 
   const handleDomElementUpdateEvent: EventListener = (
       (event: HookEventWrapper<
@@ -85,8 +88,8 @@ export const useChatMessageDomElements = (messageIds: string[], pluginUuid: stri
     };
   }, [domElements]);
 
-  useEffect(() => {
-    window.addEventListener(HookEvents.BBB_CORE_SENT_NEW_DATA, handleDomElementUpdateEvent);
+  const updateRequestedIds = () => {
+    previousMessageIds.current = messageIds;
     window.dispatchEvent(
       new CustomEvent<
         UpdatedEventDetails<void>>(HookEvents.PLUGIN_SENT_CHANGES_TO_BBB_CORE, {
@@ -100,14 +103,10 @@ export const useChatMessageDomElements = (messageIds: string[], pluginUuid: stri
           },
         }),
     );
-    // Runs on code cleanup
-    return () => {
-      // Everytime the state update, we remove the eventListener and then we re-add it.
-      window.removeEventListener(HookEvents.BBB_CORE_SENT_NEW_DATA, handleDomElementUpdateEvent);
-    };
-  }, [messageIdsState]);
-  if (sortedStringify((messageIds) || []) !== sortedStringify(messageIdsState)) {
-    setMessageIdsState((messageIds) || []);
+  };
+
+  if (sortedStringify((messageIds) || []) !== sortedStringify(previousMessageIds.current)) {
+    updateRequestedIds();
   }
 
   const flattenDomElements = useMemo(() => (
