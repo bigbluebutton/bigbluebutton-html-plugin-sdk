@@ -8,7 +8,7 @@ import { ChatMessageDomElementsArguments, UpdatedEventDetailsForChatMessageDomEl
 import { sortedStringify } from '../../../data-consumption/utils';
 
 export const useChatMessageDomElements = (messageIds: string[], pluginUuid: string) => {
-  const [domElement, setDomElement] = useState<HTMLDivElement[]>();
+  const [domElements, setDomElements] = useState<HTMLDivElement[]>();
   const [messageIdsState, setMessageIdsState] = useState<string[]>((messageIds) || []);
 
   const previousNeededIds = useRef<string[]>();
@@ -28,7 +28,7 @@ export const useChatMessageDomElements = (messageIds: string[], pluginUuid: stri
           if (sortedStringify(filteredStreamIdsFromBbbCore)
             !== sortedStringify(previousNeededIds.current)) {
             previousNeededIds.current = [...filteredStreamIdsFromBbbCore];
-            setDomElement(
+            setDomElements(
               filteredDataFromBbbCore.map((messageItemFromCore) => messageItemFromCore.message),
             );
           }
@@ -85,5 +85,5 @@ export const useChatMessageDomElements = (messageIds: string[], pluginUuid: stri
   if (sortedStringify((messageIds) || []) !== sortedStringify(messageIdsState)) {
     setMessageIdsState((messageIds) || []);
   }
-  return domElement;
+  return domElements;
 };
