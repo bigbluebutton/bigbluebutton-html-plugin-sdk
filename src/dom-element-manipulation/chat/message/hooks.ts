@@ -8,7 +8,7 @@ import { ChatMessageDomElementsArguments, UpdatedEventDetailsForChatMessageDomEl
 import { sortedStringify } from '../../../data-consumption/utils';
 
 export const useChatMessageDomElements = (messageIds: string[], pluginUuid: string) => {
-  const [domElements, setDomElements] = useState<HTMLDivElement[]>();
+  const [domElements, setDomElements] = useState<HTMLDivElement[]>([]);
   const [messageIdsState, setMessageIdsState] = useState<string[]>((messageIds) || []);
 
   const previousNeededIds = useRef<string[]>();
