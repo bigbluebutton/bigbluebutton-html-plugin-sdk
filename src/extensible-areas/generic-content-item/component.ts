@@ -1,3 +1,4 @@
+import * as ReactDOM from 'react-dom/client';
 import { GenericContentType } from './enums';
 import { GenericContentInterface, GenericContentMainAreaProps, GenericContentSidekickAreaProps } from './types';
 
@@ -8,7 +9,7 @@ export class GenericContentMainArea implements GenericContentInterface {
 
   type: GenericContentType;
 
-  contentFunction: (element: HTMLElement) => void;
+  contentFunction: (element: HTMLElement) => ReactDOM.Root;
 
   /**
    * Returns an object that when used in the setter as a generic content will be rendered
@@ -44,7 +45,7 @@ export class GenericContentSidekickArea implements GenericContentInterface {
 
   open: boolean = false;
 
-  contentFunction: (element: HTMLElement) => void;
+  contentFunction: (element: HTMLElement) => ReactDOM.Root;
 
   /**
    * Returns an object that when used in the setter as a generic content will be rendered
@@ -53,7 +54,7 @@ export class GenericContentSidekickArea implements GenericContentInterface {
    * given generic sidekick content.
    *
    * @param contentFunction - function that gives the html element to render the content of
-   * the generic component
+   * the generic content. It must return the root element where the generic content was rendered.
    * @param name - the label of the associated sidebar navigation button
    * @param section - section name under which the associated sidebar navigation button will be
    *  displayed

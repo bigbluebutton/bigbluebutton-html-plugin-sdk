@@ -1,3 +1,4 @@
+import * as ReactDOM from 'react-dom/client';
 import { PluginProvidedUiItemDescriptor } from '../base';
 
 export interface FloatingWindowInterface extends PluginProvidedUiItemDescriptor {
@@ -9,7 +10,7 @@ export interface FloatingWindowProps {
   movable: boolean;
   backgroundColor: string;
   boxShadow: string;
-  contentFunction: (element: HTMLElement) => void;
+  contentFunction: (element: HTMLElement) => ReactDOM.Root;
 }
 
 export type SetFloatingWindows = (
