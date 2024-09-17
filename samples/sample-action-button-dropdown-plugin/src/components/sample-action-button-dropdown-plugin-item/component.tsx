@@ -75,6 +75,7 @@ function SampleActionButtonDropdownPlugin(
                 />
               </React.StrictMode>,
             );
+            return root;
           },
         }),
       ]);

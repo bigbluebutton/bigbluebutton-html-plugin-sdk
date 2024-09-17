@@ -22,6 +22,7 @@ function SampleGenericContentSidekickPlugin(
         name: 'Generic Content 1',
         section: 'Section 1',
         buttonIcon: 'video',
+        open: false,
         contentFunction: (element: HTMLElement) => {
           const root = ReactDOM.createRoot(element);
           root.render(
@@ -31,12 +32,14 @@ function SampleGenericContentSidekickPlugin(
               />
             </React.StrictMode>,
           );
+          return root;
         },
       }),
       new GenericContentSidekickArea({
         name: 'Generic Content 2',
         section: 'Section 2',
         buttonIcon: 'chat',
+        open: false,
         contentFunction: (element: HTMLElement) => {
           const root = ReactDOM.createRoot(element);
           root.render(
@@ -46,6 +49,7 @@ function SampleGenericContentSidekickPlugin(
               <iframe title="wikipedia" width="100%" height="1000px" src="https://en.wikipedia.org/wiki/Main_Page" />
             </React.StrictMode>,
           );
+          return root;
         },
       }),
     ]);
