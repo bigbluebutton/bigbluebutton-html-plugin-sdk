@@ -1,8 +1,8 @@
 export {
   UserListDropdownOption,
   UserListDropdownSeparator,
-  UserListDropdownContentFunctionStructureInformation,
-  UserListDropdownFixedStructureInformation,
+  UserListDropdownGenericContentInformation,
+  UserListDropdownFixedContentInformation,
   UserListDropdownTitleAction,
 } from './component';
 export {

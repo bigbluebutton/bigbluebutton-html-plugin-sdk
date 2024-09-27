@@ -3,8 +3,8 @@ import {
   UserListDropdownSeparatorProps,
   UserListDropdownTitleActionProps,
   UserListDropdownTitleActionOnClickArguments,
-  UserListDropdownFixedStructureInformationProps,
-  UserListDropdownContentFunctionStructureInformationProps,
+  UserListDropdownFixedContentInformationProps,
+  UserListDropdownGenericContentInformationProps,
 } from './types';
 import { UserListDropdownItemType, UserListDropdownSeparatorPosition } from './enums';
 
@@ -88,7 +88,7 @@ export class UserListDropdownSeparator implements UserListDropdownInterface {
   };
 }
 
-export class UserListDropdownFixedStructureInformation implements UserListDropdownInterface {
+export class UserListDropdownFixedContentInformation implements UserListDropdownInterface {
   id: string = '';
 
   userId: string;
@@ -124,22 +124,22 @@ export class UserListDropdownFixedStructureInformation implements UserListDropdo
   constructor({
     label = '', icon = '', iconRight = '', allowed = true,
     userId = '', textColor = '',
-  }: UserListDropdownFixedStructureInformationProps) {
+  }: UserListDropdownFixedContentInformationProps) {
     this.userId = userId;
     this.label = label;
     this.icon = icon;
     this.iconRight = iconRight;
     this.textColor = textColor;
     this.allowed = allowed;
-    this.type = UserListDropdownItemType.FIXED_STRUCTURE_INFORMATION;
+    this.type = UserListDropdownItemType.FIXED_CONTENT_INFORMATION;
   }
 
   setItemId: (id: string) => void = (id: string) => {
-    this.id = `UserListDropdownFixedStructureInformation_${id}`;
+    this.id = `UserListDropdownFixedContentInformation_${id}`;
   };
 }
 
-export class UserListDropdownContentFunctionStructureInformation
+export class UserListDropdownGenericContentInformation
 implements UserListDropdownInterface {
   id: string = '';
 
@@ -170,15 +170,15 @@ implements UserListDropdownInterface {
   constructor({
     contentFunction, allowed = true,
     userId = '',
-  }: UserListDropdownContentFunctionStructureInformationProps) {
+  }: UserListDropdownGenericContentInformationProps) {
     this.userId = userId;
     this.allowed = allowed;
     this.contentFunction = contentFunction;
-    this.type = UserListDropdownItemType.CONTENT_FUNCTION_STRUCTURE_INFORMATION;
+    this.type = UserListDropdownItemType.GENERIC_CONTENT_INFORMATION;
   }
 
   setItemId: (id: string) => void = (id: string) => {
-    this.id = `UserListDropdownContentFunctionInformation_${id}`;
+    this.id = `UserListDropdownGenericContentInformation_${id}`;
   };
 }
 

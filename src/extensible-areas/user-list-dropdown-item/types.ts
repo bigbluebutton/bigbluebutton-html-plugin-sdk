@@ -26,13 +26,13 @@ export interface UserListDropdownSeparatorProps {
   position?: UserListDropdownSeparatorPosition;
 }
 
-export interface UserListDropdownContentFunctionStructureInformationProps {
+export interface UserListDropdownGenericContentInformationProps {
   contentFunction: (element: HTMLElement) => void;
   allowed: boolean;
   userId: string;
 }
 
-export interface UserListDropdownFixedStructureInformationProps {
+export interface UserListDropdownFixedContentInformationProps {
   label: string;
   icon?: string;
   iconRight?: string;
