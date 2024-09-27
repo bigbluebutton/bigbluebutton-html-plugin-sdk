@@ -1,4 +1,5 @@
 import { PluginProvidedUiItemDescriptor } from '../base';
+import { UserListDropdownSeparatorPosition } from './enums';
 
 /**
  * User List Dropdown Item - The general user list dropdown extensible area item
@@ -22,13 +23,31 @@ export interface UserListDropdownOptionProps {
 
 export interface UserListDropdownSeparatorProps {
   userId: string;
+  position?: UserListDropdownSeparatorPosition;
 }
 
-export interface UserListDropdownInformationProps {
+export interface UserListDropdownContentFunctionStructureInformationProps {
+  contentFunction: (element: HTMLElement) => void;
+  allowed: boolean;
+  userId: string;
+}
+
+export interface UserListDropdownFixedStructureInformationProps {
   label: string;
   icon?: string;
   iconRight?: string;
   allowed: boolean;
   userId: string;
   textColor: string;
+}
+
+export interface UserListDropdownTitleActionOnClickArguments {
+  browserEvent: React.MouseEvent<HTMLElement>;
+}
+
+export interface UserListDropdownTitleActionProps {
+  tooltip: string;
+  icon: string;
+  userId: string;
+  onClick: (args: UserListDropdownTitleActionOnClickArguments) => void;
 }
