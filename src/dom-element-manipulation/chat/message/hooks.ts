@@ -27,12 +27,18 @@ export const useChatMessageDomElements = (messageIds: string[], pluginUuid: stri
         UpdatedEventDetailsForChatMessageDomElements>;
         if (detail.hook === DomElementManipulationHooks.CHAT_MESSAGE) {
           const pageToUpdate = detail.data?.page;
+          if (pageToUpdate === undefined) return;
           if (detail.data?.messages.length === 0) {
             // indicates the page was unmounted in the client
             // so we remove all stored elements for that page,
             // since they might be invalid.
-            delete domElements[pageToUpdate];
-            return;
+            setDomElements((domElementsState) => {
+              const newDomElements = {
+                ...domElementsState,
+              };
+              delete newDomElements[pageToUpdate];
+              return newDomElements;
+            });
           }
 
           const pageDomElementsFromBbbCore = detail.data?.messages.map(
