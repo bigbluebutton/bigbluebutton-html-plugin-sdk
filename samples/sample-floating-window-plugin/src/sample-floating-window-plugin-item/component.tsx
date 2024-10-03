@@ -51,6 +51,7 @@ function SampleFloatingWindowPlugin(
               />
             </React.StrictMode>,
           );
+          return root;
         },
       });
       pluginApi.setActionsBarItems([]);
