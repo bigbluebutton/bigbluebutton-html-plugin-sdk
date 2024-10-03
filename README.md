@@ -249,6 +249,10 @@ One other thing is that the type of the return is precisely the same type requir
 - presentation-area:
   - open: this function will open the presentation area content automatically;
   - close: this function will close the presentation area content automatically;
+- conference:
+  - setSpeakerLevel: this function will set the speaker volume level(audio output) of the conference to a certain number between 0 and 1;
+- user-status:
+  - setAwayStatus: this function will set the away status of the user to a certain status;
 
 See usage ahead:
 
