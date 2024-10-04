@@ -7,7 +7,16 @@ export interface ChatMessageDomElementsArguments {
   pluginUuid: string;
 }
 
-export interface UpdatedEventDetailsForChatMessageDomElements {
+export interface MessageDetails {
   messageId: string;
   message: HTMLDivElement;
+}
+
+export interface UpdatedEventDetailsForChatMessageDomElements {
+  page: number;
+  messages: MessageDetails[];
+}
+
+export interface RenderedChatMessages {
+  [pageNumber: number]: HTMLDivElement[];
 }

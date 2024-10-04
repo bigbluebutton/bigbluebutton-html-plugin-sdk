@@ -1,36 +1,58 @@
-import { useEffect, useRef, useState } from 'react';
+import {
+  useEffect, useState,
+  useRef, useMemo,
+} from 'react';
 import { DomElementManipulationHooks } from '../../enums';
 import { HookEvents } from '../../../core/enum';
 import {
   HookEventWrapper, SubscribedEventDetails, UnsubscribedEventDetails, UpdatedEventDetails,
 } from '../../../core/types';
-import { ChatMessageDomElementsArguments, UpdatedEventDetailsForChatMessageDomElements } from './types';
+import {
+  ChatMessageDomElementsArguments,
+  RenderedChatMessages,
+  UpdatedEventDetailsForChatMessageDomElements,
+} from './types';
 import { sortedStringify } from '../../../data-consumption/utils';
 
-export const useChatMessageDomElements = (messageIds: string[], pluginUuid: string) => {
-  const [domElement, setDomElement] = useState<HTMLDivElement[]>();
-  const [messageIdsState, setMessageIdsState] = useState<string[]>((messageIds) || []);
+const messageIdFromDomElement = (element: HTMLDivElement) => (element?.getAttribute('data-chat-message-id') || '');
 
-  const previousNeededIds = useRef<string[]>();
+export const useChatMessageDomElements = (messageIds: string[], pluginUuid: string) => {
+  const [domElements, setDomElements] = useState<RenderedChatMessages>([]);
+  const previousMessageIds = useRef<string[]>([]);
 
   const handleDomElementUpdateEvent: EventListener = (
       (event: HookEventWrapper<
-        UpdatedEventDetails<UpdatedEventDetailsForChatMessageDomElements[]>>) => {
+        UpdatedEventDetails<UpdatedEventDetailsForChatMessageDomElements>>) => {
         const detail = event.detail as UpdatedEventDetails<
-        UpdatedEventDetailsForChatMessageDomElements[]>;
+        UpdatedEventDetailsForChatMessageDomElements>;
         if (detail.hook === DomElementManipulationHooks.CHAT_MESSAGE) {
-          const filteredDataFromBbbCore = detail.data?.filter(
-            (item) => messageIdsState.includes(item.messageId),
-          ) || [];
-          const filteredStreamIdsFromBbbCore = filteredDataFromBbbCore.map(
-            (item) => item.messageId,
+          const pageToUpdate = detail.data?.page;
+          if (pageToUpdate === undefined) return;
+          if (detail.data?.messages.length === 0) {
+            // indicates the page was unmounted in the client
+            // so we remove all stored elements for that page,
+            // since they might be invalid.
+            setDomElements((domElementsState) => {
+              const newDomElements = {
+                ...domElementsState,
+              };
+              delete newDomElements[pageToUpdate];
+              return newDomElements;
+            });
+          }
+
+          const pageDomElementsFromBbbCore = detail.data?.messages.map(
+            (item) => item.message,
           );
-          if (sortedStringify(filteredStreamIdsFromBbbCore)
-            !== sortedStringify(previousNeededIds.current)) {
-            previousNeededIds.current = [...filteredStreamIdsFromBbbCore];
-            setDomElement(
-              filteredDataFromBbbCore.map((messageItemFromCore) => messageItemFromCore.message),
-            );
+          const receivedAnythingNew = pageDomElementsFromBbbCore.some(
+            (pageDomElement) => (
+              !domElements[pageToUpdate]?.includes(pageDomElement)),
+          );
+          if (receivedAnythingNew) {
+            setDomElements((domElementsState) => ({
+              ...domElementsState,
+              [pageToUpdate]: pageDomElementsFromBbbCore,
+            }));
           }
         }
       }) as EventListener;
@@ -61,8 +83,19 @@ export const useChatMessageDomElements = (messageIds: string[], pluginUuid: stri
       );
     };
   }, []);
+
   useEffect(() => {
     window.addEventListener(HookEvents.BBB_CORE_SENT_NEW_DATA, handleDomElementUpdateEvent);
+    // Runs on code cleanup
+    return () => {
+      // On every `domElements` update, the event listener is removed and re-added to ensure
+      // the handler has access to the latest `domElements` state value.
+      window.removeEventListener(HookEvents.BBB_CORE_SENT_NEW_DATA, handleDomElementUpdateEvent);
+    };
+  }, [domElements]);
+
+  const updateRequestedIds = () => {
+    previousMessageIds.current = messageIds;
     window.dispatchEvent(
       new CustomEvent<
         UpdatedEventDetails<void>>(HookEvents.PLUGIN_SENT_CHANGES_TO_BBB_CORE, {
@@ -76,14 +109,16 @@ export const useChatMessageDomElements = (messageIds: string[], pluginUuid: stri
           },
         }),
     );
-    // Runs on code cleanup
-    return () => {
-      // Everytime the state update, we remove the eventListener and then we re-add it.
-      window.removeEventListener(HookEvents.BBB_CORE_SENT_NEW_DATA, handleDomElementUpdateEvent);
-    };
-  }, [messageIdsState]);
-  if (sortedStringify((messageIds) || []) !== sortedStringify(messageIdsState)) {
-    setMessageIdsState((messageIds) || []);
+  };
+
+  if (sortedStringify((messageIds) || []) !== sortedStringify(previousMessageIds.current)) {
+    updateRequestedIds();
   }
-  return domElement;
+
+  const flattenDomElements = useMemo(() => (
+    Object.values(domElements).filter((i) => Array.isArray(i)).flat()
+  ), [domElements]);
+  return flattenDomElements.filter((domElement) => (
+    messageIds.includes(messageIdFromDomElement(domElement))
+  ));
 };
