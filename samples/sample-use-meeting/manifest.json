@@ -10,20 +10,5 @@
           "messagesAllowedPerSecond": 10,
           "messagesAllowedPerMinute": 20
       }
-  },
-  "dataChannels": [
-      {
-          "name": "goldStars",
-          "pushPermission": ["moderator", "presenter"],
-          "replaceOrDeletePermission": ["creator", "moderator"]
-      }
-  ],
-  "remoteDataSources": [
-      {
-          "name": "allUsers",
-          "url": "${meta_pluginSettingsUserInformation}",
-          "fetchMode": "onMeetingCreate",
-          "permissions": ["moderator", "viewer"]
-      }
-  ]
+  }
 }
