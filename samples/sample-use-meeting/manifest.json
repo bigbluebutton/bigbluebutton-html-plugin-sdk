@@ -1,0 +1,29 @@
+{
+  "requiredSdkVersion": "~0.0.59",
+  "name": "sampleUseMeeting",
+  "javascriptEntrypointUrl": "http://127.0.0.1:4701/static/SampleUseMeeting.js",
+  "localesBaseUrl": "https://cdn.dominio.com/pluginabc/",
+  "eventPersistence": {
+      "isEnabled": true,
+      "maximumPayloadSizeInBytes": 1024,
+      "rateLimiting": {
+          "messagesAllowedPerSecond": 10,
+          "messagesAllowedPerMinute": 20
+      }
+  },
+  "dataChannels": [
+      {
+          "name": "goldStars",
+          "pushPermission": ["moderator", "presenter"],
+          "replaceOrDeletePermission": ["creator", "moderator"]
+      }
+  ],
+  "remoteDataSources": [
+      {
+          "name": "allUsers",
+          "url": "${meta_pluginSettingsUserInformation}",
+          "fetchMode": "onMeetingCreate",
+          "permissions": ["moderator", "viewer"]
+      }
+  ]
+}
