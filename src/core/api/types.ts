@@ -30,6 +30,7 @@ import { ServerCommands } from '../../server-commands/types';
 import { SendGenericDataForLearningAnalyticsDashboard } from '../../learning-analytics-dashboard/types';
 import { UseUserCameraDomElementsFunction } from '../../dom-element-manipulation/user-camera/types';
 import { ScreenshareHelperInterface, UserCameraHelperInterface } from '../../extensible-areas';
+import { PersistEventFunction } from '../../event-persistence/types';
 
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
@@ -242,6 +243,14 @@ export interface PluginApi {
    *
    */
   sendGenericDataForLearningAnalyticsDashboard?: SendGenericDataForLearningAnalyticsDashboard;
+  /**
+   * Persists events to `events.xml` file.
+   *
+   * @param eventName - name of the event to be persisted in `events.xml`
+   * @param payload - payload to be persisted in `events.xml`
+   *
+   */
+  persistEvent?: PersistEventFunction;
 }
 
 export interface PluginBrowserWindow extends Window {
