@@ -21,5 +21,5 @@ Where `<<PLUGIN_URL>>` is the URL that points to the location where your bundled
 # New Meeting parameters:
 
 ```
-plugins=http://172.17.0.1:4701/manifest.json
+pluginsManifests=[{url:"http://172.17.0.1:4701/manifest.json"}]
 ```
