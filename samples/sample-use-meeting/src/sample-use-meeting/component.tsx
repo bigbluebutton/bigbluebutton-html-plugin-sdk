@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import { useEffect } from 'react';
 import {
   BbbPluginSdk, PluginApi,
   pluginLogger,
@@ -12,7 +12,13 @@ React.ReactElement<SampleUseMeetingPluginProps> {
   const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
   const meetingInfoGraphqlResponse = pluginApi.useMeeting();
 
-  React.useEffect(() => {
+  useEffect(() => {
+    setInterval(() => {
+      pluginLogger.info('persisting event');
+      pluginApi.persistEvent('eventFromUseMeetingSample', { foo: 'bar' });
+    }, 5000);
+  }, []);
+  useEffect(() => {
     const meetingInfo = meetingInfoGraphqlResponse?.data;
     pluginLogger.info('Showing meeting information ', meetingInfo);
   }, [meetingInfoGraphqlResponse]);
