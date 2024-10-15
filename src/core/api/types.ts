@@ -30,6 +30,7 @@ import { ServerCommands } from '../../server-commands/types';
 import { SendGenericDataForLearningAnalyticsDashboard } from '../../learning-analytics-dashboard/types';
 import { UseUserCameraDomElementsFunction } from '../../dom-element-manipulation/user-camera/types';
 import { ScreenshareHelperInterface, UserCameraHelperInterface } from '../../extensible-areas';
+import { GetDataSource } from '../../remote-data/types';
 
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
@@ -242,6 +243,13 @@ export interface PluginApi {
    *
    */
   sendGenericDataForLearningAnalyticsDashboard?: SendGenericDataForLearningAnalyticsDashboard;
+  /**
+   * Fetches external data from pre-defined data-source in manifest.
+   *
+   * @param dataSourceName - name of the data source
+   *
+   */
+  getRemoteData?: GetDataSource;
 }
 
 export interface PluginBrowserWindow extends Window {

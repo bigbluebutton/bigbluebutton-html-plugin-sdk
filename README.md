@@ -305,6 +305,49 @@ So that the data will appear in the following form:
 | user-name |   1   |   `<value>`     |
 
 
+### External data resources
+
+This is the new integration with external servers to fetch data in a secure manner.
+
+This is possible by simply configuring the dataResource name in the manifest and then its endpoint in the URL meta parameter that goes in the create request. The manifest would look like:
+
+```json
+{
+  // ...rest of manifest configuration
+  "remoteDataSources": [
+      {
+          "name": "allUsers",
+          "url": "${meta_pluginSettingsUserInformation}",
+          "fetchMode": "onMeetingCreate",
+          "permissions": ["moderator", "viewer"]
+      }
+  ]
+}
+```
+
+Then when creating the meeting send the following parameters along, adjusting to your needs and resources:
+
+```
+meta_pluginSettingsUserInformation=https://<your-external-source-with-your-authentication>/api/users
+pluginsManifests=[{"url": "http://<domain-of-your-manifest>/your-plugin/manifest.json"}]
+```
+
+In the plugin, just use the function like:
+
+```typescript
+pluginApi.getRemoteData('allUsers').then((response: Response) => {
+  if (response.ok) {
+    response.json().then((r: CourseData) => {
+      // Do something with the jsonified data (if it's a json)
+    }).catch((reason) => {
+      pluginLogger.error('Error while processing the json from success response: ', reason);
+    });
+  }
+}).catch((reason) => {
+  pluginLogger.error('Error while fetching external resource: ', reason);
+});
+```
+
 
 ### Frequently Asked Questions (FAQ)
 
