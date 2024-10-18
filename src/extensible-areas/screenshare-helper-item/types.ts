@@ -24,6 +24,7 @@ export interface ScreenshareHelperButtonInterface extends ScreenshareHelperInter
 }
 
 export interface ScreenshareHelperButtonProps {
+  id?: string;
   label?: string;
   icon: string;
   tooltip: string;

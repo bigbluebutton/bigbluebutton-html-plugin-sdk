@@ -9,6 +9,7 @@ export interface ActionsBarInterface extends PluginProvidedUiItemDescriptor{
 }
 
 export interface ActionsBarButtonProps {
+  id?: string;
   icon: string;
   tooltip: string;
   position: ActionsBarPosition;

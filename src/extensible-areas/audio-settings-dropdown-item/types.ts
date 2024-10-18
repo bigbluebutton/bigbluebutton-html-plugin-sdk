@@ -11,6 +11,7 @@ export interface AudioSettingsDropdownInterface extends PluginProvidedUiItemDesc
 }
 
 export interface AudioSettingsDropdownOptionProps {
+  id?: string;
   label: string;
   icon: string;
   onClick: () => void;

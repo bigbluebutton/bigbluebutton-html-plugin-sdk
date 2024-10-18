@@ -33,6 +33,7 @@ export interface UserCameraHelperButtonInterface extends UserCameraHelperInterfa
 }
 
 export interface UserCameraHelperButtonProps {
+  id?: string;
   label?: string;
   icon: string;
   tooltip: string;

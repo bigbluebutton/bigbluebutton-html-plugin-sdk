@@ -122,9 +122,12 @@ export class UserListDropdownFixedContentInformation implements UserListDropdown
    * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5).
    */
   constructor({
-    label = '', icon = '', iconRight = '', allowed = true,
+    id, label = '', icon = '', iconRight = '', allowed = true,
     userId = '', textColor = '',
   }: UserListDropdownFixedContentInformationProps) {
+    if (id) {
+      this.id = id;
+    }
     this.userId = userId;
     this.label = label;
     this.icon = icon;
@@ -168,9 +171,12 @@ implements UserListDropdownInterface {
    * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5).
    */
   constructor({
-    contentFunction, allowed = true,
+    id, contentFunction, allowed = true,
     userId = '',
   }: UserListDropdownGenericContentInformationProps) {
+    if (id) {
+      this.id = id;
+    }
     this.userId = userId;
     this.allowed = allowed;
     this.contentFunction = contentFunction;
@@ -209,8 +215,11 @@ export class UserListDropdownTitleAction implements UserListDropdownInterface {
    * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5).
    */
   constructor({
-    icon = '', userId = '', onClick, tooltip,
+    id, icon = '', userId = '', onClick, tooltip,
   }: UserListDropdownTitleActionProps) {
+    if (id) {
+      this.id = id;
+    }
     this.userId = userId;
     this.icon = icon;
     this.tooltip = tooltip;
