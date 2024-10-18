@@ -5,6 +5,7 @@ export interface FloatingWindowInterface extends PluginProvidedUiItemDescriptor 
 }
 
 export interface FloatingWindowProps {
+  id?: string;
   top: number;
   left: number;
   movable: boolean;

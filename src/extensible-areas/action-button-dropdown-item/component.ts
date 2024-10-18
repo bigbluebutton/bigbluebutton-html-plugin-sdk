@@ -32,8 +32,11 @@ export class ActionButtonDropdownOption implements ActionButtonDropdownInterface
    * @returns the option to be displayed in the action button dropdown
    */
   constructor({
-    label = '', icon = '', tooltip = '', allowed = true, onClick = () => {},
+    id, label = '', icon = '', tooltip = '', allowed = true, onClick = () => {},
   }: ActionButtonDropdownOptionProps) {
+    if (id) {
+      this.id = id;
+    }
     this.label = label;
     this.icon = icon;
     this.tooltip = tooltip;

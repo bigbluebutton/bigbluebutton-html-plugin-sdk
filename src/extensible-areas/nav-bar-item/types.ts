@@ -7,6 +7,7 @@ export interface NavBarInterface extends PluginProvidedUiItemDescriptor{
 }
 
 export interface NavBarButtonProps {
+  id?: string;
   label: string;
   icon: string;
   tooltip: string;
@@ -17,6 +18,7 @@ export interface NavBarButtonProps {
 }
 
 export interface NavBarInfoProps {
+  id?: string;
   label: string;
   hasSeparator: boolean;
   position: NavBarItemPosition;

@@ -12,11 +12,13 @@ export interface UserListItemAdditionalInformationInterface extends PluginProvid
   userId: string;
 }
 export interface UserListItemIconProps {
+  id?: string;
   userId: string;
   icon: string;
 }
 
 export interface UserListItemLabelProps {
+  id?: string;
   userId: string;
   icon: string;
   label: string;

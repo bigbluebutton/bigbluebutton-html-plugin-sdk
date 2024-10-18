@@ -27,12 +27,14 @@ export interface UserListDropdownSeparatorProps {
 }
 
 export interface UserListDropdownGenericContentInformationProps {
+  id?: string;
   contentFunction: (element: HTMLElement) => void;
   allowed: boolean;
   userId: string;
 }
 
 export interface UserListDropdownFixedContentInformationProps {
+  id?: string;
   label: string;
   icon?: string;
   iconRight?: string;
@@ -46,6 +48,7 @@ export interface UserListDropdownTitleActionOnClickArguments {
 }
 
 export interface UserListDropdownTitleActionProps {
+  id?: string;
   tooltip: string;
   icon: string;
   userId: string;

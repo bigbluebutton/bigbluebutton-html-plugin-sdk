@@ -27,8 +27,11 @@ export class OptionsDropdownOption implements OptionsDropdownInterface {
    * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5).
    */
   constructor({
-    label = '', icon = '', onClick = () => {},
+    id, label = '', icon = '', onClick = () => {},
   }: OptionsDropdownOptionProps) {
+    if (id) {
+      this.id = id;
+    }
     this.label = label;
     this.icon = icon;
     this.onClick = onClick;

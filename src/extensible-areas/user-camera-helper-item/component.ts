@@ -44,9 +44,12 @@ export class UserCameraHelperButton implements UserCameraHelperButtonInterface {
    * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5).
    */
   constructor({
-    label = '', icon = '', tooltip = '', disabled = true, onClick = () => {},
+    id, label = '', icon = '', tooltip = '', disabled = true, onClick = () => {},
     position = UserCameraHelperItemPosition.TOP_RIGHT, displayFunction,
   }: UserCameraHelperButtonProps) {
+    if (id) {
+      this.id = id;
+    }
     this.label = label;
     this.icon = icon;
     this.tooltip = tooltip;

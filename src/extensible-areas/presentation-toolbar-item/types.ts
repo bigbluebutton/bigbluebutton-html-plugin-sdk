@@ -6,6 +6,7 @@ import { PluginProvidedUiItemDescriptor } from '../base';
 export interface PresentationToolbarInterface extends PluginProvidedUiItemDescriptor {}
 
 export interface PresentationToolbarButtonProps {
+  id?: string;
   label: string;
   tooltip: string;
   style: React.CSSProperties;

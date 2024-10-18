@@ -7,6 +7,7 @@ export interface ActionButtonDropdownInterface extends PluginProvidedUiItemDescr
 }
 
 export interface ActionButtonDropdownOptionProps {
+  id?: string;
   label: string;
   icon: string;
   tooltip: string;

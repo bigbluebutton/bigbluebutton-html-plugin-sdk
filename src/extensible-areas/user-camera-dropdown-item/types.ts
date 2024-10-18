@@ -25,6 +25,7 @@ export interface UserCameraDropdownSeparatorProps {
 }
 
 export interface UserCameraDropdownOptionProps {
+  id?: string;
   label: string;
   icon: string;
   onClick: (args: OnclickFunctionCallbackArguments) => void;

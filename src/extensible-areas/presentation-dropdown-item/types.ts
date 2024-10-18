@@ -11,6 +11,7 @@ export interface PresentationDropdownInterface extends PluginProvidedUiItemDescr
 }
 
 export interface PresentationDropdownOptionProps {
+  id?: string;
   label: string;
   icon: string;
   onClick: () => void;
