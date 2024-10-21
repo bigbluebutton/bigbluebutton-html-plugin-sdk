@@ -11,6 +11,7 @@ export interface CameraSettingsDropdownInterface extends PluginProvidedUiItemDes
 }
 
 export interface CameraSettingsDropdownOptionProps {
+  id?: string;
   label: string;
   icon: string;
   onClick: () => void;

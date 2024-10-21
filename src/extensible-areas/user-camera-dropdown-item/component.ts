@@ -32,9 +32,12 @@ export class UserCameraDropdownOption implements UserCameraDropdownInterface {
    * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5)
    */
   constructor({
-    label = '', icon = '', onClick = () => {},
+    id, label = '', icon = '', onClick = () => {},
     displayFunction = () => true,
   }: UserCameraDropdownOptionProps) {
+    if (id) {
+      this.id = id;
+    }
     this.displayFunction = displayFunction;
     this.label = label;
     this.icon = icon;

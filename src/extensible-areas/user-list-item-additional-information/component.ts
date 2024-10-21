@@ -27,8 +27,11 @@ export class UserListItemIcon implements UserListItemAdditionalInformationInterf
    * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5).
    */
   constructor({
-    icon = '', userId = '',
+    id, icon = '', userId = '',
   }: UserListItemIconProps) {
+    if (id) {
+      this.id = id;
+    }
     this.icon = icon;
     this.userId = userId;
     this.type = UserListItemAdditionalInformationType.ICON;
@@ -63,8 +66,11 @@ export class UserListItemLabel implements UserListItemAdditionalInformationInter
    * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5).
    */
   constructor({
-    icon = '', userId = '', label = '',
+    id, icon = '', userId = '', label = '',
   }: UserListItemLabelProps) {
+    if (id) {
+      this.id = id;
+    }
     this.icon = icon;
     this.label = label;
     this.userId = userId;
