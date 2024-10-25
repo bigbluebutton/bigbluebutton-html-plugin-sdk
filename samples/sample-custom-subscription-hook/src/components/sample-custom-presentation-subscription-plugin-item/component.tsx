@@ -61,6 +61,7 @@ function SampleCustomPresentationSubscriptionPlugin(
       : PresentationToolbarInterface = new PresentationToolbarButton({
         label: 'See preview of next slide',
         tooltip: 'It requests the content of the next slide',
+        style: {},
         onClick: () => {
           if (presentationNextPage) {
             handleFetchPresentationData(presentationNextPage);

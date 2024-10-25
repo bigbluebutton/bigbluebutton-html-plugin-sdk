@@ -1,0 +1,6 @@
+{
+  "requiredSdkVersion": "~0.0.59",
+  "name": "SampleOptionsDropdownPlugin",
+  "javascriptEntrypointUrl": "SampleOptionsDropdownPlugin.js",
+  "localesBaseUrl": "https://cdn.dominio.com/pluginabc/"
+}

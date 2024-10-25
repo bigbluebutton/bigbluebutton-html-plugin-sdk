@@ -6,17 +6,24 @@ The Sample Audio Settings Dropdown Plugin serves as a demonstration of how devel
 
 ![Gif of plugin demo](./public/assets/plugin.gif)
 
-See the **Usage** section of the main README to see how to build and run plugins.
+## Building the Plugin
 
-## Configuration Example
+To build the plugin for production use, follow these steps:
 
-Add this to the `settings.yml` of the BBB HTML5-client:
-
-```yaml
-public:
-  plugins:
-    - name: SampleAudioSettingsDropdownPlugin
-      url: <<PLUGIN_URL>>
+```bash
+cd $HOME/src/sample-audio-settings-dropdown-plugin
+npm ci
+npm run build-bundle
 ```
 
-Where `<<PLUGIN_URL>>` is the URL that points to the location where your bundled `SampleAudioSettingsDropdownPlugin.js`-file is hosted.
+The above command will generate the `dist` folder, containing the bundled JavaScript file named `SampleAudioSettingsDropdownPlugin.js`. This file can be hosted on any HTTPS server along with its `manifest.json`.
+
+If you install the Plugin separated to the manifest, remember to change the `javascriptEntrypointUrl` in the `manifest.json` to the correct endpoint.
+
+To use the plugin in BigBlueButton, send this parameter along in create call:
+
+```
+pluginManifests=[{"url":"<your-domain>/path/to/manifest.json"}]
+```
+
+Or additionally, you can add this same configuration in the `.properties` file from `bbb-web` in `/usr/share/bbb-web/WEB-INF/classes/bigbluebutton.properties`

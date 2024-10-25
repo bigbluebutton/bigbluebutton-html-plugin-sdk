@@ -8,11 +8,9 @@ const pluginName = document.currentScript?.getAttribute('pluginName') || 'plugin
 
 const root = ReactDOM.createRoot(document.getElementById(uuid));
 root.render(
-  <React.StrictMode>
-    <SamplePresentationDropdownPlugin {...{
-      pluginUuid: uuid,
-      pluginName,
-    }}
-    />
-  </React.StrictMode>,
+  <SamplePresentationDropdownPlugin {...{
+    pluginUuid: uuid,
+    pluginName,
+  }}
+  />,
 );

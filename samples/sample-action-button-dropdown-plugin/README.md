@@ -12,11 +12,8 @@ See the **Usage** section of the main README to see how to build and run plugins
 
 Add this to the `settings.yml` of the BBB HTML5-client:
 
-```yaml
-public:
-  plugins:
-    - name: SampleActionButtonDropdownPlugin
-      url: <<PLUGIN_URL>>
+```
+pluginManifests=[{"url":"http://172.17.0.1:4701/manifest.json"}]
 ```
 
 Where `<<PLUGIN_URL>>` is the URL that points to the location where your bundled `SampleActionButtonDropdownPlugin.js`-file is hosted.
