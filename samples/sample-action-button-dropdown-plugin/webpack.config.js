@@ -8,7 +8,7 @@ module.exports = {
     filename: 'SampleActionButtonDropdownPlugin.js',
     library: 'SampleActionButtonDropdownPlugin',
     libraryTarget: 'umd',
-    publicPath: '/',
+    publicPath: '/static/',
     globalObject: 'this',
   },
   devServer: {
