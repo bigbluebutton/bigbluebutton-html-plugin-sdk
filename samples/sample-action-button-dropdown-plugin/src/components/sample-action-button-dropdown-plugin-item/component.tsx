@@ -44,7 +44,7 @@ function SampleActionButtonDropdownPlugin(
   IsMeetingBreakoutGraphqlResponse>(IS_MEETING_BREAKOUT);
 
   useEffect(() => {
-    console.log('isMeetingBreakout data: ', isMeetingBreakoutFromGraphql?.meeting);
+    pluginLogger.info('isMeetingBreakout data: ', isMeetingBreakoutFromGraphql?.meeting);
   }, [isMeetingBreakoutFromGraphql]);
 
   const { data: currentPresentation } = pluginApi.useCurrentPresentation();
