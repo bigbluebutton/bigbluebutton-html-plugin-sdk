@@ -6,22 +6,22 @@ The Sample Data Channel Plugin serves as a demonstration of how developers can c
 
 See the **Usage** section of the main README to see how to build and run plugins.
 
-## Configuration Example
+## Building the Plugin
 
-*Mind that for this plugin you also need to configure the data-channels.*
-Add this to the `settings.yml` of the BBB HTML5-client:
-
-```yaml
-public:
-  plugins:
-    - name: SampleDataChannelPlugin
-      url: <<PLUGIN_URL>>
-      dataChannels:
-        - name: public-channel
-          pushPermission: ['moderator','presenter']
-          replaceOrDeletePermission:
-              - moderator
-              - sender
+```bash
+cd $HOME/src/sample-data-channel-plugin
+npm ci
+npm run build-bundle
 ```
 
-where `<<PLUGIN_URL>>` is the URL that points to the location where your bundled `SampleDataChannelPlugin.js`-file is hosted.
+The above command will generate the `dist` folder, containing the bundled JavaScript file named `SampleDataChannelPlugin.js`. This file can be hosted on any HTTPS server along with its `manifest.json`.
+
+If you install the Plugin separated to the manifest, remember to change the `javascriptEntrypointUrl` in the `manifest.json` to the correct endpoint.
+
+To use the plugin in BigBlueButton, send this parameter along in create call:
+
+```
+pluginManifests=[{"url":"<your-domain>/path/to/manifest.json"}]
+```
+
+Or additionally, you can add this same configuration in the `.properties` file from `bbb-web` in `/usr/share/bbb-web/WEB-INF/classes/bigbluebutton.properties`

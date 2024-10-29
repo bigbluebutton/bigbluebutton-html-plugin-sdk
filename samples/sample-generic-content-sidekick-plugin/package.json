@@ -19,8 +19,7 @@
     "start": "webpack serve --mode development",
     "build:watch": "rm -rf dist && tsc -w --module CommonJS",
     "lint": "eslint ./src/*",
-    "lint:fix": "npm run lint -- --fix",
-    "lint:watch": "watch 'yarn lint'"
+    "lint:fix": "npm run lint -- --fix"
   },
   "browserslist": {
     "production": [
@@ -43,6 +42,7 @@
     "@types/react-dom": "^18.2.7",
     "@types/react-modal": "^3.16.0",
     "@typescript-eslint/eslint-plugin": "^6.2.0",
+    "copy-webpack-plugin": "^12.0.2",
     "@typescript-eslint/parser": "^6.2.0",
     "babel-loader": "^9.1.2",
     "css-loader": "^6.7.4",
@@ -60,7 +60,6 @@
     "style-loader": "^3.3.3",
     "ts-loader": "^9.4.3",
     "typescript": "^5.1.6",
-    "watch": "^1.0.2",
     "webpack": "^5.83.1",
     "webpack-cli": "^5.1.1",
     "webpack-dev-server": "^4.15.1"

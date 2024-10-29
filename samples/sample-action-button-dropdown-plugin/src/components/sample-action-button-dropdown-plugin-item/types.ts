@@ -3,4 +3,10 @@ interface SampleActionButtonDropdownPluginProps {
     pluginUuid: string,
 }
 
-export { SampleActionButtonDropdownPluginProps };
+interface IsMeetingBreakoutGraphqlResponse {
+    meeting: {
+        isBreakout: boolean;
+    }[]
+}
+
+export { SampleActionButtonDropdownPluginProps, IsMeetingBreakoutGraphqlResponse };
