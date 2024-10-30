@@ -6,7 +6,7 @@ import './style.css';
 import {
   BbbPluginSdk,
   PluginApi,
-  UserListDropdownInformation,
+  UserListDropdownFixedContentInformation,
   UserListDropdownInterface,
   UserListDropdownOption,
   UserListDropdownSeparator,
@@ -35,7 +35,7 @@ function SampleUserListDropdownPlugin({
       Array<UserListDropdownInterface> = loadedUserList.map(
         (user) => {
           const buttonToUserListItem:
-            UserListDropdownInterface = new UserListDropdownInformation({
+            UserListDropdownInterface = new UserListDropdownFixedContentInformation({
               label: '1 pending assignment',
               iconRight: 'warning',
               userId: user.userId,

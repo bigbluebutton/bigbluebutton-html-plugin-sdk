@@ -38,6 +38,7 @@ export class FloatingWindow implements FloatingWindowInterface {
    * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5).
    */
   constructor({
+    id,
     top,
     left,
     movable,
@@ -45,6 +46,9 @@ export class FloatingWindow implements FloatingWindowInterface {
     boxShadow,
     contentFunction,
   }: FloatingWindowProps) {
+    if (id) {
+      this.id = id;
+    }
     this.top = top;
     this.left = left;
     this.movable = movable;

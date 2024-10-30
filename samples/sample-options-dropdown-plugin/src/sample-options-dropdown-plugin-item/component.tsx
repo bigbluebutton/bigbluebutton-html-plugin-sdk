@@ -14,6 +14,7 @@ function SampleOptionsDropdownPlugin(
 
   useEffect(() => {
     pluginApi.setOptionsDropdownItems([
+      new OptionsDropdownSeparator(),
       new OptionsDropdownOption({
         label: 'This will log on the console',
         icon: 'copy',
@@ -21,7 +22,6 @@ function SampleOptionsDropdownPlugin(
           pluginLogger.info('Log from options dropdown plugin');
         },
       }),
-      new OptionsDropdownSeparator(),
     ]);
   }, []);
 

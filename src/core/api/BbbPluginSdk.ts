@@ -46,6 +46,7 @@ import { useMeeting } from '../../data-consumption/domain/meeting/from-core/hook
 import { serverCommands } from '../../server-commands/commands';
 import { sendGenericDataForLearningAnalyticsDashboard } from '../../learning-analytics-dashboard/hooks';
 import { GenericDataForLearningAnalyticsDashboard } from '../../learning-analytics-dashboard/types';
+import { getRemoteData } from '../../remote-data/utils';
 import { persistEventFunctionWrapper } from '../../event-persistence/hooks';
 
 declare const window: PluginBrowserWindow;
@@ -111,6 +112,9 @@ export abstract class BbbPluginSdk {
       pluginApi.sendGenericDataForLearningAnalyticsDashboard = (
         data: GenericDataForLearningAnalyticsDashboard,
       ) => sendGenericDataForLearningAnalyticsDashboard(data, pluginName);
+      pluginApi.getRemoteData = (
+        dataSourceName: string,
+      ) => getRemoteData(dataSourceName, pluginName);
       pluginApi.persistEvent = <T=object>(
         eventName: string,
         payload: T,

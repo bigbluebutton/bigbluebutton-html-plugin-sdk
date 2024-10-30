@@ -8,7 +8,7 @@ module.exports = {
     filename: 'SampleUseMeeting.js',
     library: 'SampleUseMeeting',
     libraryTarget: 'umd',
-    publicPath: '/static/',
+    publicPath: '/',
     globalObject: 'this',
   },
   devServer: {

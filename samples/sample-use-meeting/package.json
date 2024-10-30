@@ -10,7 +10,7 @@
     "@types/react": "^18.2.13",
     "@types/react-dom": "^18.2.6",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "bigbluebutton-html-plugin-sdk": "0.0.64",
+    "bigbluebutton-html-plugin-sdk": "0.0.66",
     "path": "^0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -35,6 +35,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",
+    "copy-webpack-plugin": "^12.0.2",
     "@babel/preset-env": "^7.21.5",
     "@babel/preset-react": "^7.18.6",
     "@types/react-modal": "^3.16.0",

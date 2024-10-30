@@ -15,8 +15,9 @@ import {
   pluginLogger,
 } from 'bigbluebutton-html-plugin-sdk';
 import * as ReactDOM from 'react-dom/client';
-import { SampleActionButtonDropdownPluginProps } from './types';
+import { IsMeetingBreakoutGraphqlResponse, SampleActionButtonDropdownPluginProps } from './types';
 import { GenericContentExample } from '../generic-content-example/component';
+import { IS_MEETING_BREAKOUT } from './subscription';
 
 export interface DataExampleType {
   first_example_field: number;
@@ -38,6 +39,13 @@ function SampleActionButtonDropdownPlugin(
   const layoutInformation = pluginApi.useUiData(LayoutPresentatioAreaUiDataNames.CURRENT_ELEMENT, [{
     isOpen: true,
   }]);
+
+  const { data: isMeetingBreakoutFromGraphql } = pluginApi.useCustomSubscription<
+  IsMeetingBreakoutGraphqlResponse>(IS_MEETING_BREAKOUT);
+
+  useEffect(() => {
+    pluginLogger.info('isMeetingBreakout data: ', isMeetingBreakoutFromGraphql?.meeting);
+  }, [isMeetingBreakoutFromGraphql]);
 
   const { data: currentPresentation } = pluginApi.useCurrentPresentation();
 

@@ -42,9 +42,12 @@ export class NavBarButton implements NavBarInterface {
    * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5).
    */
   constructor({
-    label = '', icon = '', tooltip = '', disabled = true, onClick = () => {},
+    id, label = '', icon = '', tooltip = '', disabled = true, onClick = () => {},
     position = NavBarItemPosition.RIGHT, hasSeparator = true,
   }: NavBarButtonProps) {
+    if (id) {
+      this.id = id;
+    }
     this.label = label;
     this.icon = icon;
     this.tooltip = tooltip;
@@ -84,9 +87,12 @@ export class NavBarInfo implements NavBarInterface {
    * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5).
    */
   constructor({
-    label = '', position = NavBarItemPosition.RIGHT,
+    id, label = '', position = NavBarItemPosition.RIGHT,
     hasSeparator = true,
   }: NavBarInfoProps) {
+    if (id) {
+      this.id = id;
+    }
     this.label = label;
     this.type = NavBarItemType.INFO;
     this.position = position;

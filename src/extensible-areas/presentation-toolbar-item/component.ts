@@ -30,8 +30,11 @@ export class PresentationToolbarButton implements PresentationToolbarInterface {
    * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5)
    */
   constructor({
-    label = '', tooltip = '', onClick = () => {}, style = {},
+    id, label = '', tooltip = '', onClick = () => {}, style = {},
   }: PresentationToolbarButtonProps) {
+    if (id) {
+      this.id = id;
+    }
     this.label = label;
     this.tooltip = tooltip;
     this.onClick = onClick;
@@ -60,7 +63,7 @@ export class PresentationToolbarSpinner implements PresentationToolbarInterface 
   }
 
   setItemId: (id: string) => void = (id: string) => {
-    this.id = `PresentationToolbarButton_${id}`;
+    this.id = `PresentationToolbarSpinner_${id}`;
   };
 }
 
@@ -80,6 +83,6 @@ export class PresentationToolbarSeparator implements PresentationToolbarInterfac
   }
 
   setItemId: (id: string) => void = (id: string) => {
-    this.id = `PresentationToolbarButton_${id}`;
+    this.id = `PresentationToolbarSeparator_${id}`;
   };
 }

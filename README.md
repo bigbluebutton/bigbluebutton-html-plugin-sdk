@@ -22,6 +22,8 @@ For development purposes you can run a plugin locally from source.
 For example if you take the [`sample-action-button-dropdown-plugin`](samples/sample-action-button-dropdown-plugin),
 you do the following:
 
+*Running from source code with local BBB-server*
+
 1. Start the development server:
 
    ```bash
@@ -29,19 +31,59 @@ you do the following:
    npm install
    npm start
    ```
-2. Add reference to it on BigBlueButton's `settings.yml`:
 
-   ```yaml
-   public:
-     plugins:
-       - name: SampleActionButtonDropdownPlugin
-         url: http://127.0.0.1:4701/static/SampleActionButtonDropdownPlugin.js
-   ```
+2. Add reference to it on BigBlueButton's `/create` call or add it on `/usr/share/bbb-web/WEB-INF/classes/bigbluebutton.properties`:
 
-_N.B.:_ Be aware that in this case the url is interpreted from the plugin in the browser,
-so the localhost is actually your local development machine.
+```
+pluginsManifests=[{"url": "http://localhost:4701/manifest.json"}]
+```
 
-### Building the Plugin
+*Running from souce code with a remote BBB-server*
+
+If you are running your BBB-server elsewhere, than you can't simply point the manifest URL to a local address, you'll need to either serve the built version into a CDN or serve the dev version using a service to make it public. And for the second option we'd recommend NGROK. Here are the instructions to do that:
+
+1. Create an account on https://ngrok.com/ (Official website of NGROK);
+
+2. Install NGROK in your computer. They have a guide for that right after you created your account;
+
+3. Start the Plugin development server:
+
+```bash
+cd $HOME/src/plugin-pick-random-user-plugin
+npm install
+npm start
+```
+
+4. Start the NGROK server into your machine with the following command:
+
+```bash
+ngrok http http://172.17.0.1:4701
+```
+
+Make sure to point NGROK to the correct local URL (In our case - The samples are made this way, for instance - we used `http://172.17.0.1:4701`)
+
+Right after that, NGROK will create an interface into your terminal and will display the URL which your static files are being served.
+
+Here's an example of URL: `https://<uuid>.ngrok-free.app`
+
+You can already interact with this URL and access both 
+
+`https://<uuid>.ngrok-free.app/manifest.json`
+
+or
+
+`https://<uuid>.ngrok-free.app/PickRandomUserPlugin.js`
+
+
+5. Add this create parameter into the API-mate of the server you are testing it on:
+
+```
+pluginsManifests=[{"url": "https://<uuid>.ngrok-free.app/manifest.json"}]
+```
+
+And there you go, you can test it freely.
+
+### Building the Plugin (Production)
 
 To build a plugin for production use
 (again, using the example of [`sample-action-button-dropdown-plugin`](samples/sample-action-button-dropdown-plugin)),
@@ -53,26 +95,20 @@ npm install
 npm run build-bundle
 ```
 
-The above command will generate the `dist` folder, containing the bundled JavaScript file named `SampleActionButtonDropdownPlugin.js`.
-This file can be hosted on any HTTPS server.
+The above command will generate the `dist` folder, containing the bundled JavaScript file named `SampleActionButtonDropdownPlugin.js` along with the `manifest.json`.
+These files can be hosted on any HTTPS server.
 
-To use the plugin with BigBlueButton, add the plugin's URL to `settings.yml` as shown below:
+To use the plugin with BigBlueButton, add the plugin's `manifest.json` URL to `bigbluebutton.properties` or you can simply send it via `/create` parameter:
 
-```yaml
-public:
-  app:
-    ... // All app configurations
-  plugins:
-    - name: SampleActionButtonDropdownPlugin
-      url: <<PLUGIN_URL>>
-  ... // All other configurations
+```
+pluginManifests=[{"url":"<your-domain>/path/to/manifest.json"}]
 ```
 
 #### Hosting the Plugin on a BBB Server
 
 While the plugin can be hosted on any Server, it is also possible to host the bundled file directly on
-a BigBlueButton server. For that you copy the `dist/SampleActionButtonDropdownPlugin.js` to the folder `/var/www/bigbluebutton-default/assets/plugins`.
-In this case, the `<<PLUGIN_URL>>` will be `https://<your-host>/plugins/SampleActionButtonDropdownPlugin.js`.
+a BigBlueButton server. For that you copy `dist/SampleActionButtonDropdownPlugin.js` and `dist/manifest.json` to the folder `/var/www/bigbluebutton-default/assets/plugins/sampleActionButtonDropdownPlugin`.
+In this case, the your manifest URL will be `https://<your-host>/plugins/sampleActionButtonDropdownPlugin/manifest.json`.
 
 ## API
 
@@ -305,6 +341,49 @@ So that the data will appear in the following form:
 | user-name |   1   |   `<value>`     |
 
 
+### External data resources
+
+This is the new integration with external servers to fetch data in a secure manner.
+
+This is possible by simply configuring the dataResource name in the manifest and then its endpoint in the URL meta parameter that goes in the create request. The manifest would look like:
+
+```json
+{
+  // ...rest of manifest configuration
+  "remoteDataSources": [
+      {
+          "name": "allUsers",
+          "url": "${meta_pluginSettingsUserInformation}",
+          "fetchMode": "onMeetingCreate",
+          "permissions": ["moderator", "viewer"]
+      }
+  ]
+}
+```
+
+Then when creating the meeting send the following parameters along, adjusting to your needs and resources:
+
+```
+meta_pluginSettingsUserInformation=https://<your-external-source-with-your-authentication>/api/users
+pluginsManifests=[{"url": "http://<domain-of-your-manifest>/your-plugin/manifest.json"}]
+```
+
+In the plugin, just use the function like:
+
+```typescript
+pluginApi.getRemoteData('allUsers').then((response: Response) => {
+  if (response.ok) {
+    response.json().then((r: CourseData) => {
+      // Do something with the jsonified data (if it's a json)
+    }).catch((reason) => {
+      pluginLogger.error('Error while processing the json from success response: ', reason);
+    });
+  }
+}).catch((reason) => {
+  pluginLogger.error('Error while fetching external resource: ', reason);
+});
+```
+
 
 ### Frequently Asked Questions (FAQ)
 
@@ -354,7 +433,7 @@ module.exports = {
 ```
 
 **Does the builded plugin need to be in the same BBB server?**
-No, feel free to host it anywhere you want, just make sure to point the URL from `settings.yml`correctly.
+No, feel free to host it anywhere you want, just make sure to point the URL from `manifest.json` correctly (into the create endpoint or `bigbluebutton.properties`).
 
 **I am making my plugin based on a sample inside the SDK, but somehow, the sample is not working properly, what do I do to run it in dev mode and make it work?**
 Well there are several motives to why the sample is not working properly, so I will go through each one of them briefly:

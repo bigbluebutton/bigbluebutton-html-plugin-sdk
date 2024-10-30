@@ -58,6 +58,7 @@ function SamplePresentationToolbarPlugin(
       currentObjectToSendToClient = new PresentationToolbarButton({
         label: '10 seconds',
         tooltip: 'this is a button injected by plugin',
+        style: {},
         onClick: () => {
           handleFetchPresentationData(currentPresentation);
           setPresentationItemSpinner();

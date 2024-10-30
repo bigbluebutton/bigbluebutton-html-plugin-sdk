@@ -21,8 +21,11 @@ export class GenericContentMainArea implements GenericContentInterface {
    * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5).
    */
   constructor({
-    contentFunction,
+    id, contentFunction,
   }: GenericContentMainAreaProps) {
+    if (id) {
+      this.id = id;
+    }
     this.contentFunction = contentFunction;
     this.type = GenericContentType.MAIN_AREA;
   }
@@ -64,8 +67,11 @@ export class GenericContentSidekickArea implements GenericContentInterface {
    * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5).
    */
   constructor({
-    contentFunction, name, section, buttonIcon, open,
+    id, contentFunction, name, section, buttonIcon, open,
   }: GenericContentSidekickAreaProps) {
+    if (id) {
+      this.id = id;
+    }
     this.contentFunction = contentFunction;
     this.name = name;
     this.section = section;

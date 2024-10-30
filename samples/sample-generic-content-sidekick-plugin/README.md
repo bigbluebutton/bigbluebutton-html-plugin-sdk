@@ -8,18 +8,20 @@ The Sample Generic Content Sidekick Plugin serves as a demonstration of how deve
 
 See the **Usage** section of the main README to see how to build and run plugins.
 
-## Configuration Example
+## Building the Plugin
+```bash
+cd $HOME/src/sample-generic-content-sidekick-plugin
+npm ci
+npm run build-bundle
+```
+The above command will generate the `dist` folder, containing the bundled JavaScript file named `SampleGenericContentSidekickPlugin.js`. This file can be hosted on any HTTPS server along with its `manifest.json`.
 
-Add this to the `settings.yml` of the BBB HTML5-client:
+If you install the Plugin separated to the manifest, remember to change the `javascriptEntrypointUrl` in the `manifest.json` to the correct endpoint.
 
-```yaml
-public:
-  plugins:
-    - name: SampleGenericContentSidekickPlugin
-      url: <<PLUGIN_URL>>
+To use the plugin in BigBlueButton, send this parameter along in create call:
+
+```
+pluginManifests=[{"url":"<your-domain>/path/to/manifest.json"}]
 ```
 
-Where `<<PLUGIN_URL>>` is the URL that points to the location where your bundled `SampleGenericContentSidekickPlugin.js`-file is hosted.
-
-## More
-Generic content can be of two types: 'MAIN_AREA' and 'SIDEKICK_AREA'. This sample demonstrates how to use the 'SIDEKICK_AREA' type. For information about using the 'MAIN_AREA' type, please refer to the sample-action-button-dropdown-plugin.
+Or additionally, you can add this same configuration in the `.properties` file from `bbb-web` in `/usr/share/bbb-web/WEB-INF/classes/bigbluebutton.properties`

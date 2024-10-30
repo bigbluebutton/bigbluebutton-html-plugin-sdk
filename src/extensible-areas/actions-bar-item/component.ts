@@ -30,8 +30,11 @@ export class ActionsBarButton implements ActionsBarInterface {
    * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5)
    */
   constructor({
-    icon = '', tooltip = '', onClick = () => {}, position = ActionsBarPosition.RIGHT,
+    id, icon = '', tooltip = '', onClick = () => {}, position = ActionsBarPosition.RIGHT,
   }: ActionsBarButtonProps) {
+    if (id) {
+      this.id = id;
+    }
     this.icon = icon;
     this.tooltip = tooltip;
     this.onClick = onClick;
