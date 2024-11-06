@@ -13,6 +13,7 @@ import {
   LayoutPresentatioAreaUiDataNames,
   UiLayouts,
   pluginLogger,
+  NotificationTypeUiCommand,
 } from 'bigbluebutton-html-plugin-sdk';
 import * as ReactDOM from 'react-dom/client';
 import { IsMeetingBreakoutGraphqlResponse, SampleActionButtonDropdownPluginProps } from './types';
@@ -42,6 +43,21 @@ function SampleActionButtonDropdownPlugin(
 
   const { data: isMeetingBreakoutFromGraphql } = pluginApi.useCustomSubscription<
   IsMeetingBreakoutGraphqlResponse>(IS_MEETING_BREAKOUT);
+
+  useEffect(() => {
+    pluginApi.uiCommands.notification.send({
+      message: 'Notification message',
+      icon: 'presentation',
+      type: NotificationTypeUiCommand.INFO,
+      options: {
+        // helpLabel: 'teste help label', // this is not necessary
+        // helpLink: 'teste help link',
+        autoClose: 20000,
+      },
+      content: 'Content of my notification',
+      small: false,
+    });
+  }, []);
 
   useEffect(() => {
     pluginLogger.info('isMeetingBreakout data: ', isMeetingBreakoutFromGraphql?.meeting);

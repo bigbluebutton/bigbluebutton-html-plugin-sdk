@@ -287,6 +287,8 @@ One other thing is that the type of the return is precisely the same type requir
   - close: this function will close the presentation area content automatically;
 - conference:
   - setSpeakerLevel: this function will set the speaker volume level(audio output) of the conference to a certain number between 0 and 1;
+- notification:
+  - send: This function will send a notification for the client to render, keep in mind that it's only client-side. Should you want it to be rendered in multiple clients, use this with a data-channel;
 - user-status:
   - setAwayStatus: this function will set the away status of the user to a certain status;
 
