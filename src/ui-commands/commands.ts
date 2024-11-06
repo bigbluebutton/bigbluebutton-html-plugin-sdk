@@ -4,6 +4,7 @@ import { sidekickOptionsContainer } from './sidekick-options-container/commands'
 import { presentationArea } from './presentation-area/commands';
 import { userStatus } from './user-status/commands';
 import { conference } from './conference/commands';
+import { notification } from './notification/commands';
 
 export const uiCommands = {
   chat,
@@ -12,4 +13,5 @@ export const uiCommands = {
   presentationArea,
   userStatus,
   conference,
+  notification,
 };

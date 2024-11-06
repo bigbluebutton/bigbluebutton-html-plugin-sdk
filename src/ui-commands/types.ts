@@ -4,6 +4,7 @@ import { UiCommandsSidekickOptionsContainerObject } from './sidekick-options-con
 import { UiCommandsPresentationAreaObject } from './presentation-area/types';
 import { UiCommandsUserStatusObject } from './user-status/types';
 import { UiCommandsConferenceObject } from './conference/types';
+import { UiCommandsNotificationObject } from './notification/types';
 
 export interface UiCommands {
   chat: UiCommandsChatObject;
@@ -12,4 +13,5 @@ export interface UiCommands {
   presentationArea: UiCommandsPresentationAreaObject;
   userStatus: UiCommandsUserStatusObject;
   conference: UiCommandsConferenceObject;
+  notification: UiCommandsNotificationObject;
 }
