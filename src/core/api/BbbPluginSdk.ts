@@ -48,6 +48,8 @@ import { sendGenericDataForLearningAnalyticsDashboard } from '../../learning-ana
 import { GenericDataForLearningAnalyticsDashboard } from '../../learning-analytics-dashboard/types';
 import { getRemoteData } from '../../remote-data/utils';
 import { persistEventFunctionWrapper } from '../../event-persistence/hooks';
+import { persistAssetFunctionWrapper } from '../../asset-persistence/hook';
+import { AssetType } from '../../asset-persistence/enums';
 
 declare const window: PluginBrowserWindow;
 
@@ -123,6 +125,16 @@ export abstract class BbbPluginSdk {
           eventName,
           payload,
         );
+      pluginApi.persistAsset = (
+        assetUrl: string,
+        typeOfAsset: AssetType,
+        assetName?: string,
+      ) => persistAssetFunctionWrapper(
+        pluginName,
+        assetUrl,
+        typeOfAsset,
+        assetName,
+      );
     } else {
       throw new Error('Plugin name not set');
     }
