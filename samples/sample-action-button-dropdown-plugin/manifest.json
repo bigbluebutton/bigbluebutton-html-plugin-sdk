@@ -5,7 +5,7 @@
   "localesBaseUrl": "https://cdn.dominio.com/pluginabc/",
   "assetPersistence": {
     "enabled": true,
-    "maxFileSize": 10,
-    "maxUploadSizePerUser": 100
+    "maxFileSize": 10000000,
+    "maxUploadSizePerUser": 100000000
   }
 }
