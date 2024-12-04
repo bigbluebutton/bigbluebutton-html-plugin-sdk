@@ -195,7 +195,7 @@ const {
   deleteEntry: deleteEntryFunction, // Function to delete specific item or wipe all
   replaceEntry: replaceEntryFunction, // Function replace a specifi item
 } = useDataChannel<CustomType>(
-  channelName, // Defined according to what is on settings.yml from bbb-htlm5
+  channelName, // Defined according to what is on manifest.json
   DataChannelTypes.All_ITEMS, // | LATEST_ITEM | NEW_ITEMS -> ALL_ITEMS is default
   subChannelName = 'default', // If no subchannelName is specified, it will be 'default'
 );
@@ -203,26 +203,26 @@ const {
 
 Wiping all data off will delete every item from the specific data-channel within the specific subchannel-name.
 
-The data-channel name must be written in the settings.yml.
+**Data-channel configuration:**
 
-All the permission for writing and deleting must be in the yaml too just like the example ahead:
+The data-channel name must be in the `manifest.json` along with all the permissions for writting, reading and deleting, see example below:
 
-```yaml
-public:
-  plugins:
-    - name: PluginName
-      url: http://<your-hosted-plugin>/PluginName.js
-      dataChannels:
-        - name: channel-name
-          # pushPermission options: moderator, presenter, all
-          pushPermission: ['moderator','presenter']
-          # replaceOrDeletePermission options: moderator, presenter, creator, all
-          replaceOrdeletePermission:
-            - moderator
-            - sender
-```
+```json
+{
+  "requiredSdkVersion": "~0.0.59",
+  "name": "PluginName",
+  "javascriptEntrypointUrl": "PluginName.js",
+  "dataChannels":[
+    {
+      "name": "channel-name",
+      "pushPermission": ["moderator","presenter"],
+      "replaceOrDeletePermission": ["moderator", "sender"]
+    }
+  ]
+}
+``` 
 
-If no permission is mentioned in the yaml (writing or deleting), no one will be able proceed with that specific action:
+If no permission is mentioned in that file (writing or deleting), no one will be able proceed with that specific action:
 
 The `pushEntryFunction` has a minor detail to pay attention to, it is possible to specify the users who you want to send the item to, if none is specified, all will receive the item, such as done ahead:
 
@@ -440,12 +440,12 @@ No, feel free to host it anywhere you want, just make sure to point the URL from
 **I am making my plugin based on a sample inside the SDK, but somehow, the sample is not working properly, what do I do to run it in dev mode and make it work?**
 Well there are several motives to why the sample is not working properly, so I will go through each one of them briefly:
 
-- The config has not been set properly inside `bbb-html5.yml`, see [this section to configure your plugin](#running-the-plugin-from-source);
+- The config has not been set properly in `manifest.json`, see [this section to configure your plugin](#running-the-plugin-from-source);
 - The plugin is not even running in dev mode, it could be the port already in use, or typescript and/or javascript errors (Make sure to initialize the `pluginApi` as any of the samples inside a react function component);
 - It could be an error with that sample indeed, or that feature the plugin uses broke (it is not usual, but can happen since BBB is constantly changing and enhancing its features with its wonderful community). If that happens, just open an issue in the [SDK&#39;s github](https://github.com/bigbluebutton/bigbluebutton-html-plugin-sdk) detailing the error you are facing. And thank you in advance for reporting it back to us so we can improve each time.
 
 **How to troubleshoot the plugins? See if it has loaded in the BBB, for instance.**
-Well, each time a set of plugins are listed in the `bbb-html5.yml`, it will fire some logs based on the amount of plugins that it need to load inside the client. So open the console in the browser by pressing F12 key in your keyboard and search for the following log:
+Well, each time a set of plugins listed to be run into a specific meeting start, it will fire some logs based on the amount of plugins that it need to load inside the client. So open the console in the browser by pressing F12 key in your keyboard and search for the following log:
 
 ```log
 <ratio of loaded plugins> plugins loaded
