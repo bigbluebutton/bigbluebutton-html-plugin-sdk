@@ -1,8 +1,7 @@
 {
   "requiredSdkVersion": "~0.0.59",
-  "name": "sampleUseMeeting",
-  "javascriptEntrypointIntegrity": "aad1db35f0b1aa1072936d9977fa3cb7",
-  "javascriptEntrypointUrl": "http://127.0.0.1:4701/static/SampleUseMeeting.js",
+  "name": "SampleUseMeeting",
+  "javascriptEntrypointUrl": "SampleUseMeeting.js",
   "localesBaseUrl": "https://cdn.dominio.com/pluginabc/",
   "eventPersistence": {
       "isEnabled": true,
