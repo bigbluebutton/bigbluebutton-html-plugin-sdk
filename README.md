@@ -35,7 +35,7 @@ you do the following:
 2. Add reference to it on BigBlueButton's `/create` call or add it on `/usr/share/bbb-web/WEB-INF/classes/bigbluebutton.properties`:
 
 ```
-pluginsManifests=[{"url": "http://localhost:4701/manifest.json"}]
+pluginManifests=[{"url": "http://localhost:4701/manifest.json"}]
 ```
 
 *Running from souce code with a remote BBB-server*
@@ -78,7 +78,7 @@ or
 5. Add this create parameter into the API-mate of the server you are testing it on:
 
 ```
-pluginsManifests=[{"url": "https://<uuid>.ngrok-free.app/manifest.json"}]
+pluginManifests=[{"url": "https://<uuid>.ngrok-free.app/manifest.json"}]
 ```
 
 And there you go, you can test it freely.
@@ -367,7 +367,7 @@ Then when creating the meeting send the following parameters along, adjusting to
 
 ```
 meta_pluginSettingsUserInformation=https://<your-external-source-with-your-authentication>/api/users
-pluginsManifests=[{"url": "http://<domain-of-your-manifest>/your-plugin/manifest.json"}]
+pluginManifests=[{"url": "http://<domain-of-your-manifest>/your-plugin/manifest.json"}]
 ```
 
 In the plugin, just use the function like:
