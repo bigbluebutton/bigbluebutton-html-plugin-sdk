@@ -5,6 +5,7 @@ import { presentationArea } from './presentation-area/commands';
 import { userStatus } from './user-status/commands';
 import { conference } from './conference/commands';
 import { notification } from './notification/commands';
+import { layout } from './layout/commands';
 
 export const uiCommands = {
   chat,
@@ -14,4 +15,5 @@ export const uiCommands = {
   userStatus,
   conference,
   notification,
+  layout,
 };

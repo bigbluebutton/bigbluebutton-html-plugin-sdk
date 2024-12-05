@@ -14,6 +14,7 @@ import {
   UiLayouts,
   pluginLogger,
   NotificationTypeUiCommand,
+  ChangeEnforcedLayoutTypeEnum,
 } from 'bigbluebutton-html-plugin-sdk';
 import * as ReactDOM from 'react-dom/client';
 import { IsMeetingBreakoutGraphqlResponse, SampleActionButtonDropdownPluginProps } from './types';
@@ -40,6 +41,8 @@ function SampleActionButtonDropdownPlugin(
   const layoutInformation = pluginApi.useUiData(LayoutPresentatioAreaUiDataNames.CURRENT_ELEMENT, [{
     isOpen: true,
   }]);
+
+  const [isCamerasOnly, setIsCamerasOnly] = useState(false);
 
   const { data: isMeetingBreakoutFromGraphql } = pluginApi.useCustomSubscription<
   IsMeetingBreakoutGraphqlResponse>(IS_MEETING_BREAKOUT);
@@ -135,9 +138,26 @@ function SampleActionButtonDropdownPlugin(
           allowed: true,
           onClick: handleChangePresentationAreaContent,
         }),
+        new ActionButtonDropdownOption({
+          label: (!isCamerasOnly) ? 'Switch to cameras only layout' : 'Switch to custom layout',
+          icon: 'copy',
+          tooltip: 'this is a button injected by plugin',
+          allowed: true,
+          onClick: (!isCamerasOnly) ? () => {
+            pluginApi.uiCommands.layout.changeEnforcedLayout(
+              ChangeEnforcedLayoutTypeEnum.CAMERAS_ONLY,
+            );
+            setIsCamerasOnly(true);
+          } : () => {
+            pluginApi.uiCommands.layout.changeEnforcedLayout(
+              ChangeEnforcedLayoutTypeEnum.CUSTOM_LAYOUT,
+            );
+            setIsCamerasOnly(false);
+          },
+        }),
       ]);
     }
-  }, [currentPresentation, currentUser, showingGenericContentInPresentationArea]);
+  }, [currentPresentation, currentUser, showingGenericContentInPresentationArea, isCamerasOnly]);
 
   return (
     <ReactModal
