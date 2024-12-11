@@ -5,8 +5,10 @@ import { presentationArea } from './presentation-area/commands';
 import { userStatus } from './user-status/commands';
 import { conference } from './conference/commands';
 import { notification } from './notification/commands';
+import { camera } from './camera/commands';
 
 export const uiCommands = {
+  camera,
   chat,
   externalVideo,
   sidekickOptionsContainer,
