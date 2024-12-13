@@ -6,8 +6,10 @@ import { UiCommandsUserStatusObject } from './user-status/types';
 import { UiCommandsConferenceObject } from './conference/types';
 import { UiCommandsNotificationObject } from './notification/types';
 import { UiCommandsActionsBarObject } from './actions-bar/types';
+import { UiCommandsLayoutObject } from './layout/types';
 
 export interface UiCommands {
+  layout: UiCommandsLayoutObject;
   actionsBar: UiCommandsActionsBarObject;
   chat: UiCommandsChatObject;
   externalVideo: UiCommandsExternalVideoObject;
