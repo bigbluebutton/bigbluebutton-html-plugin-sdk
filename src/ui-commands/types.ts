@@ -5,13 +5,19 @@ import { UiCommandsPresentationAreaObject } from './presentation-area/types';
 import { UiCommandsUserStatusObject } from './user-status/types';
 import { UiCommandsConferenceObject } from './conference/types';
 import { UiCommandsNotificationObject } from './notification/types';
+import { UiCommandsActionsBarObject } from './actions-bar/types';
+import { UiCommandsLayoutObject } from './layout/types';
+import { UiCommandsNavBarObject } from './nav-bar/types';
 import { UiCommandsCameraObject } from './camera/types';
 
 export interface UiCommands {
+  layout: UiCommandsLayoutObject;
+  actionsBar: UiCommandsActionsBarObject;
   camera: UiCommandsCameraObject;
   chat: UiCommandsChatObject;
   externalVideo: UiCommandsExternalVideoObject;
   sidekickOptionsContainer: UiCommandsSidekickOptionsContainerObject;
+  navBar: UiCommandsNavBarObject;
   presentationArea: UiCommandsPresentationAreaObject;
   userStatus: UiCommandsUserStatusObject;
   conference: UiCommandsConferenceObject;

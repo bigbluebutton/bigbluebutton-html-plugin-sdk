@@ -14,6 +14,7 @@ import {
   UiLayouts,
   pluginLogger,
   NotificationTypeUiCommand,
+  ChangeEnforcedLayoutTypeEnum,
 } from 'bigbluebutton-html-plugin-sdk';
 import * as ReactDOM from 'react-dom/client';
 import { IsMeetingBreakoutGraphqlResponse, SampleActionButtonDropdownPluginProps } from './types';
@@ -40,6 +41,8 @@ function SampleActionButtonDropdownPlugin(
   const layoutInformation = pluginApi.useUiData(LayoutPresentatioAreaUiDataNames.CURRENT_ELEMENT, [{
     isOpen: true,
   }]);
+
+  const [isCamerasOnly, setIsCamerasOnly] = useState(false);
 
   const [isSelfViewDisabled, setIsSelfViewDisabled] = useState(false);
   const { data: isMeetingBreakoutFromGraphql } = pluginApi.useCustomSubscription<
@@ -130,11 +133,52 @@ function SampleActionButtonDropdownPlugin(
           },
         }),
         new ActionButtonDropdownOption({
+          label: 'Close actions bar for 5 seconds',
+          icon: 'copy',
+          tooltip: 'this is a button injected by plugin',
+          allowed: true,
+          onClick: () => {
+            pluginApi.uiCommands.actionsBar.setDisplayActionBar({ displayActionBar: false });
+            setTimeout(() => {
+              pluginApi.uiCommands.actionsBar.setDisplayActionBar({ displayActionBar: true });
+            }, 5000);
+          },
+        }),
+        new ActionButtonDropdownOption({
+          label: 'Hide nav-bar',
+          icon: 'copy',
+          tooltip: 'this is a button injected by plugin',
+          allowed: true,
+          onClick: () => {
+            pluginApi.uiCommands.navBar.setDisplayNavBar({ displayNavBar: false });
+            setTimeout(() => {
+              pluginApi.uiCommands.navBar.setDisplayNavBar({ displayNavBar: true });
+            }, 5000);
+          },
+        }),
+        new ActionButtonDropdownOption({
           label: showingGenericContentInPresentationArea ? 'Return previous presentation content' : 'Set different content in presentation area',
           icon: 'copy',
           tooltip: 'this is a button injected by plugin',
           allowed: true,
           onClick: handleChangePresentationAreaContent,
+        }),
+        new ActionButtonDropdownOption({
+          label: (!isCamerasOnly) ? 'Switch to cameras only layout' : 'Switch to custom layout',
+          icon: 'copy',
+          tooltip: 'this is a button injected by plugin',
+          allowed: true,
+          onClick: (!isCamerasOnly) ? () => {
+            pluginApi.uiCommands.layout.changeEnforcedLayout(
+              ChangeEnforcedLayoutTypeEnum.CAMERAS_ONLY,
+            );
+            setIsCamerasOnly(true);
+          } : () => {
+            pluginApi.uiCommands.layout.changeEnforcedLayout(
+              ChangeEnforcedLayoutTypeEnum.CUSTOM_LAYOUT,
+            );
+            setIsCamerasOnly(false);
+          },
         }),
         new ActionButtonDropdownOption({
           label: !(isSelfViewDisabled) ? 'Disable camera self view' : 'Enable self view',
@@ -155,8 +199,7 @@ function SampleActionButtonDropdownPlugin(
         }),
       ]);
     }
-  }, [currentPresentation, currentUser,
-    showingGenericContentInPresentationArea, isSelfViewDisabled]);
+  }, [currentPresentation, currentUser, showingGenericContentInPresentationArea]);
 
   return (
     <ReactModal
