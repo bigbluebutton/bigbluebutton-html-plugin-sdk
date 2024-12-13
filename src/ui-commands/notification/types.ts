@@ -15,6 +15,11 @@ export interface SendNotificationCommandArguments {
   small?: boolean;
 }
 
+export interface SetEnableDisplayNotificationsArguments {
+  isNotificationDisplayEnabled: boolean;
+}
+
 export interface UiCommandsNotificationObject {
   send: (information: SendNotificationCommandArguments) => void;
+  setEnabledDisplayNotifications: (isNotificationDisplayEnabled: boolean) => void;
 }
