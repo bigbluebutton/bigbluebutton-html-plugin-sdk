@@ -7,12 +7,14 @@ import { conference } from './conference/commands';
 import { notification } from './notification/commands';
 import { actionsBar } from './actions-bar/commands';
 import { layout } from './layout/commands';
+import { navBar } from './nav-bar/commands';
 
 export const uiCommands = {
   actionsBar,
   chat,
   externalVideo,
   sidekickOptionsContainer,
+  navBar,
   presentationArea,
   userStatus,
   conference,
