@@ -132,6 +132,18 @@ function SampleActionButtonDropdownPlugin(
           },
         }),
         new ActionButtonDropdownOption({
+          label: 'Close actions bar for 5 seconds',
+          icon: 'copy',
+          tooltip: 'this is a button injected by plugin',
+          allowed: true,
+          onClick: () => {
+            pluginApi.uiCommands.actionsBar.setDisplayActionBar({ displayActionBar: false });
+            setTimeout(() => {
+              pluginApi.uiCommands.actionsBar.setDisplayActionBar({ displayActionBar: true });
+            }, 5000);
+          },
+        }),
+        new ActionButtonDropdownOption({
           label: showingGenericContentInPresentationArea ? 'Return previous presentation content' : 'Set different content in presentation area',
           icon: 'copy',
           tooltip: 'this is a button injected by plugin',
