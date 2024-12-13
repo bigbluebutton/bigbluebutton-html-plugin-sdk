@@ -51,8 +51,8 @@ function SampleActionButtonDropdownPlugin(
       icon: 'presentation',
       type: NotificationTypeUiCommand.INFO,
       options: {
-        // helpLabel: 'teste help label', // this is not necessary
-        // helpLink: 'teste help link',
+        // helpLabel: 'test help label', // this is not necessary
+        // helpLink: 'test help link',
         autoClose: 20000,
       },
       content: 'Content of my notification',
