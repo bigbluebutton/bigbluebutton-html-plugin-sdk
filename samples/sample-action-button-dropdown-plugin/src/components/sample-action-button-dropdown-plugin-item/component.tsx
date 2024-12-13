@@ -149,7 +149,7 @@ function SampleActionButtonDropdownPlugin(
           tooltip: 'this is a button injected by plugin',
           allowed: true,
           onClick: () => {
-            pluginApi.uiCommands.notification.setDisplayNotifications(false);
+            pluginApi.uiCommands.notification.setEnabledDisplayNotifications(false);
           },
         }),
         new ActionButtonDropdownOption({

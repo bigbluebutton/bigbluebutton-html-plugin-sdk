@@ -1,5 +1,5 @@
 import { NotificationEnum } from './enums';
-import { SendNotificationCommandArguments, SetDisplayNotificationsArguments } from './types';
+import { SendNotificationCommandArguments, SetEnableDisplayNotificationsArguments } from './types';
 
 export const notification = {
   /**
@@ -17,12 +17,12 @@ export const notification = {
   /**
    * Decides if notifications stop being displayed.
    */
-  setDisplayNotifications: (isNotificationDisplaying: boolean) => {
+  setEnabledDisplayNotifications: (isNotificationDisplayEnabled: boolean) => {
     window.dispatchEvent(
       new CustomEvent<
-        SetDisplayNotificationsArguments
-      >(NotificationEnum.SET_DISPLAY, {
-        detail: { isNotificationDisplaying },
+        SetEnableDisplayNotificationsArguments
+      >(NotificationEnum.SET_ENABLED_DISPLAY, {
+        detail: { isNotificationDisplayEnabled },
       }),
     );
   },

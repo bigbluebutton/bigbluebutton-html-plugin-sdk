@@ -1,6 +1,6 @@
 export enum NotificationEnum {
-  SEND = 'SEND_NOTIFICATION',
-  SET_DISPLAY = 'SET_DISPLAY'
+  SEND = 'SEND_NOTIFICATION_COMMAND',
+  SET_ENABLED_DISPLAY = 'SET_ENABLED_DISPLAY_COMMAND'
 }
 
 export enum NotificationTypeUiCommand {
