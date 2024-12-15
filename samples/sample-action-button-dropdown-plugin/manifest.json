@@ -3,5 +3,9 @@
   "name": "SampleActionButtonDropdownPlugin",
   "javascriptEntrypointUrl": "SampleActionButtonDropdownPlugin.js",
   "localesBaseUrl": "https://cdn.dominio.com/pluginabc/",
-  "enabledForBreakoutRooms": true
+  "assetPersistence": {
+    "enabled": true,
+    "maxFileSize": 10000000,
+    "maxUploadSizePerUser": 100000000
+  }
 }

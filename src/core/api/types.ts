@@ -32,6 +32,7 @@ import { UseUserCameraDomElementsFunction } from '../../dom-element-manipulation
 import { ScreenshareHelperInterface, UserCameraHelperInterface } from '../../extensible-areas';
 import { GetDataSource } from '../../remote-data/types';
 import { PersistEventFunction } from '../../event-persistence/types';
+import { PersistAssetFunction } from '../../asset-persistence/types';
 
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
@@ -259,6 +260,13 @@ export interface PluginApi {
    *
    */
   persistEvent?: PersistEventFunction;
+  /**
+   * Persists assets to the current meeting, e.g.: presentation.
+   *
+   * @param payload - payload to be persisted in `events.xml`
+   *
+   */
+  persistAsset?: PersistAssetFunction;
 }
 
 export interface PluginBrowserWindow extends Window {
