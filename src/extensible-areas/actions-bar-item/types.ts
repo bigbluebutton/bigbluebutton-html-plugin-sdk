@@ -25,6 +25,7 @@ export interface ActionsBarButtonProps {
 
 export interface ActionsBarSeparatorProps {
   position: ActionsBarPosition;
+  icon?: string;
 }
 
 export interface SelectOption {

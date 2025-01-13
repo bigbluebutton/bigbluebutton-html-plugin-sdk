@@ -64,18 +64,24 @@ export class ActionsBarButton extends ActionsBarItem {
 }
 
 export class ActionsBarSeparator extends ActionsBarItem {
+  icon: string;
+
   /**
    * Returns object to be used in the setter for action bar. In this case,
    * a separator.
    *
    * @param position - position that this button will be displayed, see {@link ActionsBarPosition}
+   * @param icon - Icon to be displayed as the separator. If not provided, the default separator
+  * (a vertical bar) will be displayed.
    *
    * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5)
    */
   constructor({
     position = ActionsBarPosition.RIGHT,
+    icon = '',
   }: ActionsBarSeparatorProps) {
     super({ type: ActionsBarItemType.SEPARATOR, position });
+    this.icon = icon;
   }
 }
 
