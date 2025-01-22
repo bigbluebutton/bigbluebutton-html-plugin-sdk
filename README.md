@@ -4,10 +4,13 @@ This repository contains the SDK for developing BigBlueButton plugins.
 Plugins are React components that can be loaded from external sources
 by the BigBlueButton HTML5 client to extend its functionalities.
 
+## Overview
+
+An overview of the plugin architecture and capabilities can be found [here](https://github.com/bigbluebutton/plugins/blob/main/README.md#capabilities-and-technical-details).
+
 ## Examples
 
-A variety of example implementations to manipulate different parts of the
-BBB client can be found in the [`samples`](samples) folder.
+A variety of example implementations to manipulate different parts of the BBB client can be found in the [`samples`](samples) folder.
 
 ## Usage
 
