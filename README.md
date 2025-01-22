@@ -4,10 +4,13 @@ This repository contains the SDK for developing BigBlueButton plugins.
 Plugins are React components that can be loaded from external sources
 by the BigBlueButton HTML5 client to extend its functionalities.
 
+## Overview
+
+An overview of the plugin architecture and capabilities can be found [here](https://github.com/bigbluebutton/plugins/blob/main/README.md#capabilities-and-technical-details).
+
 ## Examples
 
-A variety of example implementations to manipulate different parts of the
-BBB client can be found in the [`samples`](samples) folder.
+A variety of example implementations to manipulate different parts of the BBB client can be found in the [`samples`](samples) folder.
 
 ## Usage
 
@@ -109,6 +112,44 @@ pluginManifests=[{"url":"<your-domain>/path/to/manifest.json"}]
 While the plugin can be hosted on any Server, it is also possible to host the bundled file directly on
 a BigBlueButton server. For that you copy `dist/SampleActionButtonDropdownPlugin.js` and `dist/manifest.json` to the folder `/var/www/bigbluebutton-default/assets/plugins/sampleActionButtonDropdownPlugin`.
 In this case, the your manifest URL will be `https://<your-host>/plugins/sampleActionButtonDropdownPlugin/manifest.json`.
+
+### Manifest Json
+
+Here is as complete `manifet.json` example with all possible configurations:
+
+```json
+{
+  "requiredSdkVersion": "~0.0.59",
+  "name": "MyPlugin",
+  "javascriptEntrypointUrl": "MyPlugin.js",
+  "localesBaseUrl": "https://cdn.domain.com/my-plugin/", // Optional
+  "dataChannels":[
+    {
+      "name": "public-channel",
+      "pushPermission": ["moderator","presenter"], // "moderator","presenter", "all"
+      "replaceOrDeletePermission": ["moderator", "creator"] // "moderator", "presenter","all", "creator"
+    }
+  ], // One can enable more data-channels to better organize client communication
+  "eventPersistence": {
+    "isEnabled": true, // By default it is not enabled
+    "maximumPayloadSizeInBytes": 1024,
+    "rateLimiting": {
+      "messagesAllowedPerSecond": 10,
+      "messagesAllowedPerMinute": 20
+    }
+  },
+  "remoteDataSources": [
+    {
+      "name": "allUsers",
+      "url": "${meta_pluginSettingsUserInformation}",
+      "fetchMode": "onMeetingCreate",
+      "permissions": ["moderator", "viewer"]
+    }
+  ]
+}
+```
+
+To better understand remote-data-sources, please, refer to [this section](#external-data-resources)
 
 ## API
 
@@ -303,7 +344,7 @@ See usage ahead:
 
 So the idea is that we have a `uiCommands` object and at a point, there will be the command to do the intended action, such as open the chat form and/or fill it, as demonstrated above
 
-  ### Server Commands
+### Server Commands
   
   `serverCommands` object: It contains all the possible commands available to the developer to interact with the BBB core server, see the ones implemented down below:
   
@@ -386,6 +427,63 @@ pluginApi.getRemoteData('allUsers').then((response: Response) => {
 });
 ```
 
+### Event persistence
+
+This feature will allow the developer to save an information (which is basically an event) in the `event.xml` file of the meeting if it's being recorded.
+
+To use it, one first need to add the following lines to their `manifest.json`:
+
+```json
+{
+  // ...rest of manifest configuration
+  "eventPersistence": {
+      "isEnabled": true,
+      "maximumPayloadSizeInBytes": 1024,
+      "rateLimiting": {
+          "messagesAllowedPerSecond": 10,
+          "messagesAllowedPerMinute": 20
+      }
+  }
+}
+```
+
+Then, the API in the SDK for that is:
+
+```ts
+pluginApi.persistEvent(eventName: string, payloadJson: Object);
+```
+
+See example in the `sample-use-meeting` plugin here in this repository. It is as follows:
+
+```ts
+useEffect(() => {
+    setInterval(() => {
+      pluginLogger.info('persisting event');
+      pluginApi.persistEvent('eventFromUseMeetingSample', { foo: 'bar' });
+    }, 5000);
+  }, []);
+```
+
+After the meeting is ended (considering it has been recorded), one can simply do the following steps to see the events:
+
+In the server terminal run:
+```bash
+sudo updatedb
+vi $(locate events.xml | grep <meeting-id>)
+```
+
+Where `<meeting-id>` is the id of the the meeting you just recorded. Then, amongst all the other events in the file, if you search it, you will find the following:
+
+```xml
+<event timestamp="25004947" module="PLUGIN" eventname="PluginGeneratedEvent">
+  <payloadJson>{"foo":"bar"}</payloadJson>
+  <pluginEventName>eventFromUseMeetingSample</pluginEventName>
+  <date>2024-10-30T18:00:11.929Z</date>
+  <pluginName>SampleUseMeeting</pluginName>
+  <userId>w_sxlfjbcb0yxs</userId>
+  <timestampUTC>1730311211929</timestampUTC>
+</event>
+```
 
 ### Frequently Asked Questions (FAQ)
 

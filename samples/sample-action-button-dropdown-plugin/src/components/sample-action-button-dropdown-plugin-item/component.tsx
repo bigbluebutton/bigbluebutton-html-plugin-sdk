@@ -144,6 +144,18 @@ function SampleActionButtonDropdownPlugin(
           },
         }),
         new ActionButtonDropdownOption({
+          label: 'Hide nav-bar',
+          icon: 'copy',
+          tooltip: 'this is a button injected by plugin',
+          allowed: true,
+          onClick: () => {
+            pluginApi.uiCommands.navBar.setDisplayNavBar({ displayNavBar: false });
+            setTimeout(() => {
+              pluginApi.uiCommands.navBar.setDisplayNavBar({ displayNavBar: true });
+            }, 5000);
+          },
+        }),
+        new ActionButtonDropdownOption({
           label: 'Stop notifications',
           icon: 'copy',
           tooltip: 'this is a button injected by plugin',
