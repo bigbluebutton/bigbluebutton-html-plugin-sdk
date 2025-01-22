@@ -199,7 +199,8 @@ function SampleActionButtonDropdownPlugin(
         }),
       ]);
     }
-  }, [currentPresentation, currentUser, showingGenericContentInPresentationArea]);
+  }, [currentPresentation, currentUser, isSelfViewDisabled,
+    showingGenericContentInPresentationArea]);
 
   return (
     <ReactModal
