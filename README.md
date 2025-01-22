@@ -110,6 +110,34 @@ While the plugin can be hosted on any Server, it is also possible to host the bu
 a BigBlueButton server. For that you copy `dist/SampleActionButtonDropdownPlugin.js` and `dist/manifest.json` to the folder `/var/www/bigbluebutton-default/assets/plugins/sampleActionButtonDropdownPlugin`.
 In this case, the your manifest URL will be `https://<your-host>/plugins/sampleActionButtonDropdownPlugin/manifest.json`.
 
+### Manifest Json
+
+Here is as complete `manifet.json` example with all possible configurations:
+
+```json
+{
+  "requiredSdkVersion": "~0.0.59",
+  "name": "MyPlugin",
+  "javascriptEntrypointUrl": "MyPlugin.js",
+  "localesBaseUrl": "https://cdn.domain.com/my-plugin/", // Optional
+  "dataChannels":[
+    {
+      "name": "public-channel",
+      "pushPermission": ["moderator","presenter"], // "moderator","presenter", "all"
+      "replaceOrDeletePermission": ["moderator", "creator"] // "moderator", "presenter","all", "creator"
+    }
+  ], // One can enable more data-channels to better organize client communication
+  "eventPersistence": {
+      "isEnabled": true, // By default it is not enabled
+      "maximumPayloadSizeInBytes": 1024,
+      "rateLimiting": {
+          "messagesAllowedPerSecond": 10,
+          "messagesAllowedPerMinute": 20
+      }
+  }
+}
+```
+
 ## API
 
 ### Extensible UI areas
