@@ -166,6 +166,15 @@ function SampleActionButtonDropdownPlugin(
           },
         }),
         new ActionButtonDropdownOption({
+          label: 'Stop notifications',
+          icon: 'copy',
+          tooltip: 'this is a button injected by plugin',
+          allowed: true,
+          onClick: () => {
+            pluginApi.uiCommands.notification.setEnabledDisplayNotifications(false);
+          },
+        }),
+        new ActionButtonDropdownOption({
           label: showingGenericContentInPresentationArea ? 'Return previous presentation content' : 'Set different content in presentation area',
           icon: 'copy',
           tooltip: 'this is a button injected by plugin',
