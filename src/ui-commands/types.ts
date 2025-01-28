@@ -8,10 +8,12 @@ import { UiCommandsNotificationObject } from './notification/types';
 import { UiCommandsActionsBarObject } from './actions-bar/types';
 import { UiCommandsLayoutObject } from './layout/types';
 import { UiCommandsNavBarObject } from './nav-bar/types';
+import { UiCommandsCameraObject } from './camera/types';
 
 export interface UiCommands {
   layout: UiCommandsLayoutObject;
   actionsBar: UiCommandsActionsBarObject;
+  camera: UiCommandsCameraObject;
   chat: UiCommandsChatObject;
   externalVideo: UiCommandsExternalVideoObject;
   sidekickOptionsContainer: UiCommandsSidekickOptionsContainerObject;

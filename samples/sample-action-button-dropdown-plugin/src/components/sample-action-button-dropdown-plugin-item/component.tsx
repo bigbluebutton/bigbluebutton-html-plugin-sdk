@@ -45,6 +45,7 @@ function SampleActionButtonDropdownPlugin(
 
   const [isCamerasOnly, setIsCamerasOnly] = useState(false);
 
+  const [isSelfViewDisabled, setIsSelfViewDisabled] = useState(false);
   const { data: isMeetingBreakoutFromGraphql } = pluginApi.useCustomSubscription<
   IsMeetingBreakoutGraphqlResponse>(IS_MEETING_BREAKOUT);
 
@@ -198,9 +199,27 @@ function SampleActionButtonDropdownPlugin(
             setIsCamerasOnly(false);
           },
         }),
+        new ActionButtonDropdownOption({
+          label: !(isSelfViewDisabled) ? 'Disable camera self view' : 'Enable self view',
+          icon: 'desktop',
+          tooltip: 'this is a button injected by plugin',
+          allowed: true,
+          onClick: !(isSelfViewDisabled) ? () => {
+            setIsSelfViewDisabled(true);
+            pluginApi.uiCommands.camera.setSelfViewDisableAllDevices({
+              isSelfViewDisabledAllDevices: true,
+            });
+          } : () => {
+            setIsSelfViewDisabled(false);
+            pluginApi.uiCommands.camera.setSelfViewDisableAllDevices({
+              isSelfViewDisabledAllDevices: false,
+            });
+          },
+        }),
       ]);
     }
-  }, [currentPresentation, currentUser, showingGenericContentInPresentationArea, isCamerasOnly]);
+  }, [currentPresentation, currentUser, isSelfViewDisabled,
+    showingGenericContentInPresentationArea]);
 
   return (
     <ReactModal
