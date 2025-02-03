@@ -142,7 +142,7 @@ Here is as complete `manifet.json` example with all possible configurations:
     {
       "name": "allUsers",
       "url": "${meta_pluginSettingsUserInformation}",
-      "fetchMode": "onMeetingCreate",
+      "fetchMode": "onMeetingCreate", // Possible values: "onMeetingCreate", "onDemand" 
       "permissions": ["moderator", "viewer"]
     }
   ]
@@ -397,21 +397,32 @@ This is possible by simply configuring the dataResource name in the manifest and
       {
           "name": "allUsers",
           "url": "${meta_pluginSettingsUserInformation}",
-          "fetchMode": "onMeetingCreate",
-          "permissions": ["moderator", "viewer"]
+          "fetchMode": "onMeetingCreate", // Possible values: "onMeetingCreate", "onDemand" 
+          "permissions": ["moderator", "viewer"] // Possible values: "moderator", "viewer", "presenter"
       }
   ]
 }
 ```
 
-Then when creating the meeting send the following parameters along, adjusting to your needs and resources:
+Going through each parameter to better understand it's structure:
+
+- `name`: It is the name of the remote data source, that is the name you'll use later on in the plugin when developing it;
+- `url`: The Url to which the data will be fetched (it can be hard-coded in the `manifest.json`, but we recommend passing it as a `meta_` parameter);
+- `fetchMode`: It tells the plugin-server if it should fetch the data only when creating the meeting, or everytime the function is called in the plugin portion;
+  - If one chooses `onMeetingCreate`, the data will be fetched when the create endpoint of the meeting is called, then it's cached in the plugin-server so that everytime the plugin wants that data, the plugin-server will respond with the cached data;
+  - On the other hand, if `onDemand` is selected, everytime the plugin calls this method, the plugin-server will fetch the data and then proxy it to the plugin;
+- `permissions`: This tells the back-end which role of the meeting can access this remote data;
+
+Here is the `/create` parameters you would have to pass to make this remote-data-source api work:
 
 ```
 meta_pluginSettingsUserInformation=https://<your-external-source-with-your-authentication>/api/users
 pluginManifests=[{"url": "http://<domain-of-your-manifest>/your-plugin/manifest.json"}]
 ```
 
-In the plugin, just use the function like:
+See that we send the `meta_` parameter, for more information, refer to the [meta parameters section](#meta_-parameters)
+
+Lastly, in the plugin, just use the function like:
 
 ```typescript
 pluginApi.getRemoteData('allUsers').then((response: Response) => {
@@ -426,6 +437,12 @@ pluginApi.getRemoteData('allUsers').then((response: Response) => {
   pluginLogger.error('Error while fetching external resource: ', reason);
 });
 ```
+
+### Meta_ parameters
+
+This is not part of the API, but it's a way of passing information to the manifest. Any value can be passed like this, one just needs to put something like `${meta_nameOfParameter}` in a specific config of the manifest, and in the `/create` call, set this meta-parameter to whatever is prefered, like `meta_nameOfParameter="A message for example"`
+
+This feature is mainly used for security purposes, see [external data section](#external-data-resources). But can be used for customization reasons as well.
 
 ### Event persistence
 
