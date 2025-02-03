@@ -94,7 +94,7 @@ follow these steps:
 
 ```bash
 cd $HOME/src/bigbluebutton-html-plugin-sdk/samples/sample-action-button-dropdown-plugin
-npm install
+npm ci
 npm run build-bundle
 ```
 
