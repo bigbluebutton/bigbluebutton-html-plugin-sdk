@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { AssetType } from 'bigbluebutton-html-plugin-sdk/dist/cjs/asset-persistence/enums';
 import * as ReactModal from 'react-modal';
 import './style.css';
 
@@ -50,22 +49,13 @@ function SampleActionButtonDropdownPlugin(
   IsMeetingBreakoutGraphqlResponse>(IS_MEETING_BREAKOUT);
 
   useEffect(() => {
-    // This line is commented once it will upload a
-    // PDF everytime you enter a meeting
-    // (if you have presenter role).
-    // Uncomment them to test this feature!
-    pluginApi.persistAsset(
-      'https://pdfobject.com/pdf/sample.pdf',
-      AssetType.PRESENTATION,
-      'my-presentation.pdf',
-    );
     pluginApi.uiCommands.notification.send({
       message: 'Notification message',
       icon: 'presentation',
       type: NotificationTypeUiCommand.INFO,
       options: {
-        // helpLabel: 'test help label', // this is not necessary
-        // helpLink: 'test help link',
+        // helpLabel: 'teste help label', // this is not necessary
+        // helpLink: 'teste help link',
         autoClose: 20000,
       },
       content: 'Content of my notification',
