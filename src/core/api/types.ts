@@ -238,6 +238,12 @@ export interface PluginApi {
   // --- Auxiliary functions ---
   getSessionToken?: GetSessionTokenFunction;
   getJoinUrl?: GetJoinUrlFunction;
+  /**
+   * Return messages to be used in the internacionalization functions (react-intl is recommended)
+   *
+   * @param fetchConfigs - fetch configuration object for the locale files (otional,
+   * usefull in dev environments).
+   */
   useLocaleMessages?: UseLocaleMessagesFunction
   /**
    * Send data to the Learning analytics dashboard
