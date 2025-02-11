@@ -48,6 +48,7 @@ import { sendGenericDataForLearningAnalyticsDashboard } from '../../learning-ana
 import { GenericDataForLearningAnalyticsDashboard } from '../../learning-analytics-dashboard/types';
 import { getRemoteData } from '../../remote-data/utils';
 import { persistEventFunctionWrapper } from '../../event-persistence/hooks';
+import useLocaleMessagesAuxiliary from '../auxiliary/plugin-information/locale-messages/useLocaleMessages';
 
 declare const window: PluginBrowserWindow;
 
@@ -123,6 +124,9 @@ export abstract class BbbPluginSdk {
           eventName,
           payload,
         );
+      pluginApi.useLocaleMessages = (
+        fetchConfigs?: RequestInit,
+      ) => useLocaleMessagesAuxiliary({ pluginApi, fetchConfigs });
     } else {
       throw new Error('Plugin name not set');
     }

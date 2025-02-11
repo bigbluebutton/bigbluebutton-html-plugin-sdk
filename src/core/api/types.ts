@@ -32,6 +32,7 @@ import { UseUserCameraDomElementsFunction } from '../../dom-element-manipulation
 import { ScreenshareHelperInterface, UserCameraHelperInterface } from '../../extensible-areas';
 import { GetDataSource } from '../../remote-data/types';
 import { PersistEventFunction } from '../../event-persistence/types';
+import { UseLocaleMessagesFunction } from '../auxiliary/plugin-information/locale-messages/types';
 
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
@@ -237,6 +238,7 @@ export interface PluginApi {
   // --- Auxiliary functions ---
   getSessionToken?: GetSessionTokenFunction;
   getJoinUrl?: GetJoinUrlFunction;
+  useLocaleMessages?: UseLocaleMessagesFunction
   /**
    * Send data to the Learning analytics dashboard
    *
