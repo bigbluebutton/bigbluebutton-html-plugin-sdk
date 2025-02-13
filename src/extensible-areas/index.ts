@@ -2,6 +2,7 @@ export * from './presentation-toolbar-item';
 export * from './user-list-dropdown-item';
 export * from './action-button-dropdown-item';
 export * from './actions-bar-item';
+export * from './apps-gallery-item';
 export * from './audio-settings-dropdown-item';
 export * from './presentation-dropdown-item';
 export * from './nav-bar-item';

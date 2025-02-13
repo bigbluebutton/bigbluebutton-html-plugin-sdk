@@ -29,7 +29,7 @@ import { UseMeetingFunction } from '../../data-consumption/domain/meeting/from-c
 import { ServerCommands } from '../../server-commands/types';
 import { SendGenericDataForLearningAnalyticsDashboard } from '../../learning-analytics-dashboard/types';
 import { UseUserCameraDomElementsFunction } from '../../dom-element-manipulation/user-camera/types';
-import { ScreenshareHelperInterface, UserCameraHelperInterface } from '../../extensible-areas';
+import { AppsGalleryInterface, ScreenshareHelperInterface, UserCameraHelperInterface } from '../../extensible-areas';
 import { GetDataSource } from '../../remote-data/types';
 import { PersistEventFunction } from '../../event-persistence/types';
 import { PersistAssetFunction } from '../../asset-persistence/types';
@@ -52,6 +52,10 @@ export type SetActionsBarItems = (
 
 export type SetAudioSettingsDropdownItems = (
   audioSettingsDropdownItem: AudioSettingsDropdownInterface[]
+) => string[];
+
+export type SetAppsGalleryItems = (
+  appsGalleryItems: AppsGalleryInterface[]
 ) => string[];
 
 export type SetPresentationDropdownItems = (
@@ -101,6 +105,7 @@ export interface PluginApi {
   setActionButtonDropdownItems: SetActionButtonDropdownItems;
   setActionsBarItems: SetActionsBarItems;
   setAudioSettingsDropdownItems: SetAudioSettingsDropdownItems;
+  setAppsGalleryItems: SetAppsGalleryItems;
   setPresentationDropdownItems: SetPresentationDropdownItems;
   setNavBarItems: SetNavBarItems;
   setScreenshareHelperItems: SetScreenshareHelperItems;

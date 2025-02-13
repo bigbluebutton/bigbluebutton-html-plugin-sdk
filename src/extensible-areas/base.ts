@@ -1,5 +1,6 @@
 import { ActionButtonDropdownItemType } from './action-button-dropdown-item/enums';
 import { ActionsBarItemType } from './actions-bar-item/enums';
+import { AppsGalleryType } from './apps-gallery-item/enums';
 import { AudioSettingsDropdownItemType } from './audio-settings-dropdown-item/enums';
 import { CameraSettingsDropdownItemType } from './camera-settings-dropdown-item/enums';
 import { FloatingWindowType } from './floating-window/enums';
@@ -16,9 +17,9 @@ import { UserListItemAdditionalInformationType } from './user-list-item-addition
 
 type PluginProvidedUiItemType = PresentationToolbarItemType |
   UserListDropdownItemType | ActionButtonDropdownItemType |
-  ActionsBarItemType | AudioSettingsDropdownItemType |
-  PresentationDropdownItemType | NavBarItemType | OptionsDropdownItemType |
-  CameraSettingsDropdownItemType | UserCameraDropdownItemType |
+  ActionsBarItemType | AppsGalleryType |
+  AudioSettingsDropdownItemType | PresentationDropdownItemType | NavBarItemType |
+  OptionsDropdownItemType | CameraSettingsDropdownItemType | UserCameraDropdownItemType |
   UserListItemAdditionalInformationType | FloatingWindowType | GenericContentType |
   ScreenshareHelperItemType | UserCameraHelperItemType;
 

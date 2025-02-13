@@ -176,6 +176,7 @@ export abstract class BbbPluginSdk {
         setActionButtonDropdownItems: () => [],
         setActionsBarItems: () => [],
         setAudioSettingsDropdownItems: () => [],
+        setAppsGalleryItems: () => [],
         setPresentationDropdownItems: () => [],
         setNavBarItems: () => [],
         setScreenshareHelperItems: () => [],
