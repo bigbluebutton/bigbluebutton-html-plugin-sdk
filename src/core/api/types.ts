@@ -32,6 +32,7 @@ import { UseUserCameraDomElementsFunction } from '../../dom-element-manipulation
 import { ScreenshareHelperInterface, UserCameraHelperInterface } from '../../extensible-areas';
 import { GetDataSource } from '../../remote-data/types';
 import { PersistEventFunction } from '../../event-persistence/types';
+import { UseLocaleMessagesFunction } from '../auxiliary/plugin-information/locale-messages/types';
 
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
@@ -237,6 +238,13 @@ export interface PluginApi {
   // --- Auxiliary functions ---
   getSessionToken?: GetSessionTokenFunction;
   getJoinUrl?: GetJoinUrlFunction;
+  /**
+   * Return messages to be used in the internacionalization functions (react-intl is recommended)
+   *
+   * @param fetchConfigs - fetch configuration object for the locale files (otional,
+   * usefull in dev environments).
+   */
+  useLocaleMessages?: UseLocaleMessagesFunction
   /**
    * Send data to the Learning analytics dashboard
    *
