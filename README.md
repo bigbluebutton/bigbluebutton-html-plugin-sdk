@@ -172,6 +172,7 @@ That being said, here are the extensible areas we have so far:
 
 - Action bar items (button, separator)
 - Action Button Dropdown Items (option, separator)
+- Apps Gallery Items (entry)
 - Audio settings dropdown items (option, separator)
 - Camera settings dropdown items (option, separator)
 - Options settings dropdown items (option, separator)
