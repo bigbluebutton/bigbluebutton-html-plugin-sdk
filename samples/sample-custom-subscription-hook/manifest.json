@@ -1,6 +1,0 @@
-{
-  "requiredSdkVersion": "~0.0.59",
-  "name": "SampleCustomSubscriptionPlugin",
-  "javascriptEntrypointUrl": "SampleCustomSubscriptionPlugin.js",
-  "localesBaseUrl": "https://cdn.dominio.com/pluginabc/"
-}
