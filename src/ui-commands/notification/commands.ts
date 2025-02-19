@@ -1,5 +1,5 @@
 import { NotificationEnum } from './enums';
-import { SendNotificationCommandArguments } from './types';
+import { SendNotificationCommandArguments, SetEnableDisplayNotificationsArguments } from './types';
 
 export const notification = {
   /**
@@ -11,6 +11,18 @@ export const notification = {
         SendNotificationCommandArguments
       >(NotificationEnum.SEND, {
         detail: information,
+      }),
+    );
+  },
+  /**
+   * Decides if notifications stop being displayed.
+   */
+  setEnabledDisplayNotifications: (isNotificationDisplayEnabled: boolean) => {
+    window.dispatchEvent(
+      new CustomEvent<
+        SetEnableDisplayNotificationsArguments
+      >(NotificationEnum.SET_ENABLED_DISPLAY, {
+        detail: { isNotificationDisplayEnabled },
       }),
     );
   },

@@ -1,7 +1,0 @@
-export enum AssetPersistenceEvents {
-  ASSET_PERSISTED = 'PLUGIN_ASSET_PERSISTED',
-}
-
-export enum AssetType {
-  PRESENTATION = 'PLUGIN_ASSET_PERSISTENCE_TYPE_PRESENTATION'
-}

@@ -32,7 +32,7 @@ import { UseUserCameraDomElementsFunction } from '../../dom-element-manipulation
 import { AppsGalleryInterface, ScreenshareHelperInterface, UserCameraHelperInterface } from '../../extensible-areas';
 import { GetDataSource } from '../../remote-data/types';
 import { PersistEventFunction } from '../../event-persistence/types';
-import { PersistAssetFunction } from '../../asset-persistence/types';
+import { UseLocaleMessagesFunction } from '../auxiliary/plugin-information/locale-messages/types';
 
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
@@ -244,6 +244,13 @@ export interface PluginApi {
   getSessionToken?: GetSessionTokenFunction;
   getJoinUrl?: GetJoinUrlFunction;
   /**
+   * Return messages to be used in the internacionalization functions (react-intl is recommended)
+   *
+   * @param fetchConfigs - fetch configuration object for the locale files (otional,
+   * usefull in dev environments).
+   */
+  useLocaleMessages?: UseLocaleMessagesFunction
+  /**
    * Send data to the Learning analytics dashboard
    *
    * @param data - object in which one can render in the learning analytics dashboard
@@ -265,13 +272,6 @@ export interface PluginApi {
    *
    */
   persistEvent?: PersistEventFunction;
-  /**
-   * Persists assets to the current meeting, e.g.: presentation.
-   *
-   * @param payload - payload to be persisted in `events.xml`
-   *
-   */
-  persistAsset?: PersistAssetFunction;
 }
 
 export interface PluginBrowserWindow extends Window {

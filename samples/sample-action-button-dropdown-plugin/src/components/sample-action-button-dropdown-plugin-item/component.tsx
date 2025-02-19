@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { AssetType } from 'bigbluebutton-html-plugin-sdk/dist/cjs/asset-persistence/enums';
 import * as ReactModal from 'react-modal';
 import './style.css';
 
@@ -45,26 +44,18 @@ function SampleActionButtonDropdownPlugin(
 
   const [isCamerasOnly, setIsCamerasOnly] = useState(false);
 
+  const [isSelfViewDisabled, setIsSelfViewDisabled] = useState(false);
   const { data: isMeetingBreakoutFromGraphql } = pluginApi.useCustomSubscription<
   IsMeetingBreakoutGraphqlResponse>(IS_MEETING_BREAKOUT);
 
   useEffect(() => {
-    // This line is commented once it will upload a
-    // PDF everytime you enter a meeting
-    // (if you have presenter role).
-    // Uncomment them to test this feature!
-    pluginApi.persistAsset(
-      'https://pdfobject.com/pdf/sample.pdf',
-      AssetType.PRESENTATION,
-      'my-presentation.pdf',
-    );
     pluginApi.uiCommands.notification.send({
       message: 'Notification message',
       icon: 'presentation',
       type: NotificationTypeUiCommand.INFO,
       options: {
-        // helpLabel: 'test help label', // this is not necessary
-        // helpLink: 'test help link',
+        // helpLabel: 'teste help label', // this is not necessary
+        // helpLink: 'teste help link',
         autoClose: 20000,
       },
       content: 'Content of my notification',
@@ -166,6 +157,15 @@ function SampleActionButtonDropdownPlugin(
           },
         }),
         new ActionButtonDropdownOption({
+          label: 'Stop notifications',
+          icon: 'copy',
+          tooltip: 'this is a button injected by plugin',
+          allowed: true,
+          onClick: () => {
+            pluginApi.uiCommands.notification.setEnabledDisplayNotifications(false);
+          },
+        }),
+        new ActionButtonDropdownOption({
           label: showingGenericContentInPresentationArea ? 'Return previous presentation content' : 'Set different content in presentation area',
           icon: 'copy',
           tooltip: 'this is a button injected by plugin',
@@ -189,9 +189,27 @@ function SampleActionButtonDropdownPlugin(
             setIsCamerasOnly(false);
           },
         }),
+        new ActionButtonDropdownOption({
+          label: !(isSelfViewDisabled) ? 'Disable camera self view' : 'Enable self view',
+          icon: 'desktop',
+          tooltip: 'this is a button injected by plugin',
+          allowed: true,
+          onClick: !(isSelfViewDisabled) ? () => {
+            setIsSelfViewDisabled(true);
+            pluginApi.uiCommands.camera.setSelfViewDisableAllDevices({
+              isSelfViewDisabledAllDevices: true,
+            });
+          } : () => {
+            setIsSelfViewDisabled(false);
+            pluginApi.uiCommands.camera.setSelfViewDisableAllDevices({
+              isSelfViewDisabledAllDevices: false,
+            });
+          },
+        }),
       ]);
     }
-  }, [currentPresentation, currentUser, showingGenericContentInPresentationArea, isCamerasOnly]);
+  }, [currentPresentation, currentUser, isSelfViewDisabled,
+    showingGenericContentInPresentationArea]);
 
   return (
     <ReactModal

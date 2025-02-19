@@ -48,8 +48,7 @@ import { sendGenericDataForLearningAnalyticsDashboard } from '../../learning-ana
 import { GenericDataForLearningAnalyticsDashboard } from '../../learning-analytics-dashboard/types';
 import { getRemoteData } from '../../remote-data/utils';
 import { persistEventFunctionWrapper } from '../../event-persistence/hooks';
-import { persistAssetFunctionWrapper } from '../../asset-persistence/hook';
-import { AssetType } from '../../asset-persistence/enums';
+import useLocaleMessagesAuxiliary from '../auxiliary/plugin-information/locale-messages/useLocaleMessages';
 
 declare const window: PluginBrowserWindow;
 
@@ -125,16 +124,9 @@ export abstract class BbbPluginSdk {
           eventName,
           payload,
         );
-      pluginApi.persistAsset = (
-        assetUrl: string,
-        typeOfAsset: AssetType,
-        assetName?: string,
-      ) => persistAssetFunctionWrapper(
-        pluginName,
-        assetUrl,
-        typeOfAsset,
-        assetName,
-      );
+      pluginApi.useLocaleMessages = (
+        fetchConfigs?: RequestInit,
+      ) => useLocaleMessagesAuxiliary({ pluginApi, fetchConfigs });
     } else {
       throw new Error('Plugin name not set');
     }
