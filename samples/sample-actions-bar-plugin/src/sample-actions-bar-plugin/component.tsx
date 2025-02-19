@@ -25,14 +25,14 @@ function SampleActionsBarPlugin({
 
   useEffect(() => {
     const buttonToUserListItem:
-          ActionsBarInterface = new ActionsBarButton({
-            icon: 'user',
-            tooltip: 'This will log on the console.',
-            onClick: () => {
-              pluginLogger.info('The actions bar button from plugin was clicked');
-            },
-            position: ActionsBarPosition.RIGHT,
-          });
+      ActionsBarInterface = new ActionsBarButton({
+        icon: 'user',
+        tooltip: 'This will log on the console.',
+        onClick: () => {
+          pluginLogger.info('The actions bar button from plugin was clicked');
+        },
+        position: ActionsBarPosition.RIGHT,
+      });
     const separatorToUserListItem:
       ActionsBarInterface = new ActionsBarSeparator({
         position: ActionsBarPosition.RIGHT,

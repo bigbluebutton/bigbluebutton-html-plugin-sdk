@@ -8,11 +8,10 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/node": "^20.3.1",
     "@types/react": "^18.2.13",
-    "@types/react-dom": "^18.2.6",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "react-dom": "^18.2.0",
     "bigbluebutton-html-plugin-sdk": "0.0.73",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "^18.2.0"
   },
   "scripts": {
     "build-bundle": "webpack --mode production",
@@ -40,7 +39,6 @@
     "@types/node": "^20.4.4",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
-    "@types/react-modal": "^3.16.0",
     "@typescript-eslint/eslint-plugin": "^6.2.0",
     "copy-webpack-plugin": "^12.0.2",
     "@typescript-eslint/parser": "^6.2.0",
@@ -56,7 +54,6 @@
     "eslint-watch": "^8.0.0",
     "lint-staged": "11.2.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "style-loader": "^3.3.3",
     "ts-loader": "^9.4.3",
     "typescript": "^5.1.6",
