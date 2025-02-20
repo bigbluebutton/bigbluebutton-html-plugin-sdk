@@ -26,6 +26,7 @@ function SampleServerCommandsPluginItem(
   const loadedMessages = pluginApi.useLoadedChatMessages();
 
   useEffect(() => {
+    // These buttons are interfaces for the user to manually send messages.
     pluginApi.setActionButtonDropdownItems([
       new ActionButtonDropdownSeparator(),
       new ActionButtonDropdownOption({
@@ -66,6 +67,7 @@ function SampleServerCommandsPluginItem(
         if (!messageMetadata.pluginName) return false;
 
         return (
+          // If message is sent from plugin, check if it's a custom one.
           (messageMetadata.pluginName === pluginName) && messageMetadata.custom
         );
       },
@@ -80,6 +82,8 @@ function SampleServerCommandsPluginItem(
   const chatMessagesDomElements = pluginApi.useChatMessageDomElements(messageIds);
 
   useEffect(() => {
+    // Logic to apply basic style to the previously selected messages:
+    // those with custom === true;
     chatMessagesDomElements?.map((chatMessageDomElement) => {
       const { parentElement } = chatMessageDomElement;
       if (parentElement.getAttribute('already-styled') === 'true') return false;
@@ -87,11 +91,16 @@ function SampleServerCommandsPluginItem(
       parentElement.style.paddingTop = '0.5rem';
       const messageIdFromUi = chatMessageDomElement.getAttribute('data-chat-message-id');
       const div = document.createElement('div');
+      // It basically applies solid gray background.
       div.style.backgroundColor = 'gray';
       div.innerHTML = chatMessagesToApplyStyle.find((message) => (
         message.messageId === messageIdFromUi
       )).text;
+      // Just to avoid rendering errors, remove all children from this element
+      const chatMessageDomElementReference = chatMessageDomElement;
+      chatMessageDomElementReference.innerHTML = '';
       chatMessageDomElement.appendChild(div);
+
       return true;
     });
   }, [chatMessagesDomElements]);

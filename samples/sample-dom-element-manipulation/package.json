@@ -8,13 +8,11 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/node": "^20.3.1",
     "@types/react": "^18.2.13",
-    "@types/react-dom": "^18.2.6",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "bigbluebutton-html-plugin-sdk": "0.0.73",
     "path": "^0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-modal": "^3.16.1",
     "react-select": "^5.7.3"
   },
   "scripts": {
@@ -38,7 +36,7 @@
     "@babel/core": "^7.21.8",
     "@babel/preset-env": "^7.21.5",
     "@babel/preset-react": "^7.18.6",
-    "@types/react-modal": "^3.16.0",
+    "@types/react-dom": "^18.2.6",
     "babel-loader": "^9.1.2",
     "css-loader": "^6.7.4",
     "copy-webpack-plugin": "^12.0.2",

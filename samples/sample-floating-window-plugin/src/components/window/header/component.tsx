@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Styled from './styles';
-import enums from '../utils/events';
+import enums from '../../../utils/events';
 
 interface HeaderProps {
   textContent: string;

@@ -18,3 +18,7 @@ export interface Presentation {
 export interface PresentationFromGraphqlWrapper {
   pres_presentation: Presentation[];
 }
+
+export interface SampleCustomSubscriptionPluginProps {
+  pluginUuid: string;
+}
