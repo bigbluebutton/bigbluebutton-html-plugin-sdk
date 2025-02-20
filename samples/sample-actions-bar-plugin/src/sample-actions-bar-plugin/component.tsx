@@ -42,7 +42,6 @@ function SampleActionsBarPlugin({
       options,
       defaultOption: options[4],
       onChange: (value, event) => {
-        console.log({ value, event });
         pluginLogger.info('The actions bar selector has changed', { value, event });
       },
       position: ActionsBarPosition.RIGHT,
