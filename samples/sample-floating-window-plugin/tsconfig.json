@@ -8,7 +8,7 @@
         "allowJs": true,
         "moduleResolution": "node"
     },
-    "include": ["src/*"],
+    "include": ["src/*", "src/components/window/floating-personal-notes", "src/components/window/header", "src/components/sample-floating-window-plugin-item"],
     "paths": {
         "*": ["node_modules"]
     },
