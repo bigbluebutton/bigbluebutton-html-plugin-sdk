@@ -1,7 +1,0 @@
-{
-  "requiredSdkVersion": "~0.0.73",
-  "name": "SampleActionButtonDropdownPlugin",
-  "javascriptEntrypointUrl": "SampleActionButtonDropdownPlugin.js",
-  "localesBaseUrl": "https://cdn.dominio.com/pluginabc/",
-  "enabledForBreakoutRooms": true
-}

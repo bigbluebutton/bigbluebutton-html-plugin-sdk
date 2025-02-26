@@ -1,6 +1,0 @@
-{
-  "requiredSdkVersion": "~0.0.73",
-  "name": "SampleActionsBarPlugin",
-  "javascriptEntrypointUrl": "SampleActionsBarPlugin.js",
-  "localesBaseUrl": "https://cdn.dominio.com/pluginabc/"
-}

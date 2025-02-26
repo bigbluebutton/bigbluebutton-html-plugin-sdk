@@ -1,6 +1,0 @@
-{
-  "requiredSdkVersion": "~0.0.73",
-  "name": "SampleGenericContentSidekickPlugin",
-  "javascriptEntrypointUrl": "SampleGenericContentSidekickPlugin.js",
-  "localesBaseUrl": "https://cdn.dominio.com/pluginabc/"
-}
