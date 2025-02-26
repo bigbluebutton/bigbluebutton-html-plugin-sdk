@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
-import SampleFloatingWindowPlugin from './sample-floating-window-plugin-item/component';
+import SampleFloatingWindowPlugin from './components/sample-floating-window-plugin-item/component';
 
 const uuid = document.currentScript?.getAttribute('uuid') || 'root';
 

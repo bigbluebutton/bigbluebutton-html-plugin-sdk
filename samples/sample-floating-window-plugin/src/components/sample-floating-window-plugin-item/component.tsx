@@ -11,8 +11,8 @@ import {
   ActionsBarPosition,
 } from 'bigbluebutton-html-plugin-sdk';
 import { SampleFloatingWindowPluginProps } from './types';
-import StickyNote from '../floating-personal-notes/component';
-import enums from '../utils/events';
+import StickyNote from '../window/floating-personal-notes/component';
+import enums from '../../utils/events';
 
 function SampleFloatingWindowPlugin(
   { pluginUuid: uuid }: SampleFloatingWindowPluginProps,
@@ -44,12 +44,10 @@ function SampleFloatingWindowPlugin(
         contentFunction: (element: HTMLElement) => {
           const root = ReactDOM.createRoot(element);
           root.render(
-            <React.StrictMode>
-              <StickyNote
-                initialTextContent={textContent}
-                initialTitle="Personal notes (not saved)"
-              />
-            </React.StrictMode>,
+            <StickyNote
+              initialTextContent={textContent}
+              initialTitle="Personal notes (not saved)"
+            />,
           );
           return root;
         },

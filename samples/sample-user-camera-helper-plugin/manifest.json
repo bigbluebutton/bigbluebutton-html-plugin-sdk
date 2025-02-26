@@ -1,0 +1,6 @@
+{
+  "requiredSdkVersion": "~0.0.73",
+  "name": "SampleUserCameraHelperPlugin",
+  "javascriptEntrypointUrl": "SampleUserCameraHelperPlugin.js",
+  "localesBaseUrl": "https://cdn.dominio.com/pluginabc/"
+}

@@ -1,7 +1,5 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
-import * as ReactModal from 'react-modal';
-import './style.css';
+import { useEffect } from 'react';
 
 import {
   BbbPluginSdk,
@@ -9,9 +7,9 @@ import {
   PresentationToolbarButton,
   PresentationToolbarInterface,
   CustomSubscriptionHookOptions,
+  pluginLogger,
 } from 'bigbluebutton-html-plugin-sdk';
-import { SampleCustomSubscriptionPluginProps } from '../types';
-import { UrlsJson, Presentation, PresentationFromGraphqlWrapper } from './types';
+import { PresentationFromGraphqlWrapper, SampleCustomSubscriptionPluginProps } from './types';
 
 function SampleCustomPresentationSubscriptionPlugin(
   { pluginUuid: uuid }: SampleCustomSubscriptionPluginProps,
@@ -19,8 +17,6 @@ function SampleCustomPresentationSubscriptionPlugin(
  React.ReactElement {
   BbbPluginSdk.initialize(uuid);
   const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
-  const [showModal, setShowModal] = useState<boolean>(false);
-  const [nextSlideUrls, setNextSlideUrls] = useState<UrlsJson>();
 
   const { data: currentPresentation } = pluginApi.useCurrentPresentation();
   let nextSlidePage = 1;
@@ -43,68 +39,20 @@ function SampleCustomPresentationSubscriptionPlugin(
     },
   } as CustomSubscriptionHookOptions);
 
-  const presentationNextPage: Presentation[] | undefined = dataResult
-    ? dataResult.pres_presentation : undefined;
-
-  const handleFetchPresentationData = (pageToFetch: Presentation[]) => {
-    const nextSlideUrlsObject: UrlsJson = pageToFetch[0].pages[0].urlsJson;
-    setNextSlideUrls(nextSlideUrlsObject);
-    setShowModal(true);
-  };
-
-  const handleCloseModalAndResetPoll = (): void => {
-    setShowModal(false);
-  };
-
   useEffect(() => {
     const currentObjectToSendToClient
       : PresentationToolbarInterface = new PresentationToolbarButton({
-        label: 'See preview of next slide',
-        tooltip: 'It requests the content of the next slide',
+        label: 'Log data for next slide',
+        tooltip: 'It queries data from next slide and logs on the console',
         style: {},
         onClick: () => {
-          if (presentationNextPage) {
-            handleFetchPresentationData(presentationNextPage);
-          }
+          pluginLogger.info('Logging data from sample-custom-presentation-subscription-plugin: ', JSON.stringify(dataResult));
         },
       });
     pluginApi.setPresentationToolbarItems([currentObjectToSendToClient]);
   }, [dataResult]);
 
-  return (
-    <ReactModal
-      className="plugin-modal"
-      overlayClassName="modal-overlay"
-      isOpen={showModal}
-      onRequestClose={handleCloseModalAndResetPoll}
-    >
-      <div
-        style={{
-          width: '100%', height: '100%', alignItems: 'center', display: 'flex', flexDirection: 'column',
-        }}
-      >
-        <h1>Preview of next slide: </h1>
-        <div className="slide-text-container">
-          {nextSlideUrls !== undefined
-            ? (
-              <img
-                width="90%"
-                src={nextSlideUrls.svg}
-                alt="next slide for the current presentation"
-              />
-            ) : null}
-        </div>
-        <button
-          type="button"
-          onClick={() => {
-            setShowModal(false);
-          }}
-        >
-          Close Modal
-        </button>
-      </div>
-    </ReactModal>
-  );
+  return null;
 }
 
 export default SampleCustomPresentationSubscriptionPlugin;
