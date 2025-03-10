@@ -269,6 +269,15 @@ export interface PluginApi {
   persistEvent?: PersistEventFunction;
 }
 
+export interface MeetingClientSettings {
+  public: {
+    app: {
+      bbbWebBase: string;
+    }
+  }
+}
+
 export interface PluginBrowserWindow extends Window {
   bbb_plugins: { [key: string]: PluginApi};
+  meetingClientSettings?: MeetingClientSettings;
 }
