@@ -85,6 +85,7 @@ export abstract class BbbPluginSdk {
     pluginApi.useMeeting = (() => useMeeting()) as UseMeetingFunction;
     pluginApi.useUsersBasicInfo = (() => useUsersBasicInfo()) as UseUsersBasicInfoFunction;
     pluginApi.useTalkingIndicator = (() => useTalkingIndicator()) as UseTalkingIndicatorFunction;
+    pluginApi.getJoinUrl = (params) => getJoinUrl(params);
     pluginApi.useLoadedChatMessages = (
       () => useLoadedChatMessages()) as UseLoadedChatMessagesFunction;
     pluginApi.useChatMessageDomElements = (
@@ -182,7 +183,6 @@ export abstract class BbbPluginSdk {
           '': () => {},
         },
         getSessionToken: () => getSessionToken(),
-        getJoinUrl: (params) => getJoinUrl(params),
         pluginName,
       };
     }
