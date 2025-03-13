@@ -1,5 +1,5 @@
 export interface MeetingStatusData {
-  renderMeeting: boolean;
+  userCurrentlyInMeeting: boolean;
 }
 
 export type UseShouldUnmountPluginFunction = () => boolean;

@@ -11,7 +11,7 @@ const useShouldUnmountPlugin = () => {
   ) => {
     const eventDetail: UpdatedEventDetails<MeetingStatusData> = (
       customEvent.detail as UpdatedEventDetails<MeetingStatusData>);
-    setShouldUnmountPlugin(!eventDetail.data.renderMeeting);
+    setShouldUnmountPlugin(!eventDetail.data.userCurrentlyInMeeting);
   }) as EventListener;
 
   useEffect(() => {
