@@ -33,6 +33,7 @@ import { ScreenshareHelperInterface, UserCameraHelperInterface } from '../../ext
 import { GetDataSource } from '../../remote-data/types';
 import { PersistEventFunction } from '../../event-persistence/types';
 import { UseLocaleMessagesFunction } from '../auxiliary/plugin-information/locale-messages/types';
+import { UseShouldUnmountPluginFunction } from '../auxiliary/plugin-unmount/types';
 
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
@@ -167,7 +168,7 @@ export interface PluginApi {
    *
    */
   usePluginSettings?: UsePluginSettingsFunction;
-    /**
+  /**
    * Returns an object containing a list user-voice with the main properties of that object,
    * that being talking (boolean), startTime (number), muted (boolean) and userId (string).
    *
@@ -175,6 +176,16 @@ export interface PluginApi {
    *
    */
   useTalkingIndicator?: UseTalkingIndicatorFunction;
+  /**
+   * Returns a boolean telling if the plugin should be unmounted or not based on the mounting
+   * of the meeting. This means that if the meeting end or the user is ejected, this will
+   * tell that the plugin should not be mounted and it's reversable: if the meeting is
+   * mounted again, it will update.
+   *
+   * @returns boolean
+   *
+   */
+  useShouldUnmountPlugin?: UseShouldUnmountPluginFunction;
   /**
    * Returns an object containing the data on the current presentation being displayed
    * in the presentation area, and its current page.
