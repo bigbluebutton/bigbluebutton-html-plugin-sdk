@@ -31,7 +31,7 @@ An overview of the plugin architecture and capabilities can be found [here](http
 
 As an example, this section will go through all the steps one need to follow in order to have a usable plugin, or at least a good starting point. In this case, the intended example plugin will add an option within the options dropdown menu (3 dots on top right-hand corner of your bbb-ui) that when clicked, it will trigger a pop up that says "hello world".
 
-1. First and foremost, choose the bbb-plugin-sdk's version based on the your Bigbluebutton's server, just as is mentioned in section [plugin versioning](#plugin-versioning), this information will be used later on this tutorial.
+1. First and foremost, choose the bbb-plugin-sdk's version based on the your BigBlueButton's server, just as is mentioned in section [plugin versioning](#plugin-versioning), this information will be used later on this tutorial.
 
 2. Use the template of a plugin provided by the Bibluebutton organization under [this URL](https://github.com/bigbluebutton/plugin-template).\
 Of course you can start a plugin from scratch, but you would need some specific configurations in the `package.json` and in  the `webpack.config.js` (if using this bundler), which can be a bit annoying to figure out. So that's why using the template can come in handy: all basic configurations are given to you, so you can focus on the code properly.\
