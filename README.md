@@ -29,21 +29,23 @@ An overview of the plugin architecture and capabilities can be found [here](http
 
 ### Building a Hello-World plugin example
 
-As an example, this section will go through all the steps one need to follow in order to have a usable plugin, or at least a good starting point. In this case, the intended example plugin will add an option within the options dropdown menu (3 dots on top right-hand corner of your bbb-ui) that when clicked, it will trigger a pop up that says "hello world".
+This section will go through all the steps one needs to follow in order to have a usable plugin, or at least a good starting point. In this case, the intended example plugin will add an option within the "options" dropdown menu (3 dots in the top right-hand corner of your client) that when clicked, will trigger a pop up containing "hello world".
 
-1. First and foremost, choose the bbb-plugin-sdk's version based on the your BigBlueButton's server, just as is mentioned in section [plugin versioning](#plugin-versioning), this information will be used later on this tutorial.
+1. First and foremost, choose the bbb-plugin-sdk's version based on the your BigBlueButton server, just as is mentioned in section [plugin versioning](#plugin-versioning), this information will be used later on this tutorial.
 
-2. Use the template of a plugin provided by the Bibluebutton organization under [this URL](https://github.com/bigbluebutton/plugin-template).\
-Of course you can start a plugin from scratch, but you would need some specific configurations in the `package.json` and in  the `webpack.config.js` (if using this bundler), which can be a bit annoying to figure out. So that's why using the template can come in handy: all basic configurations are given to you, so you can focus on the code properly.\
-Once you get in the template's page, click the button "Use this template" so you can create a repository out of it, within your github user account just like showed in the image bellow.\
+2. Use the template of a plugin provided by the BiBlueButton organization under [this URL](https://github.com/bigbluebutton/plugin-template).
+
+Of course you can start a plugin from scratch, but you would need some specific configurations in the `package.json` and in  the `webpack.config.js` (if using this bundler), which can be tricky to figure out. So that's why using the template can come in handy: all basic configurations are given to you, so you can focus on the code in mind.
+
+Once you get in the template's page, click the button "Use this template" so you can create a repository out of it, within your github user account just like showed in the image bellow.
 ![Plugin template github page showing where to click](assets/img/plugin-template-tutorial.png)
 
-3. With the repository in hands, clone it to your development place, and start adding the code needed. The following substeps will walk you through this task:
-  - Let's first give a name for the plugin we are developing, I'll choose plugin-hello-world for this example, but you can choose anotherone, mind that we must have the camel-cased name as well (in our case here "PluginHelloWorld");
-  - Now insert this name in all needed places, that is with "<plugin-name>" marked to be changed: `package.json`, `webpack.config.js` and `manifest.json` (these last 2 must be filled in with the camel-cased version);
-  - Go to https://www.npmjs.com/package/bigbluebutton-html-plugin-sdk and see the current version acoording to your BBB server, in my case here, the last version published is `0.1.2`, but since I am using bbb 3.0, I need to check the last version of the `0.0.x`, which is `0.0.73`;
-  - Now in the `package.json` update the version of the SDK, if needed, to that of the last published one (The package you want to search for is `bigbluebutton-html-plugin-sdk`);
-  - Run `npm i` to install all dependencies;
+3. Clone this new repository locally and start modifying the code. The following substeps will walk you through this task:
+  - Let's first give a name for the plugin we are developing, I'll choose plugin-hello-world for this example, but you can choose any name but bear in mind that we must have the PascalCased name as well (in our case here "PluginHelloWorld");
+  - Now insert this name in all needed places, that is with "<plugin-name>" marked to be changed: `package.json`, `webpack.config.js` and `manifest.json` (these last 2 must be filled in with the PascalCased version);
+  - Go to https://www.npmjs.com/package/bigbluebutton-html-plugin-sdk and see the current version according to your BBB server, in my case here, the last version published was `0.1.2`, but since I am using BigBlueButton 3.0, I need to check the last version of the `0.0.x`, which is `0.0.73`;
+  - Now in `package.json` update the version of the SDK, if needed, to that of the last published one (The package you want to search for is `bigbluebutton-html-plugin-sdk`);
+  - Run `npm install` to install all dependencies;
   - Now create a folder to store the componentes you will create for the plugin, in our case, I will name it `plugin-hello-world` and it will be inside src, so the command would be `mkdir src/plugin-hello-world`;
   - create a file called component inside the previously mentioned folder called `component.tsx`
   - There you can insert whatever code you want, I will insert the following
@@ -105,9 +107,11 @@ root.render(
 
 ```
 
-All done, that's it, You have yourself a plugin, now for running it, you will have to choose between running it development mode or production mode, and for that, use the sections [dev](#running-the-plugin-from-source) or [prod](#building-the-plugin-production).
+All done, that's it! You have a plugin!
 
-Feel free to reach out to us if anything was not clear. 
+About instructions on how to run it, you will have to choose between running it development mode or production mode, and for that, use the sections [dev](#running-the-plugin-from-source) or [prod](#building-the-plugin-production).
+
+Feel free to reach out to us for additional information. 
 
 
 ## Usage
