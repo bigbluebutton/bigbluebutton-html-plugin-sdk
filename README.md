@@ -29,7 +29,7 @@ An overview of the plugin architecture and capabilities can be found [here](http
 
 ### Building a Hello-World plugin example
 
-As an example, this secction will go through all the steps one need to follow in order to have a usable plugin, or at least a good starting point. In this case, the intended example plugin will add an option within the options dropdown menu (3 dots on top right-hand corner of your bbb-ui) that when clicked, it will trigger a pop up that says "hello world".
+As an example, this section will go through all the steps one need to follow in order to have a usable plugin, or at least a good starting point. In this case, the intended example plugin will add an option within the options dropdown menu (3 dots on top right-hand corner of your bbb-ui) that when clicked, it will trigger a pop up that says "hello world".
 
 1. First and foremost, choose the bbb-plugin-sdk's version based on the your Bigbluebutton's server, just as is mentioned in section [plugin versioning](#plugin-versioning), this information will be used later on this tutorial.
 
