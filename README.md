@@ -177,10 +177,22 @@ have a look at the READMEs in the respective samples folders inside the respecti
 
 ### Running the Plugin from Source
 
-For development purposes you can run a plugin locally from source.
+*Quick comment for those using Firefox to test locally development:* you are going to see ahead that we recommend using ngrok to proxy the calls to your local server in order to test your plugin in nearly any BigBlueButton server out there. There is only one minor issue with this: the Ngrok's free plan has an interstitial page that loads the first time you interact with their proxy server and to bypass this page after the first interaction, they set a cookie called `abuse_interstitial`.
 
-For example if you take the [`sample-action-button-dropdown-plugin`](samples/sample-action-button-dropdown-plugin),
-you do the following:
+The only problem in this is that Firefox is a bit strict with their cookies policy and this can cause your plugin to not load. To solve this minor problem, one can set different cookies preferences just to test the plugin in dev mode, and then can return the configurations back to normal. To do that, follow the instructions ahead:
+
+- Access the "about:preferences" in your Firefox;
+- Search for the word cookie in the search input (within the preferences page);
+- There you'll find some of the default configuration on cookies. Amongst those, you'll see three options on cookies preferences: Standard (usually the default), Strict and Custom;
+- For bbb-plugin testing purposes, you'll need to select "custom", then inside this selection, there are some checkboxes with some selection-dropdown for you to choose your preferences. You are going to change just the first one with checkbox labeled "Cookies" to "Cookies from unvisited websites" (since there is no need to block cookies from the already visited websites, such as your ngrok proxy, for this example, of course);
+- Once changed, firefox will ask you to reload all the tabs, do that so you apply the changes.
+
+And there you have it. One last comment: This happens for Firefox, other browsers might be as strict, we don't know for sure. With Chrome, it works out-of-the-box, though. 
+
+---
+
+Now, jumping into the development process. You can run a plugin locally from source. For example, if you take the [`sample-action-button-dropdown-plugin`](https://github.com/bigbluebutton/bigbluebutton-html-plugin-sdk/tree/v0.0.x/samples/sample-action-button-dropdown-plugin),
+you'll do the following:
 
 *Running from source code with local BBB-server*
 
