@@ -25,14 +25,14 @@ function SampleActionsBarPlugin({
 
   useEffect(() => {
     const buttonToUserListItem:
-          ActionsBarInterface = new ActionsBarButton({
-            icon: 'user',
-            tooltip: 'This will log on the console.',
-            onClick: () => {
-              pluginLogger.info('The actions bar button from plugin was clicked');
-            },
-            position: ActionsBarPosition.RIGHT,
-          });
+      ActionsBarInterface = new ActionsBarButton({
+        icon: 'user',
+        tooltip: 'This will log on the console.',
+        onClick: () => {
+          pluginLogger.info('The actions bar button from plugin was clicked');
+        },
+        position: ActionsBarPosition.RIGHT,
+      });
     const separatorToUserListItem:
       ActionsBarInterface = new ActionsBarSeparator({
         position: ActionsBarPosition.RIGHT,
@@ -42,7 +42,6 @@ function SampleActionsBarPlugin({
       options,
       defaultOption: options[4],
       onChange: (value, event) => {
-        console.log({ value, event });
         pluginLogger.info('The actions bar selector has changed', { value, event });
       },
       position: ActionsBarPosition.RIGHT,
@@ -55,7 +54,7 @@ function SampleActionsBarPlugin({
     const toggleGroupItem: ActionsBarInterface = new ActionsBarToggleGroup({
       title: 'Toggle',
       options: options.slice(0, 2), // Toggle groups can have more than 2 options
-      defaultOption: options[2],
+      defaultOption: options[1],
       onChange: (value, event) => {
         pluginLogger.info('The actions bar toggle group has changed', { value, event: event.nativeEvent });
       },

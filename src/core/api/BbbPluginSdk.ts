@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import { useEffect } from 'react';
+import useShouldUnmountPlugin from '../auxiliary/plugin-unmount/hook';
 import { UseLoadedUserListFunction } from '../../data-consumption/domain/users/loaded-user-list/types';
 import { UseCurrentUserFunction } from '../../data-consumption/domain/users/current-user/types';
 import {
@@ -85,6 +86,7 @@ export abstract class BbbPluginSdk {
     pluginApi.useMeeting = (() => useMeeting()) as UseMeetingFunction;
     pluginApi.useUsersBasicInfo = (() => useUsersBasicInfo()) as UseUsersBasicInfoFunction;
     pluginApi.useTalkingIndicator = (() => useTalkingIndicator()) as UseTalkingIndicatorFunction;
+    pluginApi.getJoinUrl = (params) => getJoinUrl(params);
     pluginApi.useLoadedChatMessages = (
       () => useLoadedChatMessages()) as UseLoadedChatMessagesFunction;
     pluginApi.useChatMessageDomElements = (
@@ -96,6 +98,7 @@ export abstract class BbbPluginSdk {
     pluginApi.uiCommands = uiCommands;
     pluginApi.useUiData = useUiData;
     const pluginName = pluginApi?.pluginName;
+    pluginApi.useShouldUnmountPlugin = useShouldUnmountPlugin;
     if (pluginName) {
       pluginApi.useDataChannel = ((
         channelName: string,
@@ -183,7 +186,6 @@ export abstract class BbbPluginSdk {
           '': () => {},
         },
         getSessionToken: () => getSessionToken(),
-        getJoinUrl: (params) => getJoinUrl(params),
         pluginName,
       };
     }
