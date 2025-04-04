@@ -6,4 +6,4 @@ export interface Meeting {
   loginUrl?: string;
 }
 
-export type UseMeetingFunction = () => GraphqlResponseWrapper<Meeting[]>;
+export type UseMeetingFunction = () => GraphqlResponseWrapper<Meeting>;

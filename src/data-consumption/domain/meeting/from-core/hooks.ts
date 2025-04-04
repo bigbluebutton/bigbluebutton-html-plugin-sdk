@@ -3,7 +3,7 @@ import { createDataConsumptionHook } from '../../../factory/hookCreator';
 import { Meeting } from './types';
 
 export const useMeeting = () => createDataConsumptionHook<
-  Meeting[]
+  Meeting
 >(
   DataConsumptionHooks.MEETING,
 );
