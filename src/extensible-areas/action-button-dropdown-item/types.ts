@@ -11,6 +11,7 @@ export interface ActionButtonDropdownOptionProps {
   label: string;
   icon: string;
   tooltip: string;
+  dataTest?: string;
   allowed: boolean;
   onClick: () => void;
 }
