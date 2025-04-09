@@ -16,6 +16,8 @@ export class ActionButtonDropdownOption implements ActionButtonDropdownInterface
 
   tooltip: string;
 
+  dataTest: string;
+
   allowed: boolean;
 
   onClick: () => void;
@@ -26,13 +28,14 @@ export class ActionButtonDropdownOption implements ActionButtonDropdownInterface
    * @param label - label to be displayed on the option
    * @param icon - icon to be displayed on the option
    * @param tooltip - tooltip to be displayed when hovering over option
+   * @param dataTest - string attribute to be used for testing
    * @param allowed - boolean indicating whether the option should be displayed
    * @param onClick - function to be called when clicking
    *
    * @returns the option to be displayed in the action button dropdown
    */
   constructor({
-    id, label = '', icon = '', tooltip = '', allowed = true, onClick = () => {},
+    id, label = '', icon = '', tooltip = '', dataTest = '', allowed = true, onClick = () => {},
   }: ActionButtonDropdownOptionProps) {
     if (id) {
       this.id = id;
@@ -40,6 +43,7 @@ export class ActionButtonDropdownOption implements ActionButtonDropdownInterface
     this.label = label;
     this.icon = icon;
     this.tooltip = tooltip;
+    this.dataTest = dataTest;
     this.allowed = allowed;
     this.onClick = onClick;
     this.type = ActionButtonDropdownItemType.OPTION;
