@@ -289,6 +289,6 @@ export interface MeetingClientSettings {
 }
 
 export interface PluginBrowserWindow extends Window {
-  bbb_plugins: { [key: string]: PluginApi};
+  bbbPluginApiConstructors: { [key: string]: (pluginApi: PluginApi) => void };
   meetingClientSettings?: MeetingClientSettings;
 }
