@@ -71,7 +71,7 @@ Once you get in the template's page, click the button "Use this template" so you
           label: 'Click me',
           icon: 'user',
           onClick: () => {
-            alert('hello wrold');
+            alert('Hello, World!');
             pluginLogger.info('Option has been clicked');
           },
         }),
@@ -90,7 +90,7 @@ Once you get in the template's page, click the button "Use this template" so you
 ```tsx
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
-import PluginTemplateHelloWorld from './plugin-hello-world/component';
+import PluginHelloWorld from './plugin-hello-world/component';
 
 const uuid = document.currentScript?.getAttribute('uuid') || 'root';
 
