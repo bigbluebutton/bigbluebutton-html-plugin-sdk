@@ -13,10 +13,9 @@ import {
 import { SampleUserListDropdownPluginProps } from './types';
 
 function SampleUserListDropdownPlugin({
-  pluginUuid: uuid,
+  pluginUuid: uuid, pluginApi,
 }: SampleUserListDropdownPluginProps): React.ReactElement<SampleUserListDropdownPluginProps> {
-  BbbPluginSdk.initialize(uuid);
-  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
+  BbbPluginSdk.initialize(pluginApi, uuid);
   const { data: loadedUserList } = pluginApi.useLoadedUserList();
   useEffect(() => {
     if (loadedUserList !== undefined && loadedUserList.length > 0) {

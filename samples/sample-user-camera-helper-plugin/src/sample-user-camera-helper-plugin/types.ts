@@ -1,5 +1,7 @@
+import { PluginApi } from 'bigbluebutton-html-plugin-sdk';
+
 interface SampleUserCameraHelperPluginProps {
-    pluginName: string,
+    pluginApi: PluginApi,
     pluginUuid: string,
 }
 

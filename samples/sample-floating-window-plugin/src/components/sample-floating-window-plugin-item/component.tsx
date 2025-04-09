@@ -4,8 +4,6 @@ import { useEffect, useState } from 'react';
 
 import {
   FloatingWindow,
-  PluginApi,
-  BbbPluginSdk,
   ActionsBarInterface,
   ActionsBarButton,
   ActionsBarPosition,
@@ -15,9 +13,8 @@ import StickyNote from '../window/floating-personal-notes/component';
 import enums from '../../utils/events';
 
 function SampleFloatingWindowPlugin(
-  { pluginUuid: uuid }: SampleFloatingWindowPluginProps,
+  { pluginApi }: SampleFloatingWindowPluginProps,
 ): React.ReactElement {
-  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
   const [textContent, setTextContent] = useState('');
   const [isMinimized, setIsMinimized] = useState(false);
   const [isClosed, setIsClosed] = useState(false);

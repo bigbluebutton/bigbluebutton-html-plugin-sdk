@@ -2,8 +2,6 @@ import * as React from 'react';
 import { useEffect } from 'react';
 
 import {
-  BbbPluginSdk,
-  PluginApi,
   pluginLogger,
   PresentationDropdownInterface,
   PresentationDropdownOption,
@@ -12,9 +10,8 @@ import {
 import { SamplePresentationDropdownPluginProps } from './types';
 
 function SamplePresentationDropdownPlugin(
-  { pluginUuid: uuid }: SamplePresentationDropdownPluginProps,
+  { pluginApi }: SamplePresentationDropdownPluginProps,
 ): React.ReactElement<SamplePresentationDropdownPluginProps> {
-  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
 
   useEffect(() => {
     const presentationDropdownOption:

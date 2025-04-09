@@ -4,14 +4,13 @@ import {
   BbbPluginSdk,
   ChatFormUiDataNames,
   ExternalVideoVolumeUiDataNames,
-  PluginApi, pluginLogger, UserListUiDataNames,
+  pluginLogger, UserListUiDataNames,
 } from 'bigbluebutton-html-plugin-sdk';
 import { SampleUiEventsPluginProps } from './types';
 
-function SampleUiEventsPlugin({ pluginUuid: uuid }: SampleUiEventsPluginProps):
+function SampleUiEventsPlugin({ pluginUuid: uuid, pluginApi }: SampleUiEventsPluginProps):
 React.ReactElement<SampleUiEventsPluginProps> {
-  BbbPluginSdk.initialize(uuid);
-  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
+  BbbPluginSdk.initialize(pluginApi, uuid);
   const userListOpened = pluginApi
     .useUiData(UserListUiDataNames.USER_LIST_IS_OPEN, { value: true });
   const currentChatText = pluginApi.useUiData(ChatFormUiDataNames.CURRENT_CHAT_INPUT_TEXT, { text: '' });

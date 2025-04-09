@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 
 import {
   BbbPluginSdk,
-  PluginApi,
   ActionButtonDropdownSeparator,
   ActionButtonDropdownOption,
 } from 'bigbluebutton-html-plugin-sdk';
@@ -15,10 +14,9 @@ export interface DataExampleType {
 }
 
 function SampleServerCommandsPluginItem(
-  { pluginUuid: uuid, pluginName }: SampleServerCommandsPluginProps,
+  { pluginUuid: uuid, pluginApi, pluginName }: SampleServerCommandsPluginProps,
 ): React.ReactNode {
-  BbbPluginSdk.initialize(uuid);
-  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
+  BbbPluginSdk.initialize(pluginApi, uuid);
   const [
     chatMessagesToApplyStyle,
     setChatIdsToApplyStyle,

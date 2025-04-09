@@ -1,5 +1,7 @@
+import { PluginApi } from 'bigbluebutton-html-plugin-sdk';
+
 interface GenericContentSidekickExampleProps {
-    uuid: string;
+    pluginApi: PluginApi;
 }
 
 export { GenericContentSidekickExampleProps };

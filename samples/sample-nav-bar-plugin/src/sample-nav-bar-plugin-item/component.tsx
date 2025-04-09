@@ -2,14 +2,12 @@ import * as React from 'react';
 import { useEffect } from 'react';
 
 import {
-  BbbPluginSdk, NavBarButton, NavBarInfo, NavBarItemPosition, PluginApi,
+  NavBarButton, NavBarInfo, NavBarItemPosition,
   pluginLogger,
 } from 'bigbluebutton-html-plugin-sdk';
 import { SampleNavBarPluginProps } from './types';
 
-function SampleNavBarPlugin({ pluginUuid: uuid }: SampleNavBarPluginProps): React.ReactElement {
-  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
-
+function SampleNavBarPlugin({ pluginApi }: SampleNavBarPluginProps): React.ReactElement {
   useEffect(() => {
     const button = new NavBarButton({
       icon: 'user',
