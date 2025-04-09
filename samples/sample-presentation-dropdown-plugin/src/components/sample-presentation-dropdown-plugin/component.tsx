@@ -12,7 +12,6 @@ import { SamplePresentationDropdownPluginProps } from './types';
 function SamplePresentationDropdownPlugin(
   { pluginApi }: SamplePresentationDropdownPluginProps,
 ): React.ReactElement<SamplePresentationDropdownPluginProps> {
-
   useEffect(() => {
     const presentationDropdownOption:
       PresentationDropdownInterface = new PresentationDropdownOption({

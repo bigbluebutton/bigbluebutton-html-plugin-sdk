@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 
 import {
   BbbPluginSdk,
-  PluginApi,
   pluginLogger,
   UserListDropdownFixedContentInformation,
   UserListDropdownInterface,
