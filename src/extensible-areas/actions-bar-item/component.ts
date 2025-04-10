@@ -36,9 +36,7 @@ class ActionsBarItem implements ActionsBarInterface {
 }
 
 export class ActionsBarButton extends ActionsBarItem {
-  icon: string;
-
-  customIconSvg?: React.SVGProps<SVGSVGElement>;
+  icon: string | React.SVGProps<SVGSVGElement>;
 
   tooltip: string;
 
@@ -48,8 +46,8 @@ export class ActionsBarButton extends ActionsBarItem {
    * Returns object to be used in the setter for action bar. In this case,
    * a button.
    *
-   * @param icon - icon to be used in the button for the action bar (takes priority)
-   * @param customIconSvg - svg to be used in the button icon for the action bar (not required)
+   * @param icon - icon to be used in the button for the action bar - it can be the iconName
+   * from BigbBlueButton or an svg
    * @param tooltip - tooltip to be displayed when hovering the button
    * @param onClick - function to be called when clicking the button
    * @param position - position that this button will be displayed, see {@link ActionsBarPosition}
@@ -57,11 +55,10 @@ export class ActionsBarButton extends ActionsBarItem {
    * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5)
    */
   constructor({
-    id, icon = '', customIconSvg, tooltip = '', onClick = () => {}, position = ActionsBarPosition.RIGHT,
+    id, icon = '', tooltip = '', onClick = () => {}, position = ActionsBarPosition.RIGHT,
   }: ActionsBarButtonProps) {
     super({ id, type: ActionsBarItemType.BUTTON, position });
     this.icon = icon;
-    this.customIconSvg = customIconSvg;
     this.tooltip = tooltip;
     this.onClick = onClick;
   }
