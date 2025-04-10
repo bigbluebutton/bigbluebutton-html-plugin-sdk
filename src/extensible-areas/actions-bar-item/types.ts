@@ -15,9 +15,22 @@ export interface ActionsBarItemProps {
   type: ActionsBarItemType;
 }
 
+export interface ActionsBarButtonIconSvg {
+  svgContent: React.SVGProps<SVGSVGElement>;
+}
+
+export interface ActionsBarButtonIconName {
+  /**
+   * Default icon name defined by BBB (see options there).
+   */
+  iconName: string;
+}
+
+export type ActionsBarIconType = ActionsBarButtonIconSvg | ActionsBarButtonIconName
+
 export interface ActionsBarButtonProps {
   id?: string;
-  icon: string | React.SVGProps<SVGSVGElement>;
+  icon: ActionsBarIconType;
   tooltip: string;
   position: ActionsBarPosition;
   onClick: () => void;

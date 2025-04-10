@@ -9,6 +9,7 @@ import {
   SelectOption,
   ToggleGroupOption,
   ActionsBarToggleGroupProps,
+  ActionsBarIconType,
 } from './types';
 
 // ActionsBar Extensible Area
@@ -36,7 +37,7 @@ class ActionsBarItem implements ActionsBarInterface {
 }
 
 export class ActionsBarButton extends ActionsBarItem {
-  icon: string | React.SVGProps<SVGSVGElement>;
+  icon: ActionsBarIconType;
 
   tooltip: string;
 
@@ -55,7 +56,7 @@ export class ActionsBarButton extends ActionsBarItem {
    * @returns Object that will be interpreted by the core of Bigbluebutton (HTML5)
    */
   constructor({
-    id, icon = '', tooltip = '', onClick = () => {}, position = ActionsBarPosition.RIGHT,
+    id, icon, tooltip = '', onClick = () => {}, position = ActionsBarPosition.RIGHT,
   }: ActionsBarButtonProps) {
     super({ id, type: ActionsBarItemType.BUTTON, position });
     this.icon = icon;
