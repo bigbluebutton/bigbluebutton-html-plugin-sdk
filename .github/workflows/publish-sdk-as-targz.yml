@@ -1,7 +1,7 @@
 name: Build and Release
 
 on:
-  push:
+  pull_request:
     tags:
       - 'v*'  # Trigger on version tags like v1.0.0
 
