@@ -34,7 +34,7 @@
     "watch": "^1.0.2"
   },
   "scripts": {
-    "postinstall": "[ \"$GITHUB_REPOSITORY\" = \"bigbluebutton/bigbluebutton\" ] && npm run build",
+    "postinstall": "[ \"$GITHUB_REPOSITORY\" = \"bigbluebutton/bigbluebutton\" ] && npm run build || exit 0",
     "prepublishOnly": "npm run build # runs before publish",
     "build": "rm -rf dist/cjs && tsc --module CommonJS --outDir dist/cjs",
     "build:watch": "rm -rf dist && tsc -w --module CommonJS",
