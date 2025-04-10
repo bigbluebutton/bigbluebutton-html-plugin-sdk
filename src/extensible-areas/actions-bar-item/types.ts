@@ -17,8 +17,7 @@ export interface ActionsBarItemProps {
 
 export interface ActionsBarButtonProps {
   id?: string;
-  icon: string;
-  customIconSvg?: React.SVGProps<SVGSVGElement>;
+  icon: string | React.SVGProps<SVGSVGElement>;
   tooltip: string;
   position: ActionsBarPosition;
   onClick: () => void;
