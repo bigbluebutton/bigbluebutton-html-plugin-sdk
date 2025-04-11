@@ -23,7 +23,7 @@ jobs:
       - name: Package build into tar.gz
         run: |
           mkdir -p build
-          cp -r * build/
+          cp -r dist/ build/
           tar -czf bigbluebutton-html-plugin-sdk.tar.gz -C build .
 
       - name: Upload release asset
