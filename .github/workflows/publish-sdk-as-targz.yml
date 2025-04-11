@@ -1,9 +1,6 @@
 name: Build and Release
 
-on:
-  pull_request:
-    tags:
-      - 'v*'  # Trigger on version tags like v1.0.0
+on: [pull_request]
 
 jobs:
   build-release:
