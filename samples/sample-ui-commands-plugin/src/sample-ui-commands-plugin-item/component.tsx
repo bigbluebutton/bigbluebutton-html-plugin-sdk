@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 
-import { BbbPluginSdk, PluginApi } from 'bigbluebutton-html-plugin-sdk';
+import { BbbPluginSdk } from 'bigbluebutton-html-plugin-sdk';
 import { SampleUiCommandsPluginProps } from './types';
 
 function SampleUiCommandsPlugin(
-  { pluginUuid: uuid }: SampleUiCommandsPluginProps,
+  { pluginUuid: uuid, pluginApi }: SampleUiCommandsPluginProps,
 ): React.ReactElement {
-  BbbPluginSdk.initialize(uuid);
-  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
+  BbbPluginSdk.initialize(pluginApi, uuid);
 
   useEffect(() => {
     pluginApi.uiCommands.chat.form.open();

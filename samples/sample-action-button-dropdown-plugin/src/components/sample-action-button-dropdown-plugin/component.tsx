@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import {
   BbbPluginSdk,
-  PluginApi,
   ActionButtonDropdownSeparator,
   ActionButtonDropdownOption,
   pluginLogger,
@@ -16,10 +15,9 @@ export interface DataExampleType {
 }
 
 function SampleActionButtonDropdownPlugin(
-  { pluginUuid: uuid }: SampleActionButtonDropdownPluginProps,
+  { pluginApi, pluginUuid: uuid }: SampleActionButtonDropdownPluginProps,
 ): React.ReactElement<SampleActionButtonDropdownPluginProps> {
-  BbbPluginSdk.initialize(uuid);
-  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
+  BbbPluginSdk.initialize(pluginApi, uuid);
   const { data: currentUser } = pluginApi.useCurrentUser();
 
   React.useEffect(() => {

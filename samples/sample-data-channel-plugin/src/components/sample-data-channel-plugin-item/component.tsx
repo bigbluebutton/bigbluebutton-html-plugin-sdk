@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useEffect } from 'react';
 
 import {
-  BbbPluginSdk, PluginApi, ActionButtonDropdownOption,
+  BbbPluginSdk, ActionButtonDropdownOption,
   RESET_DATA_CHANNEL, DataChannelTypes,
   pluginLogger,
 } from 'bigbluebutton-html-plugin-sdk';
@@ -14,11 +14,10 @@ interface DataExampleType {
 }
 
 function SampleDataChannelPlugin(
-  { pluginUuid: uuid }: SampleDataChannelPluginProps,
+  { pluginUuid: uuid, pluginApi }: SampleDataChannelPluginProps,
 ): React.ReactNode {
-  BbbPluginSdk.initialize(uuid);
+  BbbPluginSdk.initialize(pluginApi, uuid);
   // This Plugin only keeps track of a variable
-  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
   const { data: dataResponseDefaultAllItems, pushEntry: pushEntryFunctionDefault, deleteEntry: deleteEntryFunctionDefault } = pluginApi.useDataChannel<DataExampleType>('public-channel', DataChannelTypes.All_ITEMS);
   const { data: dataResponseDefaultLastItem } = pluginApi.useDataChannel<DataExampleType>('public-channel', DataChannelTypes.LATEST_ITEM);
   const { data: dataResponseNewSubChannel, pushEntry: pushToNewSubChannel, deleteEntry: deleteEntryFunctionNewSubChannel } = pluginApi.useDataChannel<DataExampleType>('public-channel', DataChannelTypes.All_ITEMS, 'newSubChannel');

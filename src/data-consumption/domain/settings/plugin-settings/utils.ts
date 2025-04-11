@@ -1,7 +1,7 @@
 import { GraphqlResponseWrapper } from '../../../../core';
-import { PluginSettingsResponseFromGraphqlWrapper } from './types';
+import { FilterPluginSpecificSettingsFunction, PluginSettingsResponseFromGraphqlWrapper } from './types';
 
-export const filterPluginSpecificSettings = (
+export const filterPluginSpecificSettings: FilterPluginSpecificSettingsFunction = (
   completeSettings: GraphqlResponseWrapper<PluginSettingsResponseFromGraphqlWrapper>,
 ) => {
   const pluginSettings = completeSettings

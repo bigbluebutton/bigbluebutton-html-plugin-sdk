@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 
 import {
   BbbPluginSdk,
-  PluginApi,
   GenericContentSidekickArea,
 } from 'bigbluebutton-html-plugin-sdk';
 import * as ReactDOM from 'react-dom/client';
@@ -11,10 +10,9 @@ import { SampleGenericContentSidekickPluginProps } from './types';
 import { GenericContentSidekickExample } from '../generic-content-sidekick-example/component';
 
 function SampleGenericContentSidekickPlugin(
-  { pluginUuid: uuid }: SampleGenericContentSidekickPluginProps,
+  { pluginUuid: uuid, pluginApi }: SampleGenericContentSidekickPluginProps,
 ): React.ReactNode {
-  BbbPluginSdk.initialize(uuid);
-  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
+  BbbPluginSdk.initialize(pluginApi, uuid);
 
   useEffect(() => {
     pluginApi.setGenericContentItems([
@@ -27,7 +25,7 @@ function SampleGenericContentSidekickPlugin(
           const root = ReactDOM.createRoot(element);
           root.render(
             <GenericContentSidekickExample
-              uuid={uuid}
+              pluginApi={pluginApi}
             />,
           );
           return root;

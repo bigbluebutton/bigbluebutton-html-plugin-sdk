@@ -2,17 +2,16 @@ import * as React from 'react';
 import { useEffect } from 'react';
 
 import {
-  BbbPluginSdk, PluginApi,
+  BbbPluginSdk,
   pluginLogger,
   PresentationToolbarButton,
 } from 'bigbluebutton-html-plugin-sdk/';
 import { SamplePresentationToolbarPluginProps } from './types';
 
 function SamplePresentationToolbarPlugin(
-  { pluginUuid: uuid }: SamplePresentationToolbarPluginProps,
+  { pluginUuid: uuid, pluginApi }: SamplePresentationToolbarPluginProps,
 ): React.ReactElement<SamplePresentationToolbarPluginProps> {
-  BbbPluginSdk.initialize(uuid);
-  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
+  BbbPluginSdk.initialize(pluginApi, uuid);
 
   useEffect(() => {
     const currentObjectToSendToClient = new PresentationToolbarButton({

@@ -1,13 +1,11 @@
-import { BbbPluginSdk, PluginApi, LoadedUserListData } from 'bigbluebutton-html-plugin-sdk';
+import { LoadedUserListData } from 'bigbluebutton-html-plugin-sdk';
 import * as React from 'react';
 import { GenericContentSidekickExampleProps } from './types';
 
 export function GenericContentSidekickExample(props: GenericContentSidekickExampleProps) {
   const {
-    uuid,
+    pluginApi,
   } = props;
-  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
-
   const loadedUserList = pluginApi.useLoadedUserList();
   return (
     <div style={{

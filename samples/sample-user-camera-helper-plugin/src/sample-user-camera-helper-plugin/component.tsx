@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 
 import {
   BbbPluginSdk,
-  PluginApi,
   pluginLogger,
   UserCameraHelperButton,
   UserCameraHelperItemPosition,
@@ -11,10 +10,11 @@ import {
 import { SampleUserCameraHelperPluginProps, VideoStreamsSubscriptionResultType } from './types';
 import { VIDEO_STREAMS_SUBSCRIPTION } from '../queries';
 
-function SampleUserCameraHelperPlugin({ pluginUuid: uuid }: SampleUserCameraHelperPluginProps):
+function SampleUserCameraHelperPlugin(
+  { pluginUuid: uuid, pluginApi }: SampleUserCameraHelperPluginProps,
+):
 React.ReactElement<SampleUserCameraHelperPluginProps> {
-  BbbPluginSdk.initialize(uuid);
-  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
+  BbbPluginSdk.initialize(pluginApi, uuid);
 
   const { data: videoStreams } = pluginApi.useCustomSubscription<
     VideoStreamsSubscriptionResultType

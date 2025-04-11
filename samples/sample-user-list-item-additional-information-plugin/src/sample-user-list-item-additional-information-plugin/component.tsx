@@ -2,15 +2,14 @@ import * as React from 'react';
 import { useEffect } from 'react';
 
 import {
-  BbbPluginSdk, PluginApi, UserListItemIcon, UserListItemLabel,
+  BbbPluginSdk, UserListItemIcon, UserListItemLabel,
 } from 'bigbluebutton-html-plugin-sdk';
 import { SampleUserListItemAdditionalInformationPluginProps } from './types';
 
 function SampleUserListItemAdditionalInformationPlugin(
-  { pluginUuid: uuid }: SampleUserListItemAdditionalInformationPluginProps,
+  { pluginUuid: uuid, pluginApi }: SampleUserListItemAdditionalInformationPluginProps,
 ): React.ReactElement<SampleUserListItemAdditionalInformationPluginProps> {
-  BbbPluginSdk.initialize(uuid);
-  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
+  BbbPluginSdk.initialize(pluginApi, uuid);
   const { data: loadedUserList } = pluginApi.useLoadedUserList();
 
   useEffect(() => {
