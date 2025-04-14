@@ -54,7 +54,7 @@ function SampleActionsBarPlugin({
     const toggleGroupItem: ActionsBarInterface = new ActionsBarToggleGroup({
       title: 'Toggle',
       options: options.slice(0, 2), // Toggle groups can have more than 2 options
-      defaultOption: options[2],
+      defaultOption: options[1],
       onChange: (value, event) => {
         pluginLogger.info('The actions bar toggle group has changed', { value, event: event.nativeEvent });
       },
