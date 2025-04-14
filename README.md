@@ -108,20 +108,6 @@ function PluginHelloWorld({ pluginUuid }: PluginHelloWorldProps): React.ReactEle
   BbbPluginSdk.initialize(pluginUuid);
   const pluginApi = BbbPluginSdk.getPluginApi(pluginUuid);
 
-<<<<<<< HEAD
-  useEffect(() => {
-    pluginApi.setOptionsDropdownItems([
-      new OptionsDropdownOption({
-        label: 'Click me',
-        icon: 'user',
-        onClick: () => {
-          alert('hello world');
-          pluginLogger.info('Option has been clicked');
-        },
-      }),
-    ]);
-  }, []);
-=======
     useEffect(() => {
       pluginApi.setOptionsDropdownItems([
         new OptionsDropdownOption({
@@ -134,7 +120,6 @@ function PluginHelloWorld({ pluginUuid }: PluginHelloWorldProps): React.ReactEle
         }),
       ]);
     }, []);
->>>>>>> 951c497 (Update README.md)
 
   return null;
 }
