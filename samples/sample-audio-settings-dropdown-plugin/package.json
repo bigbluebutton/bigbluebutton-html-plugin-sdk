@@ -9,7 +9,7 @@
     "@types/node": "^20.3.1",
     "@types/react": "^18.2.13",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "bigbluebutton-html-plugin-sdk": "0.1.2",
+    "bigbluebutton-html-plugin-sdk": "0.1.4",
     "browser-bunyan": "^1.8.0",
     "path": "^0.12.7",
     "react": "^18.2.0",
