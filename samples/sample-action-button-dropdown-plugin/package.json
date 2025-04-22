@@ -18,6 +18,7 @@
   },
   "scripts": {
     "build-bundle": "webpack --mode production",
+    "postinstall": "node scripts/update-manifest-sdk-version.js",
     "start": "webpack serve --mode development",
     "build:watch": "rm -rf dist && tsc -w --module CommonJS",
     "lint": "eslint ./src/*",
