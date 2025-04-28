@@ -1,6 +1,7 @@
+import { PluginApi } from 'bigbluebutton-html-plugin-sdk';
+
 interface SampleCameraSettingsDropdownPluginProps {
-    pluginName: string,
-    pluginUuid: string,
+    pluginApi: PluginApi
 }
 
 export { SampleCameraSettingsDropdownPluginProps };

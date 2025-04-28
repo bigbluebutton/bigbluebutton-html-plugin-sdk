@@ -2,16 +2,14 @@ import * as React from 'react';
 import { useEffect } from 'react';
 
 import {
-  BbbPluginSdk, OptionsDropdownOption, OptionsDropdownSeparator, PluginApi,
+  OptionsDropdownOption, OptionsDropdownSeparator,
   pluginLogger,
 } from 'bigbluebutton-html-plugin-sdk';
 import { SampleOptionsDropdownPluginProps } from './types';
 
 function SampleOptionsDropdownPlugin(
-  { pluginUuid: uuid }: SampleOptionsDropdownPluginProps,
+  { pluginApi }: SampleOptionsDropdownPluginProps,
 ): React.ReactElement<SampleOptionsDropdownPluginProps> {
-  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
-
   useEffect(() => {
     pluginApi.setOptionsDropdownItems([
       new OptionsDropdownSeparator(),

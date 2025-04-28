@@ -4,16 +4,15 @@ import { useEffect } from 'react';
 import {
   ActionsBarButton, ActionsBarInterface, ActionsBarPosition, ActionsBarSelector,
   ActionsBarSeparator, ActionsBarToggleGroup, BbbPluginSdk, GraphqlResponseWrapper,
-  PluginApi, UsersBasicInfoResponseFromGraphqlWrapper,
+  UsersBasicInfoResponseFromGraphqlWrapper,
   pluginLogger,
 } from 'bigbluebutton-html-plugin-sdk';
 import { SampleActionsBarPluginProps } from './types';
 
 function SampleActionsBarPlugin({
-  pluginUuid: uuid,
+  pluginUuid: uuid, pluginApi,
 }: SampleActionsBarPluginProps): React.ReactNode {
-  BbbPluginSdk.initialize(uuid);
-  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
+  BbbPluginSdk.initialize(pluginApi, uuid);
   const options = [
     { value: 1, label: 'one' },
     { value: 2, label: 'two' },

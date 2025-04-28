@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 
 import {
   BbbPluginSdk,
-  PluginApi,
   PresentationToolbarButton,
   PresentationToolbarInterface,
   CustomSubscriptionHookOptions,
@@ -12,11 +11,10 @@ import {
 import { PresentationFromGraphqlWrapper, SampleCustomSubscriptionPluginProps } from './types';
 
 function SampleCustomPresentationSubscriptionPlugin(
-  { pluginUuid: uuid }: SampleCustomSubscriptionPluginProps,
+  { pluginUuid: uuid, pluginApi }: SampleCustomSubscriptionPluginProps,
 ):
  React.ReactElement {
-  BbbPluginSdk.initialize(uuid);
-  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
+  BbbPluginSdk.initialize(pluginApi, uuid);
 
   const { data: currentPresentation } = pluginApi.useCurrentPresentation();
   let nextSlidePage = 1;

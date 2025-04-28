@@ -1,5 +1,7 @@
+import { PluginApi } from 'bigbluebutton-html-plugin-sdk';
+
 interface SampleDataChannelPluginProps {
-    pluginName: string,
+    pluginApi: PluginApi,
     pluginUuid: string,
 }
 

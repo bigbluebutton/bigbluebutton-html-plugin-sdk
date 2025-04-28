@@ -4,17 +4,14 @@ import {
   AudioSettingsDropdownInterface,
   AudioSettingsDropdownOption,
   AudioSettingsDropdownSeparator,
-  BbbPluginSdk, PluginApi,
   pluginLogger,
 } from 'bigbluebutton-html-plugin-sdk';
 
 import { SampleAudioSettingsDropdownPluginProps } from './types';
 
 function SampleAudioSettingsDropdownPlugin(
-  { pluginUuid: uuid }: SampleAudioSettingsDropdownPluginProps,
+  { pluginApi }: SampleAudioSettingsDropdownPluginProps,
 ): React.ReactElement<SampleAudioSettingsDropdownPluginProps> {
-  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
-
   useEffect(() => {
     const buttonToAudioSettingsDropdown:
       AudioSettingsDropdownInterface = new AudioSettingsDropdownOption({
