@@ -11,10 +11,6 @@ interface PluginInformationResult {
   localesBaseUrl: string;
 }
 
-interface GraphqlResponseWrapper {
-  plugin: PluginInformationResult[];
-}
-
 interface IntlMessages {
   loading: boolean;
   messages: Record<string, string>;
@@ -26,7 +22,6 @@ type UseLocaleMessagesFunction = (fetchConfigs?: RequestInit) => IntlMessages;
 export {
   UseLocaleMessagesProps,
   PluginInformationResult,
-  GraphqlResponseWrapper,
   IntlMessages,
   UseLocaleMessagesFunction,
 };
