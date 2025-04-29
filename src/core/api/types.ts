@@ -96,6 +96,7 @@ export type SetGenericContentItems = (
  */
 export interface PluginApi {
   pluginName?: string;
+  localesBaseUrl?: string;
   // --- Extensible Areas Setters ---
   setPresentationToolbarItems: SetPresentationToolbarItems;
   setUserListDropdownItems: SetUserListDropdownItems;
