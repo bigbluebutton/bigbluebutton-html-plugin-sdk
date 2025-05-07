@@ -162,7 +162,11 @@ export abstract class BbbPluginSdk {
    * @returns The PluginApi object
    *
    */
-  public static getPluginApi(uuid: string, pluginName?: string): PluginApi {
+  public static getPluginApi(
+    uuid: string,
+    pluginName?: string,
+    localesBaseUrl?: string,
+  ): PluginApi {
     if (!window.bbb_plugins) window.bbb_plugins = {};
     if (Object.keys(window.bbb_plugins).indexOf(uuid) === -1) {
       window.bbb_plugins[uuid] = {
@@ -187,6 +191,7 @@ export abstract class BbbPluginSdk {
         },
         getSessionToken: () => getSessionToken(),
         pluginName,
+        localesBaseUrl,
       };
     }
 
