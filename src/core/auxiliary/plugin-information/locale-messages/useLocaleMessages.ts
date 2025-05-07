@@ -1,8 +1,8 @@
-import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { IntlLocaleUiDataNames } from '../../../../ui-data-hooks';
 import { pluginLogger } from '../../../../utils';
-import { GraphqlResponseWrapper, IntlMessages, UseLocaleMessagesProps } from './types';
-import { GET_PLUGIN_INFORMATION } from './subscriptions';
+import { IntlMessages, UseLocaleMessagesProps } from './types';
+import { fetchLocaleAndStore, mergeLocaleMessages } from './utils';
 
 function useLocaleMessagesAuxiliary(
   { pluginApi, fetchConfigs }: UseLocaleMessagesProps,
@@ -12,27 +12,38 @@ function useLocaleMessagesAuxiliary(
     fallbackLocale: 'en',
   });
 
-  const [loading, setLoading] = React.useState(true);
-  const [messages, setMessages] = React.useState<Record<string, string>>({});
+  const [loading, setLoading] = useState(true);
+  const [messages, setMessages] = useState<Record<string, string>>({});
+  const [fallbackMessages, setFallbackMessages] = useState<Record<string, string>>();
 
-  const { data: pluginInformation } = pluginApi.useCustomSubscription!<GraphqlResponseWrapper>(
-    GET_PLUGIN_INFORMATION,
-  );
-
-  React.useEffect(() => {
-    if (pluginInformation && pluginInformation.plugin && currentLocale.locale) {
-      const { localesBaseUrl } = pluginInformation.plugin[0];
-      const { locale } = currentLocale;
+  useEffect(() => {
+    if (pluginApi?.localesBaseUrl && currentLocale.locale) {
+      const { localesBaseUrl } = pluginApi;
+      const { locale, fallbackLocale } = currentLocale;
       const localeUrl = `${localesBaseUrl}/${locale}.json`;
-      fetch(localeUrl, fetchConfigs).then((result) => result.json()).then((localeMessages) => {
+      const fallbackLocaleUrl = `${localesBaseUrl}/${fallbackLocale}.json`;
+      Promise.all([
+        localeUrl,
+        fallbackLocaleUrl,
+      ].map((url) => {
+        if (url !== fallbackLocaleUrl || !fallbackMessages) {
+          try {
+            return fetchLocaleAndStore(url, fetchConfigs);
+          } catch (err) {
+            pluginLogger.error(`Something went wrong while trying to fetch ${localeUrl}: `, err);
+            return Promise.reject(err);
+          }
+        }
+        return Promise.resolve(fallbackMessages);
+      })).then((values) => {
+        const [desiredLocale, fallbackLocaleMessages] = values;
+        setMessages(mergeLocaleMessages(desiredLocale, fallbackLocaleMessages));
+        if (!fallbackMessages) setFallbackMessages(fallbackLocaleMessages);
+      }).finally(() => {
         setLoading(false);
-        setMessages(localeMessages);
-      }).catch((err) => {
-        setLoading(false);
-        pluginLogger.error(`Something went wrong while trying to fetch ${localeUrl}: `, err);
       });
     }
-  }, [pluginInformation, currentLocale]);
+  }, [currentLocale]);
   return {
     messages,
     loading,

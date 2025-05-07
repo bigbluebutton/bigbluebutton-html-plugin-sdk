@@ -13,3 +13,13 @@ export interface PluginSettingsResponseFromGraphqlWrapper {
 export type UsePluginSettingsFunction = () => GraphqlResponseWrapper<
   PluginSettingsData
 >;
+
+export type UsePluginSettingsWrapperFunction = (pluginName: string) => GraphqlResponseWrapper<
+  PluginSettingsData
+>;
+
+export type FilterPluginSpecificSettingsFunction = (
+  completeSettings: GraphqlResponseWrapper<PluginSettingsResponseFromGraphqlWrapper>,
+) => GraphqlResponseWrapper<
+  PluginSettingsData
+>
