@@ -1,16 +1,15 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 
-import { BbbPluginSdk, PluginApi } from 'bigbluebutton-html-plugin-sdk';
+import { BbbPluginSdk } from 'bigbluebutton-html-plugin-sdk';
 import { SampleDomElementManipulationProps } from './types';
 
 const REGEX = /@([A-Z][a-z]+ ){0,2}[A-Z][a-z]+/;
 
 function SampleDomElementManipulation(
-  { pluginUuid: uuid }: SampleDomElementManipulationProps,
+  { pluginUuid: uuid, pluginApi }: SampleDomElementManipulationProps,
 ): React.ReactElement {
-  BbbPluginSdk.initialize(uuid);
-  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
+  BbbPluginSdk.initialize(pluginApi, uuid);
 
   const [chatIdsToApplyHighlights, setChatIdsToApplyHighlights] = useState<string[]>([]);
   const response = pluginApi.useLoadedChatMessages();

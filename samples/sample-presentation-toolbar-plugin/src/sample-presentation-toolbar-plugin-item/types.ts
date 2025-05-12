@@ -1,5 +1,7 @@
+import { PluginApi } from 'bigbluebutton-html-plugin-sdk';
+
 interface SamplePresentationToolbarPluginProps {
-    pluginName: string,
+    pluginApi: PluginApi,
     pluginUuid: string,
 }
 

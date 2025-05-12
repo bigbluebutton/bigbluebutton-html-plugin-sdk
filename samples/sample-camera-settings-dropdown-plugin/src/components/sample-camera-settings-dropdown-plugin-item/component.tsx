@@ -2,16 +2,14 @@ import * as React from 'react';
 import { useEffect } from 'react';
 
 import {
-  BbbPluginSdk, CameraSettingsDropdownOption, CameraSettingsDropdownSeparator, PluginApi,
+  CameraSettingsDropdownOption, CameraSettingsDropdownSeparator,
   pluginLogger,
 } from 'bigbluebutton-html-plugin-sdk';
 import { SampleCameraSettingsDropdownPluginProps } from './types';
 
 function SampleCameraSettingsDropdownPlugin(
-  { pluginUuid: uuid }: SampleCameraSettingsDropdownPluginProps,
+  { pluginApi }: SampleCameraSettingsDropdownPluginProps,
 ): React.ReactElement<SampleCameraSettingsDropdownPluginProps> {
-  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
-
   useEffect(() => {
     pluginApi.setCameraSettingsDropdownItems([
       new CameraSettingsDropdownSeparator(),

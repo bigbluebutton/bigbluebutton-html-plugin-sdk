@@ -1,3 +1,5 @@
+import { PluginApi } from 'bigbluebutton-html-plugin-sdk';
+
 export interface UrlsJson {
   thumb: string;
   text: string;
@@ -21,4 +23,5 @@ export interface PresentationFromGraphqlWrapper {
 
 export interface SampleCustomSubscriptionPluginProps {
   pluginUuid: string;
+  pluginApi: PluginApi;
 }

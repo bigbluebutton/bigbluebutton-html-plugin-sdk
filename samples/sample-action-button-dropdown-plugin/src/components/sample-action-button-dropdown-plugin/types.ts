@@ -1,6 +1,10 @@
+import {
+  PluginApi,
+} from 'bigbluebutton-html-plugin-sdk';
+
 interface SampleActionButtonDropdownPluginProps {
-    pluginName: string,
-    pluginUuid: string,
+    pluginApi: PluginApi;
+    pluginUuid: string;
 }
 
 interface IsMeetingBreakoutGraphqlResponse {

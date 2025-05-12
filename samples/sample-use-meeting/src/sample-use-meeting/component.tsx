@@ -1,23 +1,16 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import {
-  BbbPluginSdk, PluginApi,
+  BbbPluginSdk,
   pluginLogger,
 } from 'bigbluebutton-html-plugin-sdk';
 import { SampleUseMeetingPluginProps } from './types';
 
-function SampleUseMeetingPlugin({ pluginUuid: uuid }: SampleUseMeetingPluginProps):
+function SampleUseMeetingPlugin({ pluginUuid: uuid, pluginApi }: SampleUseMeetingPluginProps):
 React.ReactElement<SampleUseMeetingPluginProps> {
-  BbbPluginSdk.initialize(uuid);
-  const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
+  BbbPluginSdk.initialize(pluginApi, uuid);
   const meetingInfoGraphqlResponse = pluginApi.useMeeting();
 
-  useEffect(() => {
-    setInterval(() => {
-      pluginLogger.info('persisting event');
-      pluginApi.persistEvent('eventFromUseMeetingSample', { foo: 'bar' });
-    }, 5000);
-  }, []);
   useEffect(() => {
     const meetingInfo = meetingInfoGraphqlResponse?.data;
     pluginLogger.info('Showing meeting information ', meetingInfo);

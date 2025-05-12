@@ -289,7 +289,9 @@ export interface MeetingClientSettings {
   }
 }
 
+export type PluginSetupCallbackType = (pluginApi: PluginApi, uuid: string) => void;
+
 export interface PluginBrowserWindow extends Window {
-  bbb_plugins: { [key: string]: PluginApi};
+  bbbPluginApiConstructors: { [key: string]: PluginSetupCallbackType };
   meetingClientSettings?: MeetingClientSettings;
 }
