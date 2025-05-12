@@ -1,10 +1,11 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { expect } from '@playwright/test';
 import { Sample } from '../../../tests/core/sample';
 import { ELEMENT_WAIT_LONGER_TIME } from '../../../tests/core/constants';
 import { elements as e } from './elements';
 
 export class ActionsButtonDropdown extends Sample {
-  async actionButtonDropdown() {
+  async test() {
     await this.modPage.page.waitForSelector(e.whiteboard, { timeout: ELEMENT_WAIT_LONGER_TIME });
     await this.modPage.page.click(e.actions);
     await this.modPage.hasElement(e.pluginSeparator, 'should display the separator element injected by the plugin');
