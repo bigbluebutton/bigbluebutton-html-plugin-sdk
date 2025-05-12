@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+/* eslint-disable import/no-extraneous-dependencies */
 import { test as base, expect, TestInfo } from '@playwright/test';
 import { secret, server } from '../../../tests/core/parameters';
 import { Sample } from '../../../tests/core/sample';

@@ -62,10 +62,10 @@ export interface SessionSettings {
   emojiRain: boolean;
 }
 
-function getChecksum(text, secret) {
+function getChecksum(text) {
   let algorithm = (process.env.CHECKSUM || '').toLowerCase();
   if (!['sha1', 'sha256', 'sha512'].includes(algorithm)) {
-    switch (secret.length) {
+    switch (secret?.length) {
       case 128:
         algorithm = 'sha512';
         break;
@@ -94,7 +94,7 @@ function createMeetingUrl(params, createParameter) {
     + `&allowStartStopRecording=true&autoStartRecording=false&welcome=${params.welcome}`;
   const query = createParameter !== undefined ? `${baseQuery}&${createParameter}` : baseQuery;
   const apiCall = `create${query}${params.secret}`;
-  const checksum = getChecksum(apiCall, secret);
+  const checksum = getChecksum(apiCall);
   const url = `${params.server}/create?${query}&checksum=${checksum}`;
   return url;
 }
@@ -120,7 +120,7 @@ export function getJoinURL({
   const baseQuery = `fullName=${fullName}&meetingID=${meetingID}&password=${pw}${shouldSkipSessionDetailsModal}`;
   const query = joinParameter ? `${baseQuery}&${joinParameter}` : baseQuery;
   const apiCall = `join${query}${secret}`;
-  const checksum = getChecksum(apiCall, secret);
+  const checksum = getChecksum(apiCall);
   return `${server}/join?${query}&checksum=${checksum}`;
 }
 

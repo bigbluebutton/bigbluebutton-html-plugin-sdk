@@ -43,7 +43,12 @@
   },
   "overrides": [
     {
-      "files": ["**/tests/**", "**/tests/core/**", "./samples/**/tests/**"],
+      "files": [
+        "playwright.config.ts",
+        "**/tests/**",
+        "**/tests/core/**",
+        "samples/**/tests/**"
+      ],
       "rules": {
         "lines-between-class-members": "off",
         "import/no-extraneous-dependencies": [
