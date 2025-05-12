@@ -23,6 +23,7 @@ import {
 import {
   PluginApi,
   PluginBrowserWindow,
+  PluginSetupCallbackType,
 } from './types';
 import { useDataChannelGeneral } from '../../data-channel/hooks';
 import {
@@ -135,6 +136,19 @@ export abstract class BbbPluginSdk {
     } else {
       throw new Error('Plugin name not set');
     }
+  }
+
+  /**
+   * Initializes a plugin by performing the security check and registering
+   * the plugin's setup callback.
+   *
+   * @param callbackSetupFunction - A callback function that receives the plugin API, UUID,
+   * and is responsible for rendering or initializing the plugin.
+   */
+  static setupPlugin(callbackSetupFunction: PluginSetupCallbackType) {
+    const uuid = document.currentScript?.getAttribute('uuid') || 'root';
+    BbbPluginSdk.pluginApiSecurityCheck(uuid);
+    window.bbbPluginApiConstructors[uuid] = callbackSetupFunction;
   }
 
   /**

@@ -1,14 +1,9 @@
 import * as React from 'react';
+import { BbbPluginSdk, PluginApi } from 'bigbluebutton-html-plugin-sdk';
 import * as ReactDOM from 'react-dom/client';
-import { BbbPluginSdk, PluginApi, PluginBrowserWindow } from 'bigbluebutton-html-plugin-sdk';
 import SamplePresentationDropdownPlugin from './components/sample-presentation-dropdown-plugin/component';
 
-declare const window: PluginBrowserWindow;
-
-const uuid = document.currentScript?.getAttribute('uuid') || 'root';
-
-BbbPluginSdk.pluginApiSecurityCheck(uuid);
-window.bbbPluginApiConstructors[uuid] = (pluginApi: PluginApi) => {
+BbbPluginSdk.setupPlugin((pluginApi: PluginApi, uuid: string) => {
   const root = ReactDOM.createRoot(document.getElementById(uuid));
   root.render(
     <SamplePresentationDropdownPlugin {...{
@@ -17,4 +12,4 @@ window.bbbPluginApiConstructors[uuid] = (pluginApi: PluginApi) => {
     }}
     />,
   );
-};
+});

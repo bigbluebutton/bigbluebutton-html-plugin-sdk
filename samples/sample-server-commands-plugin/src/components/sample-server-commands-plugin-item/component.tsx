@@ -14,9 +14,10 @@ export interface DataExampleType {
 }
 
 function SampleServerCommandsPluginItem(
-  { pluginUuid: uuid, pluginApi, pluginName }: SampleServerCommandsPluginProps,
+  { pluginUuid: uuid, pluginApi }: SampleServerCommandsPluginProps,
 ): React.ReactNode {
   BbbPluginSdk.initialize(pluginApi, uuid);
+  const { pluginName } = pluginApi;
   const [
     chatMessagesToApplyStyle,
     setChatIdsToApplyStyle,

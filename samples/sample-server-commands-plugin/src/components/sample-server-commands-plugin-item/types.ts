@@ -2,7 +2,6 @@ import { PluginApi } from 'bigbluebutton-html-plugin-sdk';
 
 interface SampleServerCommandsPluginProps {
     pluginApi: PluginApi,
-    pluginName: string,
     pluginUuid: string,
 }
 
