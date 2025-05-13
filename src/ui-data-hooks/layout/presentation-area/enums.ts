@@ -1,4 +1,4 @@
-export enum LayoutPresentatioAreaUiDataNames {
+export enum LayoutPresentationAreaUiDataNames {
   CURRENT_ELEMENT = 'CURRENT_ELEMENT',
 }
 

@@ -1,7 +1,7 @@
-import { LayoutPresentatioAreaUiDataNames, UiLayouts } from './enums';
+import { LayoutPresentationAreaUiDataNames, UiLayouts } from './enums';
 
 export type LayoutPresentationAreaUiDataPayloads = {
-  [LayoutPresentatioAreaUiDataNames.CURRENT_ELEMENT]: {
+  [LayoutPresentationAreaUiDataNames.CURRENT_ELEMENT]: {
     currentElement?: UiLayouts,
     genericContentId?: string,
     isOpen: boolean,
