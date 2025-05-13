@@ -102,7 +102,7 @@ export abstract class BbbPluginSdk {
     if (pluginName) {
       pluginApi.useDataChannel = ((
         channelName: string,
-        dataChannelType: DataChannelTypes = DataChannelTypes.All_ITEMS,
+        dataChannelType: DataChannelTypes = DataChannelTypes.ALL_ITEMS,
         subChannelName: string = 'default',
       ) => useDataChannelGeneral(
         channelName,

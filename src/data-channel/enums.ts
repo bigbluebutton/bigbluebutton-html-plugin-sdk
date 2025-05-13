@@ -18,7 +18,7 @@ export enum DataChannelHooks {
 }
 
 export enum DataChannelTypes {
-  All_ITEMS = 'Hooks::DataChannel::AllItems',
+  ALL_ITEMS = 'Hooks::DataChannel::AllItems',
   NEW_ITEMS = 'Hooks::DataChannel::NewItems',
   LATEST_ITEM = 'Hooks::DataChannel::LatestItem',
 }
