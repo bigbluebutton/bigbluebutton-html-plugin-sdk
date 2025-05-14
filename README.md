@@ -12,7 +12,7 @@ An overview of the main features and capabilities can be found [here](https://gi
 
 This repository has the code of the SDK used to develop a BigBlueButton plugin.
 
-Mind that we have a different branch for each version of the SDK. This happens so we garantee that everything merged on one of the branches is compatible with the CORE in its correspondent version. As for now, see a correspondence of branches, SDK versions and BBB core version.
+Mind that we have a different branch for each version of the SDK. This happens so we guarantee that everything merged on one of the branches is compatible with the CORE in its correspondent version. As for now, see a correspondence of branches, SDK versions and BBB core version.
 
 | Repository Branch | Plugin-SDK Version | BigBlueButton Core Version |
 |------------------|--------------------|----------------------------|
@@ -21,7 +21,7 @@ Mind that we have a different branch for each version of the SDK. This happens s
 
 See that this branch (`main`) does not contain any code, that's because this branch is used only for basic documentation. If you want further information about the pluginApi features themselves, see the documentation (`readme` files) within the specific branch you are interested in. We do this separation because from now on, `v0.1.x` is becoming more and more different from the other one `v0.0.x`.
 
-If you have any suggestions, requirements or questions, don't hesitate to contat us.
+If you have any suggestions, requirements or questions, don't hesitate to contact us.
 
 With that said, here it follows the basic documentation of the pluginSdk:
 
