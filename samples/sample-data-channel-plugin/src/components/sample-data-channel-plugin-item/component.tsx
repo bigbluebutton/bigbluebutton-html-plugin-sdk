@@ -19,9 +19,9 @@ function SampleDataChannelPlugin(
   BbbPluginSdk.initialize(uuid);
   // This Plugin only keeps track of a variable
   const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
-  const { data: dataResponseDefaultAllItems, pushEntry: pushEntryFunctionDefault, deleteEntry: deleteEntryFunctionDefault } = pluginApi.useDataChannel<DataExampleType>('public-channel', DataChannelTypes.All_ITEMS);
+  const { data: dataResponseDefaultAllItems, pushEntry: pushEntryFunctionDefault, deleteEntry: deleteEntryFunctionDefault } = pluginApi.useDataChannel<DataExampleType>('public-channel', DataChannelTypes.ALL_ITEMS);
   const { data: dataResponseDefaultLastItem } = pluginApi.useDataChannel<DataExampleType>('public-channel', DataChannelTypes.LATEST_ITEM);
-  const { data: dataResponseNewSubChannel, pushEntry: pushToNewSubChannel, deleteEntry: deleteEntryFunctionNewSubChannel } = pluginApi.useDataChannel<DataExampleType>('public-channel', DataChannelTypes.All_ITEMS, 'newSubChannel');
+  const { data: dataResponseNewSubChannel, pushEntry: pushToNewSubChannel, deleteEntry: deleteEntryFunctionNewSubChannel } = pluginApi.useDataChannel<DataExampleType>('public-channel', DataChannelTypes.ALL_ITEMS, 'newSubChannel');
 
   useEffect(() => {
     pluginLogger.info('Log to verify the data flow: ', dataResponseDefaultAllItems, dataResponseDefaultLastItem, dataResponseNewSubChannel);

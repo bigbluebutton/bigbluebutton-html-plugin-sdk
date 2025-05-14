@@ -1,1 +1,1 @@
-export { LayoutPresentatioAreaUiDataNames, UiLayouts } from './presentation-area/enums';
+export { LayoutPresentationAreaUiDataNames, UiLayouts } from './presentation-area/enums';
