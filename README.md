@@ -1,29 +1,28 @@
+
 # BigBlueButton SDK for HTML5 Client Plugins
 
-This repository contains the SDK for developing BigBlueButton plugins.
-Plugins are React components that can be loaded from external sources
-by the BigBlueButton HTML5 client to extend its functionalities.
+This repository contains the SDK for developing BigBlueButton plugins. Plugins are React components that can be loaded from external sources by the BigBlueButton HTML5 client to extend its functionalities.
 
 ## Overview
 
-An overview of the main features and capabilities can be found [here](https://github.com/bigbluebutton/plugins/blob/main/README.md#capabilities-and-technical-details), but beware that those depend on the version of BigBlueButton you are developing for.
+An overview of the main features and capabilities can be found [here](https://github.com/bigbluebutton/plugins/blob/main/README.md#capabilities-and-technical-details). However, please note that these depend on the version of BigBlueButton you are developing for.
 
 ## Plugin Versioning
 
-This repository has the code of the SDK used to develop a BigBlueButton plugin.
+This repository contains the SDK code used to develop BigBlueButton plugins.
 
-Mind that we have a different branch for each version of the SDK. This happens so we guarantee that everything merged on one of the branches is compatible with the CORE in its correspondent version. As for now, see a correspondence of branches, SDK versions and BBB core version.
+Please be aware that we have a separate branch for each version of the SDK. This ensures that everything merged into a branch is compatible with the corresponding version of the BigBlueButton core. As of now, here’s the correspondence between the branches, SDK versions, and BigBlueButton core versions:
 
 | Repository Branch | Plugin-SDK Version | BigBlueButton Core Version |
 |------------------|--------------------|----------------------------|
-| v0.0.x           | v0.0.x            | v3.0.x                    |
-| v0.1.x           | v0.1.x            | v3.1.x                     |
+| v0.0.x           | v0.0.x             | v3.0.x                     |
+| v0.1.x           | v0.1.x             | v3.1.x                     |
 
-See that this branch (`main`) does not contain any code, that's because this branch is used only for basic documentation. If you want further information about the pluginApi features themselves, see the documentation (`readme` files) within the specific branch you are interested in. We do this separation because from now on, `v0.1.x` is becoming more and more different from the other one `v0.0.x`.
+Note that this branch (`main`) does not contain any code, as it is used only for basic documentation. For more information about the plugin API features, see the documentation (`readme` files) within the specific branch you are interested in. We separate the branches because, going forward, `v0.1.x` is becoming more and more different from `v0.0.x`.
 
-If you have any suggestions, requirements or questions, don't hesitate to contact us.
+If you have any suggestions, requirements, or questions, don’t hesitate to contact us.
 
-With that said, here it follows the basic documentation of the pluginSdk:
+With that said, here follows the basic documentation of the Plugin SDK:
 
 ### Building a Hello-World Plugin Example
 
@@ -156,7 +155,7 @@ root.render(
 
 ---
 
-**✅ That’s It!**
+**✅ That’s it!**
 
 You’ve successfully created your first plugin! 🎉
 
@@ -210,7 +209,7 @@ you'll do the following:
 pluginManifests=[{"url": "http://localhost:4701/manifest.json"}]
 ```
 
-*Running from souce code with a remote BBB-server*
+*Running from source code with a remote BBB-server*
 
 If you are running your BBB-server elsewhere, than you can't simply point the manifest URL to a local address, you'll need to either serve the built version into a CDN or serve the dev version using a service to make it public. And for the second option we'd recommend NGROK. Here are the instructions to do that:
 
@@ -288,9 +287,9 @@ While the plugin can be hosted on any Server, it is also possible to host the bu
 a BigBlueButton server. For that you copy `dist/SampleActionButtonDropdownPlugin.js` and `dist/manifest.json` to the folder `/var/www/bigbluebutton-default/assets/plugins/sampleActionButtonDropdownPlugin`.
 In this case, the your manifest URL will be `https://<your-host>/plugins/sampleActionButtonDropdownPlugin/manifest.json`.
 
-### Manifest Json
+### Manifest JSON
 
-Here is as complete `manifet.json` example with all possible configurations:
+Here is a complete `manifest.json` example with all possible configurations:
 
 ```json
 {
