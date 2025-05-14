@@ -21,7 +21,8 @@
     "start": "webpack serve --mode development",
     "build:watch": "rm -rf dist && tsc -w --module CommonJS",
     "lint": "eslint ./src/*",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "postinstall": "node scripts/update-manifest-sdk-version.js"
   },
   "browserslist": {
     "production": [
