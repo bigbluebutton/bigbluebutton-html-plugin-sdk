@@ -7,7 +7,7 @@ This repository contains the SDK for developing BigBlueButton plugins. Plugins a
 
 An overview of the main features and capabilities can be found [here](https://github.com/bigbluebutton/plugins/blob/main/README.md#capabilities-and-technical-details). However, please note that these depend on the version of BigBlueButton you are developing for.
 
-## Plugin Versioning
+### Plugin Versioning
 
 This repository contains the SDK code used to develop BigBlueButton plugins.
 
@@ -322,3 +322,117 @@ Here is a complete `manifest.json` example with all possible configurations:
   ]
 }
 ```
+
+## Developing the SDK
+
+Now that you have a broad understanding of how the plugins work, let’s take a look at how to develop the SDK.
+
+**Motivation:** You might want to add a new feature to be used in a plugin, fix a bug, or correct an unexpected behavior in an existing feature.
+
+### Understanding the Architecture
+
+Before making any changes, here's a brief overview of how `bigbluebutton-html-plugin-sdk` interacts with other components. From here on, we'll refer to `bigbluebutton-html-plugin-sdk` as `plugin-sdk` and `bigbluebutton-html5` as `bbb-html5`.
+
+```mermaid
+graph
+  sdk[plugin-sdk in development]
+
+  %% Application Box
+  subgraph App[Application running]
+    %% HTML5 Box
+    subgraph HTML5[bbb-html5]
+      B1[node_modules]
+      B1 --> B2[plugin-sdk&#64;v0.0.73]
+    end
+
+    %% Plugin Box
+    subgraph Plugin[plugin-pick-random-user]
+      C1[node_modules]
+      C1 --> C2[plugin-sdk&#64;v0.0.73]
+    end
+  end
+
+  %% Link from plugin to html5
+  HTML5 --> Plugin
+```
+
+As shown above, both `bbb-html5` and the plugin being developed have their own `node_modules`, each importing the version of `plugin-sdk` specified in their respective `package.json` files (in this example, `v0.0.73`).
+
+Once you’ve made a change to `plugin-sdk`—for example, by adding a new `ui-command`—you’ll need to:
+
+1. Build the SDK;
+2. Publish the SDK to both the plugin and `bbb-html5`.
+
+After that, the architecture will look like this:
+
+```mermaid
+graph TB
+  %% SDK Box
+  subgraph SDK["plugin-sdk (built)"]
+    A1[new-ui-command]
+  end
+
+  %% Application Box
+  subgraph App[Application running]
+    direction LR
+
+    %% HTML5 Box
+    subgraph HTML5[bbb-html5]
+      B1[node_modules]
+    end
+
+    %% Plugin Box
+    subgraph Plugin[plugin-pick-random-user]
+      C1[node_modules]
+    end
+
+    HTML5 --> Plugin
+  end
+
+  %% Link from plugin to html5
+  B1 & C1 --> SDK 
+```
+
+Now, instead of each having their own version, both `bbb-html5` and the plugin point to the newly built version of `plugin-sdk`, which includes your changes.
+
+### Building the SDK
+
+As outlined above, once your changes to the `plugin-sdk` are complete, follow these steps:
+
+**1. Install dependencies and build the SDK (adjust the path to your SDK directory):**
+
+```bash
+cd ~/dev/bigbluebutton-html-plugin-sdk/
+npm install
+npm run build
+```
+
+**2. Publish the SDK to `bbb-html5`:**
+
+```bash
+./scripts/publish-to-project-folder.sh ~/dev/bigbluebutton/bigbluebutton-html5
+```
+
+**3. Publish the SDK to the plugin you want to test:**
+
+We often use the sample plugins to test new features. To do that, run:
+
+```bash
+./scripts/publish-to-samples.sh
+```
+
+Alternatively, to publish to a specific plugin (e.g., `plugin-pick-random-user`), run:
+
+```bash
+./scripts/publish-to-project-folder.sh ~/dev/plugin-pick-random-user
+```
+
+The first argument to the `publish-to-project-folder.sh` script is the path to the project you want to publish the SDK to.
+
+---
+
+After completing these steps, the new feature is available in both `bbb-html5` and the plugin of your choice. For `bbb-html5`, you can typically use window event names to add a listener and connect the feature to a part of the core application.
+
+Once the development is done, open a pull request (PR) for both the SDK and the core BBB repository. We usually link them in the “More” section like so:
+
+_Closely related to the PR on the CORE: <link-to-core-pr>_
