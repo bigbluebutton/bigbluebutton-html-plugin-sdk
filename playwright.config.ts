@@ -8,7 +8,7 @@ import { server } from './tests/core/parameters';
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 export default defineConfig({
-  testDir: path.join(process.cwd(), 'tests'),
+  testDir: process.cwd(),
   workers: CI ? 1 : undefined,
   retries: CI ? 1 : 0,
   fullyParallel: true,
