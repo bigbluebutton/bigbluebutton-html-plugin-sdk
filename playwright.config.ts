@@ -13,7 +13,9 @@ export default defineConfig({
   retries: CI ? 1 : 0,
   fullyParallel: true,
   forbidOnly: CI,
-  reporter: [['list'], ['html', { open: 'never' }]],
+  reporter: CI
+    ? [['list'], ['blob']]
+    : [['list'], ['html', { open: 'never' }]],
   use: {
     baseURL: server,
     headless: true,
