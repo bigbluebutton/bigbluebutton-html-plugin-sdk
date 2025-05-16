@@ -21,7 +21,9 @@
     "start": "webpack serve --mode development",
     "build:watch": "rm -rf dist && tsc -w --module CommonJS",
     "lint": "eslint ./src/*",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "test": "npx playwright test -c ../../playwright.config.ts",
+    "copy-sample-to-container": "../../tests/core/scripts/copy-sample-to-container.sh sample-action-button-dropdown-plugin"
   },
   "browserslist": {
     "production": [
