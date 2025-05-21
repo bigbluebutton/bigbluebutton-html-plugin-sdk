@@ -429,10 +429,42 @@ Alternatively, to publish to a specific plugin (e.g., `plugin-pick-random-user`)
 
 The first argument to the `publish-to-project-folder.sh` script is the path to the project you want to publish the SDK to.
 
----
+**4. Make the Pull Request**
 
 After completing these steps, the new feature is available in both `bbb-html5` and the plugin of your choice. For `bbb-html5`, you can typically use window event names to add a listener and connect the feature to a part of the core application.
+
+Before opening the pull requests, we ask the developer to **not reference a version number** for the SDK in `package.json` yet. Instead, use the commit hash from your SDK changes.
+
+Example:
+
+```json
+"dependencies": {
+  ...
+  "bigbluebutton-html-plugin-sdk": "https://codeload.github.com/bigbluebutton/bigbluebutton-html-plugin-sdk/tar.gz/<commit-hash-id>"
+}
+```
+
+You can obtain the commit hash via `git log` in the sdk repo directory.
+
+
+After adding it, run:
+
+```bash
+npm install
+```
+
+This will update `package-lock.json` accordingly.
 
 Once the development is done, open a pull request (PR) for both the SDK and the core BBB repository. We usually link them in the “More” section like so:
 
 _Closely related to the PR on the CORE: <link-to-core-pr>_
+
+It is worth mentioning that after the SDK PR is merged in, a new version will be published to [npmjs.com](https://npmjs.com) (e.g.: `0.0.99`) 
+
+It is important to update the SDK version in:
+
+- bigbluebutton-web/grails-app/conf/bigbluebutton.properties;
+- bigbluebutton-html5/package.json;
+- bigbluebutton-html5/package-lock.json;
+
+And finally commit the last changes to your PR (See [official documentation](https://docs.bigbluebutton.org/plugins#9-finalizing-with-an-official-sdk-version) for more information on this topic).
