@@ -397,7 +397,7 @@ Now, instead of each having their own version, both `bbb-html5` and the plugin p
 
 ### Building the SDK
 
-As outlined above, once your changes to the `plugin-sdk` are complete, follow these steps:
+As outlined above, once your changes to the `plugin-sdk` are complete, follow these steps (for a more detailed explanation refer back to the [official documentation](https://docs.bigbluebutton.org/plugins#developing-the-bigbluebutton-html-plugin-sdk)):
 
 **1. Install dependencies and build the SDK (adjust the path to your SDK directory):**
 
