@@ -1,5 +1,5 @@
 {
-  "requiredSdkVersion": "0.0.73",
+  "requiredSdkVersion": "~0.0.78",
   "name": "SampleUserListDropdownPlugin",
   "javascriptEntrypointUrl": "SampleUserListDropdownPlugin.js",
   "localesBaseUrl": "https://cdn.dominio.com/pluginabc/"

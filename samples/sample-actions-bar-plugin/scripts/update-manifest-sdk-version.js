@@ -19,10 +19,13 @@ if (!sdkVersion) {
 // Clean version string
 const cleanedVersion = sdkVersion.replace(/^[\^~]/, '');
 
+// It's recommended that we keep the required version as "~v"
+requiredSdkVersion = "~" + cleanedVersion
+
 // Read and update manifest.json
 const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-manifest.requiredSdkVersion = cleanedVersion;
+manifest.requiredSdkVersion = requiredSdkVersion;
 
 // Write it back
 fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) +'\n', 'utf8');
-console.log(`Updated requiredSdkVersion in manifest.json to ${cleanedVersion}`);
+console.log(`Updated requiredSdkVersion in manifest.json to ${requiredSdkVersion}`);
