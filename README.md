@@ -151,6 +151,10 @@ Here is as complete `manifest.json` example with all possible configurations:
 
 To better understand remote-data-sources, please, refer to [this section](#external-data-resources)
 
+## Testing SDK
+
+To setup and run the automated tests for the plugin SDK samples, check the [testing doc](/tests/README.md)
+
 ## API
 
 ### Extensible UI areas
