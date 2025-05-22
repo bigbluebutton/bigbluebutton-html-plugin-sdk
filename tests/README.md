@@ -44,7 +44,7 @@ Test files are identified by the `*.spec.ts` pattern on sample folders. Examples
 
 3.  **Running sample:**
 
-      The plugin SDK sample tests work with the built plugin [hosted on a BBB Server](/README.md#hosting-the-plugin-on-a-bbb-server). You need to build the sample and you can either manually the copy the files into the correct directory inside the local container or just run
+      The plugin SDK sample tests work with the built plugin [hosted on a BBB Server](/README.md#hosting-the-plugin-on-a-bbb-server). You need to build the sample and you can either manually copy the files into the correct directory inside the local container or just run
 
       ```bash
       npm run copy-sample-to-container  # when inside sample's folder (with tests implemented)
