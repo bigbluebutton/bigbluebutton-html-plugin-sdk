@@ -1,5 +1,5 @@
 {
-  "requiredSdkVersion": "~0.0.59",
+  "requiredSdkVersion": "~0.0.78",
   "name": "SampleUiCommandsPlugin",
   "javascriptEntrypointUrl": "SampleUiCommandsPlugin.js",
   "localesBaseUrl": "https://cdn.dominio.com/pluginabc/"

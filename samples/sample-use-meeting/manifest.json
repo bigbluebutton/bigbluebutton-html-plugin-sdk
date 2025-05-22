@@ -1,14 +1,14 @@
 {
-  "requiredSdkVersion": "~0.0.59",
+  "requiredSdkVersion": "~0.0.78",
   "name": "SampleUseMeeting",
   "javascriptEntrypointUrl": "SampleUseMeeting.js",
   "localesBaseUrl": "https://cdn.dominio.com/pluginabc/",
   "eventPersistence": {
-      "isEnabled": true,
-      "maximumPayloadSizeInBytes": 1024,
-      "rateLimiting": {
-          "messagesAllowedPerSecond": 10,
-          "messagesAllowedPerMinute": 20
-      }
+    "isEnabled": true,
+    "maximumPayloadSizeInBytes": 1024,
+    "rateLimiting": {
+      "messagesAllowedPerSecond": 10,
+      "messagesAllowedPerMinute": 20
+    }
   }
 }

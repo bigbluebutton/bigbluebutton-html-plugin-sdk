@@ -1,5 +1,5 @@
 {
-  "requiredSdkVersion": "~0.0.59",
+  "requiredSdkVersion": "~0.0.78",
   "name": "SamplePresentationDropdownPlugin",
   "javascriptEntrypointUrl": "SamplePresentationDropdownPlugin.js",
   "localesBaseUrl": "https://cdn.dominio.com/pluginabc/"
