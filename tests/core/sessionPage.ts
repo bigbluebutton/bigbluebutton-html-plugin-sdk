@@ -107,6 +107,10 @@ export class SessionPage {
     return this.page.locator(selector);
   }
 
+  async waitForPluginLogger() {
+    return this.page.waitForEvent('console', (msg) => msg.text().includes('PluginLogger'));
+  }
+
   async hasText(selector: string, text: string, description: string, timeout = ELEMENT_WAIT_TIME) {
     const locator = this.getLocator(selector).first();
     await expect(locator, description).toContainText(text, { timeout });

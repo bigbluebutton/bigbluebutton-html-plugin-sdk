@@ -42,7 +42,7 @@ test.describe.parallel('Action bar', () => {
   test('should log expected message when custom SVG button is clicked', async ({ sampleTest }) => {
     await sampleTest.modPage.hasElement(e.actionsBarButtonCustomSvg, 'should display the button with custom SVG');
     const [consoleMessage] = await Promise.all([
-      sampleTest.modPage.page.waitForEvent('console'),
+      sampleTest.modPage.waitForPluginLogger(),
       sampleTest.modPage.page.click(e.actionsBarButtonCustomSvg),
     ]);
     expect(
@@ -57,7 +57,7 @@ test.describe.parallel('Action bar', () => {
     await inputLocator.focus();
     await inputLocator.click({ force: true });
     const [consoleMessage] = await Promise.all([
-      sampleTest.modPage.page.waitForEvent('console'),
+      sampleTest.modPage.waitForPluginLogger(),
       sampleTest.modPage.page.click('li[data-value="1"]'),
     ]);
 
@@ -85,7 +85,7 @@ test.describe.parallel('Action bar', () => {
     await sampleTest.modPage.hasElement(e.actionsBarButtonToggleGroup, 'should display the button with toggle group');
     const toggleGroupItemLocator = sampleTest.modPage.getLocator(e.actionsBarButtonToggleGroup).locator('button[value="1"]');
     const [consoleMessage] = await Promise.all([
-      sampleTest.modPage.page.waitForEvent('console'),
+      sampleTest.modPage.waitForPluginLogger(),
       toggleGroupItemLocator.click(),
     ]);
 

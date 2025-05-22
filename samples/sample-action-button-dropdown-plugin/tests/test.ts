@@ -12,7 +12,7 @@ export class ActionsButtonDropdown extends Sample {
     await this.modPage.hasElement(e.pluginButton, 'should display the button element injected by the plugin');
     await this.modPage.hasText(e.pluginButton, 'Button injected by plugin', 'should display the correct text on the injected button');
     const [consoleMessage] = await Promise.all([
-      this.modPage.page.waitForEvent('console'),
+      this.modPage.waitForPluginLogger(),
       this.modPage.page.click(e.pluginButton),
     ]);
     expect(
