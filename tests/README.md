@@ -42,14 +42,31 @@ Test files are identified by the `*.spec.ts` pattern on sample folders. Examples
       *   **`LOCAL_CONTAINER_NAME` (Optional):** The name of the local Docker container running the BigBlueButton server. This is useful when testing against a locally hosted instance of BigBlueButton in a containerized environment.
           *   Example: `LOCAL_CONTAINER_NAME=bbb-local-container`
 
-3.  **Running sample:**
+3.  **Publish sample:**
 
-      The plugin SDK sample tests work with the built plugin [hosted on a BBB Server](/README.md#hosting-the-plugin-on-a-bbb-server). You need to build the sample and you can either manually copy the files into the correct directory inside the local container or just run
+      The plugin SDK sample tests work with the built plugin [hosted on a BBB Server](/README.md#hosting-the-plugin-on-a-bbb-server).
+      - if working on SDK development (e.g. adding `data-test` attribute for testing purposes), you need to publish it to both SDK and core: see [the Building the SDK steps](https://github.com/bigbluebutton/bigbluebutton-html-plugin-sdk?tab=readme-ov-file#developing-the-sdk).
+      
+      You need to build the sample:
+      ```bash
+      # inside sample's folder (with tests implemented)
+      npm ci
+      npm run build-bundle
+      ```
+
+       and then you can either manually copy the built files (`/dist` folder) into the correct directory inside the local container (`/var/www/bigbluebutton-default/assets/plugins`) or just run:
 
       ```bash
-      npm run copy-sample-to-container  # when inside sample's folder (with tests implemented)
-      ./tests/core/scripts/copy-sample-to-container.sh <SAMPLE_PLUGIN_NAME> <LOCAL_CONTAINER> # when in the root
+      # when inside sample's folder
+      npm run copy-sample-to-container
       ```
+      or
+      ```bash
+      # when in the root
+      ./tests/core/scripts/copy-sample-to-container.sh <SAMPLE_PLUGIN_NAME> <LOCAL_CONTAINER>
+      ```
+
+      _Note: The entire SDK build process must be repeated whenever changes are made to the SDK or the BBB core. After updating the sample, the newly built files also need to be republished—both scripts mentioned above handle this by removing the old files and copying in the new ones._
 
 ## Running Tests
 
