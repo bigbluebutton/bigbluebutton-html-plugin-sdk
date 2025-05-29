@@ -1,6 +1,6 @@
 {
   "name": "bigbluebutton-html-plugin-sdk",
-  "version": "0.0.81",
+  "version": "0.0.82",
   "homepage": "https://github.com/bigbluebutton/bigbluebutton-html-plugin-sdk",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
