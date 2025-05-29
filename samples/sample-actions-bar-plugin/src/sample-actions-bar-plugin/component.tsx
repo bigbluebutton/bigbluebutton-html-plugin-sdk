@@ -42,10 +42,12 @@ function SampleActionsBarPlugin({
           pluginLogger.info('The actions bar button from plugin was clicked');
         },
         position: ActionsBarPosition.RIGHT,
+        dataTest: 'actionsBarButtonCustomSvg',
       });
     const separatorToUserListItem:
       ActionsBarInterface = new ActionsBarSeparator({
         position: ActionsBarPosition.RIGHT,
+        dataTest: 'actionsBarButtonSeparator',
       });
     const selectorItem: ActionsBarInterface = new ActionsBarSelector({
       title: 'Selector',
@@ -56,10 +58,12 @@ function SampleActionsBarPlugin({
       },
       position: ActionsBarPosition.RIGHT,
       width: 150, // To define a specific width, uncomment this line
+      dataTest: 'actionsBarButtonSelector',
     });
     const separatorIconItem: ActionsBarInterface = new ActionsBarSeparator({
       position: ActionsBarPosition.RIGHT,
       icon: 'whiteboard',
+      dataTest: 'actionsBarButtonSelectorIcon',
     });
     const toggleGroupItem: ActionsBarInterface = new ActionsBarToggleGroup({
       title: 'Toggle',
@@ -70,6 +74,7 @@ function SampleActionsBarPlugin({
       },
       position: ActionsBarPosition.RIGHT,
       // exclusive: false, // To allow for checking more than one option, uncomment this line
+      dataTest: 'actionsBarButtonToggleGroup',
     });
 
     pluginApi.setActionsBarItems([
