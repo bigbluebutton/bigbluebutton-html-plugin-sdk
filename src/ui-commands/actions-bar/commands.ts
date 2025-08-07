@@ -5,7 +5,7 @@ export const actionsBar = {
   /**
    * Decides whether to display the actions bar
    *
-   * @param setSpeakerLevelCommandArgumentsthe volume to which the core will set the speaker
+   * @param arg object containing the `displayActionBar` which is a boolean
    * level.
    * Refer to {@link SetDisplayActionBarCommandArguments} to understand the argument structure.
    */

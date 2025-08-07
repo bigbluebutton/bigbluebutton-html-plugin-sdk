@@ -56,7 +56,9 @@ function SampleFloatingWindowPlugin(
       pluginApi.setFloatingWindows([floatingWindow]);
     } else if (isMinimized && !isClosed) {
       const restoringButton: ActionsBarInterface = new ActionsBarButton({
-        icon: 'copy',
+        icon: {
+          iconName: 'copy',
+        },
         tooltip: 'Open private notes floating window',
         onClick: () => {
           setIsMinimized(false);

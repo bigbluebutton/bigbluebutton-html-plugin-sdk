@@ -6,6 +6,7 @@ import {
   ActionButtonDropdownSeparator,
   ActionButtonDropdownOption,
   pluginLogger,
+  ChangeEnforcedLayoutTypeEnum,
 } from 'bigbluebutton-html-plugin-sdk';
 
 import { SampleActionButtonDropdownPluginProps } from './types';
@@ -36,6 +37,61 @@ function SampleActionButtonDropdownPlugin(
           dataTest: 'actionDropdownButtonPlugin',
           onClick: () => {
             pluginLogger.info('Log that the button from sample-action-button-dropdown-plugin has been clicked');
+          },
+        }),
+        new ActionButtonDropdownOption({
+          label: 'Smart layout',
+          icon: 'copy',
+          tooltip: 'this is a button injected by plugin',
+          allowed: true,
+          onClick: () => {
+            pluginApi.uiCommands.layout.changeEnforcedLayout(
+              ChangeEnforcedLayoutTypeEnum.SMART_LAYOUT,
+            );
+          },
+        }),
+        new ActionButtonDropdownOption({
+          label: 'Media Only',
+          icon: 'copy',
+          tooltip: 'this is a button injected by plugin',
+          allowed: true,
+          onClick: () => {
+            pluginApi.uiCommands.layout.changeEnforcedLayout(
+              ChangeEnforcedLayoutTypeEnum.MEDIA_ONLY,
+            );
+          },
+        }),
+        new ActionButtonDropdownOption({
+          label: 'Participants and chat Only',
+          icon: 'copy',
+          tooltip: 'this is a button injected by plugin',
+          allowed: true,
+          onClick: () => {
+            pluginApi.uiCommands.layout.changeEnforcedLayout(
+              ChangeEnforcedLayoutTypeEnum.PARTICIPANTS_AND_CHAT_ONLY,
+            );
+          },
+        }),
+        new ActionButtonDropdownOption({
+          label: 'Presentation Only',
+          icon: 'copy',
+          tooltip: 'this is a button injected by plugin',
+          allowed: true,
+          onClick: () => {
+            pluginApi.uiCommands.layout.changeEnforcedLayout(
+              ChangeEnforcedLayoutTypeEnum.PRESENTATION_ONLY,
+            );
+          },
+        }),
+        new ActionButtonDropdownOption({
+          label: 'Video Focus',
+          icon: 'copy',
+          tooltip: 'this is a button injected by plugin',
+          allowed: true,
+          onClick: () => {
+            pluginApi.uiCommands.layout.changeEnforcedLayout(
+              ChangeEnforcedLayoutTypeEnum.VIDEO_FOCUS,
+            );
           },
         }),
       ]);

@@ -18,7 +18,8 @@
   },
   "scripts": {
     "build-bundle": "webpack --mode production",
-    "start": "webpack serve --mode development"
+    "start": "webpack serve --mode development",
+    "lint": "eslint ./src/*"
   },
   "browserslist": {
     "production": [

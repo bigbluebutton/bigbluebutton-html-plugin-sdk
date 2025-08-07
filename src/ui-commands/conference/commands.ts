@@ -6,7 +6,7 @@ export const conference = {
    * Sets the volume of the speakers in the conference to a certain level.
    * Needs to be a value between 0 and 1.
    *
-   * @param setSpeakerLevelCommandArgumentsthe volume to which the core will set the speaker
+   * @param setSpeakerLevelCommandArguments volume to which the core will set the speaker
    * level.
    * Refer to {@link SetSpeakerLevelCommandArguments} to understand the argument structure.
    */

@@ -13,8 +13,8 @@ function StickyNote({ initialTitle = '', initialTextContent = '' }: StickyNotePr
   const [inputVisible, setInputVisible] = useState(false);
   const [content, setContent] = useState(initialTextContent);
 
-  const handleOnChange = (newContent: React.FormEvent<HTMLInputElement>) => {
-    setContent(newContent.currentTarget.value);
+  const handleOnChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(e.currentTarget.value);
   };
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

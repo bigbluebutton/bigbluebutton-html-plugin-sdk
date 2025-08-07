@@ -16,6 +16,7 @@
   "scripts": {
     "build-bundle": "webpack --mode production",
     "start": "webpack serve --mode development",
+    "lint": "eslint ./src/*",
     "build:watch": "rm -rf dist && tsc -w --module CommonJS",
     "lint": "eslint ./src/*",
     "lint:fix": "npm run lint -- --fix"

@@ -1,8 +1,9 @@
 export enum LayoutEnum {
   CHANGE_ENFORCED_LAYOUT = 'CHANGE_ENFORCED_LAYOUT',
+  SET_ENFORCED_LAYOUT = 'SET_ENFORCED_LAYOUT',
 }
 
-export enum ChangeEnforcedLayoutTypeEnum {
+export enum EnforcedLayoutTypeEnum {
   CUSTOM_LAYOUT = 'CUSTOM_LAYOUT',
   SMART_LAYOUT = 'SMART_LAYOUT',
   PRESENTATION_FOCUS = 'PRESENTATION_FOCUS',
@@ -12,3 +13,7 @@ export enum ChangeEnforcedLayoutTypeEnum {
   PARTICIPANTS_AND_CHAT_ONLY = 'PARTICIPANTS_AND_CHAT_ONLY',
   MEDIA_ONLY = 'MEDIA_ONLY',
 }
+
+export const ChangeEnforcedLayoutTypeEnum = EnforcedLayoutTypeEnum;
+
+export type ChangeEnforcedLayoutTypeEnum = EnforcedLayoutTypeEnum;
