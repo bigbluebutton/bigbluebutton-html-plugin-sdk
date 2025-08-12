@@ -66,6 +66,7 @@ test.describe.parallel('Custom Subscription Hook', () => {
     expect(options.length, 'presentation should have more than 1 slide for the plugin to perform as expected').toBeGreaterThan(1);
     await skipSlideSelect.selectOption({ index: options.length - 1 });
     await expect(sampleTest.modPage.page.locator(e.nextSlide), 'should disable the next slide button when on the last slide').toBeDisabled();
+    await sampleTest.modPage.page.waitForTimeout(1000); // wait for next slide to be loaded
 
     const [consoleMessage2] = await Promise.all([
       sampleTest.modPage.waitForPluginLogger(),
