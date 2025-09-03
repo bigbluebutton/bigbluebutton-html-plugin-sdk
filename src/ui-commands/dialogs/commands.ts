@@ -1,21 +1,21 @@
 import { DialogsEnum } from './enums';
-import { SetHideMediaDialogsCommandArguments } from './types';
+import { SetHideDialogsCommandArguments } from './types';
 
 export const dialogs = {
   /**
-   * Sets whether to hide media dialogs or not (Both audio and video preview dialogs).
+   * Sets whether to hide  dialogs or not (Both audio and video preview dialogs).
    *
-   * @param setHideMediaDialogsCommandArguments whether to hide media dialogs or not.
-   * Refer to {@link SetHideMediaDialogsCommandArguments} to understand the argument structure.
+   * @param setHideDialogsCommandArguments whether to hide  dialogs or not.
+   * Refer to {@link SetHideDialogsCommandArguments} to understand the argument structure.
    */
-  setHideMediaDialogs: (
-    setHideMediaDialogsCommandArguments: SetHideMediaDialogsCommandArguments,
+  setHideDialogs: (
+    setHideDialogsCommandArguments: SetHideDialogsCommandArguments,
   ) => {
-    const { hidden } = setHideMediaDialogsCommandArguments;
+    const { hidden } = setHideDialogsCommandArguments;
     window.dispatchEvent(
       new CustomEvent<
-        SetHideMediaDialogsCommandArguments
-      >(DialogsEnum.SET_HIDE_MEDIA_DIALOGS, {
+        SetHideDialogsCommandArguments
+      >(DialogsEnum.SET_HIDE_DIALOGS, {
         detail: {
           hidden,
         },

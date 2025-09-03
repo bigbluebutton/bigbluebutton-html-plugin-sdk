@@ -1,9 +1,9 @@
-export interface SetHideMediaDialogsCommandArguments {
+export interface SetHideDialogsCommandArguments {
   hidden: boolean;
 }
 
 export interface UiCommandsDialogsObject {
-  setHideMediaDialogs: (
-    setHideMediaDialogsCommandArguments: SetHideMediaDialogsCommandArguments
+  setHideDialogs: (
+    setHideDialogsCommandArguments: SetHideDialogsCommandArguments
   ) => void;
 }
