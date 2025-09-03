@@ -1,0 +1,3 @@
+export enum DialogsEnum {
+  SET_HIDE_MEDIA_DIALOGS = 'SET_HIDE_MEDIA_DIALOGS_COMMAND',
+}

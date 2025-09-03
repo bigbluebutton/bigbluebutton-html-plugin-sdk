@@ -10,6 +10,7 @@ import { UiCommandsLayoutObject } from './layout/types';
 import { UiCommandsNavBarObject } from './nav-bar/types';
 import { UiCommandsCameraObject } from './camera/types';
 import { UiCommandsSidekickArea } from './sidekick-area/types';
+import { UiCommandsDialogsObject } from './dialogs/types';
 
 export interface UiCommands {
   layout: UiCommandsLayoutObject;
@@ -24,4 +25,5 @@ export interface UiCommands {
   userStatus: UiCommandsUserStatusObject;
   conference: UiCommandsConferenceObject;
   notification: UiCommandsNotificationObject;
+  dialogs: UiCommandsDialogsObject;
 }
