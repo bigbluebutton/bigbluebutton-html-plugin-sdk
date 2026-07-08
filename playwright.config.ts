@@ -4,6 +4,8 @@ import { server } from './tests/core/parameters';
 
 export default defineConfig({
   testDir: process.cwd(),
+  // Unit tests under tests/unit/ are run by Vitest (npm run test:unit)
+  testIgnore: ['**/tests/unit/**', '**/node_modules/**'],
   workers: CI ? 1 : undefined,
   retries: CI ? 1 : 0,
   fullyParallel: true,
