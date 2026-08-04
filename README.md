@@ -781,11 +781,12 @@ One other thing is that the type of the return is precisely the same type requir
     - setMenuBadge: this will set a badge for a specific generic content in the sidekick area;
     - removeMenuBadge: this will remove any badges that a specific generic content might have;
     - panel:
-      - open: this function will open the sidekick options panel automatically;
+      - open: this function will open the sidekick options panel automatically. It optionally takes the ID of a generic content sidekick area (as returned by `setGenericContentItems`) to open that specific panel;
+      - openCorePanel: this function will open one of the core panels, such as Polls, described by the `SidekickAreaCorePanelEnum`. Polls, Timer and Breakout are ignored unless the user could already open them from the sidebar navigation;
       - close: this function will close the sidekick options panel automatically (and also the sidebar content if open, to avoid inconsistencies in ui);
 - sidekick-options-container:
-  - open: this function will open the sidekick options panel automatically;
-  - close: this function will close the sidekick options panel automatically (and also the sidebar content if open, to avoid inconsistencies in ui);
+  - open: this function will open the sidekick options panel automatically (deprecated, use `sidekickArea.options.panel.open` instead);
+  - close: this function will close the sidekick options panel automatically (and also the sidebar content if open, to avoid inconsistencies in ui) (deprecated, use `sidekickArea.options.panel.close` instead);
 - user-status:
   - setAwayStatus: this function will set the away status of the user to a certain status;
 - captions:
@@ -835,6 +836,14 @@ One other thing is that the type of the return is precisely the same type requir
     pluginApi.uiCommands.sidekickArea.options.renameGenericContentSection(
       'my-content-id',
       'New Section Name'
+    );
+
+    // Open a specific sidekick panel
+    pluginApi.uiCommands.sidekickArea.options.panel.open('my-content-id');
+
+    // Open a core panel
+    pluginApi.uiCommands.sidekickArea.options.panel.openCorePanel(
+      SidekickAreaCorePanelEnum.POLL
     );
 
     // Camera commands
