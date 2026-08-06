@@ -869,11 +869,9 @@ So the idea is that we have a `uiCommands` object and at a point, there will be 
   - save: this function saves the given text, locale and caption type
   - addLocale: this function sends a locale to be added to the available options
 
-  - presentation:
-    - upload: uploads a new presentation to BigBlueButton;
-
-  - presentation:
-    - upload: uploads a new presentation to BigBlueButton;
+- presentation:
+  - upload: uploads a new presentation to BigBlueButton;
+  - insertPages: inserts pages into the current presentation at a given 1-based position (out-of-range values are clamped by the server: 1 prepends, totalPages + 1 appends). The content is the file to convert into pages; omitting it (or passing null) inserts a single blank page;
 
 **Example usage:**
 
@@ -931,6 +929,15 @@ So the idea is that we have a `uiCommands` object and at a point, there will be 
             locale: 'pt-BR',
             localeName: 'Portuguese (Brazil)',
           });
+        },
+      }),
+      new ActionButtonDropdownOption({
+        label: 'Insert pages',
+        icon: 'copy',
+        onClick: () => {
+          // Insert the pages of a PDF file at position 2 of the current presentation
+          // (pdfFile is a File object, e.g. taken from an input of type file)
+          pluginApi.serverCommands.presentation.insertPages(2, { file: pdfFile });
         },
       }),
     ]);
