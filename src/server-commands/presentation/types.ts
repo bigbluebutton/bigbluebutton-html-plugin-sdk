@@ -40,8 +40,8 @@ export interface ServerCommandsPresentationObject {
   upload: (uploadPresentationCommandArguments: UploadPresentationCommandArguments) => void;
   insertPages: (
     position: number,
+    content?: UploadPresentationContent | null,
     mimeType?: string,
     filename?: string,
-    content?: UploadPresentationContent | null,
   ) => void;
 }
