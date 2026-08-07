@@ -3,4 +3,4 @@ export { ChangeEnforcedLayoutTypeEnum, EnforcedLayoutTypeEnum } from './layout/e
 export { CaptionsLanguageEnum } from './captions/enums';
 export { ChatUiCommandsEnum } from './chat/enums';
 export { ScreenshareCommandsEnum } from './screenshare/enums';
-export { SidekickAreaCorePanelEnum } from './sidekick-area/options/panel/enums';
+export { SidekickAreaCorePanelEnum } from './sidekick-area/panel/enums';

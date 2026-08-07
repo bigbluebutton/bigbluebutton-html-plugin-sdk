@@ -1,22 +1,21 @@
-import { sidekickAreaOptionsPanel } from '../sidekick-area/options/panel/commands';
-import { UiCommandsSidekickOptionsContainerObject } from './types';
+import { SidekickOptionsContainerEnum } from './enums';
 
-export const sidekickOptionsContainer: UiCommandsSidekickOptionsContainerObject = {
+export const sidekickOptionsContainer = {
   /**
    * Opens the sidekick container automatically.
    *
-   * @deprecated Use `sidekickArea.options.panel.open` instead.
+   * @deprecated Use the new {@link sidekickArea} object instead.
    */
   open: () => {
-    sidekickAreaOptionsPanel.open();
+    window.dispatchEvent(new Event(SidekickOptionsContainerEnum.OPEN));
   },
 
   /**
-   * Closes the sidekick container (and sidebar content panel) automatically.
+   * Closes the sidekick container (and sidebard content panel) automatically.
    *
-   * @deprecated Use `sidekickArea.options.panel.close` instead.
+   * @deprecated Use the new {@link sidekickArea} object instead.
    */
   close: () => {
-    sidekickAreaOptionsPanel.close();
+    window.dispatchEvent(new Event(SidekickOptionsContainerEnum.CLOSE));
   },
 };
