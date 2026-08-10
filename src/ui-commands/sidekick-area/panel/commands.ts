@@ -1,49 +1,47 @@
 import { SidekickAreaCorePanelEnum, SidekickAreaPanelEnum } from './enums';
 import {
-  OpenSidekickAreaCorePanelCommandArguments,
-  OpenSidekickAreaPanelCommandArguments,
+  SidekickAreaPanelCommandArguments,
   UiCommandsSidekickAreaPanelObject,
 } from './types';
 
+const dispatch = (
+  command: SidekickAreaPanelEnum,
+  id?: string,
+  panel?: SidekickAreaCorePanelEnum,
+) => {
+  window.dispatchEvent(new CustomEvent<SidekickAreaPanelCommandArguments>(
+    command,
+    {
+      detail: {
+        id,
+        panel,
+      },
+    },
+  ));
+};
+
 export const sidekickAreaPanel: UiCommandsSidekickAreaPanelObject = {
   /**
-   * Opens a generic content sidekick area panel.
+   * Opens a panel in the sidekick area.
    *
-   * @param id Id of the generic content sidekick area, as returned by
-   * `pluginApi.setGenericContentItems`. When omitted, no panel is selected.
+   * @param id Id of a generic content sidekick area, as returned by
+   * `pluginApi.setGenericContentItems`.
+   * @param panel Core panel to open instead, read only when no id is given. Core
+   * panels the user could not open themselves, such as Polls for a viewer, are ignored.
    */
-  open: (id?: string) => {
-    window.dispatchEvent(new CustomEvent<OpenSidekickAreaPanelCommandArguments>(
-      SidekickAreaPanelEnum.OPEN,
-      {
-        detail: {
-          id,
-        },
-      },
-    ));
+  open: (id?: string, panel?: SidekickAreaCorePanelEnum) => {
+    dispatch(SidekickAreaPanelEnum.OPEN, id, panel);
   },
 
   /**
-   * Opens one of the core panels, such as Polls.
+   * Closes a panel in the sidekick area, but only if it is on display, so a plugin
+   * does not close a panel it does not own. Passing neither argument closes the
+   * sidekick area altogether.
    *
-   * @param panel Core panel to be opened. Polls, Timer and Breakout are ignored
-   * unless the user could already open them from the sidebar navigation.
+   * @param id Id of a generic content sidekick area.
+   * @param panel Core panel to close instead, read only when no id is given.
    */
-  openCorePanel: (panel: SidekickAreaCorePanelEnum) => {
-    window.dispatchEvent(new CustomEvent<OpenSidekickAreaCorePanelCommandArguments>(
-      SidekickAreaPanelEnum.OPEN_CORE_PANEL,
-      {
-        detail: {
-          panel,
-        },
-      },
-    ));
-  },
-
-  /**
-   * Closes the panel currently displayed in the sidekick area.
-   */
-  close: () => {
-    window.dispatchEvent(new Event(SidekickAreaPanelEnum.CLOSE));
+  close: (id?: string, panel?: SidekickAreaCorePanelEnum) => {
+    dispatch(SidekickAreaPanelEnum.CLOSE, id, panel);
   },
 };

@@ -784,9 +784,8 @@ One other thing is that the type of the return is precisely the same type requir
       - open: this function will open the sidekick options panel automatically;
       - close: this function will close the sidekick options panel automatically (and also the sidebar content if open, to avoid inconsistencies in ui);
   - panel:
-    - open: this function will open a generic content sidekick area panel. It optionally takes the ID of that area (as returned by `setGenericContentItems`) to select which one to open;
-    - openCorePanel: this function will open one of the core panels, such as Polls, described by the `SidekickAreaCorePanelEnum`. Polls, Timer and Breakout are ignored unless the user could already open them from the sidebar navigation;
-    - close: this function will close the panel currently displayed in the sidekick area;
+    - open: this function will open a panel in the sidekick area. It takes the ID of a generic content sidekick area (as returned by `setGenericContentItems`) as its first argument, or one of the `SidekickAreaCorePanelEnum` core panels as its second. Core panels the user could not open from the sidebar navigation themselves, such as Polls for a viewer, are ignored;
+    - close: this function will close a panel in the sidekick area. It takes the same arguments as `open`, and then only closes the panel if it is one of those on display, so a plugin does not close a panel it does not own. Passing neither closes the sidekick area altogether;
 - sidekick-options-container:
   - open: this function will open the sidekick options panel automatically;
   - close: this function will close the sidekick options panel automatically (and also the sidebar content if open, to avoid inconsistencies in ui);
@@ -841,13 +840,17 @@ One other thing is that the type of the return is precisely the same type requir
       'New Section Name'
     );
 
-    // Open a specific sidekick panel
+    // Open the plugin's own sidekick panel
     pluginApi.uiCommands.sidekickArea.panel.open('my-content-id');
 
     // Open a core panel
-    pluginApi.uiCommands.sidekickArea.panel.openCorePanel(
+    pluginApi.uiCommands.sidekickArea.panel.open(
+      undefined,
       SidekickAreaCorePanelEnum.POLL
     );
+
+    // Close it again, but only if it is still the one on display
+    pluginApi.uiCommands.sidekickArea.panel.close('my-content-id');
 
     // Camera commands
     pluginApi.uiCommands.camera.setSelfViewDisableAllDevices(true);

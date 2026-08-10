@@ -1,15 +1,11 @@
 import { SidekickAreaCorePanelEnum } from './enums';
 
 export interface UiCommandsSidekickAreaPanelObject {
-  open: (id?: string) => void;
-  openCorePanel: (panel: SidekickAreaCorePanelEnum) => void;
-  close: () => void;
+  open: (id?: string, panel?: SidekickAreaCorePanelEnum) => void;
+  close: (id?: string, panel?: SidekickAreaCorePanelEnum) => void;
 }
 
-export interface OpenSidekickAreaPanelCommandArguments {
+export interface SidekickAreaPanelCommandArguments {
   id?: string;
-}
-
-export interface OpenSidekickAreaCorePanelCommandArguments {
-  panel: SidekickAreaCorePanelEnum;
+  panel?: SidekickAreaCorePanelEnum;
 }
