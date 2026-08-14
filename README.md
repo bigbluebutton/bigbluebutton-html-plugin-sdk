@@ -576,7 +576,7 @@ So we have the `data`, which is different for each hook, that's why it's a gener
     if (chatMessages) {
       pluginLogger.info('Total messages:', chatMessages.length);
       chatMessages.forEach((msg) => {
-        pluginLogger.info(`Message from ${msg.senderName}: ${msg.message}`);
+        pluginLogger.info(`Message from ${msg.senderUserId} (${msg.senderRole}): ${msg.message}`);
       });
     }
   }, [chatMessages]);

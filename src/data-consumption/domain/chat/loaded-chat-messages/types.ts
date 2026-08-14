@@ -5,6 +5,8 @@ export interface LoadedChatMessage {
   message: string;
   messageId: string;
   senderUserId: string;
+  // Static throughout the meeting; null for system messages
+  senderRole: string | null;
   messageMetadata: string;
 }
 
