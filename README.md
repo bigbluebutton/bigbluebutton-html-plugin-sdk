@@ -783,6 +783,9 @@ One other thing is that the type of the return is precisely the same type requir
     - panel:
       - open: this function will open the sidekick options panel automatically;
       - close: this function will close the sidekick options panel automatically (and also the sidebar content if open, to avoid inconsistencies in ui);
+  - panel:
+    - open: this function will open a panel in the sidekick area. It takes the ID of a generic content sidekick area (as returned by `setGenericContentItems`), or one of the `SidekickAreaCorePanelEnum` core panels, as its only argument. Core panels the user could not open from the sidebar navigation themselves, such as Polls for a viewer, are ignored;
+    - close: this function will close a panel in the sidekick area. It takes the same argument as `open`, and then only closes the panel if it is the one on display, so a plugin does not close a panel it does not own. Passing no argument closes the sidekick area altogether;
 - sidekick-options-container:
   - open: this function will open the sidekick options panel automatically;
   - close: this function will close the sidekick options panel automatically (and also the sidebar content if open, to avoid inconsistencies in ui);
@@ -836,6 +839,15 @@ One other thing is that the type of the return is precisely the same type requir
       'my-content-id',
       'New Section Name'
     );
+
+    // Open the plugin's own sidekick panel
+    pluginApi.uiCommands.sidekickArea.panel.open('my-content-id');
+
+    // Open a core panel
+    pluginApi.uiCommands.sidekickArea.panel.open(SidekickAreaCorePanelEnum.POLL);
+
+    // Close it again, but only if it is still the one on display
+    pluginApi.uiCommands.sidekickArea.panel.close('my-content-id');
 
     // Camera commands
     pluginApi.uiCommands.camera.setSelfViewDisableAllDevices(true);
