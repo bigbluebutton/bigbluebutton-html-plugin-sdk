@@ -3,7 +3,6 @@
   "version": "0.1.26",
   "homepage": "https://github.com/bigbluebutton/bigbluebutton-html-plugin-sdk",
   "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
   "license": "LGPL-3.0",
   "repository": {
     "type": "git",
@@ -35,9 +34,7 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.33.0",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-watch": "^8.0.0",
     "jsdom": "^25.0.1",
-    "lint-staged": "11.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sha.js": "^2.4.11",
@@ -53,7 +50,7 @@
     "build:watch": "rm -rf dist && tsc -w --module CommonJS",
     "lint": "eslint . --ignore-pattern node_modules",
     "lint:fix": "npm run lint -- --fix",
-    "lint:watch": "watch 'yarn lint'",
+    "lint:watch": "watch 'npm run lint'",
     "test": "npx playwright test",
     "test:unit": "vitest run",
     "test:unit:watch": "vitest",
@@ -64,18 +61,12 @@
     "dist"
   ],
   "keywords": [
-    "react hook",
-    "react-hook",
-    "use",
-    "fetch",
-    "hook",
+    "bigbluebutton",
+    "plugin",
+    "sdk",
+    "typescript",
     "react",
-    "use hooks",
-    "graphql",
-    "mutation",
-    "query",
-    "useAxios",
-    "apollo"
+    "graphql"
   ],
   "dependencies": {
     "@apollo/client": "^3.8.7",
