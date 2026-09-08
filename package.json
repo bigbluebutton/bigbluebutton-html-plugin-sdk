@@ -24,7 +24,7 @@
     "@typescript-eslint/eslint-plugin": "^6.2.0",
     "@typescript-eslint/parser": "^6.2.0",
     "@vitejs/plugin-react": "^4.7.0",
-    "@vitest/coverage-v8": "^3.2.6",
+    "@vitest/coverage-v8": "^4.1.11",
     "axios": "^1.8.4",
     "dotenv": "^16.4.7",
     "eslint": "^8.45.0",
@@ -40,7 +40,7 @@
     "sha.js": "^2.4.11",
     "typescript": "^5.1.6",
     "vite": "^6.4.3",
-    "vitest": "^3.2.6",
+    "vitest": "^4.1.11",
     "watch": "^0.13.0",
     "xml2js": "^0.6.2"
   },
