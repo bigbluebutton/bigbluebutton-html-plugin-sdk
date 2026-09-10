@@ -63,6 +63,8 @@ import { useCustomMutation } from '../../data-creation/hook';
 import { UseCustomMutationFunction } from '../../data-creation/types';
 import { UseMeetingDataFunction } from '../../data-consumption/domain/meeting/meeting-data/types';
 import { useMeetingData } from '../../data-consumption/domain/meeting/meeting-data/hooks';
+import { UseTimerFunction } from '../../data-consumption/domain/timer/types';
+import { useTimer } from '../../data-consumption/domain/timer/hooks';
 
 declare const window: PluginBrowserWindow;
 
@@ -108,6 +110,7 @@ export abstract class BbbPluginSdk {
     pluginApi.useMeetingData = useMeetingData as UseMeetingDataFunction;
     pluginApi.useUsersBasicInfo = (() => useUsersBasicInfo()) as UseUsersBasicInfoFunction;
     pluginApi.useTalkingIndicator = (() => useTalkingIndicator()) as UseTalkingIndicatorFunction;
+    pluginApi.useTimer = (() => useTimer()) as UseTimerFunction;
     pluginApi.getJoinUrl = (params) => getJoinUrl(params);
     pluginApi.useLoadedChatMessages = (
       () => useLoadedChatMessages()) as UseLoadedChatMessagesFunction;

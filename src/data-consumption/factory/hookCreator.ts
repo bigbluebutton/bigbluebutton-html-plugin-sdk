@@ -37,7 +37,9 @@ export const createDataConsumptionHook = <T>(
       sortedStringify(hookArguments?.variables)
       !== sortedStringify(variablesState)
     ) {
-      setVariablesState(() => JSON.parse(sortedStringify(hookArguments?.variables)));
+      setVariablesState(() => (hookArguments?.variables === undefined
+        ? undefined
+        : JSON.parse(sortedStringify(hookArguments.variables))));
     }
   }
 

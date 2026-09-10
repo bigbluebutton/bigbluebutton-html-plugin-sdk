@@ -39,6 +39,7 @@ import { GetUiDataFunction } from '../../ui-data/getters/types';
 import { UseCustomQueryFunction } from '../../data-consumption/domain/shared/custom-query/types';
 import { UseCustomMutationFunction } from '../../data-creation/types';
 import { UseMeetingDataFunction } from '../../data-consumption/domain/meeting/meeting-data/types';
+import { UseTimerFunction } from '../../data-consumption/domain/timer/types';
 
 // Setter Functions for the API
 export type SetPresentationToolbarItems = (presentationToolbarItem:
@@ -200,6 +201,13 @@ export interface PluginApi {
    *
    */
   useTalkingIndicator?: UseTalkingIndicatorFunction;
+  /**
+   * Returns an object containing the current state of the meeting timer.
+   *
+   * @returns `GraphqlResponseWrapper` with the TimerData type.
+   *
+   */
+  useTimer?: UseTimerFunction;
   /**
    * Returns a boolean telling if the plugin should be unmounted or not based on the mounting
    * of the meeting. This means that if the meeting end or the user is ejected, this will
