@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "declaration": true,
     "esModuleInterop": true,
@@ -22,10 +21,7 @@
     "sourceMap": true,
     "strict": true,
     "target": "es5",
-    "rootDir":"./src",
-    "paths": {
-      "bigbluebutton-html-plugin-sdk/*": ["dist/cjs/*"],
-    }
+    "rootDir":"./src"
   },
   "include": [
     "src/**/*.ts"
