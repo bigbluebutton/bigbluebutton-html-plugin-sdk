@@ -9,4 +9,5 @@ export enum DataConsumptionHooks {
   TALKING_INDICATOR = 'Hooks::UseTalkingIndicator',
   CUSTOM_SUBSCRIPTION = 'Hooks::CustomSubscription',
   CUSTOM_QUERY = 'Hooks::CustomQuery',
+  TIMER = 'Hooks::UseTimer',
 }

@@ -116,6 +116,23 @@ describe('createDataConsumptionHook', () => {
       expect(variablesOf(subscribeEvents[1])).toEqual(PT_BR_VARIABLES);
     });
 
+    it('resubscribes without variables when they become undefined', () => {
+      const { rerender } = renderHook(
+        ({ variables }: { variables?: object }) => createDataConsumptionHook<CaptionData>(
+          DataConsumptionHooks.CUSTOM_SUBSCRIPTION,
+          { query: QUERY_WITH_ONE_VARIABLE, variables },
+        ),
+        { initialProps: { variables: EN_VARIABLES as object | undefined } },
+      );
+
+      rerender({ variables: undefined });
+
+      expect(unsubscribeEvents).toHaveLength(1);
+      expect(variablesOf(unsubscribeEvents[0])).toEqual(EN_VARIABLES);
+      expect(subscribeEvents).toHaveLength(2);
+      expect(variablesOf(subscribeEvents[1])).toBeUndefined();
+    });
+
     it('does not resubscribe when a rerender passes a new variables object with the same content', () => {
       const { rerender } = renderCustomSubscriptionHook({ locale: 'en' });
 
