@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 
 import {
+  parseVersion,
   nextVersion,
   distTagFor,
   compareVersions,
@@ -34,6 +35,30 @@ describe('nextVersion', () => {
     ['', '1.0', '1.0.0.0', 'v1.0.0', 'banana', '01.0.0'].forEach((input) => {
       expect(() => nextVersion(input)).toThrow();
     });
+  });
+});
+
+describe('a pre-release that carries no counter', () => {
+  // nextVersion cannot derive anything from "1.0.0-beta", and says so. That is not the same
+  // as the version being invalid: releasing it explicitly is how that case is handled, so
+  // everything except nextVersion has to accept it.
+  it('is still a valid version', () => {
+    expect(parseVersion('1.0.0-beta')).toEqual({
+      major: 1,
+      minor: 0,
+      patch: 0,
+      prerelease: ['beta'],
+    });
+  });
+
+  it('still resolves to its own dist-tag', () => {
+    expect(distTagFor('1.0.0-beta')).toBe('beta');
+  });
+
+  it('still orders against other versions', () => {
+    expect(compareVersions('1.0.0-beta', '0.1.26')).toBe(1);
+    expect(compareVersions('1.0.0-beta', '1.0.0')).toBe(-1);
+    expect(compareVersions('1.0.0-beta', '1.0.0-beta.1')).toBe(-1);
   });
 });
 

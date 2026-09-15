@@ -59,8 +59,11 @@ if [ -z "$REQUESTED_VERSION" ]; then
 else
     NEW_VERSION="$REQUESTED_VERSION"
 
-    # Reject a version that is not a version before anything else happens.
-    node "$THIS_SCRIPT_PATH/lib/version.js" next "$NEW_VERSION" > /dev/null
+    # Reject a version that is not a version before anything else happens. This asks whether
+    # the version is well formed, not whether a successor could be derived from it: a
+    # pre-release such as 1.0.0-beta carries no counter to move, and releasing it explicitly
+    # is exactly how that case is meant to be handled.
+    node "$THIS_SCRIPT_PATH/lib/version.js" validate "$NEW_VERSION" > /dev/null
 
     # Refuse a release that would not move the package forward. npm rejects a republished
     # version anyway, but it does so only after the build, and after the version was written.

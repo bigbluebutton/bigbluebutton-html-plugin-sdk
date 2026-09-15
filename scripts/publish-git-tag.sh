@@ -35,7 +35,7 @@ fi
 cd "$PROJECT_DIR"
 
 # Reject a version that is not a version, before touching git at all.
-node scripts/lib/version.js next "$VERSION" > /dev/null
+node scripts/lib/version.js validate "$VERSION" > /dev/null
 
 # Check that the tag is still free, so a re-run does not fail halfway through.
 if git rev-parse -q --verify "refs/tags/v$VERSION" > /dev/null; then

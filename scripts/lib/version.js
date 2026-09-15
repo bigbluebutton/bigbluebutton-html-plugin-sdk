@@ -14,6 +14,7 @@
  *   node scripts/lib/version.js next 1.0.0-beta.1     # -> 1.0.0-beta.2
  *   node scripts/lib/version.js dist-tag 1.0.0-beta.2 # -> beta
  *   node scripts/lib/version.js compare 1.0.0 0.9.9   # -> 1
+ *   node scripts/lib/version.js validate 1.0.0-beta   # -> 1.0.0-beta
  */
 
 const VERSION_PATTERN = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?$/;
@@ -208,6 +209,10 @@ function runCommandLine(argv) {
     next: { arity: 1, run: ([version]) => nextVersion(version) },
     'dist-tag': { arity: 1, run: ([version]) => distTagFor(version) },
     compare: { arity: 2, run: ([versionA, versionB]) => compareVersions(versionA, versionB) },
+    // Answers "is this a version?", which is a different question from "what follows it?".
+    // A pre-release such as 1.0.0-beta is a perfectly valid version to release even though
+    // nothing can be derived from it automatically.
+    validate: { arity: 1, run: ([version]) => { parseVersion(version); return version; } },
   };
 
   const selected = commands[command];
@@ -216,7 +221,8 @@ function runCommandLine(argv) {
     process.stderr.write(
       'Usage: node scripts/lib/version.js next <VERSION>\n'
       + '       node scripts/lib/version.js dist-tag <VERSION>\n'
-      + '       node scripts/lib/version.js compare <VERSION_A> <VERSION_B>\n',
+      + '       node scripts/lib/version.js compare <VERSION_A> <VERSION_B>\n'
+      + '       node scripts/lib/version.js validate <VERSION>\n',
     );
     process.exit(1);
   }
