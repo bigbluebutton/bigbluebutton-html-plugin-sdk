@@ -229,6 +229,41 @@ public:
 
 To setup and run the automated tests for the plugin SDK samples, check the [testing doc](/tests/README.md)
 
+## Releasing a New Version
+
+Releasing the SDK is a single command, run from the project root by a maintainer with publish rights on npm. It writes the new version, publishes the package, points the 23 sample projects at it, and then commits, tags and pushes the release.
+
+Called without an argument it releases the version that follows the current one: a stable version moves to the next patch, while a pre-release moves its own counter and stays on its channel.
+
+```bash
+./scripts/publish-version.sh
+# Releasing bigbluebutton-html-plugin-sdk 0.1.26 -> 0.1.27 (npm dist-tag: latest)
+```
+
+Called with a version it releases exactly that version, which is how a new pre-release channel is opened.
+
+```bash
+./scripts/publish-version.sh 1.0.0-beta.1
+# Releasing bigbluebutton-html-plugin-sdk 0.1.26 -> 1.0.0-beta.1 (npm dist-tag: beta)
+```
+
+The npm dist-tag follows from the version itself: a stable version is published as `latest`, and a pre-release under its own channel (`beta`, `rc`, and so on), so installing the package without asking for a tag keeps returning the stable release.
+
+Every invocation also takes `--dry-run`, which prints each step of the release, from `npm version` to the final `git push`, and ends with `[dry-run] nothing was published, committed or pushed`.
+
+```bash
+./scripts/publish-version.sh 1.0.0 --dry-run
+```
+
+Four guards stop a release before it changes anything:
+
+- a version that is not a version: `"1.0" is not a semantic version. Expected MAJOR.MINOR.PATCH, optionally followed by a pre-release such as -beta.1.`
+- a version that does not move the package forward: `Error: 0.1.26 is not higher than the current version 0.1.26.`
+- a git tag that is already taken: `Error: tag v0.1.27 already exists.`
+- a working tree with uncommitted changes: `Error: the working tree has uncommitted changes.`
+
+The two steps worth running on their own are separate scripts, and both take `--dry-run` as well: `./scripts/publish-to-npm.sh <VERSION>` publishes the package under the dist-tag the version implies, and `./scripts/publish-git-tag.sh <VERSION>` commits the version files, tags the commit and pushes the tag and the branch. The version arithmetic the three scripts share lives in `scripts/lib/version.js`.
+
 ## API
 
 ### Extensible UI areas
