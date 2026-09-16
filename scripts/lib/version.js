@@ -6,8 +6,14 @@
  * `$(("0-beta" + 1))` silently evaluates to 1, so the release either repeated the version it
  * was already on or walked backwards.
  *
+ * The parsing, the increment and the ordering come from the `semver` library. Two rules stay
+ * here because they are not semver's to decide: a pre-release carrying no numeric counter is
+ * refused instead of being started at ".0", and the npm dist-tag is derived from the
+ * pre-release channel.
+ *
  * Build metadata ("1.0.0+build.5") is deliberately not supported: npm ignores it when
- * resolving a version, and this repository has never published one.
+ * resolving a version, and this repository has never published one. `semver` accepts it and
+ * drops it, which is why parseVersion below is stricter than semver.
  *
  * Can be used as a module or from the command line:
  *
@@ -17,8 +23,8 @@
  *   node scripts/lib/version.js validate 1.0.0-beta   # -> 1.0.0-beta
  */
 
-const VERSION_PATTERN = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?$/;
-const NUMERIC_IDENTIFIER_PATTERN = /^(0|[1-9]\d*)$/;
+const semver = require('semver');
+
 const DIST_TAG_PATTERN = /^[a-zA-Z][a-zA-Z0-9-]*$/;
 
 /**
@@ -32,20 +38,29 @@ function parseVersion(version) {
     throw new TypeError(`Expected a version string, got ${typeof version}.`);
   }
 
-  const match = VERSION_PATTERN.exec(version.trim());
+  const trimmed = version.trim();
 
-  if (!match) {
+  // Comparing against the input rather than trusting a truthy answer: semver normalises what
+  // it accepts, so `valid("v1.0.0")` returns "1.0.0" and `valid("1.0.0+build.5")` returns
+  // "1.0.0". Only a version that comes back unchanged is one this repository can publish.
+  if (semver.valid(trimmed) !== trimmed) {
     throw new Error(
       `"${version}" is not a semantic version. Expected MAJOR.MINOR.PATCH, optionally followed `
       + 'by a pre-release such as -beta.1.',
     );
   }
 
+  const {
+    major, minor, patch, prerelease,
+  } = semver.parse(trimmed);
+
   return {
-    major: Number(match[1]),
-    minor: Number(match[2]),
-    patch: Number(match[3]),
-    prerelease: match[4] ? match[4].split('.') : [],
+    major,
+    minor,
+    patch,
+    // semver types the identifiers it parses, so "1.0.0-beta.1" yields ["beta", 1]. The
+    // exported shape is a list of strings.
+    prerelease: prerelease.map(String),
   };
 }
 
@@ -63,14 +78,20 @@ function nextVersion(currentVersion) {
   const {
     major, minor, patch, prerelease,
   } = parseVersion(currentVersion);
+  const version = currentVersion.trim();
 
   if (prerelease.length === 0) {
-    return `${major}.${minor}.${patch + 1}`;
+    return semver.inc(version, 'patch');
   }
 
-  const counter = prerelease[prerelease.length - 1];
+  // Asked to increment "1.0.0-beta", semver answers "1.0.0-beta.0", inventing a counter that
+  // was never published. The refusal below has to come first. Reading the identifiers as
+  // semver typed them is what tells a channel from a counter: "beta" stays a string, 1 does
+  // not.
+  const identifiers = semver.prerelease(version);
+  const counter = identifiers[identifiers.length - 1];
 
-  if (!NUMERIC_IDENTIFIER_PATTERN.test(counter)) {
+  if (typeof counter !== 'number') {
     throw new Error(
       `"${currentVersion}" is a pre-release with no numeric counter to increment. Pass the `
       + `version you want explicitly, for example "${major}.${minor}.${patch}-`
@@ -78,9 +99,7 @@ function nextVersion(currentVersion) {
     );
   }
 
-  const bumped = prerelease.slice(0, -1).concat(String(Number(counter) + 1));
-
-  return `${major}.${minor}.${patch}-${bumped.join('.')}`;
+  return semver.inc(version, 'prerelease');
 }
 
 /**
@@ -112,34 +131,6 @@ function distTagFor(version) {
 }
 
 /**
- * Compares two pre-release identifiers following the semantic versioning precedence rules:
- * numeric identifiers compare numerically, everything else compares as text, and a numeric
- * identifier always ranks below an alphanumeric one.
- */
-function comparePrereleaseIdentifiers(identifierA, identifierB) {
-  const aIsNumeric = NUMERIC_IDENTIFIER_PATTERN.test(identifierA);
-  const bIsNumeric = NUMERIC_IDENTIFIER_PATTERN.test(identifierB);
-
-  if (aIsNumeric && bIsNumeric) {
-    return Math.sign(Number(identifierA) - Number(identifierB));
-  }
-
-  if (aIsNumeric) {
-    return -1;
-  }
-
-  if (bIsNumeric) {
-    return 1;
-  }
-
-  if (identifierA === identifierB) {
-    return 0;
-  }
-
-  return identifierA < identifierB ? -1 : 1;
-}
-
-/**
  * Orders two versions: -1 if the first is lower, 1 if it is higher, 0 if they are equal.
  *
  * Used to refuse a release that would not move the package forward.
@@ -149,46 +140,12 @@ function comparePrereleaseIdentifiers(identifierA, identifierB) {
  * @returns {number}
  */
 function compareVersions(versionA, versionB) {
-  const parsedA = parseVersion(versionA);
-  const parsedB = parseVersion(versionB);
-  const coreParts = ['major', 'minor', 'patch'];
+  // Validated here rather than left to semver so that an invalid version is reported the same
+  // way it is everywhere else in this file.
+  parseVersion(versionA);
+  parseVersion(versionB);
 
-  for (let i = 0; i < coreParts.length; i += 1) {
-    const difference = Math.sign(parsedA[coreParts[i]] - parsedB[coreParts[i]]);
-
-    if (difference !== 0) {
-      return difference;
-    }
-  }
-
-  // A version carrying a pre-release ranks below the same version without one.
-  if (parsedA.prerelease.length === 0 || parsedB.prerelease.length === 0) {
-    return Math.sign(parsedB.prerelease.length - parsedA.prerelease.length);
-  }
-
-  const identifierCount = Math.max(parsedA.prerelease.length, parsedB.prerelease.length);
-
-  for (let i = 0; i < identifierCount; i += 1) {
-    // The version that runs out of identifiers first is the lower one.
-    if (parsedA.prerelease[i] === undefined) {
-      return -1;
-    }
-
-    if (parsedB.prerelease[i] === undefined) {
-      return 1;
-    }
-
-    const difference = comparePrereleaseIdentifiers(
-      parsedA.prerelease[i],
-      parsedB.prerelease[i],
-    );
-
-    if (difference !== 0) {
-      return difference;
-    }
-  }
-
-  return 0;
+  return semver.compare(versionA.trim(), versionB.trim());
 }
 
 module.exports = {

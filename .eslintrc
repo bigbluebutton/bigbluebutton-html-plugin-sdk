@@ -43,6 +43,22 @@
   },
   "overrides": [
     {
+      // Release tooling: run with node by the publish scripts and never bundled into dist,
+      // so it is CommonJS and its dependencies are development ones.
+      "files": [
+        "scripts/**"
+      ],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off",
+        "import/no-extraneous-dependencies": [
+          "error",
+          {
+            "devDependencies": true
+          }
+        ]
+      }
+    },
+    {
       "files": [
         "playwright.config.ts",
         "vitest.config.ts",
