@@ -5,45 +5,37 @@
 #
 # Usage: ./scripts/publish-git-tag.sh <VERSION> [--dry-run]
 
-# Set the "-e" flag to make the script exit immediately if any command fails.
 set -e
 
-# Get the path of the directory containing this script.
 THIS_SCRIPT_PATH=$(dirname "$(readlink -f "$0")")
-
-# Calculate the absolute path of the project directory.
 PROJECT_DIR=$(realpath "$THIS_SCRIPT_PATH/..")
 
-# The version being recorded, and the optional dry-run flag.
 VERSION="$1"
 DRY_RUN_FLAG="$2"
 
-# Check if the required command line argument is missing.
 if [ -z "$VERSION" ]; then
     echo "Usage: $0 <VERSION> [--dry-run]"
     exit 1
 fi
 
-# Check that the second argument, when given, is the flag this script knows.
 if [ -n "$DRY_RUN_FLAG" ] && [ "$DRY_RUN_FLAG" != "--dry-run" ]; then
     echo "Error: unknown option \"$DRY_RUN_FLAG\"."
     echo "Usage: $0 <VERSION> [--dry-run]"
     exit 1
 fi
 
-# Change the working directory to the project directory.
 cd "$PROJECT_DIR"
 
-# Reject a version that is not a version, before touching git at all.
+# This script also runs on its own, so it rejects a version that is not a version before
+# touching git at all, and checks that the tag is still free.
 node scripts/lib/version.js validate "$VERSION" > /dev/null
 
-# Check that the tag is still free, so a re-run does not fail halfway through.
 if git rev-parse -q --verify "refs/tags/v$VERSION" > /dev/null; then
     echo "Error: tag v$VERSION already exists."
     exit 1
 fi
 
-# Collect the files that carry the version number and are actually present.
+# The samples do not all carry both files, so only the ones present are committed.
 FILES_TO_COMMIT=(package.json package-lock.json)
 
 for sample in samples/*/; do
@@ -63,6 +55,7 @@ if [ "$DRY_RUN_FLAG" = "--dry-run" ]; then
     exit 0
 fi
 
+# --- commit, tag and push to github ---
 git add "${FILES_TO_COMMIT[@]}"
 
 git commit -m "Bump version to $VERSION"
@@ -73,5 +66,5 @@ git push origin "v$VERSION"
 
 git push
 
-# Print a message indicating the version was recorded.
 echo "Committed, tagged and pushed v$VERSION"
+# --- end commit, tag and push to github ---

@@ -1,21 +1,15 @@
 /**
  * Version arithmetic shared by the publish scripts.
  *
- * This lives in Node rather than in the shell because parsing a semantic version in bash is
- * exactly what used to break: `cut -d. -f3` on "1.0.0-beta.1" yields "0-beta", and
- * `$(("0-beta" + 1))` silently evaluates to 1, so the release either repeated the version it
- * was already on or walked backwards.
+ * It lives in Node because parsing a version in bash is what used to break: `cut -d. -f3` on
+ * "1.0.0-beta.1" yields "0-beta", and `$(("0-beta" + 1))` silently evaluates to 1.
  *
- * The parsing, the increment and the ordering come from the `semver` library. Two rules stay
- * here because they are not semver's to decide: a pre-release carrying no numeric counter is
- * refused instead of being started at ".0", and the npm dist-tag is derived from the
- * pre-release channel.
+ * The parsing, the increment and the ordering come from `semver`. What stays here is what is
+ * not semver's to decide: a pre-release with no numeric counter is refused rather than started
+ * at ".0", the npm dist-tag is derived from the pre-release channel, and a version semver only
+ * accepts by normalising it ("v1.0.0", "1.0.0+build.5") is refused.
  *
- * Build metadata ("1.0.0+build.5") is deliberately not supported: npm ignores it when
- * resolving a version, and this repository has never published one. `semver` accepts it and
- * drops it, which is why parseVersion below is stricter than semver.
- *
- * Can be used as a module or from the command line:
+ * Usable as a module or from the command line:
  *
  *   node scripts/lib/version.js next 1.0.0-beta.1     # -> 1.0.0-beta.2
  *   node scripts/lib/version.js dist-tag 1.0.0-beta.2 # -> beta
@@ -28,10 +22,8 @@ const semver = require('semver');
 const DIST_TAG_PATTERN = /^[a-zA-Z][a-zA-Z0-9-]*$/;
 
 /**
- * Splits a version into its parts, refusing anything that is not a semantic version.
- *
- * @param {string} version e.g. "0.1.26" or "1.0.0-beta.1"
- * @returns {{major: number, minor: number, patch: number, prerelease: string[]}}
+ * Splits a version such as "1.0.0-beta.1" into its parts, refusing anything that is not a
+ * semantic version.
  */
 function parseVersion(version) {
   if (typeof version !== 'string') {
@@ -40,9 +32,8 @@ function parseVersion(version) {
 
   const trimmed = version.trim();
 
-  // Comparing against the input rather than trusting a truthy answer: semver normalises what
-  // it accepts, so `valid("v1.0.0")` returns "1.0.0" and `valid("1.0.0+build.5")` returns
-  // "1.0.0". Only a version that comes back unchanged is one this repository can publish.
+  // Compared against the input rather than trusted for being truthy: semver normalises what it
+  // accepts, so only a version that comes back unchanged is one this repository can publish.
   if (semver.valid(trimmed) !== trimmed) {
     throw new Error(
       `"${version}" is not a semantic version. Expected MAJOR.MINOR.PATCH, optionally followed `
@@ -58,25 +49,22 @@ function parseVersion(version) {
     major,
     minor,
     patch,
-    // semver types the identifiers it parses, so "1.0.0-beta.1" yields ["beta", 1]. The
-    // exported shape is a list of strings.
+    // semver types what it parses, so "1.0.0-beta.1" yields ["beta", 1]; this shape is strings.
     prerelease: prerelease.map(String),
   };
 }
 
 /**
- * The version that follows the given one.
- *
- * A stable version moves to the next patch (0.1.26 -> 0.1.27). A pre-release moves its own
- * counter instead, staying on the same channel (1.0.0-beta.1 -> 1.0.0-beta.2), because a
- * pre-release exists precisely to be iterated before the release it precedes.
- *
- * @param {string} currentVersion
- * @returns {string}
+ * The version that follows the given one. A stable version moves to the next patch
+ * (0.1.26 -> 0.1.27); a pre-release moves its own counter and stays on its channel
+ * (1.0.0-beta.1 -> 1.0.0-beta.2), because a pre-release exists to be iterated before the
+ * release it precedes.
  */
 function nextVersion(currentVersion) {
   const version = currentVersion.trim();
 
+  // Called for the refusal, not for the parts: semver.prerelease below answers null both for a
+  // stable version and for something that is not a version at all.
   parseVersion(version);
 
   const identifiers = semver.prerelease(version);
@@ -99,13 +87,9 @@ function nextVersion(currentVersion) {
 }
 
 /**
- * The npm dist-tag a version should be published under.
- *
- * A stable version takes "latest". A pre-release takes its own channel ("beta", "rc", ...), so
- * that installing the package without asking for a tag keeps returning the stable release.
- *
- * @param {string} version
- * @returns {string}
+ * The npm dist-tag a version should be published under: "latest" for a stable version, its own
+ * channel ("beta", "rc", ...) for a pre-release, so that installing the package without asking
+ * for a tag keeps returning the stable release.
  */
 function distTagFor(version) {
   const { prerelease } = parseVersion(version);
@@ -127,17 +111,11 @@ function distTagFor(version) {
 }
 
 /**
- * Orders two versions: -1 if the first is lower, 1 if it is higher, 0 if they are equal.
- *
- * Used to refuse a release that would not move the package forward.
- *
- * @param {string} versionA
- * @param {string} versionB
- * @returns {number}
+ * Orders two versions: -1 if the first is lower, 1 if it is higher, 0 if they are equal. Used
+ * to refuse a release that would not move the package forward.
  */
 function compareVersions(versionA, versionB) {
-  // Validated here rather than left to semver so that an invalid version is reported the same
-  // way it is everywhere else in this file.
+  // semver.compare accepts versions this repository does not, such as "v1.0.0".
   parseVersion(versionA);
   parseVersion(versionB);
 
@@ -162,9 +140,8 @@ function runCommandLine(argv) {
     next: { arity: 1, run: ([version]) => nextVersion(version) },
     'dist-tag': { arity: 1, run: ([version]) => distTagFor(version) },
     compare: { arity: 2, run: ([versionA, versionB]) => compareVersions(versionA, versionB) },
-    // Answers "is this a version?", which is a different question from "what follows it?".
-    // A pre-release such as 1.0.0-beta is a perfectly valid version to release even though
-    // nothing can be derived from it automatically.
+    // "Is this a version?", a different question from "what follows it?": 1.0.0-beta is valid
+    // to release even though nothing can be derived from it automatically.
     validate: { arity: 1, run: ([version]) => { parseVersion(version); return version; } },
   };
 
