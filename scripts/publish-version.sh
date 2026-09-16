@@ -58,23 +58,18 @@ if [ -z "$REQUESTED_VERSION" ]; then
     NEW_VERSION=$(node "$THIS_SCRIPT_PATH/lib/version.js" next "$CURRENT_VERSION")
 else
     NEW_VERSION="$REQUESTED_VERSION"
-
-    # Reject a version that is not a version before anything else happens. This asks whether
-    # the version is well formed, not whether a successor could be derived from it: a
-    # pre-release such as 1.0.0-beta carries no counter to move, and releasing it explicitly
-    # is exactly how that case is meant to be handled.
-    node "$THIS_SCRIPT_PATH/lib/version.js" validate "$NEW_VERSION" > /dev/null
-
-    # Refuse a release that would not move the package forward. npm rejects a republished
-    # version anyway, but it does so only after the build, and after the version was written.
-    if [ "$(node "$THIS_SCRIPT_PATH/lib/version.js" compare "$NEW_VERSION" "$CURRENT_VERSION")" != "1" ]; then
-        echo "Error: $NEW_VERSION is not higher than the current version $CURRENT_VERSION."
-        exit 1
-    fi
 fi
 
-# Resolve the npm dist-tag that goes with this version.
+# Resolving the dist-tag also rejects a version this repository cannot publish, which is why
+# it comes before the comparison below.
 DIST_TAG=$(node "$THIS_SCRIPT_PATH/lib/version.js" dist-tag "$NEW_VERSION")
+
+# Refuse a release that would not move the package forward. npm rejects a republished
+# version anyway, but it does so only after the build, and after the version was written.
+if [ "$(node "$THIS_SCRIPT_PATH/lib/version.js" compare "$NEW_VERSION" "$CURRENT_VERSION")" != "1" ]; then
+    echo "Error: $NEW_VERSION is not higher than the current version $CURRENT_VERSION."
+    exit 1
+fi
 
 # Check that the tag is still free, so the release does not fail after publishing to npm.
 if git rev-parse -q --verify "refs/tags/v$NEW_VERSION" > /dev/null; then

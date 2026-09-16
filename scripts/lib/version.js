@@ -75,27 +75,23 @@ function parseVersion(version) {
  * @returns {string}
  */
 function nextVersion(currentVersion) {
-  const {
-    major, minor, patch, prerelease,
-  } = parseVersion(currentVersion);
   const version = currentVersion.trim();
 
-  if (prerelease.length === 0) {
+  parseVersion(version);
+
+  const identifiers = semver.prerelease(version);
+
+  if (!identifiers) {
     return semver.inc(version, 'patch');
   }
 
   // Asked to increment "1.0.0-beta", semver answers "1.0.0-beta.0", inventing a counter that
-  // was never published. The refusal below has to come first. Reading the identifiers as
-  // semver typed them is what tells a channel from a counter: "beta" stays a string, 1 does
-  // not.
-  const identifiers = semver.prerelease(version);
-  const counter = identifiers[identifiers.length - 1];
-
-  if (typeof counter !== 'number') {
+  // was never published, so the refusal has to come first. Reading the identifiers as semver
+  // typed them is what tells a channel from a counter: "beta" stays a string, 1 does not.
+  if (typeof identifiers[identifiers.length - 1] !== 'number') {
     throw new Error(
       `"${currentVersion}" is a pre-release with no numeric counter to increment. Pass the `
-      + `version you want explicitly, for example "${major}.${minor}.${patch}-`
-      + `${prerelease.join('.')}.1".`,
+      + `version you want explicitly, for example "${version}.1".`,
     );
   }
 
