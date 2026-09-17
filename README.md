@@ -263,9 +263,23 @@ Five guards stop a release before it changes anything:
 - a git tag that is already taken: `Error: tag v0.1.27 already exists.`
 - a working tree with uncommitted changes: `Error: the working tree has uncommitted changes.`
 
-The branch guard reads the remote tip over the network to confirm the branch is in sync, and under `--dry-run` it only reports what a real run would refuse, so a dry run still works from any branch or clone.
+The branch guard reads the remote tip over the network to confirm the branch is in sync, and under `--dry-run` it only reports what a real run would refuse, so a dry run still works from any branch or clone. The "not higher" and "uncommitted changes" guards belong to the npm stage: the git-only re-run described below skips them by design.
 
-The two steps worth running on their own are separate scripts, and both take `--dry-run` as well: `./scripts/publish-to-npm.sh <VERSION>` publishes the package under the dist-tag the version implies, and `./scripts/publish-git-tag.sh <VERSION>` commits the version files, tags the commit and pushes the tag and the branch. Each of them starts with the branch guard too, since each publishes something on its own; the guard lives in `scripts/lib/check-release-branch.sh`. The version arithmetic the three scripts share lives in `scripts/lib/version.js`.
+The two stages of the release can be toggled off independently through environment variables, and both honor `--dry-run`:
+
+```bash
+PUBLISH_TO_NPMJS=false ./scripts/publish-version.sh
+```
+
+finishes a release whose npm publish already succeeded: it accepts the version package.json already holds (and the uncommitted version files the earlier run left behind), and only points the samples at the published version, commits, tags and pushes.
+
+```bash
+PUBLISH_TO_GITHUB=false ./scripts/publish-version.sh
+```
+
+publishes to npm without recording the release in git.
+
+The version arithmetic lives in `scripts/lib/version.js`, and the branch guard in `scripts/lib/check-release-branch.sh`.
 
 ## API
 
