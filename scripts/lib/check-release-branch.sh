@@ -69,7 +69,8 @@ if [ "$REMOTE_REPOSITORY" != "$MAIN_REPOSITORY" ]; then
         "Releases leave from a clone paired with $MAIN_REPOSITORY, so everyone releases the same thing."
 fi
 
-if [ "$(node -pe "require('$THIS_SCRIPT_PATH/release-branches.json').releaseBranches.includes('$REMOTE_BRANCH')")" != "true" ]; then
+# The branch name is untrusted input, so it is passed as data, never interpolated into source.
+if [ "$(node -e "const {releaseBranches} = require('$THIS_SCRIPT_PATH/release-branches.json'); process.stdout.write(String(releaseBranches.includes(process.argv[1])))" "$REMOTE_BRANCH")" != "true" ]; then
     refuse "branch $BRANCH tracks $REMOTE/$REMOTE_BRANCH, which is not a release branch of $MAIN_REPOSITORY" \
         "The release branches are $RELEASE_BRANCHES; a new release line is added in scripts/lib/release-branches.json."
 fi
