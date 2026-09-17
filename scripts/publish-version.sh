@@ -40,6 +40,10 @@ done
 
 cd "$PROJECT_DIR"
 
+# The branch is checked before anything else, so a release from the wrong branch or
+# clone stops while nothing has been changed yet.
+"$THIS_SCRIPT_PATH/lib/check-release-branch.sh" $DRY_RUN_FLAG
+
 DEPENDENCY_NAME=$(node -pe "require('./package.json').name")
 CURRENT_VERSION=$(node -pe "require('./package.json').version")
 

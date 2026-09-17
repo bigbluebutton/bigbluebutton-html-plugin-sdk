@@ -29,6 +29,10 @@ fi
 
 cd "$PROJECT_DIR"
 
+# The branch is checked here too, so this script cannot publish from the wrong branch
+# or clone when it runs on its own.
+"$THIS_SCRIPT_PATH/lib/check-release-branch.sh" $DRY_RUN_FLAG
+
 # Resolving the dist-tag also rejects a version npm could not publish sanely.
 DIST_TAG=$(node scripts/lib/version.js dist-tag "$VERSION")
 

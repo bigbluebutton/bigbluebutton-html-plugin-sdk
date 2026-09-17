@@ -26,6 +26,10 @@ fi
 
 cd "$PROJECT_DIR"
 
+# The branch is checked here too, so tagging from the wrong branch or clone fails
+# before anything is committed or pushed.
+"$THIS_SCRIPT_PATH/lib/check-release-branch.sh" $DRY_RUN_FLAG
+
 # This script also runs on its own, so it rejects a version that is not a version before
 # touching git at all, and checks that the tag is still free.
 node scripts/lib/version.js validate "$VERSION" > /dev/null

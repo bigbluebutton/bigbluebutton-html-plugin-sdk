@@ -255,14 +255,17 @@ Every invocation also takes `--dry-run`, which prints each step of the release, 
 ./scripts/publish-version.sh 1.0.0 --dry-run
 ```
 
-Four guards stop a release before it changes anything:
+Five guards stop a release before it changes anything:
 
+- a branch that is not a release branch of the main repository, in sync with it: `Error: branch main tracks origin/main, which is not a release branch of bigbluebutton/bigbluebutton-html-plugin-sdk.` The main repository and its release branches are declared in `scripts/lib/release-branches.json`, so a new release line is a one-line addition there.
 - a version that is not a version: `"1.0" is not a semantic version. Expected MAJOR.MINOR.PATCH, optionally followed by a pre-release such as -beta.1.`
 - a version that does not move the package forward: `Error: 0.1.26 is not higher than the current version 0.1.26.`
 - a git tag that is already taken: `Error: tag v0.1.27 already exists.`
 - a working tree with uncommitted changes: `Error: the working tree has uncommitted changes.`
 
-The two steps worth running on their own are separate scripts, and both take `--dry-run` as well: `./scripts/publish-to-npm.sh <VERSION>` publishes the package under the dist-tag the version implies, and `./scripts/publish-git-tag.sh <VERSION>` commits the version files, tags the commit and pushes the tag and the branch. The version arithmetic the three scripts share lives in `scripts/lib/version.js`.
+The branch guard reads the remote tip over the network to confirm the branch is in sync, and under `--dry-run` it only reports what a real run would refuse, so a dry run still works from any branch or clone.
+
+The two steps worth running on their own are separate scripts, and both take `--dry-run` as well: `./scripts/publish-to-npm.sh <VERSION>` publishes the package under the dist-tag the version implies, and `./scripts/publish-git-tag.sh <VERSION>` commits the version files, tags the commit and pushes the tag and the branch. Each of them starts with the branch guard too, since each publishes something on its own; the guard lives in `scripts/lib/check-release-branch.sh`. The version arithmetic the three scripts share lives in `scripts/lib/version.js`.
 
 ## API
 
