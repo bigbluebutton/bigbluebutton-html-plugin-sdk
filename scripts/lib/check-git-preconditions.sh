@@ -1,16 +1,51 @@
 #!/bin/bash
 
-# This script refuses to release from the wrong place: the current branch has to track a
-# release branch of the main repository, and be in sync with it. Which repository is the
-# main one, and which of its branches are releasable, is declared in release-branches.json
-# next to this script.
+# Git preconditions of a release: the check below refuses to release from the wrong branch or
+# clone, and the URL helpers are shared with the remote resolution in publish-version.sh.
 #
-# The comparisons are made on the remote side: the remote is identified by the owner/name
-# its URL ends in, which matches https, ssh and local paths all the same way, and the
-# branch by the name it has on that remote, which is not always the local name. Checking
-# the sync reads the remote tip over the network.
-#
-# Usage: ./scripts/lib/check-release-branch.sh [--dry-run]
+# Usage: ./scripts/lib/check-git-preconditions.sh [--dry-run]
+
+# The owner/name a remote URL points at: drop a trailing .git, keep the last two segments.
+# Normalizes https, ssh and local-path URLs the same way.
+repository_of_remote_url() {
+    printf '%s' "$1" | sed 's/\.git$//' | awk -F'[/:]' '{print $(NF-1) "/" $NF}'
+}
+
+# Whether a URL is ssh: the ssh:// scheme, or git's scp-like host:path form (colon before any slash).
+is_ssh_remote_url() {
+    case "$1" in
+        ssh://*) return 0 ;;
+        *://*) return 1 ;;
+        *:*)
+            case "${1%%:*}" in
+                */*) return 1 ;;
+                ?*) return 0 ;;
+                *) return 1 ;;
+            esac
+            ;;
+        *) return 1 ;;
+    esac
+}
+
+# Remotes whose URL is the given repository, in git remote order; unreadable URLs are skipped.
+main_repository_remotes() {
+    main_repository="$1"
+
+    for remote in $(git remote); do
+        if ! url=$(git remote get-url "$remote" 2> /dev/null); then
+            continue
+        fi
+
+        if [ "$(repository_of_remote_url "$url")" = "$main_repository" ]; then
+            printf '%s\n' "$remote"
+        fi
+    done
+
+    return 0
+}
+
+# publish-version.sh sources this file for the helpers above; the check below runs on execution.
+[ "${BASH_SOURCE[0]}" = "$0" ] || return 0
 
 set -e
 
@@ -62,7 +97,7 @@ if ! REMOTE_URL=$(git remote get-url "$REMOTE" 2> /dev/null); then
         "Releases leave from a release branch ($RELEASE_BRANCHES) of $MAIN_REPOSITORY."
 fi
 
-REMOTE_REPOSITORY=$(printf '%s' "$REMOTE_URL" | sed 's/\.git$//' | awk -F'[/:]' '{print $(NF-1) "/" $NF}')
+REMOTE_REPOSITORY=$(repository_of_remote_url "$REMOTE_URL")
 
 if [ "$REMOTE_REPOSITORY" != "$MAIN_REPOSITORY" ]; then
     refuse "branch $BRANCH tracks $UPSTREAM_REF on $REMOTE_URL, which is not the main repository $MAIN_REPOSITORY" \
