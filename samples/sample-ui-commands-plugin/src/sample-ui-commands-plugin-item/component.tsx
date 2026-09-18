@@ -99,7 +99,7 @@ function SampleUiCommandsPlugin(
       }),
       new MediaAreaOption({
         label: 'Stop screenshare',
-        icon: 'copy',
+        icon: { iconName: 'desktop_off' },
         tooltip: '',
         dataTest: 'stopScreenshareButton',
         allowed: true,
