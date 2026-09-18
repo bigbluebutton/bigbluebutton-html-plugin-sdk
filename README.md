@@ -231,7 +231,7 @@ To setup and run the automated tests for the plugin SDK samples, check the [test
 
 ## Releasing a New Version
 
-Releasing the SDK is a single command, run from the project root by a maintainer with publish rights on npm. It writes the new version, publishes the package, points the 23 sample projects at it, and then commits, tags and pushes the release.
+Releasing the SDK is a single command, run from the project root by a maintainer with publish rights on npm. It writes the new version, publishes the package, points the 23 sample projects at it, and then commits, tags and pushes the release to the main repository.
 
 Called without an argument it releases the version that follows the current one: a stable version moves to the next patch, while a pre-release moves its own counter and stays on its channel.
 
@@ -249,21 +249,26 @@ Called with a version it releases exactly that version, which is how a new pre-r
 
 The npm dist-tag follows from the version itself: a stable version is published as `latest`, and a pre-release under its own channel (`beta`, `rc`, and so on), so installing the package without asking for a tag keeps returning the stable release.
 
-Every invocation also takes `--dry-run`, which prints each step of the release, from `npm version` to the final `git push`, and ends with `[dry-run] nothing was published, committed or pushed`.
+Every invocation also takes `--dry-run`, which prints each step of the release, from `npm version` to the final atomic push to the main repository, and ends with `[dry-run] nothing was published, committed or pushed`.
 
 ```bash
 ./scripts/publish-version.sh 1.0.0 --dry-run
 ```
 
-Five guards stop a release before it changes anything:
+Six guards stop a release before it changes anything:
 
 - a branch that is not a release branch of the main repository, in sync with it: `Error: branch main tracks origin/main, which is not a release branch of bigbluebutton/bigbluebutton-html-plugin-sdk.` The main repository and its release branches are declared in `scripts/lib/release-branches.json`, so a new release line is a one-line addition there.
 - a version that is not a version: `"1.0" is not a semantic version. Expected MAJOR.MINOR.PATCH, optionally followed by a pre-release such as -beta.1.`
 - a version that does not move the package forward: `Error: 0.1.26 is not higher than the current version 0.1.26.`
 - a git tag that is already taken: `Error: tag v0.1.27 already exists.`
 - a working tree with uncommitted changes: `Error: the working tree has uncommitted changes.`
+- a main repository remote that is not reachable over ssh: `Error: remote upstream is the main repository bigbluebutton/bigbluebutton-html-plugin-sdk, but its URL is not an ssh URL (...).` Releases are pushed over ssh, and the message prints the exact `git remote set-url` that points the remote at its ssh URL.
 
 The branch guard reads the remote tip over the network to confirm the branch is in sync, and under `--dry-run` it only reports what a real run would refuse, so a dry run still works from any branch or clone. The "not higher" and "uncommitted changes" guards belong to the npm stage: the git-only re-run described below skips them by design.
+
+The release is pushed to the remote that is the main repository, found by matching each remote's `owner/name` (so a fork checked out as `origin` never receives it). When more than one remote matches, the first over ssh in `git remote` order wins, and the chosen remote is named in the output. The branch commit and the tag then go up in a single atomic push, so a release can never land half on one remote and half on another.
+
+Releases are pushed over ssh on purpose. An https remote with a working credential helper would push just as well, but a missing credential there fails halfway through, after the package is already on npm. Requiring ssh turns that into an upfront refusal with a one-line fix, before anything is published.
 
 The two stages of the release can be toggled off independently through environment variables, and both honor `--dry-run`:
 
@@ -279,7 +284,7 @@ PUBLISH_TO_GITHUB=false ./scripts/publish-version.sh
 
 publishes to npm without recording the release in git.
 
-The version arithmetic lives in `scripts/lib/version.js`, and the branch guard in `scripts/lib/check-release-branch.sh`.
+The version arithmetic lives in `scripts/lib/version.js`, and the branch check and remote-URL helpers in `scripts/lib/check-git-preconditions.sh`.
 
 ## API
 
