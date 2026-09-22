@@ -61,9 +61,7 @@
     "test-chromium-ci": "export CI='true' && npx playwright test --project=chromium"
   },
   "files": [
-    "dist",
-    "src",
-    "tsconfig.json"
+    "dist"
   ],
   "keywords": [
     "react hook",
