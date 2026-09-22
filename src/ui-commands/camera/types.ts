@@ -7,11 +7,29 @@ export interface SetSelfViewDisableCommandArguments {
   streamId: string;
 }
 
+interface ByUserId {
+  userId: string;
+}
+
+interface ByStreamId {
+  streamId: string;
+}
+
+export type WebcamSelector = ByUserId | ByStreamId;
+
+export interface SetCameraFocusCommandArguments {
+  focus: boolean;
+  webcamSelector: WebcamSelector[];
+}
+
 export interface UiCommandsCameraObject {
   setSelfViewDisableAllDevices: (
     setSelfViewDisableAllDevicesCommandArguments: SetSelfViewDisableAllDevicesCommandArguments
   ) => void;
   setSelfViewDisable: (
     setSelfViewDisableAllDevicesCommandArguments: SetSelfViewDisableCommandArguments
+  ) => void;
+  setCameraFocus: (
+    setCameraFocusCommandArguments: SetCameraFocusCommandArguments
   ) => void;
 }

@@ -373,7 +373,7 @@ export interface MeetingClientSettings {
   }
 }
 
-export interface PluginBrowserWindow extends Window {
+export interface PluginBrowserWindow {
   bbb_plugins: { [key: string]: PluginApi };
   meetingClientSettings?: MeetingClientSettings;
 }
