@@ -50,7 +50,7 @@ export const camera = {
     );
   },
   /**
-   * Sets the in focus camera for a specific user.
+   * Sets the focused camera for a specific user.
    *
    * @param setSelfViewDisableCommandArguments: object with a
    * boolean that tells whether to enable or disable the camera focus for specific user.
