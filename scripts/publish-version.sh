@@ -31,6 +31,10 @@ set -e
 THIS_SCRIPT_PATH=$(dirname "$(readlink -f "$0")")
 PROJECT_DIR=$(realpath "$THIS_SCRIPT_PATH/..")
 
+# Sourced for the remote-URL helpers; executed further down as the branch check.
+# shellcheck source=lib/check-git-preconditions.sh
+. "$THIS_SCRIPT_PATH/lib/check-git-preconditions.sh"
+
 # The toggles are environment overrides, not in-file switches: flipping a stage must not require
 # editing the file, because an edited script dirties the tree and the clean-tree check below
 # would refuse the release.
@@ -62,9 +66,82 @@ done
 
 cd "$PROJECT_DIR"
 
+# Refusal of the remote resolution: a real run stops with an error before anything is
+# published; a dry run only reports it and ends the way every dry run does.
+release_remote_refusal() {
+    if [ "$DRY_RUN_FLAG" = "--dry-run" ]; then
+        echo "[dry-run] $1; a real run would stop here."
+        echo "$2"
+        echo "$3"
+        echo "[dry-run] nothing was published, committed or pushed"
+        exit 0
+    fi
+
+    echo "Error: $1."
+    echo "$2"
+    echo "$3"
+    exit 1
+}
+
+# Picks the push target: the first remote that is the main repository over ssh, in git
+# remote order. Sets RELEASE_REMOTE and RELEASE_BRANCH, which the push site reads.
+resolve_release_remote() {
+    # Cleared first, so values inherited from the environment cannot pose as a resolution.
+    RELEASE_REMOTE=""
+    RELEASE_BRANCH=""
+
+    local main_repository upstream_ref main_remotes remote first_main_remote first_main_url
+
+    main_repository=$(node -pe "require('$THIS_SCRIPT_PATH/lib/release-branches.json').mainRepository")
+
+    # A missing upstream refuses on a real run; a dry run goes on and still resolves the
+    # remote, leaving the branch empty for the push line to show as a placeholder.
+    if upstream_ref=$(git rev-parse --abbrev-ref "@{upstream}" 2> /dev/null); then
+        RELEASE_BRANCH="${upstream_ref#*/}"
+    elif [ "$DRY_RUN_FLAG" != "--dry-run" ]; then
+        echo "Error: could not resolve the branch this release is pushed to."
+        exit 1
+    fi
+
+    main_remotes=$(main_repository_remotes "$main_repository")
+    first_main_remote=""
+
+    for remote in $main_remotes; do
+        [ -n "$first_main_remote" ] || first_main_remote="$remote"
+        if is_ssh_remote_url "$(git remote get-url "$remote" 2> /dev/null)"; then
+            RELEASE_REMOTE="$remote"
+            break
+        fi
+    done
+
+    if [ -n "$RELEASE_REMOTE" ]; then
+        echo "Releasing to remote $RELEASE_REMOTE ($main_repository)"
+        return 0
+    fi
+
+    if [ -n "$first_main_remote" ]; then
+        first_main_url=$(git remote get-url "$first_main_remote" 2> /dev/null || true)
+        release_remote_refusal \
+            "remote $first_main_remote is the main repository $main_repository, but its URL is not an ssh URL ($first_main_url)" \
+            "Releases are pushed over ssh, so point that remote at the ssh URL:" \
+            "    git remote set-url $first_main_remote git@github.com:$main_repository.git"
+    else
+        release_remote_refusal \
+            "no remote is the main repository $main_repository" \
+            "Add it as a remote over ssh:" \
+            "    git remote add upstream git@github.com:$main_repository.git"
+    fi
+}
+
 # The branch is checked before anything else, so a release from the wrong branch or
 # clone stops while nothing has been changed yet.
-"$THIS_SCRIPT_PATH/lib/check-release-branch.sh" $DRY_RUN_FLAG
+"$THIS_SCRIPT_PATH/lib/check-git-preconditions.sh" $DRY_RUN_FLAG
+
+# Resolved by name, so a fork checked out as origin never receives the release. The npm-only
+# stage does not push and stays usable from an https clone.
+if [ "$PUBLISH_TO_GITHUB" = "true" ]; then
+    resolve_release_remote
+fi
 
 DEPENDENCY_NAME=$(node -pe "require('./package.json').name")
 CURRENT_VERSION=$(node -pe "require('./package.json').version")
@@ -149,8 +226,7 @@ if [ "$DRY_RUN_FLAG" = "--dry-run" ]; then
         echo "[dry-run] git add ${#FILES_TO_COMMIT[@]} version files (package.json/package-lock.json of the project and of the samples)"
         echo "[dry-run] git commit -m \"Bump version to $NEW_VERSION\""
         echo "[dry-run] git tag v$NEW_VERSION"
-        echo "[dry-run] git push origin v$NEW_VERSION"
-        echo "[dry-run] git push"
+        echo "[dry-run] git push --atomic $RELEASE_REMOTE HEAD:refs/heads/${RELEASE_BRANCH:-<release-branch>} refs/tags/v$NEW_VERSION"
         # --- end point the samples at the new version, commit, tag and push to github ---
     fi
 
@@ -212,10 +288,9 @@ if [ "$PUBLISH_TO_GITHUB" = "true" ]; then
 
     git tag "v$NEW_VERSION"
 
-    git push origin "v$NEW_VERSION"
+    # One atomic push: the branch commit and the tag land together, or neither does.
+    git push --atomic "$RELEASE_REMOTE" "HEAD:refs/heads/$RELEASE_BRANCH" "refs/tags/v$NEW_VERSION"
 
-    git push
-
-    echo "Committed, tagged and pushed v$NEW_VERSION"
+    echo "Committed, tagged and pushed v$NEW_VERSION to $RELEASE_REMOTE"
     # --- end point the samples at the new version, commit, tag and push to github ---
 fi
