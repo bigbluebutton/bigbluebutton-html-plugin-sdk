@@ -1,5 +1,9 @@
 import { CameraEnum } from './enums';
-import { SetSelfViewDisableAllDevicesCommandArguments, SetSelfViewDisableCommandArguments } from './types';
+import {
+  SetCameraFocusCommandArguments,
+  SetSelfViewDisableAllDevicesCommandArguments,
+  SetSelfViewDisableCommandArguments,
+} from './types';
 
 export const camera = {
   /**
@@ -45,6 +49,27 @@ export const camera = {
         detail: {
           isSelfViewDisabled,
           streamId,
+        },
+      }),
+    );
+  },
+  /**
+   * Sets or clears the focused camera for the selected webcams.
+   *
+   * @param setCameraFocusCommandArguments: focus state and webcams selected by user or stream ID.
+   */
+  setCameraFocus: (
+    setCameraFocusCommandArguments: SetCameraFocusCommandArguments,
+  ) => {
+    const {
+      webcamSelector,
+      focus,
+    } = setCameraFocusCommandArguments;
+    window.dispatchEvent(
+      new CustomEvent<SetCameraFocusCommandArguments>(CameraEnum.SET_CAMERA_FOCUS, {
+        detail: {
+          focus,
+          webcamSelector,
         },
       }),
     );

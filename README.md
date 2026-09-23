@@ -752,7 +752,8 @@ One other thing is that the type of the return is precisely the same type requir
   - setDisplayActionBar: this function decides whether to display the actions bar
 - camera:
   - setSelfViewDisableAllDevices: Sets the self-view camera disabled/enabled for all camera devices of a user;
-  - setSelfViewDisable: Sets the self-view camera disabled/enabled for specific camera.
+  - setSelfViewDisable: Sets the self-view camera disabled/enabled for specific camera;
+  - setCameraFocus: Sets or clears the focused camera, selecting a webcam by user ID or stream ID.
 - chat:
   - form:
     - open: this function will open the sidebar chat panel automatically;
@@ -852,6 +853,10 @@ One other thing is that the type of the return is precisely the same type requir
     // Camera commands
     pluginApi.uiCommands.camera.setSelfViewDisableAllDevices(true);
     pluginApi.uiCommands.camera.setSelfViewDisable('camera-stream-id', false);
+    pluginApi.uiCommands.camera.setCameraFocus({
+      focus: true,
+      webcamSelector: [{ userId: 'user-id' }],
+    });
 
     // Set away status
     pluginApi.uiCommands.userStatus.setAwayStatus(true);
