@@ -8,6 +8,7 @@ export enum SidekickAreaPanelEnum {
  * the user could already open them from the sidebar navigation.
  */
 export enum SidekickAreaCorePanelEnum {
+  PROFILE = 'profile',
   CHAT = 'chat',
   USER_LIST = 'userlist',
   SHARED_NOTES = 'shared-notes',
@@ -15,4 +16,5 @@ export enum SidekickAreaCorePanelEnum {
   POLL = 'poll',
   TIMER = 'timer',
   BREAKOUT = 'breakoutroom',
+  AUDIO_CAPTIONS = 'audio-captions',
 }

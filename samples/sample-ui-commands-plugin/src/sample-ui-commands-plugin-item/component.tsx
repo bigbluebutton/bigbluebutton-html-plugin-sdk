@@ -6,6 +6,7 @@ import {
   PluginApi,
   MediaAreaOption,
   MediaAreaSeparator,
+  SidekickAreaCorePanelEnum,
 } from 'bigbluebutton-html-plugin-sdk';
 import { PrivateChatSubscriptionResult, SampleUiCommandsPluginProps } from './types';
 import { GET_CHATS_SUBSCRIPTION } from './query';
@@ -18,6 +19,9 @@ function SampleUiCommandsPlugin(
 
   const [privateChatId, setPrivateChatId] = useState<string | null>(null);
   const [targetUserId, setTargetUserId] = useState<string | null>(null);
+  // The sidekick area exposes open and close, not a toggle, and its panel is not
+  // published as ui-data, so the plugin keeps track of what it opened itself.
+  const [isProfilePanelOpen, setIsProfilePanelOpen] = useState(false);
 
   // Get all users in the meeting
   const { data: usersData } = pluginApi.useUsersBasicInfo();
@@ -95,7 +99,7 @@ function SampleUiCommandsPlugin(
       }),
       new MediaAreaOption({
         label: 'Stop screenshare',
-        icon: 'copy',
+        icon: { iconName: 'desktop_off' },
         tooltip: '',
         dataTest: 'stopScreenshareButton',
         allowed: true,
@@ -103,8 +107,41 @@ function SampleUiCommandsPlugin(
           pluginApi.uiCommands?.screenshare.stop();
         },
       }),
+      new MediaAreaOption({
+        label: isProfilePanelOpen ? 'Close profile panel' : 'Open profile panel',
+        icon: { iconName: 'profile' },
+        tooltip: 'Toggles the profile panel in the sidekick area',
+        allowed: true,
+        dataTest: 'toggleProfilePanelButton',
+        onClick: () => {
+          if (isProfilePanelOpen) {
+            pluginApi.uiCommands?.sidekickArea.panel.close(
+              SidekickAreaCorePanelEnum.PROFILE,
+            );
+          } else {
+            pluginApi.uiCommands?.sidekickArea.panel.open(
+              SidekickAreaCorePanelEnum.PROFILE,
+            );
+          }
+          setIsProfilePanelOpen((wasOpen) => !wasOpen);
+        },
+      }),
+      new MediaAreaOption({
+        label: 'Open polls',
+        icon: { iconName: 'polling' },
+        tooltip: 'Opens the polling panel in the sidekick area',
+        // The core only registers the polling panel for the presenter, so the command
+        // is ignored for anyone else.
+        allowed: Boolean(currentUser?.presenter),
+        dataTest: 'openPollsButton',
+        onClick: () => {
+          pluginApi.uiCommands?.sidekickArea.panel.open(
+            SidekickAreaCorePanelEnum.POLL,
+          );
+        },
+      }),
     ]);
-  }, [usersData, currentUser]);
+  }, [usersData, currentUser, isProfilePanelOpen]);
 
   return null;
 }
