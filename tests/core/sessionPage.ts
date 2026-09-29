@@ -1,7 +1,7 @@
 import {
   expect, Page, Browser, Locator,
 } from '@playwright/test';
-import { ELEMENT_WAIT_EXTRA_LONG_TIME, ELEMENT_WAIT_TIME } from './constants';
+import { ELEMENT_WAIT_EXTRA_LONG_TIME, ELEMENT_WAIT_TIME, PLUGIN_LOGGER_NAME } from './constants';
 import * as parameters from './parameters';
 import {
   createMeeting, generateSettingsData, getJoinURL, SessionSettings,
@@ -120,7 +120,7 @@ export class SessionPage {
   }
 
   async waitForPluginLogger() {
-    return this.page.waitForEvent('console', (msg) => msg.text().includes('PluginLogger'));
+    return this.page.waitForEvent('console', (msg) => msg.text().includes(PLUGIN_LOGGER_NAME));
   }
 
   async hasText(selector: string, text: string, description: string, timeout = ELEMENT_WAIT_TIME) {
