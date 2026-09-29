@@ -9,6 +9,7 @@ export const coreElements = {
   microphoneBtn: 'button[data-test="microphoneBtn"]',
   joinEchoTestButton: 'button[data-test="joinEchoTestButton"]',
   audioDropdownMenu: 'button[data-test="audioDropdownMenu"]',
+  leaveAudio: 'li[data-test="leaveAudio"]',
   establishingAudioLabel: 'span[data-test="establishingAudioLabel"]',
   // video
   joinVideoButton: 'button[data-test="joinVideo"]',

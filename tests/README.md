@@ -39,6 +39,8 @@ Test files are identified by the `*.spec.ts` pattern on sample folders. Examples
           *   Example: `BBB_SECRET=yoursupersecretkey`
       *   **`TIMEOUT_MULTIPLIER` (Optional):** A numerical value to multiply default timeout values. Useful for slower environments. If not set, it defaults to `2` in CI environments and `1` otherwise.
           *   Example: `TIMEOUT_MULTIPLIER=2`
+      *   **`MEDIA_BRIDGE` (Optional):** The media bridge the tests expect: `livekit` (default, the BigBlueButton 4.0 default) or `bbb-webrtc-sfu`. With `bbb-webrtc-sfu`, each test meeting is created with that bridge for audio, camera and screen sharing.
+          *   Example: `MEDIA_BRIDGE=bbb-webrtc-sfu`
       *   **`LOCAL_CONTAINER_NAME` (Optional):** The name of the local Docker container running the BigBlueButton server. This is useful when testing against a locally hosted instance of BigBlueButton in a containerized environment.
           *   Example: `LOCAL_CONTAINER_NAME=bbb-local-container`
 
