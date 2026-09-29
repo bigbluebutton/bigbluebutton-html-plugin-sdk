@@ -120,7 +120,7 @@ Here is a complete `manifest.json` example with all possible configurations:
 
 ```json
 {
-  "requiredSdkVersion": "~0.0.59",
+  "requiredSdkVersion": "^1.0.0-beta.2",
   "name": "MyPlugin",
   "version": "1.0.0",
   "javascriptEntrypointUrl": "MyPlugin.js",
@@ -165,7 +165,7 @@ Here is a complete `manifest.json` example with all possible configurations:
 
 | Field | Required | Description |
 |-------|----------|-------------|
-| `requiredSdkVersion` | Yes | Specifies the SDK version compatibility (e.g., `~0.0.59`) |
+| `requiredSdkVersion` | Yes | Specifies the SDK version compatibility (e.g., `^1.0.0-beta.2`). While the SDK is on a pre-release, the range must name that pre-release: the server does not match `1.0.0-beta.x` against plain `0.x` ranges |
 | `name` | Yes | Plugin name as referenced in configuration |
 | `version` | No | Plugin version for cache-busting (appends `?version=X` to JS URL) |
 | `javascriptEntrypointUrl` | Yes | URL to the main JavaScript bundle |
@@ -740,7 +740,7 @@ The data-channel name must be in the `manifest.json` along with all the permissi
 
 ```json
 {
-  "requiredSdkVersion": "~0.0.59",
+  "requiredSdkVersion": "^1.0.0-beta.2",
   "name": "PluginName",
   "javascriptEntrypointUrl": "PluginName.js",
   "dataChannels": [
@@ -1396,7 +1396,7 @@ This feature is mainly used for security purposes, see [external data section](#
 
 ```json
 {
-  "requiredSdkVersion": "~0.0.59",
+  "requiredSdkVersion": "^1.0.0-beta.2",
   "name": "MyPlugin",
   "javascriptEntrypointUrl": "MyPlugin.js",
   "remoteDataSources": [
@@ -1443,7 +1443,7 @@ This isolates the parameter to `MyPlugin` and avoids conflicts with other plugin
 
 ```json
 {
-  "requiredSdkVersion": "~0.0.59",
+  "requiredSdkVersion": "^1.0.0-beta.2",
   "name": "MyPlugin",
   "javascriptEntrypointUrl": "MyPlugin.js",
   "dataChannels": [
@@ -1480,7 +1480,7 @@ If a plugin expects a placeholder (via `meta_` or `plugin_`) but doesn't receive
 
 ```json
 {
-  "requiredSdkVersion": "~0.0.59",
+  "requiredSdkVersion": "^1.0.0-beta.2",
   "name": "MyPlugin",
   "javascriptEntrypointUrl": "MyPlugin.js",
   "dataChannels": [
