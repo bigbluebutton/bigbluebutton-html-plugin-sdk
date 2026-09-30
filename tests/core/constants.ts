@@ -15,7 +15,7 @@ export const LOOP_INTERVAL: number = 1200;
 
 // The client prints plugin logs under `pluginLogger(<PluginName>)`
 // (bigbluebutton-html5/imports/startup/client/logger/index.ts).
-export const PLUGIN_LOGGER_NAME: string = 'pluginLogger(';
+export const PLUGIN_LOGGER_NAME: string = 'pluginLogger';
 
 // STRESS TESTS VARS
 export const JOIN_AS_MODERATOR_TEST_ROUNDS: number = 15;
