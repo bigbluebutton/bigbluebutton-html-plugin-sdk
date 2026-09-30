@@ -5,6 +5,7 @@ import { checkPluginAvailability } from '../../../tests/core/fixtures/sampleBefo
 import { elements as e } from './elements';
 import { ELEMENT_WAIT_LONGER_TIME } from '../../../tests/core/constants';
 import { extractObject } from '../../../tests/utils/extractObject';
+import { isPluginLog } from '../../../tests/utils/isPluginLog';
 
 interface PluginDataChannelPayload {
   first_example_field: number;
@@ -62,7 +63,7 @@ test.describe.parallel('Data Channel', () => {
     // get the last console message as sample plugin logs a few incomplete data first
     const consoleMessages: ConsoleMessage[] = [];
     const consoleHandler = (msg: ConsoleMessage) => {
-      if (msg.text().includes('PluginLogger')) {
+      if (isPluginLog(msg)) {
         consoleMessages.push(msg);
       }
     };

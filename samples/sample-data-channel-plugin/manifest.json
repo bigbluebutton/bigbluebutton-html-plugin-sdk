@@ -6,7 +6,7 @@
   "localesBaseUrl": "https://cdn.dominio.com/pluginabc/",
   "loggerSettings": {
     "console": {
-      "level": "error"
+      "level": "info"
     }
   },
   "dataChannels": [

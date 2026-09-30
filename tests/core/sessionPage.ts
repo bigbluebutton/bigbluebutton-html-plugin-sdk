@@ -7,6 +7,7 @@ import {
   createMeeting, generateSettingsData, getJoinURL, SessionSettings,
 } from './helpers';
 import { coreElements as e } from './coreElements';
+import { isPluginLog } from '../utils/isPluginLog';
 
 interface PageProps {
   browser: Browser;
@@ -120,7 +121,7 @@ export class SessionPage {
   }
 
   async waitForPluginLogger() {
-    return this.page.waitForEvent('console', (msg) => msg.text().includes('PluginLogger'));
+    return this.page.waitForEvent('console', isPluginLog);
   }
 
   async hasText(selector: string, text: string, description: string, timeout = ELEMENT_WAIT_TIME) {
