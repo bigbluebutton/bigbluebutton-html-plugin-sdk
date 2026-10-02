@@ -1,5 +1,5 @@
 {
-  "requiredSdkVersion": "~0.1.5",
+  "requiredSdkVersion": "^1.0.0-beta.2",
   "name": "SampleUseMeeting",
   "javascriptEntrypointUrl": "SampleUseMeeting.js",
   "localesBaseUrl": "https://cdn.dominio.com/pluginabc/",

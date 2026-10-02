@@ -1,7 +1,10 @@
 import {
   expect, Page, Browser, Locator,
 } from '@playwright/test';
-import { ELEMENT_WAIT_EXTRA_LONG_TIME, ELEMENT_WAIT_TIME } from './constants';
+import {
+  ELEMENT_WAIT_EXTRA_LONG_TIME, ELEMENT_WAIT_LONGER_TIME, ELEMENT_WAIT_TIME, PLUGIN_LOGGER_NAME,
+} from './constants';
+import { isLiveKit } from './mediaBridge';
 import * as parameters from './parameters';
 import {
   createMeeting, generateSettingsData, getJoinURL, SessionSettings,
@@ -120,7 +123,7 @@ export class SessionPage {
   }
 
   async waitForPluginLogger() {
-    return this.page.waitForEvent('console', (msg) => msg.text().includes('PluginLogger'));
+    return this.page.waitForEvent('console', (msg) => msg.text().includes(PLUGIN_LOGGER_NAME));
   }
 
   async hasText(selector: string, text: string, description: string, timeout = ELEMENT_WAIT_TIME) {
@@ -131,5 +134,24 @@ export class SessionPage {
   async closeAudioModal() {
     await this.hasElement(e.audioModal, 'should display the audio modal', ELEMENT_WAIT_EXTRA_LONG_TIME);
     await this.page.click(e.closeModal);
+    // Under LiveKit, closing the audio modal auto-joins audio muted. Leave it so
+    // closeAudioModal consistently ends with the user not in audio, which is what
+    // the samples' tests expect.
+    if (isLiveKit) {
+      await this.page.waitForSelector(e.audioDropdownMenu, { timeout: ELEMENT_WAIT_LONGER_TIME });
+      await this.leaveAudio();
+    }
+  }
+
+  async leaveAudio() {
+    await this.page.click(e.audioDropdownMenu);
+    await this.page.click(e.leaveAudio);
+    await this.hasElement(e.joinAudioButton, 'should display the join audio button after leaving audio');
+  }
+
+  async clickMicrophoneButton() {
+    // LiveKit meetings do not expose the Microphone/Listen Only phase of the
+    // audio modal, so there is no microphone button to click there.
+    if (!isLiveKit) await this.page.click(e.microphoneBtn);
   }
 }

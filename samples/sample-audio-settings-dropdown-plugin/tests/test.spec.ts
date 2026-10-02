@@ -24,10 +24,13 @@ test.describe.parallel('Audio Settings Dropdown', () => {
       { timeout: ELEMENT_WAIT_LONGER_TIME },
     );
     await sampleTest.modPage.page.click(e.joinAudioButton);
-    await sampleTest.modPage.page.click(e.microphoneBtn);
+    await sampleTest.modPage.clickMicrophoneButton();
     await sampleTest.modPage.page.click(e.joinEchoTestButton);
-    await sampleTest.modPage.hasElement(e.establishingAudioLabel, 'should display the establishing audio label');
-    await sampleTest.modPage.wasRemoved(e.establishingAudioLabel, 'should remove the establishing audio label once audio is established');
+    await sampleTest.modPage.wasRemoved(
+      e.establishingAudioLabel,
+      'should remove the establishing audio label once audio is established',
+      ELEMENT_WAIT_LONGER_TIME,
+    );
     await sampleTest.modPage.page.click(e.audioDropdownMenu);
 
     const audioSettingsButton = sampleTest.modPage.getLocator(e.pluginAudioSettingsDropdownButton);

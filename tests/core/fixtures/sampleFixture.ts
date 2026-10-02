@@ -2,6 +2,7 @@
 import { test as base } from '@playwright/test';
 import { Sample } from '../sample';
 import { encodeCustomParams } from '../helpers';
+import { getMediaBridgeCreateParam } from '../mediaBridge';
 
 export interface SampleTestFixtures {
   sampleTest: Sample;
@@ -22,7 +23,10 @@ export function createSampleTest(config: SampleTestConfig) {
         throw new Error(`Plugin URL is not set. Either set ${config.envVarName} environment variable or ensure beforeAll has run successfully.`);
       }
 
-      const createParameter = encodeCustomParams(`pluginManifests=${JSON.stringify([{ url: customUrl }])}`);
+      const createParameter = [
+        encodeCustomParams(`pluginManifests=${JSON.stringify([{ url: customUrl }])}`),
+        getMediaBridgeCreateParam(),
+      ].filter(Boolean).join('&');
       const sampleTest = new Sample({ browser, context });
       await sampleTest.initModPage(page, { createParameter });
       await use(sampleTest);

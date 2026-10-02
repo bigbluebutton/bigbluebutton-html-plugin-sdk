@@ -13,6 +13,10 @@ export const ELEMENT_WAIT_LONGER_TIME: number = 10000 * MULTIPLIER;
 export const ELEMENT_WAIT_EXTRA_LONG_TIME: number = 15000 * MULTIPLIER;
 export const LOOP_INTERVAL: number = 1200;
 
+// The client prints plugin logs under `pluginLogger(<PluginName>)`
+// (bigbluebutton-html5/imports/startup/client/logger/index.ts).
+export const PLUGIN_LOGGER_NAME: string = 'pluginLogger';
+
 // STRESS TESTS VARS
 export const JOIN_AS_MODERATOR_TEST_ROUNDS: number = 15;
 export const MAX_JOIN_AS_MODERATOR_FAIL_RATE: number = 0.05;

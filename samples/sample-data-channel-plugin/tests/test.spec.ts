@@ -3,7 +3,7 @@ import { expect, ConsoleMessage } from '@playwright/test';
 import { createSampleTest } from '../../../tests/core/fixtures/sampleFixture';
 import { checkPluginAvailability } from '../../../tests/core/fixtures/sampleBeforeAll';
 import { elements as e } from './elements';
-import { ELEMENT_WAIT_LONGER_TIME } from '../../../tests/core/constants';
+import { ELEMENT_WAIT_LONGER_TIME, PLUGIN_LOGGER_NAME } from '../../../tests/core/constants';
 import { extractObject } from '../../../tests/utils/extractObject';
 
 interface PluginDataChannelPayload {
@@ -62,7 +62,7 @@ test.describe.parallel('Data Channel', () => {
     // get the last console message as sample plugin logs a few incomplete data first
     const consoleMessages: ConsoleMessage[] = [];
     const consoleHandler = (msg: ConsoleMessage) => {
-      if (msg.text().includes('PluginLogger')) {
+      if (msg.text().includes(PLUGIN_LOGGER_NAME)) {
         consoleMessages.push(msg);
       }
     };
