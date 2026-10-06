@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports */
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
@@ -20,7 +20,7 @@ module.exports = {
     client: {
       overlay: false,
     },
-    onBeforeSetupMiddleware: (devServer) => {
+    setupMiddlewares: (middlewares, devServer) => {
       if (!devServer) {
         throw new Error('webpack-dev-server is not defined');
       }
@@ -29,6 +29,8 @@ module.exports = {
       devServer.app.get('/manifest.json', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'manifest.json'));
       });
+
+      return middlewares;
     },
   },
   module: {
