@@ -2,3 +2,4 @@ node_modules
 dist
 samples/*/dist
 samples/*/dist-tsc
+coverage

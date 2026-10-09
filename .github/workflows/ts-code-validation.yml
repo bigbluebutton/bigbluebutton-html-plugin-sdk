@@ -15,8 +15,22 @@ jobs:
       - name: install node
         uses: actions/setup-node@v4
         with:
-          node-version: 20.x
-      - name: run npm install
-        run: npm install
+          node-version: 24.x
+      - name: Install dependencies
+        run: npm ci
       - name: typescript code validation with eslint
         run: npm run lint
+  scripts-validation:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Merge branches
+        uses: ./.github/actions/merge-branches
+      - name: Check shell script syntax
+        shell: bash
+        run: find scripts tests/core/scripts -name '*.sh' -print0 | xargs -0 -n1 bash -n
+      - name: Run shellcheck
+        shell: bash
+        run: find scripts tests/core/scripts -name '*.sh' -print0 | xargs -0 shellcheck --severity=error

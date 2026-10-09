@@ -225,6 +225,19 @@ public:
           def: 3234
 ```
 
+## Developing the SDK
+
+To try SDK changes in a plugin before they are published on npm, build the SDK and copy it into the plugin's `node_modules`:
+
+```bash
+npm run build      # or npm run build:watch while editing
+./scripts/publish-to-project-folder.sh <path-to-plugin>
+```
+
+The script needs the plugin's dependencies already installed (`npm ci` inside the plugin) and only builds the SDK when `dist/` is missing, so rebuild after each change.
+
+To do the same for every sample in `samples/`, run `./scripts/publish-to-samples.sh`. It has the same requirement: run `npm ci` inside each sample first, otherwise every sample fails with a missing `node_modules` error while the script still ends with "SDK update process completed". To check that all samples still compile and pass lint against the current SDK, run `./scripts/validate-samples-code.sh`, which installs each sample's dependencies when needed.
+
 ## Testing SDK
 
 To setup and run the automated tests for the plugin SDK samples, check the [testing doc](/tests/README.md)
