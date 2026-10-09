@@ -92,6 +92,7 @@ function SampleServerCommandsPluginItem(
 
     const messagesToStyle = loadedMessages.data.filter(
       (message) => {
+        if (message.deletedAt) return false;
         if (!message.messageMetadata) return false;
 
         const messageMetadata = JSON.parse(message.messageMetadata);

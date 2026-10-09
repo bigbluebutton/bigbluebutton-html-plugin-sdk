@@ -18,7 +18,7 @@ function SampleDomElementManipulation(
   useEffect(() => {
     if (response.data) {
       const idsToApply = response.data.filter(
-        (message) => message.message.search(REGEX) !== -1,
+        (message) => !message.deletedAt && message.message.search(REGEX) !== -1,
       ).map((message) => message.messageId);
       setChatIdsToApplyHighlights(idsToApply);
     }
