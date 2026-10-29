@@ -86,6 +86,7 @@ function SampleGenericContentSidekickPlugin(
         label: 'Click to increment the badge',
         icon: { iconName: 'user' },
         tooltip: 'Use it to enable the badge',
+        dataTest: 'incrementSidekickBadge',
         allowed: true,
         onClick: () => {
           countGenericContent.current += 1;
