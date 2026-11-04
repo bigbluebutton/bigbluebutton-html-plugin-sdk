@@ -22,70 +22,9 @@ have a look at the READMEs in the respective [samples](samples)-folders.
 
 ### Running the Plugin from Source
 
-For development purposes you can run a plugin locally from source.
+For development purposes you can run a plugin from source. To do that, follow the instructions in [Running the Plugin from Source](https://docs.bigbluebutton.org/plugins/#running-the-plugin-from-source) in the official documentation.
 
-For example if you take the [`sample-media-area-plugin`](samples/sample-media-area-plugin),
-you do the following:
-
-_Running from source code with local BBB-server_
-
-1. Start the development server:
-
-   ```bash
-   cd $HOME/src/bigbluebutton-html-plugin-sdk/samples/sample-media-area-plugin
-   npm install
-   npm start
-   ```
-
-2. Add reference to it on BigBlueButton's `/create` call or add it on `/usr/share/bbb-web/WEB-INF/classes/bigbluebutton.properties`:
-
-```
-pluginManifests=[{"url": "http://localhost:4701/manifest.json"}]
-```
-
-_Running from source code with a remote BBB-server_
-
-If you are running your BBB-server elsewhere, than you can't simply point the manifest URL to a local address, you'll need to either serve the built version into a CDN or serve the dev version using a service to make it public. And for the second option we'd recommend NGROK. Here are the instructions to do that:
-
-1. Create an account on https://ngrok.com/ (Official website of NGROK);
-
-2. Install NGROK in your computer. They have a guide for that right after you created your account;
-
-3. Start the Plugin development server:
-
-```bash
-cd $HOME/src/plugin-pick-random-user-plugin
-npm install
-npm start
-```
-
-4. Start the NGROK server into your machine with the following command:
-
-```bash
-ngrok http http://172.17.0.1:4701
-```
-
-Make sure to point NGROK to the correct local URL (In our case - The samples are made this way, for instance - we used `http://172.17.0.1:4701`)
-
-Right after that, NGROK will create an interface into your terminal and will display the URL which your static files are being served.
-
-Here's an example of URL: `https://<uuid>.ngrok-free.app`
-
-You can already interact with this URL and access both
-
-`https://<uuid>.ngrok-free.app/manifest.json`
-
-or
-
-`https://<uuid>.ngrok-free.app/PickRandomUserPlugin.js`
-
-5. Add this create parameter into the API-mate of the server you are testing it on:
-
-```
-pluginManifests=[{"url": "https://<uuid>.ngrok-free.app/manifest.json"}]
-```
-
-And there you go, you can test it freely.
+If you want to use NGROK instead (for instance, if you don't have ssh access to a BBB server), check out [this guide on how to set up a development environment using NGROK](docs/running-with-ngrok.md).
 
 ### Building the Plugin (Production)
 
