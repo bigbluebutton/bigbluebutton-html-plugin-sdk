@@ -1559,6 +1559,55 @@ Where `<meeting-id>` is the id of the the meeting you just recorded. Then, among
 </event>
 ```
 
+### Performance telemetry
+
+When the BBB client has its performance telemetry on, it already measures each plugin from the
+outside: script load, first UI item, panel opening, GraphQL operations and data channel round trips.
+`pluginTelemetry` lets the plugin add what only it knows: how long its own work takes, a few
+quantities, and the actions that matter to reproduce a bug.
+
+```ts
+import { pluginTelemetry, PluginErrorBoundary } from 'bigbluebutton-html-plugin-sdk';
+
+// Durations: a function (sync or async) or a promise. Throws and rejections count as failed.
+const users = await pluginTelemetry.measure('load_users', () => fetchUsers());
+
+const span = pluginTelemetry.start('draw_chart');
+drawChart();
+span.end();
+
+// Last value of a quantity
+pluginTelemetry.gauge('queue_size', queue.length);
+
+// An action in the client's repro trail, sent along when an error happens
+pluginTelemetry.mark('picked_user');
+
+// Render errors of a panel, floating window or generic content, reported under the plugin name
+root.render(
+  <PluginErrorBoundary fallback={<p>Something went wrong.</p>}>
+    <Panel />
+  </PluginErrorBoundary>,
+);
+```
+
+Rules:
+
+- **No content in names.** Names become metric attributes and trail entries. They must match
+  `^[A-Za-z][A-Za-z0-9_.-]{0,39}$` and name an action or a quantity, never a user, a message or an id.
+  The client drops invalid names and keeps at most 8 measure and gauge names per plugin. Marks closer
+  than 100 ms are dropped.
+- **No version bump needed.** Every call is a no-op when telemetry is off or the client predates
+  this API, so there is no reason to raise `requiredSdkVersion` for it. Raising it makes servers with
+  an older SDK refuse the plugin.
+- **Name your GraphQL operations** (`MyPlugin_Users`). The client attributes named custom
+  subscriptions, queries and mutations to the plugin; the plugin-name prefix keeps them apart from
+  other plugins' operations, also in the GraphQL middleware metrics, which are labeled by operation
+  name.
+- `pluginTelemetry.isEnabled()` tells whether measurements are being recorded, e.g. to skip
+  expensive bookkeeping when they are not.
+
+See `samples/sample-telemetry-plugin`.
+
 ## Common Patterns and Best Practices
 
 This section covers common patterns and best practices for plugin development.
