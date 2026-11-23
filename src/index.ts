@@ -13,3 +13,5 @@ export * from './ui-commands';
 export * from './core';
 
 export * from './utils';
+
+export * from './telemetry';

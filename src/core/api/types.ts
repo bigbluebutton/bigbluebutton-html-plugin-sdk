@@ -1,4 +1,5 @@
 import { Logger } from 'browser-bunyan';
+import { PluginTelemetryApi } from '../../telemetry/types';
 import { UiCommands } from '../../ui-commands/types';
 import { UseChatMessageDomElementsFunction } from '../../dom-element-manipulation/chat/message/types';
 import { MediaAreaInterface } from '../../extensible-areas/media-area-item/types';
@@ -350,6 +351,10 @@ export interface PluginApi {
    * Function used to log in the console.
    */
   logger?: Logger;
+  /**
+   * Performance telemetry, injected by the client. Use `pluginTelemetry` instead of reading it.
+   */
+  telemetry?: PluginTelemetryApi;
 }
 
 export interface Console {
