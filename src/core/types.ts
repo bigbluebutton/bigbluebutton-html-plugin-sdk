@@ -25,16 +25,25 @@ export interface UpdatedEventDetails<T> {
   hook: Hooks;
   hookArguments?: HookArguments;
   data: T;
+  // Plugin that sent the event, for telemetry. Kept out of hookArguments, which BBB core uses
+  // as the deduplication key across plugins. Missing in events from older SDKs.
+  pluginName?: string;
 }
 
 export interface SubscribedEventDetails {
   hook: Hooks;
   hookArguments?: HookArguments;
+  // Plugin that sent the event, for telemetry. Kept out of hookArguments, which BBB core uses
+  // as the deduplication key across plugins. Missing in events from older SDKs.
+  pluginName?: string;
 }
 
 export interface UnsubscribedEventDetails {
   hook: Hooks;
   hookArguments?: HookArguments;
+  // Plugin that sent the event, for telemetry. Kept out of hookArguments, which BBB core uses
+  // as the deduplication key across plugins. Missing in events from older SDKs.
+  pluginName?: string;
 }
 
 export interface HookEventWrapper<T> extends Event {

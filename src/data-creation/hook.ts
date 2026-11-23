@@ -14,6 +14,7 @@ import {
 } from '../core/types';
 import { DataCreationHookEnums } from './enums';
 import validateMutationEventFromClient from './utils';
+import { currentPluginName } from '../utils/plugin-identity';
 
 export function useCustomMutation<T>(
   mutation: string,
@@ -41,6 +42,7 @@ export function useCustomMutation<T>(
             options,
           },
           data,
+          pluginName: currentPluginName(),
         },
       }),
     );
@@ -87,6 +89,7 @@ export function useCustomMutation<T>(
             mutation,
             options,
           },
+          pluginName: currentPluginName(),
         },
       }),
     );
@@ -108,6 +111,7 @@ export function useCustomMutation<T>(
               mutation,
               options,
             },
+            pluginName: currentPluginName(),
           },
         }),
       );

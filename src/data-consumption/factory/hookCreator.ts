@@ -15,6 +15,7 @@ import {
   makeCustomHookIdentifierFromArgs,
 } from '../utils';
 import { DataConsumptionHooks } from '../enums';
+import { currentPluginName } from '../../utils/plugin-identity';
 
 export const createDataConsumptionHook = <T>(
   hookName: Hooks,
@@ -70,6 +71,7 @@ export const createDataConsumptionHook = <T>(
         detail: {
           hook: hookName,
           hookArguments: subscriptionArguments,
+          pluginName: currentPluginName(),
         },
       }),
     );
@@ -83,6 +85,7 @@ export const createDataConsumptionHook = <T>(
           detail: {
             hook: hookName,
             hookArguments: subscriptionArguments,
+            pluginName: currentPluginName(),
           },
         }),
       );
